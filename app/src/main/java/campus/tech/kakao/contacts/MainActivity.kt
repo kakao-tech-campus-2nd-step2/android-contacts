@@ -57,6 +57,9 @@ class MainActivity : AppCompatActivity() {
             mail = mail_form.text.toString()
             memo = memo_form.text.toString()
             birth = birth_form.text.toString()
+            if (sex_male.isChecked) sex = sex_male.text.toString()
+            else if (sex_female.isChecked) sex = sex_female.text.toString()
+            //Log.d("Log", sex)
 
             if (name.isEmpty())
                 Toast.makeText(this, "이름을 입력해주세요.", Toast.LENGTH_SHORT).show()
