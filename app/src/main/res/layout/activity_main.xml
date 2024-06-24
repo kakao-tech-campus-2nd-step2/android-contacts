@@ -150,6 +150,7 @@
         />
 
     <LinearLayout
+        app:layout_constraintVertical_weight="1"
         android:id="@+id/bottom_button_area"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
