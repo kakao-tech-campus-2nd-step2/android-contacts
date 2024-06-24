@@ -1,12 +1,15 @@
 package campus.tech.kakao.contacts
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
@@ -14,6 +17,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var tel_form: EditText
     lateinit var mail_form: EditText
     lateinit var birth_form: EditText
+    lateinit var sex_form: RadioGroup
     lateinit var sex_male: RadioButton
     lateinit var sex_female: RadioButton
     lateinit var memo_form: EditText
@@ -35,6 +39,7 @@ class MainActivity : AppCompatActivity() {
         tel_form = findViewById(R.id.tel_form)
         mail_form = findViewById(R.id.mail_form)
         birth_form = findViewById(R.id.birth_form)
+        sex_form = findViewById(R.id.sex_form)
         sex_male = findViewById(R.id.male)
         sex_female = findViewById(R.id.female)
         memo_form = findViewById(R.id.memo_form)
@@ -44,6 +49,20 @@ class MainActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.detail_button).setOnClickListener{
             it.visibility = View.GONE
             findViewById<LinearLayout>(R.id.detail_form_area).visibility = View.VISIBLE
+        }
+
+        saveButton.setOnClickListener {
+            name = name_form.text.toString()
+            tel = tel_form.text.toString()
+            mail = mail_form.text.toString()
+            memo = memo_form.text.toString()
+            birth = birth_form.text.toString()
+
+            if (name.isEmpty())
+                Toast.makeText(this, "이름을 입력해주세요.", Toast.LENGTH_SHORT).show()
+            if (tel.isEmpty())
+                Toast.makeText(this, "전화번호를 입력해주세요.", Toast.LENGTH_SHORT).show()
+
         }
     }
 }
