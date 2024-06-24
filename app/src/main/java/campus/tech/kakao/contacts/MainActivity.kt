@@ -66,6 +66,8 @@ class MainActivity : AppCompatActivity() {
             if (tel.isEmpty())
                 Toast.makeText(this, "전화번호를 입력해주세요.", Toast.LENGTH_SHORT).show()
 
+            if (!name.isEmpty() && !tel.isEmpty())
+                Toast.makeText(this, "저장이 완료되었습니다.", Toast.LENGTH_LONG).show()
         }
     }
 }
