@@ -11,7 +11,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:src="@drawable/men_img"
-        app:layout_constraintTop_toTopOf="parnet"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"></ImageView>
 
@@ -61,6 +61,7 @@
         />
 
     <LinearLayout
+        android:id="@+id/detail_form_area"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
