@@ -7,13 +7,166 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/men_img"
+        app:layout_constraintTop_toTopOf="parnet"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"></ImageView>
+
+    <EditText
+        android:id="@+id/name_form"
+        android:layout_width="390dp"
+        android:layout_height="40dp"
+        android:inputType="textPersonName"
+        android:text="이름"
+        android:gravity="center_vertical"
+        android:background="#DFF3F6"
+        android:layout_marginTop="100dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tel_form"
+         />
+
+    <EditText
+        android:id="@+id/tel_form"
+        android:layout_width="390dp"
+        android:layout_height="40dp"
+        android:inputType="phone"
+        android:text="전화번호"
+        android:gravity="center_vertical"
+        android:background="#DFF3F6"
+        android:layout_marginTop="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name_form"
+        app:layout_constraintBottom_toTopOf="@+id/mail_form"
+        />
+
+    <EditText
+        android:id="@+id/mail_form"
+        android:layout_width="390dp"
+        android:layout_height="40dp"
+        android:inputType="textEmailAddress"
+        android:text="메일"
+        android:gravity="center_vertical"
+        android:background="#DFF3F6"
+        android:layout_marginTop="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tel_form"
+        app:layout_constraintBottom_toTopOf="@id/detail_button"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/mail_form"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="invisible">
+
+        <EditText
+            android:id="@+id/birth_form"
+            android:layout_width="390dp"
+            android:layout_height="40dp"
+            android:inputType="date"
+            android:text="생일"
+            android:gravity="center_vertical"
+            android:background="#DFF3F6" />
+
+        <RadioGroup
+            android:tooltipText="text"
+            android:gravity="right"
+            android:layout_marginTop="10dp"
+            android:id="@+id/sex_form"
+            android:layout_width="390dp"
+            android:layout_height="40dp"
+            android:background="#DFF3F6"
+            android:orientation="horizontal">
+
+            <!--TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="200dp"
+                android:text="empty" /-->
+
+            <RadioButton
+                android:layout_marginRight="10dp"
+                android:id="@+id/female"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="여성"></RadioButton>
+
+            <RadioButton
+                android:layout_marginRight="10dp"
+                android:id="@+id/male"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="남성"></RadioButton>
+            
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/memo_form"
+            android:layout_width="390dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:inputType="textLongMessage"
+            android:text="메모"
+            android:gravity="center_vertical"
+            android:background="#DFF3F6" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/detail_button"
+        android:layout_width="390dp"
+        android:layout_height="40dp"
+        android:text="더보기 v"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mail_form"
+        android:visibility="visible"
+        />
+
+    <LinearLayout
+        android:id="@+id/bottom_button_area"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/cancel_button"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/white"
+            android:text="취소"
+            android:textColor="@color/black"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/save_button"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/white"
+            android:text="저장"
+            android:textColor="@color/black"
+            android:textStyle="bold"/>
+
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
