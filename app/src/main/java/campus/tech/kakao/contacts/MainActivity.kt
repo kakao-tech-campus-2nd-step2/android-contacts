@@ -13,14 +13,14 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
-    lateinit var name_form: EditText
-    lateinit var tel_form: EditText
-    lateinit var mail_form: EditText
-    lateinit var birth_form: EditText
-    lateinit var sex_form: RadioGroup
-    lateinit var sex_male: RadioButton
-    lateinit var sex_female: RadioButton
-    lateinit var memo_form: EditText
+    lateinit var nameForm: EditText
+    lateinit var telForm: EditText
+    lateinit var mailForm: EditText
+    lateinit var birthForm: EditText
+    lateinit var sexForm: RadioGroup
+    lateinit var sexMale: RadioButton
+    lateinit var sexFemale: RadioButton
+    lateinit var memoForm: EditText
     lateinit var cancelButton: Button
     lateinit var saveButton: Button
 
@@ -35,14 +35,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        name_form = findViewById(R.id.name_form)
-        tel_form = findViewById(R.id.tel_form)
-        mail_form = findViewById(R.id.mail_form)
-        birth_form = findViewById(R.id.birth_form)
-        sex_form = findViewById(R.id.sex_form)
-        sex_male = findViewById(R.id.male)
-        sex_female = findViewById(R.id.female)
-        memo_form = findViewById(R.id.memo_form)
+        nameForm = findViewById(R.id.name_form)
+        telForm = findViewById(R.id.tel_form)
+        mailForm = findViewById(R.id.mail_form)
+        birthForm = findViewById(R.id.birth_form)
+        sexForm = findViewById(R.id.sex_form)
+        sexMale = findViewById(R.id.male)
+        sexFemale = findViewById(R.id.female)
+        memoForm = findViewById(R.id.memo_form)
         cancelButton = findViewById(R.id.cancel_button)
         saveButton = findViewById(R.id.save_button)
 
@@ -52,13 +52,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         saveButton.setOnClickListener {
-            name = name_form.text.toString()
-            tel = tel_form.text.toString()
-            mail = mail_form.text.toString()
-            memo = memo_form.text.toString()
-            birth = birth_form.text.toString()
-            if (sex_male.isChecked) sex = sex_male.text.toString()
-            else if (sex_female.isChecked) sex = sex_female.text.toString()
+            name = nameForm.text.toString()
+            tel = telForm.text.toString()
+            mail = mailForm.text.toString()
+            memo = memoForm.text.toString()
+            birth = birthForm.text.toString()
+            if (sexMale.isChecked) sex = sexMale.text.toString()
+            else if (sexFemale.isChecked) sex = sexFemale.text.toString()
             //Log.d("Log", sex)
 
             if (name.isEmpty())
