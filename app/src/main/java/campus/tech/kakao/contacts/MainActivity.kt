@@ -19,6 +19,14 @@ class MainActivity : AppCompatActivity() {
     lateinit var memo_form: EditText
     lateinit var cancelButton: Button
     lateinit var saveButton: Button
+
+    lateinit var name: String
+    lateinit var tel: String
+    lateinit var mail: String
+    lateinit var sex: String
+    lateinit var memo: String
+    lateinit var birth: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -32,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         memo_form = findViewById(R.id.memo_form)
         cancelButton = findViewById(R.id.cancel_button)
         saveButton = findViewById(R.id.save_button)
-        
+
         findViewById<TextView>(R.id.detail_button).setOnClickListener{
             it.visibility = View.GONE
             findViewById<LinearLayout>(R.id.detail_form_area).visibility = View.VISIBLE
