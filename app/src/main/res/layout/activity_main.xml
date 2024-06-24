@@ -1,19 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="#92FFEB3B" />
+
+            <EditText
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_margin="20dp"
+                android:hint="이름"
+                android:paddingLeft="10dp"
+                android:textSize="25dp"
+                android:textColor="#C6676767"
+                android:background="#4800BCD4" />
+
+            <EditText
+                android:id="@+id/phoneNum"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_margin="20dp"
+                android:hint="전화번호"
+                android:paddingLeft="10dp"
+                android:textSize="25dp"
+                android:textColor="#C6676767"
+                android:background="#4800BCD4" />
+
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_margin="20dp"
+                android:hint="메일"
+                android:paddingLeft="10dp"
+                android:textSize="25dp"
+                android:textColor="#C6676767"
+                android:background="#4800BCD4" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:text="더보기"
+                    android:textSize="25dp"
+                    android:gravity="center"
+                    android:layout_gravity="center" />
+
+                <ImageView
+                    android:id="@+id/toggle"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="#4800BCD4" />
+            </LinearLayout>
+
+            <!-- 숨길 추가 필드 시작 -->
+            <LinearLayout
+                android:id="@+id/additionalFieldsLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="생일" />
+
+                <EditText
+                    android:id="@+id/birthdayEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="생일을 선택하세요"
+                    android:focusable="false"
+                    android:clickable="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="성별" />
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RadioButton
+                        android:id="@+id/maleRadioButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="남성" />
+
+                    <RadioButton
+                        android:id="@+id/femaleRadioButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="여성" />
+                </RadioGroup>
+
+                <EditText
+                    android:id="@+id/notesEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="추가 메모"
+                    android:inputType="textMultiLine" />
+            </LinearLayout>
+            <!-- 숨길 추가 필드 끝 -->
+
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>
