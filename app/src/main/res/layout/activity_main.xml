@@ -87,13 +87,16 @@
         android:layout_marginRight="15dp"
         android:visibility="gone">
 
-        <EditText
+        <TextView
             android:id="@+id/birth"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="15dp"
             android:background="@drawable/text_background"
-            android:hint="생일" />
+            android:hint="생일"
+            android:gravity="left|center"
+            android:textSize="18dp"
+            />
 
         <EditText
             android:id="@+id/sex"
