@@ -44,6 +44,7 @@
         android:background="@color/mint"
         android:gravity="center_vertical"
         android:hint="@string/hint_phone_num"
+        android:inputType="number"
         android:paddingStart="10dp"
         android:textSize="15sp"
         android:textStyle="bold"
