@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="top_margin">15dp</dimen>
+    <dimen name="top_margin_double">30dp</dimen>
+    <dimen name="horizontal_margin">20dp</dimen>
+    <dimen name="edittext_padding">15dp</dimen>
+</resources>

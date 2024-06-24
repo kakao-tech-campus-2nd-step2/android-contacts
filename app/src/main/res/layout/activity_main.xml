@@ -7,13 +7,61 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
+    <ImageView
+        android:id="@+id/contactImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="@dimen/top_margin_double"
+        android:src="@drawable/contact_main_image"/>
+
+    <LinearLayout
+        android:id="@+id/textFormList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/top_margin_double"
+        app:layout_constraintTop_toBottomOf="@+id/contactImage">
+        
+        <EditText
+            android:id="@+id/contactName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="이름"
+            android:background="@drawable/edittext_background"
+            android:layout_marginHorizontal="@dimen/horizontal_margin"
+            android:padding="@dimen/edittext_padding"
+        />
+
+        <EditText
+            android:id="@+id/contactTel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="전화번호"
+            android:background="@drawable/edittext_background"
+            android:layout_marginTop="@dimen/top_margin"
+            android:layout_marginHorizontal="@dimen/horizontal_margin"
+            android:padding="@dimen/edittext_padding"
+        />
+
+        <EditText
+            android:id="@+id/contactMail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="메일"
+            android:background="@drawable/edittext_background"
+            android:layout_marginTop="@dimen/top_margin"
+            android:layout_marginHorizontal="@dimen/horizontal_margin"
+            android:padding="@dimen/edittext_padding"
+        />
+
+
+
+    </LinearLayout>
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
