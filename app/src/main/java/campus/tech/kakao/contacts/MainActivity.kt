@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var phone: EditText
     private lateinit var mail: EditText
     private lateinit var birth: TextView
-    private lateinit var sex: TextView
+    private lateinit var sex:String
     private lateinit var female: RadioButton
     private lateinit var male: RadioButton
     private lateinit var memo: EditText
@@ -35,7 +35,6 @@ class MainActivity : AppCompatActivity() {
         phone = findViewById(R.id.phone)
         mail = findViewById(R.id.mail)
         birth = findViewById(R.id.birth)
-        sex = findViewById(R.id.sex)
         female = findViewById(R.id.female)
         male = findViewById(R.id.male)
         memo = findViewById(R.id.memo)
@@ -69,14 +68,19 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "전화 번호는 필수 값입니다", Toast.LENGTH_SHORT).show()
             }
             else{
-                if (female.isChecked)
+                if (female.isChecked) {
+                    sex = "여자"
+                }
+                else if (male.isChecked) {
+                    sex = "남자"
+                }
                 // Insert data into database
                 val contact = Contact(
                     name.text.toString(),
                     phone.text.toString().toInt(),
                     mail.text.toString(),
                     birth.text.toString(),
-                    sex.text.toString(),
+                    sex,
                     memo.text.toString()
                 )
                 database.contactDao().insert(contact)
