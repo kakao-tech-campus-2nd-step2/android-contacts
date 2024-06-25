@@ -28,5 +28,11 @@ class MainActivity : AppCompatActivity() {
             RequiredInputVerify()
         }
     }
+
+    fun swapVisibility(viewA: View, viewB: View) {
+        val temp = viewA.visibility
+        viewA.visibility = viewB.visibility
+        viewB.visibility = temp
+    }
     }
 }
