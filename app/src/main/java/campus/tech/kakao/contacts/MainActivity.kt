@@ -1,6 +1,7 @@
 package campus.tech.kakao.contacts
 
 import android.os.Bundle
+import android.text.method.TextKeyListener.clear
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +18,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var birthdayEditText: EditText
     private lateinit var memoEditText: EditText
     private lateinit var genderRadioGroup: RadioGroup
+    private lateinit var cancelButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         birthdayEditText = findViewById(R.id.birthday)
         genderRadioGroup = findViewById(R.id.gender)
         memoEditText = findViewById(R.id.memo)
+        cancelButton = findViewById(R.id.cancel)
 
         plusButton.setOnClickListener {
             if (birthdayEditText.visibility == View.GONE) {
@@ -55,7 +58,11 @@ class MainActivity : AppCompatActivity() {
                 phoneNumberEditText.text.toString().isEmpty() -> {
                     Toast.makeText(this, "전화번호는 필수 값 입니다.", Toast.LENGTH_SHORT).show()
                 }
+                else -> {
+                    Toast.makeText(this, "저장이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                }
             }
         }
+        
     }
 }
