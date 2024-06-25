@@ -1,5 +1,9 @@
 package campus.tech.kakao.contacts
 
+import android.app.DatePickerDialog
+import android.content.Intent
+import android.icu.text.SimpleDateFormat
+import android.icu.util.Calendar
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -11,6 +15,7 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
     lateinit var nameForm: EditText
@@ -39,6 +44,7 @@ class MainActivity : AppCompatActivity() {
         telForm = findViewById(R.id.tel_form)
         mailForm = findViewById(R.id.mail_form)
         birthForm = findViewById(R.id.birth_form)
+        val calender: Calendar = Calendar.getInstance()
         sexForm = findViewById(R.id.sex_form)
         sexMale = findViewById(R.id.male)
         sexFemale = findViewById(R.id.female)
@@ -50,6 +56,25 @@ class MainActivity : AppCompatActivity() {
             it.visibility = View.GONE
             findViewById<LinearLayout>(R.id.detail_form_area).visibility = View.VISIBLE
         }
+
+        val dateSetListener = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+            calender.set(Calendar.YEAR, year)
+            calender.set(Calendar.MONTH, month)
+            calender.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+            val myDateFormat = "yyyy.MM.dd"
+            val simpleDateFormat = SimpleDateFormat(myDateFormat, Locale.KOREA)
+            birthForm.setText(simpleDateFormat.format(calender.time))
+        }
+        birthForm.setOnClickListener {
+            DatePickerDialog(
+                this@MainActivity,
+                dateSetListener,
+                calender.get(Calendar.YEAR),
+                calender.get(Calendar.MONTH),
+                calender.get(Calendar.DAY_OF_MONTH)
+            ).show()
+        }
+
 
         saveButton.setOnClickListener {
             name = nameForm.text.toString()
