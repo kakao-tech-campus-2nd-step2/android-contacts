@@ -4,7 +4,7 @@
 ### 1. 스켈레톤 업로드
 
 - Contact 모델 스켈레톤 코드 제작
-    - 속성 : name : Int , phoneNumber: Int, profileImg : String, email : String, birth: Int, gender: String, memo: String
+    - 속성 : name : String , phoneNumber: String, email : String, birth: String, gender: String, memo: String
 - ContactRepository 스켈레톤 코드 제작
     - 속성 : 전화번호부 리스트 contacts : mutableListOf<Contact>
     - 리스트에 전화번호를 추가, 삭제, 조회 기능
