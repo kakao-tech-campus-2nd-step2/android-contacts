@@ -24,7 +24,6 @@
         android:text="오른쪽 +버튼을 클릭하여 연락처를 등록해보세요."/>
 
 
-
     <Button
         android:id="@+id/addbutton"
         android:layout_width="70dp"
