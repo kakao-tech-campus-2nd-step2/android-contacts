@@ -5,7 +5,7 @@
     <item
         android:width="100dp"
         android:height="100dp">
-            <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="oval">
+            <shape android:shape="oval">
                 <stroke android:color="@color/black" android:width="10dp"/>
             </shape>
     </item>
@@ -17,7 +17,7 @@
         <rotate
             android:fromDegrees="25"
             android:pivotX="15%">
-            <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="oval">
+            <shape android:shape="oval">
                 <solid android:color="@color/black"/>
             </shape>
         </rotate>
@@ -30,7 +30,7 @@
         <rotate
             android:fromDegrees="40"
             android:pivotY="80%">
-            <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="oval">
+            <shape android:shape="oval">
                 <solid android:color="@color/black"/>
             </shape>
         </rotate>
@@ -43,7 +43,7 @@
         android:gravity="center"
         android:top="8dp"
         >
-        <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="oval">
+        <shape android:shape="oval">
             <solid android:color="@color/black"/>
         </shape>
 
@@ -56,7 +56,7 @@
         android:right="30dp"
         android:top="8dp"
         >
-        <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="oval">
+        <shape android:shape="oval">
             <solid android:color="@color/black"/>
         </shape>
 
