@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
         val name = findViewById<EditText>(R.id.name)
         val phone = findViewById<EditText>(R.id.phone)
         val save = findViewById<TextView>(R.id.save)
+        val cancel = findViewById<TextView>(R.id.cancel)
 
         val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 
@@ -38,5 +39,12 @@ class MainActivity : AppCompatActivity() {
                 toast.show()
             }
         }
+
+        cancel.setOnClickListener{
+            val toast = Toast.makeText(this, "취소 되었습니다", Toast.LENGTH_SHORT)
+            toast.show()
+        }
+
+
     }
 }
