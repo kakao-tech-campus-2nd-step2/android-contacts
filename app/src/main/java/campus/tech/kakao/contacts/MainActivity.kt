@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         val day = calendar.get(Calendar.DAY_OF_MONTH)
 
         val datePickerDialog = DatePickerDialog(this, { _, selectedYear, selectedMonth, selectedDay ->
-            val selectedDate = "$selectedYear-${selectedMonth + 1}-$selectedDay"
+            val selectedDate = "$selectedYear.${selectedMonth + 1}.$selectedDay"
             val birthdayEditText: EditText = findViewById(R.id.birthdayEditText)
             birthdayEditText.setText(selectedDate)
         }, year, month, day)
