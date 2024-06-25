@@ -9,5 +9,7 @@
     <string name="hint_gender">성별</string>
     <string name="hint_memo">메모</string>
     <string name="see_more">더보기</string>
+    <string name="gender_option_woman">여성</string>
+    <string name="gender_option_man">남성</string>
 
 </resources>
