@@ -14,7 +14,7 @@
         android:layout_height="100dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
-        android:src="@mipmap/ic_launcher_round"/>
+        android:src="@mipmap/ic_launcher_round" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -64,6 +64,7 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/moreBtn"
                 android:layout_width="100dp"
                 android:layout_height="45dp"
                 android:layout_gravity="center_horizontal"
@@ -74,6 +75,7 @@
 
 
             <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/moreInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -114,8 +116,8 @@
                     <RadioGroup
                         android:id="@+id/gender"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="match_parent"
+                        android:layout_weight="1"
                         android:orientation="horizontal">
 
                         <RadioButton
@@ -162,6 +164,7 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/cancel"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="30dp"
@@ -172,6 +175,7 @@
             android:textSize="25dp" />
 
         <TextView
+            android:id="@+id/save"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="30dp"
