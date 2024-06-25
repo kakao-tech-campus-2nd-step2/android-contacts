@@ -1,9 +1,11 @@
 package campus.tech.kakao.contacts
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +22,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var cancelBtn: Button
     lateinit var saveBtn: Button
     lateinit var seeMoreLayout:LinearLayoutCompat
+    lateinit var genderRadioGroup: RadioGroup
+    private var gender = 0 // 0 : 무응답, 1 : 여성, 2 : 남성
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -38,12 +42,14 @@ class MainActivity : AppCompatActivity() {
         cancelBtn = findViewById(R.id.cancel_btn)
         saveBtn = findViewById(R.id.save_btn)
         seeMoreLayout = findViewById(R.id.see_more_layout)
+        genderRadioGroup = findViewById(R.id.gender_radio_group)
     }
 
     private fun setOnClickListeners() {
         setOnClickListenerOfSaveBtn()
         setOnClickListenerOfCancelBtn()
         setOnClickListenerOfSeeMoreLayout()
+        setOnClickListenerOfGenderRadioGroup()
     }
 
     private fun setOnClickListenerOfCancelBtn() {
@@ -72,4 +78,15 @@ class MainActivity : AppCompatActivity() {
             memoEditText.visibility = View.VISIBLE
         }
     }
+
+    private fun setOnClickListenerOfGenderRadioGroup() {
+        genderRadioGroup.setOnCheckedChangeListener { group, checkId ->
+            gender = when (checkId) {
+                R.id.woman_radio_btn -> 1
+                R.id.man_radio_btn -> 2
+                else -> 0
+            }
+        }
+    }
 }
+
