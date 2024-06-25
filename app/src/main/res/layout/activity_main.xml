@@ -86,7 +86,7 @@
                     android:orientation="vertical"
                     android:visibility="invisible">
 
-                    <EditText
+                    <TextView
                         android:id="@+id/birthday"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
@@ -94,8 +94,8 @@
                         android:layout_marginRight="15dp"
                         android:layout_marginBottom="15dp"
                         android:background="@color/lightBlue"
+                        android:gravity="center_vertical"
                         android:hint="생일"
-                        android:inputType="date"
                         android:paddingLeft="15dp"
                         android:textSize="15dp" />
 
@@ -114,8 +114,7 @@
                             android:layout_weight="1.3"
                             android:gravity="center_vertical"
                             android:paddingLeft="15dp"
-                            android:text="성별"
-                            android:textColor="@color/gray"
+                            android:hint="성별"
                             android:textSize="15dp" />
 
                         <RadioGroup

@@ -1,5 +1,6 @@
 package campus.tech.kakao.contacts
 
+import android.app.DatePickerDialog
 import android.content.Context
 import android.os.Bundle
 import android.view.View
@@ -10,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.view.isInvisible
+import java.util.Calendar
 
 
 class MainActivity : AppCompatActivity() {
@@ -22,18 +24,20 @@ class MainActivity : AppCompatActivity() {
         val phone = findViewById<EditText>(R.id.phone)
         val moreBtn = findViewById<TextView>(R.id.moreBtn)
         val moreInfo = findViewById<LinearLayoutCompat>(R.id.moreInfo)
+        val birthday = findViewById<TextView>(R.id.birthday)
         val save = findViewById<TextView>(R.id.save)
         val cancel = findViewById<TextView>(R.id.cancel)
 
-        val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val inputMethodManager =
+            getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 
-        save.setOnClickListener{
-            if(name.text.isEmpty()) {
+        save.setOnClickListener {
+            if (name.text.isEmpty()) {
                 val toast = Toast.makeText(this, "이름은 필수값입니다", Toast.LENGTH_SHORT)
                 toast.show()
                 name.requestFocus()
                 inputMethodManager.showSoftInput(name, InputMethodManager.SHOW_IMPLICIT)
-            } else if(phone.text.isEmpty()) {
+            } else if (phone.text.isEmpty()) {
                 val toast = Toast.makeText(this, "전화번호는 필수값입니다", Toast.LENGTH_SHORT)
                 toast.show()
                 phone.requestFocus()
@@ -44,14 +48,28 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        cancel.setOnClickListener{
+        cancel.setOnClickListener {
             val toast = Toast.makeText(this, "취소 되었습니다", Toast.LENGTH_SHORT)
             toast.show()
         }
 
-        moreBtn.setOnClickListener{
+        moreBtn.setOnClickListener {
             moreInfo.visibility = View.VISIBLE
             moreBtn.visibility = View.INVISIBLE
+        }
+
+        birthday.setOnClickListener {
+            val calendar = Calendar.getInstance()    //캘린더뷰 만들기
+            val dateSetListener =
+                DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+                    birthday.text = "" + year + "." + (month + 1) + "." + dayOfMonth
+                }
+            DatePickerDialog(
+                this, dateSetListener,
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
+            ).show()
         }
     }
 }
