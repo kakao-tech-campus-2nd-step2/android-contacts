@@ -1,13 +1,17 @@
 package campus.tech.kakao.contacts
 
+import android.app.DatePickerDialog
 import android.content.Intent
+import android.icu.util.Calendar
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
@@ -21,6 +25,10 @@ class ContactActivity : AppCompatActivity() {
         val name: EditText = findViewById(R.id.name)
         val phoneNumber: EditText = findViewById(R.id.phone_number)
         val mail: EditText = findViewById(R.id.mail)
+
+        val viewMore: ConstraintLayout = findViewById(R.id.view_more)
+
+        val birth: TextView = findViewById(R.id.birthday)
 
         cancelButton.setOnClickListener {
             Toast.makeText(this, "취소 되었습니다", Toast.LENGTH_SHORT).show()
@@ -36,6 +44,22 @@ class ContactActivity : AppCompatActivity() {
                 setResult(RESULT_OK, returnIntent)
                 finish()
             }
+        }
+
+        viewMore.setOnClickListener {
+            findViewById<ConstraintLayout>(R.id.more_infos).visibility = ConstraintLayout.VISIBLE
+            viewMore.visibility = Button.GONE
+        }
+
+        birth.setOnClickListener {
+            val calendar = Calendar.getInstance()
+            val cYear = calendar.get(Calendar.YEAR)
+            val cMonth = calendar.get(Calendar.MONTH)
+            val cDay = calendar.get(Calendar.DAY_OF_MONTH)
+
+            DatePickerDialog(this,
+                { view, year, month, dayOfMonth -> birth.text = "$year-${month + 1}-$dayOfMonth" },
+                cYear, cMonth, cDay).show()
         }
     }
 
@@ -56,7 +80,6 @@ class ContactActivity : AppCompatActivity() {
 
     private fun isValidNumber(phoneNumber: EditText): Boolean {
         val v : Regex = Regex("^[0-9]+$")
-        Log.d("Contact",phoneNumber.text.toString())
         return if (v.matches(phoneNumber.text.toString())) {
             true
         } else if (phoneNumber.text.toString() == "") {
