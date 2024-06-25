@@ -64,5 +64,14 @@ class MainActivity : AppCompatActivity() {
             }
         }
         
+        cancelButton.setOnClickListener {
+            nameEditText.text.clear()
+            phoneNumberEditText.text.clear()
+            mailEditText.text.clear()
+            birthdayEditText.text.clear()
+            genderRadioGroup.clearCheck()
+            memoEditText.text.clear()
+            Toast.makeText(this, "취소되었습니다", Toast.LENGTH_SHORT).show()
+        }
     }
 }
