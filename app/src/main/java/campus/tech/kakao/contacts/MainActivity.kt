@@ -4,6 +4,8 @@ import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.View
 import android.widget.DatePicker
+import android.widget.EditText
+import android.widget.RadioButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -11,21 +13,36 @@ import androidx.room.Room
 import java.util.Calendar
 
 class MainActivity : AppCompatActivity() {
+    // Declare UI elements
+    private lateinit var name: EditText
+    private lateinit var phone: EditText
+    private lateinit var mail: EditText
     private lateinit var birth: TextView
+    private lateinit var sex: TextView
+    private lateinit var female: RadioButton
+    private lateinit var male: RadioButton
+    private lateinit var memo: EditText
+    private lateinit var save: TextView
+    private lateinit var cancel: TextView
+    private lateinit var moreText: TextView
+    private lateinit var birthSexMemo: View
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         // Initialize UI elements
-        val name = findViewById<TextView>(R.id.name)
-        val phone = findViewById<TextView>(R.id.phone)
-        val mail = findViewById<TextView>(R.id.mail)
-        birth = findViewById<TextView>(R.id.birth)
-        val sex = findViewById<TextView>(R.id.sex)
-        val memo = findViewById<TextView>(R.id.memo)
-        val save = findViewById<TextView>(R.id.save)
-        val cancel = findViewById<TextView>(R.id.cancel)
-        val birthSexMemo = findViewById<View>(R.id.birthSexMemo)
-        val moreText = findViewById<TextView>(R.id.moreText)
+        name = findViewById(R.id.name)
+        phone = findViewById(R.id.phone)
+        mail = findViewById(R.id.mail)
+        birth = findViewById(R.id.birth)
+        sex = findViewById(R.id.sex)
+        female = findViewById(R.id.female)
+        male = findViewById(R.id.male)
+        memo = findViewById(R.id.memo)
+        save = findViewById(R.id.save)
+        cancel = findViewById(R.id.cancel)
+        birthSexMemo = findViewById(R.id.birthSexMemo)
+        moreText = findViewById(R.id.moreText)
         birth.setOnClickListener {
             showDatePickerDialog()
         }
@@ -52,6 +69,7 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "전화 번호는 필수 값입니다", Toast.LENGTH_SHORT).show()
             }
             else{
+                if (female.isChecked)
                 // Insert data into database
                 val contact = Contact(
                     name.text.toString(),
