@@ -17,14 +17,21 @@ class MainActivity : AppCompatActivity() {
 
 
         val name = findViewById<EditText>(R.id.name)
+        val phone = findViewById<EditText>(R.id.phone)
         val save = findViewById<TextView>(R.id.save)
+
+        val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 
         save.setOnClickListener{
             if(name.text.isEmpty()) {
                 val toast = Toast.makeText(this, "이름은 필수값입니다", Toast.LENGTH_SHORT)
                 toast.show()
                 name.requestFocus()
-                val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputMethodManager.showSoftInput(name, InputMethodManager.SHOW_IMPLICIT)
+            } else if(phone.text.isEmpty()) {
+                val toast = Toast.makeText(this, "전화번호는 필수값입니다", Toast.LENGTH_SHORT)
+                toast.show()
+                name.requestFocus()
                 inputMethodManager.showSoftInput(name, InputMethodManager.SHOW_IMPLICIT)
             }
         }
