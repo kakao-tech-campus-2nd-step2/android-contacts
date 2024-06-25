@@ -34,5 +34,10 @@ class MainActivity : AppCompatActivity() {
         viewA.visibility = viewB.visibility
         viewB.visibility = temp
     }
+
+    fun clickCancelEvent() {
+        val output = "취소 되었습니다"
+        Toast.makeText(getApplicationContext(), output, Toast.LENGTH_SHORT).show()
+    }
     }
 }
