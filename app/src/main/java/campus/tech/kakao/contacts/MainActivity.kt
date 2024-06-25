@@ -53,7 +53,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -113,14 +112,26 @@ class MainActivity : AppCompatActivity() {
                 )
                 database.contactDao().insert(contact)
                 Toast.makeText(this, "저장이 완료 되었습니다", Toast.LENGTH_SHORT).show()
-                Log.d("MainActivity", database.contactDao().getAll().toString())
             }
 
         }
         // Set click listener for cancel button
+        fun loadAllData(){
+            if (database.contactDao() == null){
+                Log.d("contacttest", "null")
+            }
+            else{
+                val list = database.contactDao().getAll()
+                list.forEach {
+                    Log.d("contacttest", ""+it.id+", "+it.name+", "+it.phone+", "+it.email+", "+it.birth+", "+it.sex+" ")
+                }
+            }
+        }
         cancel.setOnClickListener {
             Toast.makeText(this, "취소 되었습니다", Toast.LENGTH_SHORT).show()
+//            loadAllData()
         }
+
 
     }
 
@@ -134,4 +145,6 @@ class MainActivity : AppCompatActivity() {
             }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH))
         datePicker.show()
     }
+
+
 }
