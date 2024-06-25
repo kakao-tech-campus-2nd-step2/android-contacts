@@ -1,7 +1,10 @@
 package campus.tech.kakao.contacts
 
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.os.Message
+import android.view.MotionEvent
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.Button
@@ -19,10 +22,14 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var moreButton: LinearLayout
     private lateinit var inputFields: Array<View>
-    private lateinit var checkButtons: Array<Button>
+    private lateinit var buttons: Array<Button>
+    private lateinit var checkButtons: LinearLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        var bb: EditText
 
         moreButton = findViewById(R.id.moreButton)
         inputFields = arrayOf(
@@ -33,39 +40,40 @@ class MainActivity : AppCompatActivity() {
             findViewById(R.id.inputGender),
             findViewById(R.id.inputMemo)
         )
-        checkButtons = arrayOf(
+        buttons = arrayOf(
             findViewById(R.id.cancel),
             findViewById(R.id.save)
         )
+        checkButtons = findViewById(R.id.checkbuttons)
 
         val clickListener = View.OnClickListener { view ->
-            when(view) {
+            when (view) {
                 moreButton -> showInputs()
-                inputFields[0] -> Toast.makeText(this, "이름은 필수 값 입니다.", Toast.LENGTH_SHORT).show()
-                inputFields[1] -> Toast.makeText(this, "전화 번호는 필수 값 입니다.", Toast.LENGTH_SHORT).show()
                 inputFields[3] -> showDatePickerDialog(inputFields[3])
-                checkButtons[0] -> cancelContact()
-                checkButtons[1] -> saveContact()
+                buttons[0] -> cancelContact()
+                buttons[1] -> {
+                    var name = (inputFields[0] as EditText).text.toString().trim()
+                    var phoneNumber = (inputFields[1] as EditText).text.toString().trim()
+                    saveContact(name, phoneNumber)
+                }
             }
         }
 
         moreButton.setOnClickListener(clickListener)
-        inputFields[0].setOnClickListener(clickListener)
-        inputFields[1].setOnClickListener(clickListener)
         inputFields[3].setOnClickListener(clickListener)
-
-
+        buttons[0].setOnClickListener(clickListener)
+        buttons[1].setOnClickListener(clickListener)
     }
 
     private fun showInputs() {
         var slideDown = AnimationUtils.loadAnimation(this, R.anim.slide_down)
         moreButton.visibility = View.GONE
-            GlobalScope.launch(Dispatchers.Main) {
-                for (i in 3..5) {
-                    inputFields[i].visibility = View.VISIBLE
-                    inputFields[i].startAnimation(slideDown)
-                    delay(550)
-                }
+        GlobalScope.launch(Dispatchers.Main) {
+            for (i in 3..5) {
+                inputFields[i].visibility = View.VISIBLE
+                inputFields[i].startAnimation(slideDown)
+                delay(400)
+            }
         }
     }
 
@@ -91,7 +99,12 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this, "취소 되었습니다", Toast.LENGTH_LONG).show()
     }
 
-    private fun saveContact() {
-        Toast.makeText(this, "저장이 완료 되었습니다", Toast.LENGTH_SHORT).show()
+    private fun saveContact(name: String, phoneNumber: String) {
+        if (name == "")
+            Toast.makeText(this, "이름은 필수 값 입니다.", Toast.LENGTH_SHORT).show()
+        else if (phoneNumber == "")
+            Toast.makeText(this, "전화 번호는 필수 값 입니다.", Toast.LENGTH_SHORT).show()
+        else
+            Toast.makeText(this, "저장이 완료 되었습니다", Toast.LENGTH_SHORT).show()
     }
 }
