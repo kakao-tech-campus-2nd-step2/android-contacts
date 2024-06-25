@@ -35,9 +35,11 @@ class MainActivity : AppCompatActivity() {
         val phone = etPhone.text.toString()
         val email = etmail.text.toString()
         val message = etmessage.text.toString()
+        val female = rgfemale.buttonTintMode.hashCode()
+        val male = rgmale.buttonTintMode.hashCode()
         val gender = when {
-            this.rgmale -> "남자"
-            this.rgfemale -> "여자"
+            female -> "1"
+            male -> "0"
             else -> ""
         }
         if(name.isEmpty()&&phone.isNotEmpty()&&email.isNotEmpty()&&message.isNotEmpty()){
@@ -47,9 +49,9 @@ class MainActivity : AppCompatActivity() {
                 put(ContactsContract.Contacts.IN_DEFAULT_DIRECTORY,email)
                 put(ContactsContract.Contacts.IN_DEFAULT_DIRECTORY,message)
                 contentResolver.insert(ContactsContract.Contacts.CONTENT_URI,values)
-            } else {
-                Toast.makeText(this,"정확한 값을 입력해주세요",Toast.LENGTH_SHORT).show()
             }
+        } else {
+            Toast.makeText(this,"정확한 값을 입력해주세요",Toast.LENGTH_SHORT).show()
         }
     }
 
