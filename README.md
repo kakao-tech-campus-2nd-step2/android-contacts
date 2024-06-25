@@ -17,7 +17,7 @@ AngularJS Git Commit Message Conventions을 참고해 커밋 메시지를 작성
 
 
 기능 요구 사항
-간단한 연락처를 구현한다.
+간단한 연락처를 구현한다. 
 
 연락처를 추가한다.
 이름과 전화번호는 필수 값이다.
