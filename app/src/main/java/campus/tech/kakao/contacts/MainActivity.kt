@@ -1,5 +1,6 @@
 package campus.tech.kakao.contacts
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -7,18 +8,23 @@ import android.widget.EditText
 import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeParseException
+import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
-    lateinit var emailInput:EditText
-    lateinit var nameInput:EditText
-    lateinit var phoneInput:EditText
-    lateinit var birthdayInput:EditText
-    var gender:Int = -1
-    lateinit var memoInput:EditText
+    lateinit var emailInput: EditText
+    lateinit var nameInput: EditText
+    lateinit var phoneInput: EditText
+    lateinit var birthdayInput: EditText
+    lateinit var genderInput: RadioGroup
+    lateinit var memoInput: EditText
+
+    var birthday: LocalDate? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_addcontact)
         initiateInputFields()
@@ -26,24 +32,33 @@ class MainActivity : AppCompatActivity() {
         setButtonsListener()
     }
 
-    fun initiateInputFields(){
+    fun initiateInputFields() {
         nameInput = findViewById(R.id.input_name)
         emailInput = findViewById(R.id.input_mail)
         phoneInput = findViewById(R.id.input_tel)
         birthdayInput = findViewById(R.id.input_birthday)
         memoInput = findViewById(R.id.input_memo)
-        gender = findViewById<RadioGroup>(R.id.input_gender).checkedRadioButtonId
+        genderInput = findViewById<RadioGroup>(R.id.input_gender)
+
+        birthdayInput.setOnFocusChangeListener { v, hasFocus ->
+            if (hasFocus) {
+                showDatePicker()
+            }
+            else{
+                verifyBirthday(birthdayInput.text.toString())
+            }
+        }
     }
 
-    fun setMoreOptionsListener(){
+    fun setMoreOptionsListener() {
         findViewById<View>(R.id.more_options).setOnClickListener {
             appendOptions()
         }
     }
 
-    fun setButtonsListener(){
+    fun setButtonsListener() {
         findViewById<Button>(R.id.button_submit).setOnClickListener {
-            if(validateInputs()){
+            if (validateInputs()) {
                 saveSuccess()
             }
         }
@@ -52,17 +67,21 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun validateInputs():Boolean{
-        if(checkNameEmpty()){
+    fun getGender(): Int {
+        return genderInput.checkedRadioButtonId
+    }
+
+    fun validateInputs(): Boolean {
+        if (checkNameEmpty()) {
             showToast("이름 값은 필수입니다")
             return false
         }
-        if(checkPhoneNumberEmpty()){
+        if (checkPhoneNumberEmpty()) {
             showToast("전화번호 값은 필수입니다")
             return false
         }
-        if(!checkEmailEmpty()){
-            if(!verifyEmail(emailInput.text.toString())){
+        if (!checkEmailEmpty()) {
+            if (!verifyEmail(emailInput.text.toString())) {
                 showToast("잘못된 이메일 형식입니다")
                 return false
             }
@@ -70,37 +89,87 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    fun checkNameEmpty():Boolean{
+    fun checkNameEmpty(): Boolean {
         return nameInput.text.isEmpty()
     }
 
-    fun checkPhoneNumberEmpty():Boolean{
+    fun checkPhoneNumberEmpty(): Boolean {
         return phoneInput.text.isEmpty()
     }
 
-    fun checkEmailEmpty():Boolean{
+    fun checkEmailEmpty(): Boolean {
         return emailInput.text.isEmpty()
     }
 
-    fun verifyEmail(emailText:String):Boolean{
+    fun verifyEmail(emailText: String): Boolean {
         val emailVerifyingRegex = Regex("^[a-zA-Z0-9+-\\_.]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+\$")
         return emailVerifyingRegex.matches(emailText)
     }
 
-    fun appendOptions(){
+    fun appendOptions() {
         findViewById<View>(R.id.more_options).visibility = View.GONE
         findViewById<View>(R.id.additional_inputs).visibility = View.VISIBLE
     }
 
-    fun saveSuccess(){
+    fun saveSuccess() {
         showToast("저장이 완료 되었습니다")
     }
 
-    fun cancel(){
+    fun cancel() {
         showToast("취소 되었습니다")
     }
 
-    fun showToast(message:String){
+    fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    fun showDatePicker() {
+        val dialogInitialDate = birthday?:LocalDate.now()
+        val dialog =
+            DatePickerDialog(this, null, dialogInitialDate.year, dialogInitialDate.monthValue, dialogInitialDate.dayOfMonth)
+        dialog.setOnDateSetListener { _, year, month, dayOfMonth ->
+            birthday = LocalDate.of(year, month, dayOfMonth)
+            birthdayInput.setText(birthday?.toString())
+        }
+        dialog.show()
+    }
+
+    fun checkDateValid(birthdayText: String): Boolean {
+        val sdf = SimpleDateFormat("yyyy-dd-dd", Locale.getDefault())
+        sdf.isLenient = false
+
+        return try {
+            val date = sdf.parse(birthdayText)
+            true
+        } catch (e: ParseException) {
+            false
+        }
+    }
+
+    fun setBirthdayFromText(birthdayText: String){
+        birthday = try {
+            LocalDate.parse(birthdayText)
+        } catch (
+            e: DateTimeParseException
+        ) {
+            null
+        }
+    }
+
+    fun verifyBirthday(birthdayText: String) {
+        if(!checkDateValid(birthdayText)){
+            birthday = null
+            birthdayInput.setText("")
+            return
+        }
+
+        setBirthdayFromText(birthdayText)
+        birthdayInput.setText(birthday?.toString()?:"")
+    }
+
+    companion object {
+        const val GENDER_NONE = -1
+        const val GENDER_FEMALE = 0
+        const val GENDER_MALE = 1
     }
 }
