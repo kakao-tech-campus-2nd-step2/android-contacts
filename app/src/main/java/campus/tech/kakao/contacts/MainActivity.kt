@@ -10,6 +10,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        saveButtonSetOnClickListner(this)
         cancelButtonSetOnClickListner(this)
     }
 
@@ -24,5 +25,15 @@ class MainActivity : AppCompatActivity() {
         cancelMessage.show()
     }
 
+    fun saveButtonSetOnClickListner(context : Context){
+        findViewById<TextView>(R.id.button_save).setOnClickListener(){
+            displaySaveMessage(context)
+        }
+    }
+
+    fun displaySaveMessage(context: Context){
+        val saveMessage = Toast.makeText(context, "저장이 완료 되었습니다.", Toast.LENGTH_SHORT)
+        saveMessage.show()
+    }
 }
 
