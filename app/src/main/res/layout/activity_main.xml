@@ -44,6 +44,7 @@
             android:layout_marginTop="@dimen/top_margin"
             android:layout_marginHorizontal="@dimen/horizontal_margin"
             android:padding="@dimen/edittext_padding"
+            android:inputType="phone"
         />
 
         <EditText
