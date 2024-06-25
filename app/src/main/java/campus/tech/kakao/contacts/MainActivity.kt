@@ -42,7 +42,14 @@ class MainActivity : AppCompatActivity() {
 
     private fun setOnClickListeners() {
         setOnClickListenerOfSaveBtn()
+        setOnClickListenerOfCancelBtn()
         setOnClickListenerOfSeeMoreLayout()
+    }
+
+    private fun setOnClickListenerOfCancelBtn() {
+        cancelBtn.setOnClickListener {
+            Toast.makeText(this, "취소 되었습니다.", Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun setOnClickListenerOfSaveBtn() {
