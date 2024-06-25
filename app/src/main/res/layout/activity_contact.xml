@@ -1,10 +1,205 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
+    android:background="@color/background"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ContactActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="80dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@color/buttonTextColor"
+            android:text="취소"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="match_parent"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="@color/buttonTextColor"
+            android:text="저장" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:fillViewport="true"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+    <ImageView
+        android:id="@+id/defaultProfileImage"
+        android:padding="40dp"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_gravity="center"
+        android:src="@drawable/user"
+        android:scaleType="centerCrop"/>
+
+    <EditText
+        android:id="@+id/nameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:padding="10dp"
+        android:inputType="text"
+        android:textSize="20sp"
+        android:hint="이름"
+        android:autofillHints="username"
+        android:background="@drawable/edit_box"
+        />
+
+    <EditText
+        android:id="@+id/phoneNumEditText"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:padding="10dp"
+        android:inputType="number|phone"
+        android:textSize="20sp"
+        android:hint="전화번호"
+        android:autofillHints="phone"
+        android:background="@drawable/edit_box"
+        android:layout_marginBottom="50dp"
+        />
+
+    <EditText
+        android:id="@+id/emailEditText"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:padding="10dp"
+        android:inputType="textEmailAddress"
+        android:textSize="20sp"
+        android:hint="이메일"
+        android:autofillHints="emailAddress"
+        android:background="@drawable/edit_box"
+        android:layout_marginBottom="50dp"
+        />
+
+    <LinearLayout
+        android:id="@+id/moreButton"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:onClick="onMoreButtonClick"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/moreText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:text="더보기"
+            android:textColor="@color/buttonTextColor"
+            android:textStyle="bold"
+            android:textSize="25sp" />
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/down"
+            android:layout_marginStart="8dp" />
+
+
+
+    </LinearLayout>
+    
+    <!-- 더보기 누르면 나오는 입력 필드 -->
+    <EditText
+        android:id="@+id/birthdayEditText"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:padding="10dp"
+        android:inputType="none"
+        android:textSize="20sp"
+        android:layout_marginBottom="50dp"
+        android:hint="생일"
+        android:autofillHints="birthday"
+        android:background="@drawable/edit_box"
+        android:visibility="gone"
+        android:focusable="false"
+        android:clickable="true" />
+
+    <RadioGroup
+        android:id="@+id/genderRadioGroup"
+        android:layout_width="match_parent"
+        android:background="@drawable/edit_box"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        android:layout_marginBottom="50dp"
+        android:padding="10dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="성별"
+            android:textSize="23sp"
+            android:textColor="@color/grey"
+            android:layout_marginEnd="150dp"
+            />
+        <RadioButton
+            android:id="@+id/male"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_marginRight="20dp"
+            android:text="남성"/>
+        <RadioButton
+            android:id="@+id/female"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="여성"/>
+
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/memoEditText"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:padding="10dp"
+        android:layout_marginBottom="50dp"
+        android:textSize="23sp"
+        android:gravity="top"
+        android:inputType="textMultiLine"
+        android:singleLine="false"
+        android:hint="메모"
+        android:background="@drawable/edit_box"
+        android:visibility="gone"
+        />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+
+
+
+
+
+
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>
