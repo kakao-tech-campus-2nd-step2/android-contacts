@@ -51,6 +51,55 @@
             android:textSize="15sp"
             android:textStyle="bold"/>
 
+        <EditText
+            android:id="@+id/email_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/mint"
+            android:gravity="center_vertical"
+            android:hint="@string/hint_email"
+            android:paddingStart="10dp"
+            android:textSize="15sp"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/birthday_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:inputType="date"
+            android:layout_marginTop="20dp"
+            android:background="@color/mint"
+            android:gravity="center_vertical"
+            android:hint="@string/hint_birthday"
+            android:paddingStart="10dp"
+            android:textSize="15sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/gender_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/mint"
+            android:gravity="center_vertical"
+            android:hint="@string/hint_gender"
+            android:paddingStart="10dp"
+            android:textSize="15sp"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:id="@+id/memo_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/mint"
+            android:gravity="center_vertical"
+            android:hint="@string/hint_memo"
+            android:paddingStart="10dp"
+            android:textSize="15sp"
+            android:textStyle="bold"/>
+
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 
