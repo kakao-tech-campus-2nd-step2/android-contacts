@@ -33,6 +33,9 @@ class MainActivity : AppCompatActivity() {
                 toast.show()
                 phone.requestFocus()
                 inputMethodManager.showSoftInput(phone, InputMethodManager.SHOW_IMPLICIT)
+            } else {
+                val toast = Toast.makeText(this, "저장이 완료 되었습니다", Toast.LENGTH_SHORT)
+                toast.show()
             }
         }
     }
