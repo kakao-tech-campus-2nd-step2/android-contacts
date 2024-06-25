@@ -13,8 +13,10 @@
         android:layout_height="0dp"
         android:fillViewport="true"
         android:scrollbars="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/button_cancel"
         app:layout_constraintTop_toTopOf="parent"
         >
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -152,7 +154,7 @@
                 />
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:text="더보기"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -165,5 +167,25 @@
 
     </androidx.core.widget.NestedScrollView>
 
+    <TextView
+        android:id="@+id/button_save"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/button_cancel"
+        android:text="저장"
+        android:gravity="center"
+        android:textSize="20sp"/>
 
+    <TextView
+        android:id="@+id/button_cancel"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        app:layout_constraintRight_toLeftOf="@id/button_save"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="취소"
+        android:gravity="center"
+        android:textSize="20sp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
