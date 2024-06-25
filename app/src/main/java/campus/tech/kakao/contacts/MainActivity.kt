@@ -2,14 +2,16 @@ package campus.tech.kakao.contacts
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.View
-import android.widget.DatePicker
 import android.widget.EditText
 import android.widget.RadioButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import java.util.Calendar
 
 class MainActivity : AppCompatActivity() {
@@ -18,7 +20,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var phone: EditText
     private lateinit var mail: EditText
     private lateinit var birth: TextView
-    private lateinit var sex:String
+    private var sex:String? = null
     private lateinit var female: RadioButton
     private lateinit var male: RadioButton
     private lateinit var memo: EditText
@@ -26,6 +28,31 @@ class MainActivity : AppCompatActivity() {
     private lateinit var cancel: TextView
     private lateinit var moreText: TextView
     private lateinit var birthSexMemo: View
+
+    val MIGRATION_1_2 = object : Migration(1, 2) {
+        override fun migrate(database: SupportSQLiteDatabase) {
+            database.execSQL(
+                "CREATE TABLE new_Contact (" +
+                        "id INTEGER PRIMARY KEY NOT NULL, " +
+                        "name TEXT NOT NULL, " +
+                        "phone INTEGER NOT NULL, " +
+                        "email TEXT, " +
+                        "birth TEXT, " +
+                        "sex TEXT, " +
+                        "memo TEXT)"
+            )
+            // 데이터 복사
+            database.execSQL(
+                "INSERT INTO new_Contact (id, name, phone, email, birth, sex, memo) " +
+                        "SELECT id, name, CAST(phone AS INTEGER), email, birth, sex, memo FROM Contact")
+            // 이전 테이블 제거
+            database.execSQL("DROP TABLE Contact")
+
+            // 새 테이블 이름 바꾸기
+            database.execSQL("ALTER TABLE new_Contact RENAME TO Contact")
+        }
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,7 +85,8 @@ class MainActivity : AppCompatActivity() {
         val database = Room.databaseBuilder(
             applicationContext,
             ContactDatabase::class.java, "database-name"
-        ).allowMainThreadQueries().build()
+        ).addMigrations(MIGRATION_1_2).allowMainThreadQueries().build()
+
         // Set click listener for save button
         save.setOnClickListener {
             if (name.text.isEmpty()) {
@@ -85,6 +113,7 @@ class MainActivity : AppCompatActivity() {
                 )
                 database.contactDao().insert(contact)
                 Toast.makeText(this, "저장이 완료 되었습니다", Toast.LENGTH_SHORT).show()
+                Log.d("MainActivity", database.contactDao().getAll().toString())
             }
 
         }
