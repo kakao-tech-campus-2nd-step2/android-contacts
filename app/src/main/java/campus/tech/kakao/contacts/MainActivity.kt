@@ -1,7 +1,8 @@
 package campus.tech.kakao.contacts
 
+import android.app.DatePickerDialog
+import android.icu.util.Calendar
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -16,12 +17,12 @@ class MainActivity : AppCompatActivity() {
     lateinit var nameEditText: EditText
     lateinit var phoneNumEditText: EditText
     lateinit var emailEditText: EditText
-    lateinit var birthdayEditText: EditText
+    lateinit var birthdayTextView: TextView
     lateinit var genderLayout: ConstraintLayout
     lateinit var memoEditText: EditText
     lateinit var cancelBtn: Button
     lateinit var saveBtn: Button
-    lateinit var seeMoreLayout:LinearLayoutCompat
+    lateinit var seeMoreLayout: LinearLayoutCompat
     lateinit var genderRadioGroup: RadioGroup
     private var gender = 0 // 0 : 무응답, 1 : 여성, 2 : 남성
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         nameEditText = findViewById(R.id.name_edit_text)
         phoneNumEditText = findViewById(R.id.phone_num_edit_text)
         emailEditText = findViewById(R.id.email_edit_text)
-        birthdayEditText = findViewById(R.id.birthday_edit_text)
+        birthdayTextView = findViewById(R.id.birthday_text_view)
         genderLayout = findViewById(R.id.gender_layout)
         memoEditText = findViewById(R.id.memo_edit_text)
         cancelBtn = findViewById(R.id.cancel_btn)
@@ -50,7 +51,9 @@ class MainActivity : AppCompatActivity() {
         setOnClickListenerOfCancelBtn()
         setOnClickListenerOfSeeMoreLayout()
         setOnClickListenerOfGenderRadioGroup()
+        setOnClickListenerOfBirthdayEditText()
     }
+
 
     private fun setOnClickListenerOfCancelBtn() {
         cancelBtn.setOnClickListener {
@@ -73,7 +76,7 @@ class MainActivity : AppCompatActivity() {
     private fun setOnClickListenerOfSeeMoreLayout() {
         seeMoreLayout.setOnClickListener {
             seeMoreLayout.visibility = View.GONE
-            birthdayEditText.visibility = View.VISIBLE
+            birthdayTextView.visibility = View.VISIBLE
             genderLayout.visibility = View.VISIBLE
             memoEditText.visibility = View.VISIBLE
         }
@@ -86,6 +89,20 @@ class MainActivity : AppCompatActivity() {
                 R.id.man_radio_btn -> 2
                 else -> 0
             }
+        }
+    }
+
+    private fun setOnClickListenerOfBirthdayEditText() {
+        birthdayTextView.setOnClickListener {
+            val calendar = Calendar.getInstance()
+            val year = calendar.get(Calendar.YEAR)
+            val month = calendar.get(Calendar.MONTH)
+            val day = calendar.get(Calendar.DAY_OF_MONTH)
+            val dateListener = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+                val formattedDate = "${year}.${month}.${dayOfMonth}"
+                birthdayTextView.text = formattedDate
+            }
+            DatePickerDialog(this, dateListener, year, month, day).show()
         }
     }
 }
