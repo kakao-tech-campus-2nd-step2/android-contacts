@@ -25,10 +25,12 @@
         android:layout_marginBottom="20dp"
         android:hint="이름"
         android:padding="11dp"
+        android:focusable="true"
         android:background="@drawable/rounded_edittext"/>
 
     <EditText
         android:id="@+id/inputPhoneNumber"
+        android:focusable="true"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginLeft="20dp"
@@ -80,6 +82,9 @@
         </LinearLayout>
 
         <EditText
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:clickable="true"
             android:visibility="gone"
             android:id="@+id/inputBirth"
             android:layout_width="match_parent"
@@ -92,6 +97,7 @@
             android:background="@drawable/rounded_edittext"/>
 
         <LinearLayout
+            android:id="@+id/inputGender"
             android:visibility="gone"
             android:background="@drawable/rounded_edittext"
             android:layout_marginLeft="20dp"
@@ -144,6 +150,12 @@
             android:hint="메모"
             android:padding="11dp"
             android:background="@drawable/rounded_edittext"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 
