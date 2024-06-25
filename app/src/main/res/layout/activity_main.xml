@@ -37,6 +37,7 @@
         android:hint="@string/phoneNumber"
         android:background="@color/nameBackGround"
         android:padding="12dp"
+        android:inputType="phone"
         app:layout_constraintTop_toBottomOf="@+id/name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
