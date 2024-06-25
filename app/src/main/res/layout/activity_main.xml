@@ -5,15 +5,158 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F4E6F4"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+    <ImageView
+        android:id="@+id/userImage"
+        android:src="@drawable/account"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="16dp"/>
+
+    <EditText
+        android:id="@+id/inputName"
+        app:layout_constraintStart_toStartOf="@+id/userImage"
+        app:layout_constraintEnd_toEndOf="@+id/userImage"
+        app:layout_constraintTop_toBottomOf="@+id/userImage"
+        android:layout_marginTop="16dp"
+        android:paddingStart="16dp"
+        android:background="@drawable/input_form"
+        android:layout_width="360dp"
+        android:layout_height="48dp"
+        android:hint="이름"/>
+
+    <EditText
+        android:id="@+id/inputPhoneNumber"
+        app:layout_constraintStart_toStartOf="@+id/inputName"
+        app:layout_constraintEnd_toEndOf="@+id/inputName"
+        app:layout_constraintTop_toBottomOf="@+id/inputName"
+        android:layout_marginTop="16dp"
+        android:paddingStart="16dp"
+        android:background="@drawable/input_form"
+        android:layout_width="360dp"
+        android:layout_height="48dp"
+        android:hint="전화번호"/>
+
+    <EditText
+        android:id="@+id/inputEmail"
+        app:layout_constraintStart_toStartOf="@+id/inputPhoneNumber"
+        app:layout_constraintEnd_toEndOf="@+id/inputPhoneNumber"
+        app:layout_constraintTop_toBottomOf="@+id/inputPhoneNumber"
+        android:layout_marginTop="16dp"
+        android:paddingStart="16dp"
+        android:background="@drawable/input_form"
+        android:layout_width="360dp"
+        android:layout_height="48dp"
+        android:hint="메일"/>
+    
+    <ImageView
+        app:layout_constraintStart_toStartOf="@+id/inputEmail"
+        app:layout_constraintEnd_toEndOf="@+id/inputEmail"
+        app:layout_constraintTop_toBottomOf="@+id/inputEmail"
+        android:visibility="gone"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/show_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/inputBirthDay"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="16dp"
+            android:paddingStart="16dp"
+            android:background="@drawable/input_form"
+            android:layout_width="360dp"
+            android:layout_height="48dp"
+            android:hint="생일"/>
+
+        <EditText
+            android:id="@+id/inputGender"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inputBirthDay"
+            android:layout_marginTop="16dp"
+            android:paddingStart="16dp"
+            android:background="@drawable/input_form"
+            android:layout_width="360dp"
+            android:layout_height="48dp"
+            android:hint="성별"/>
+
+        <RadioGroup
+            app:layout_constraintEnd_toEndOf="@+id/inputGender"
+            app:layout_constraintTop_toTopOf="@+id/inputGender"
+            android:layout_marginEnd="24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radioBtnMan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="여성"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <RadioButton
+                android:id="@+id/radioBtnWoman"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="남성"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </RadioGroup>
+
+
+        <EditText
+            android:id="@+id/inputMemo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inputGender"
+            android:layout_marginTop="16dp"
+            android:paddingStart="16dp"
+            android:background="@drawable/input_form"
+            android:layout_width="360dp"
+            android:layout_height="48dp"
+            android:hint="메모"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="54dp"
+            android:layout_weight="1"
+            android:textSize="24sp"
+            android:textAlignment="center"
+            android:text="취소"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="54dp"
+            android:layout_weight="1"
+            android:textSize="24sp"
+            android:textAlignment="center"
+            android:text="저장"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
