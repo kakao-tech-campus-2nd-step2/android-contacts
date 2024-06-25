@@ -36,7 +36,7 @@
             android:hint="@string/hint_name"
             android:paddingStart="10dp"
             android:textSize="15sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/phone_num_edit_text"
@@ -49,7 +49,7 @@
             android:inputType="number"
             android:paddingStart="10dp"
             android:textSize="15sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/email_edit_text"
@@ -61,20 +61,47 @@
             android:hint="@string/hint_email"
             android:paddingStart="10dp"
             android:textSize="15sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/see_more_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/see_more"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:src="@drawable/arrow_down" />
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
 
         <EditText
             android:id="@+id/birthday_edit_text"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:inputType="date"
             android:layout_marginTop="20dp"
             android:background="@color/mint"
             android:gravity="center_vertical"
             android:hint="@string/hint_birthday"
+            android:inputType="date"
             android:paddingStart="10dp"
             android:textSize="15sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/gender_text_view"
@@ -86,7 +113,8 @@
             android:hint="@string/hint_gender"
             android:paddingStart="10dp"
             android:textSize="15sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:visibility="gone" />
 
         <EditText
             android:id="@+id/memo_edit_text"
@@ -98,7 +126,8 @@
             android:hint="@string/hint_memo"
             android:paddingStart="10dp"
             android:textSize="15sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:visibility="gone" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

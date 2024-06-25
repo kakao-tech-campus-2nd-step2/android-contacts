@@ -8,5 +8,6 @@
     <string name="hint_email">메일</string>
     <string name="hint_gender">성별</string>
     <string name="hint_memo">메모</string>
+    <string name="see_more">더보기</string>
 
 </resources>
