@@ -2,6 +2,7 @@ package campus.tech.kakao.contacts
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -54,10 +55,17 @@ class ContactActivity : AppCompatActivity() {
     }
 
     private fun isValidNumber(phoneNumber: EditText): Boolean {
-        val v : Regex = Regex("^[0-9]$")
-        return if (phoneNumber.text.toString() == "") {
+        val v : Regex = Regex("^[0-9]+$")
+        Log.d("Contact",phoneNumber.text.toString())
+        return if (v.matches(phoneNumber.text.toString())) {
+            true
+        } else if (phoneNumber.text.toString() == "") {
             Toast.makeText(this, "전화번호는 반드시 입력해야 합니다", Toast.LENGTH_SHORT).show()
             false
-        } else true
+        } else {
+            Toast.makeText(this, "전화번호는 숫자로만 구성되어야 합니다", Toast.LENGTH_SHORT).show()
+            false
+        }
+
     }
 }
