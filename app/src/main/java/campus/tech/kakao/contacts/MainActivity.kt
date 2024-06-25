@@ -31,8 +31,8 @@ class MainActivity : AppCompatActivity() {
             } else if(phone.text.isEmpty()) {
                 val toast = Toast.makeText(this, "전화번호는 필수값입니다", Toast.LENGTH_SHORT)
                 toast.show()
-                name.requestFocus()
-                inputMethodManager.showSoftInput(name, InputMethodManager.SHOW_IMPLICIT)
+                phone.requestFocus()
+                inputMethodManager.showSoftInput(phone, InputMethodManager.SHOW_IMPLICIT)
             }
         }
     }
