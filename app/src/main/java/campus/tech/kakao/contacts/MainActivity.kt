@@ -39,5 +39,18 @@ class MainActivity : AppCompatActivity() {
         val output = "취소 되었습니다"
         Toast.makeText(getApplicationContext(), output, Toast.LENGTH_SHORT).show()
     }
+
+    fun RequiredInputVerify() {
+        var output = "저장이 완료 되었습니다"
+
+        val phoneNumber = findViewById<EditText>(R.id.phone_number)
+        if (phoneNumber.text.toString() == "")
+            output = "전화번호는 필수 값입니다"
+
+        val name = findViewById<EditText>(R.id.name)
+        if (name.text.toString() == "")
+            output = "이름은 필수 값입니다"
+
+        Toast.makeText(getApplicationContext(), output, Toast.LENGTH_SHORT).show()
     }
 }
