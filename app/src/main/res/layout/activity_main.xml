@@ -17,10 +17,10 @@
 
     <EditText
         android:id="@+id/name_form"
-        android:layout_width="390dp"
-        android:layout_height="40dp"
+        android:layout_width="@dimen/edittext_width"
+        android:layout_height="@dimen/edittext_height"
         android:inputType="textPersonName"
-        android:hint="이름"
+        android:hint="@string/name_hint"
         android:gravity="center_vertical"
         android:background="@drawable/rounded_edittext"
         android:layout_marginTop="100dp"
@@ -32,10 +32,10 @@
 
     <EditText
         android:id="@+id/tel_form"
-        android:layout_width="390dp"
-        android:layout_height="40dp"
+        android:layout_width="@dimen/edittext_width"
+        android:layout_height="@dimen/edittext_height"
         android:inputType="phone"
-        android:hint="전화번호"
+        android:hint="@string/tel_hint"
         android:gravity="center_vertical"
         android:background="@drawable/rounded_edittext"
         android:layout_marginTop="10dp"
@@ -47,10 +47,10 @@
 
     <EditText
         android:id="@+id/mail_form"
-        android:layout_width="390dp"
-        android:layout_height="40dp"
+        android:layout_width="@dimen/edittext_width"
+        android:layout_height="@dimen/edittext_height"
         android:inputType="textEmailAddress"
-        android:hint="메일"
+        android:hint="@string/mail_hint"
         android:gravity="center_vertical"
         android:background="@drawable/rounded_edittext"
         android:layout_marginTop="10dp"
@@ -74,25 +74,25 @@
 
         <EditText
             android:id="@+id/birth_form"
-            android:layout_width="390dp"
-            android:layout_height="40dp"
+            android:layout_width="@dimen/edittext_width"
+            android:layout_height="@dimen/edittext_height"
             android:inputType="none"
             android:focusable="false"
-            android:hint="생일"
+            android:hint="@string/bith_hint"
             android:gravity="center_vertical"
             android:background="@drawable/rounded_edittext" />
 
         <LinearLayout
             android:layout_marginTop="10dp"
             android:background="@drawable/rounded_edittext"
-            android:layout_width="390dp"
+            android:layout_width="@dimen/edittext_width"
             android:layout_height="40dp"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="성별"
+                android:hint="@string/sex_hint"
                 android:textSize="18sp"
                 android:layout_gravity="center_vertical"/>
 
@@ -112,13 +112,13 @@
                     android:id="@+id/female"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="여성"   />
+                    android:text="@string/sex_female"   />
 
                 <RadioButton
                     android:id="@+id/male"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="남성"   />
+                    android:text="@string/sex_male"   />
 
 
             </RadioGroup>
@@ -127,11 +127,11 @@
 
         <EditText
             android:id="@+id/memo_form"
-            android:layout_width="390dp"
-            android:layout_height="40dp"
+            android:layout_width="@dimen/edittext_width"
+            android:layout_height="@dimen/edittext_height"
             android:layout_marginTop="10dp"
             android:inputType="textLongMessage"
-            android:hint="메모"
+            android:hint="@string/memo_hint"
             android:gravity="center_vertical"
             android:background="@drawable/rounded_edittext" />
 
@@ -139,8 +139,8 @@
 
     <LinearLayout
         android:id="@+id/detail_button_area"
-        android:layout_width="390dp"
-        android:layout_height="40dp"
+        android:layout_width="@dimen/edittext_width"
+        android:layout_height="@dimen/edittext_height"
         android:orientation="horizontal"
         android:layout_marginTop="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -157,7 +157,7 @@
             android:id="@+id/detail_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="더보기"
+            android:text="@string/see_more_button"
             android:layout_gravity="center" />
 
         <ImageView
