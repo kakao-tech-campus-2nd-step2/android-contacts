@@ -45,17 +45,17 @@ class MainActivity : AppCompatActivity() {
         ).allowMainThreadQueries().build()
         // Set click listener for save button
         save.setOnClickListener {
-            if (name.text.toString() == "") {
+            if (name.text.isEmpty()) {
                 Toast.makeText(this, "이름은 필수 값입니다", Toast.LENGTH_SHORT).show()
             }
-            else if (phone.text.toString() == "") {
+            else if (phone.text.isEmpty()) {
                 Toast.makeText(this, "전화 번호는 필수 값입니다", Toast.LENGTH_SHORT).show()
             }
             else{
                 // Insert data into database
                 val contact = Contact(
                     name.text.toString(),
-                    phone.text.toString(),
+                    phone.text.toString().toInt(),
                     mail.text.toString(),
                     birth.text.toString(),
                     sex.text.toString(),

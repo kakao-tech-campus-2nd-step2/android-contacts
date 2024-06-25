@@ -47,7 +47,8 @@
                 android:layout_height="50dp"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/text_background"
-                android:hint="전화번호" />
+                android:hint="전화번호"
+                android:inputType="number"/>
 
             <EditText
                 android:id="@+id/mail"
