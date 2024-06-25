@@ -2,6 +2,7 @@ package campus.tech.kakao.contacts
 
 import android.os.Bundle
 import android.widget.EditText
+import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +16,16 @@ class MainActivity : AppCompatActivity() {
         val btnCancel: TextView = findViewById<TextView>(R.id.btnCancel)
         val inputName: EditText = findViewById<EditText>(R.id.inputName)
         val inputPhoneNumber: EditText = findViewById<EditText>(R.id.inputPhoneNumber)
+        val radioGroupGender: RadioGroup = findViewById<RadioGroup>(R.id.radioGroupGender)
+
+        val inputTextList = listOf(
+            inputName,
+            inputPhoneNumber,
+            findViewById<EditText>(R.id.inputBirthDay),
+            findViewById<EditText>(R.id.inputEmail),
+            findViewById<EditText>(R.id.inputGender),
+            findViewById<EditText>(R.id.inputMemo),
+        )
         
         btnSave.setOnClickListener {
             if (inputName.text.isEmpty() || inputPhoneNumber.text.isEmpty()){
@@ -25,6 +36,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnCancel.setOnClickListener {
+            inputTextList.forEach{it.text.clear()}
+            radioGroupGender.clearCheck()
             Toast.makeText(this, "취소 되었습니다", Toast.LENGTH_SHORT).show()
         }
     }
