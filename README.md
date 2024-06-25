@@ -1,19 +1,19 @@
 # android-contacts
 
-## Step1 연락처 추가
+## Step1 _연락처 추가_
 
 ### Layout Requirements
 
 **User input**
 
 - Default: name, phone number, e-mail
-    - only numbers can be input in phone number
+  - only numbers can be input in phone number
 - Addition: birthday, gender, memo
-    - choose one of two genders
+  - choose one of two genders
 
 **Button**
 
-- more
+- more details
 - cancel
 - save
 
@@ -21,19 +21,19 @@
 
 **Additional Input**
 
-더보기 버튼을 누르면 더보기 버튼과 입력 폼의 invisibility 값이 swap됨
+after clicking the more details button, the more details button and the additional input form's visibility value are swapped
 
-- 생일, 성별, 메모 추가 입력 폼은 초기값으로 invisibility 속성의 값으로 gone을 가짐
-- 더보기 버튼은 초기값으로 invisibility 속성의 값으로 visible을 가짐
+- birthday, gender, memo input form has an default value of gone for the visibility attribute
+- more details button has an default value of visible for the visibility attribute
 
 **Cancel**
 
-“취소 되었습니다”라는 토스트 메시지를 출력
+When cancel button is clicked, ouput toast message "취소 되었습니다"
 
 **Verify required input**
 
-저장 버튼을 눌렀을 경우
+When save button is clicked
 
-- 이름을 입력하지 않으면 “이름은 필수 값입니다”라는 토스트 메시지를 출력
-- 전화번호 입력하지 않으면 “전화번호는 필수 값입니다”라는 토스트 메시지를 출력
-- 필수 입력사항이 입력되면 “저장이 완료 되었습니다”라는 토스트 메시지를 출력
+- when phone number is not exist, output toast message "전화번호는 필수 값입니다"
+- when name is not exist, output toast message "이름은 필수 값입니다"
+- all input requirements was exist, then output toast message "저장이 완료 되었습니다"
