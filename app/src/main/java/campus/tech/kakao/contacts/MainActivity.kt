@@ -6,6 +6,7 @@ import android.provider.ContactsContract
 import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioButton
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import campus.tech.kakao.contacts.R.id.female
 
@@ -16,8 +17,8 @@ class MainActivity : AppCompatActivity() {
     private val etmessage: EditText by lazy {findViewById(R.id.message)}
     private val btnsave: Button by lazy {findViewById(R.id.save)}
     private val btndeny: Button by lazy {findViewById(R.id.deny)}
-    public val rgfemale: RadioButton by lazy { findViewById(female) }
-    public val rgmale: RadioButton by lazy { findViewById(R.id.male)}
+    private val rgfemale: RadioButton by lazy { findViewById(R.id.female) }
+    private val rgmale: RadioButton by lazy { findViewById(R.id.male)}
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -35,19 +36,19 @@ class MainActivity : AppCompatActivity() {
         val email = etmail.text.toString()
         val message = etmessage.text.toString()
         val gender = when {
-            this.rgmale -> {
-                "남자"
-            }
-            this.rgfemale -> {
-                "여자"
-            }
+            this.rgmale -> "남자"
+            this.rgfemale -> "여자"
             else -> ""
         }
         if(name.isEmpty()&&phone.isNotEmpty()&&email.isNotEmpty()&&message.isNotEmpty()){
             val values = ContentValues().apply {
                 put(ContactsContract.Contacts.DISPLAY_NAME,name)
                 put(ContactsContract.CommonDataKinds.Phone.NUMBER,phone)
-                put()
+                put(ContactsContract.Contacts.IN_DEFAULT_DIRECTORY,email)
+                put(ContactsContract.Contacts.IN_DEFAULT_DIRECTORY,message)
+                contentResolver.insert(ContactsContract.Contacts.CONTENT_URI,values)
+            } else {
+                Toast.makeText(this,"정확한 값을 입력해주세요",Toast.LENGTH_SHORT).show()
             }
         }
     }
