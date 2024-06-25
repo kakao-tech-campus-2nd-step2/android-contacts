@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
         saveButton = findViewById(R.id.save_button)
 
         findViewById<TextView>(R.id.detail_button).setOnClickListener{
-            it.visibility = View.GONE
+            findViewById<LinearLayout>(R.id.detail_button_area).visibility = View.INVISIBLE
             findViewById<LinearLayout>(R.id.detail_form_area).visibility = View.VISIBLE
         }
 
