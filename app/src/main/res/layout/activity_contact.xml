@@ -14,11 +14,12 @@
         android:layout_height="80dp">
 
         <TextView
+            android:id="@+id/cancelButton"
             android:layout_width="0dp"
             android:layout_weight="0.5"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:textSize="25sp"
+            android:textSize="22sp"
             android:textStyle="bold"
             android:textColor="@color/buttonTextColor"
             android:text="취소"/>
@@ -29,10 +30,11 @@
             android:layout_height="match_parent"/>
 
         <TextView
+            android:id="@+id/saveButton"
             android:layout_width="0dp"
             android:layout_weight="0.5"
             android:layout_height="match_parent"
-            android:textSize="25sp"
+            android:textSize="22sp"
             android:textStyle="bold"
             android:gravity="center"
             android:textColor="@color/buttonTextColor"
@@ -113,15 +115,13 @@
             android:text="더보기"
             android:textColor="@color/buttonTextColor"
             android:textStyle="bold"
-            android:textSize="25sp" />
+            android:textSize="20sp" />
 
         <ImageView
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:src="@drawable/down"
             android:layout_marginStart="8dp" />
-
-
 
     </LinearLayout>
     
@@ -154,7 +154,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="성별"
-            android:textSize="23sp"
+            android:textSize="20sp"
             android:textColor="@color/grey"
             android:layout_marginEnd="150dp"
             />
@@ -180,7 +180,7 @@
         android:layout_height="150dp"
         android:padding="10dp"
         android:layout_marginBottom="50dp"
-        android:textSize="23sp"
+        android:textSize="20sp"
         android:gravity="top"
         android:inputType="textMultiLine"
         android:singleLine="false"
