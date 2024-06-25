@@ -2,12 +2,14 @@ package campus.tech.kakao.contacts
 
 import android.content.Context
 import android.os.Bundle
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.core.view.isInvisible
 
 
 class MainActivity : AppCompatActivity() {
@@ -18,6 +20,8 @@ class MainActivity : AppCompatActivity() {
 
         val name = findViewById<EditText>(R.id.name)
         val phone = findViewById<EditText>(R.id.phone)
+        val moreBtn = findViewById<TextView>(R.id.moreBtn)
+        val moreInfo = findViewById<LinearLayoutCompat>(R.id.moreInfo)
         val save = findViewById<TextView>(R.id.save)
         val cancel = findViewById<TextView>(R.id.cancel)
 
@@ -45,6 +49,9 @@ class MainActivity : AppCompatActivity() {
             toast.show()
         }
 
-
+        moreBtn.setOnClickListener{
+            moreInfo.visibility = View.VISIBLE
+            moreBtn.visibility = View.INVISIBLE
+        }
     }
 }
