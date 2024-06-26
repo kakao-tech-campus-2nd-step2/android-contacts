@@ -9,6 +9,7 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.lifecycle.Observer
@@ -63,8 +64,18 @@ class MainActivity : AppCompatActivity() {
 
     private fun onCancelClicked() {
         showToast("취소합니다.")
-        resetForm()
-        startActivity(Intent(this, ContactListActivity::class.java))
+        onBackPressed()
+    }
+
+    override fun onBackPressed(){
+        AlertDialog.Builder(this)
+            .setMessage("작성 중인 내용이 있습니다. 정말 나가시겠습니까?")
+            .setPositiveButton("나가기") { _, _ ->
+                resetForm()
+                super.onBackPressed()
+            }
+            .setNegativeButton("작성하기", null)
+            .show()
     }
 
     private fun onSaveClicked() {
