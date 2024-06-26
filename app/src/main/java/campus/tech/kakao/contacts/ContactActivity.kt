@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -19,6 +20,7 @@ class ContactActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contact)
+
         val cancelButton: Button = findViewById(R.id.cancel)
         val saveButton: Button = findViewById(R.id.save)
 
@@ -29,6 +31,8 @@ class ContactActivity : AppCompatActivity() {
         val viewMore: ConstraintLayout = findViewById(R.id.view_more)
 
         val birth: TextView = findViewById(R.id.birthday)
+        val sex: RadioGroup = findViewById(R.id.sex_radio_group)
+        val memo: EditText = findViewById(R.id.memo)
 
         cancelButton.setOnClickListener {
             Toast.makeText(this, "취소 되었습니다", Toast.LENGTH_SHORT).show()
@@ -39,6 +43,7 @@ class ContactActivity : AppCompatActivity() {
 
         saveButton.setOnClickListener {
             if (isValidInfo(name, phoneNumber)) {
+                saveInfo(name, phoneNumber, mail, birth, sex, memo)
                 Toast.makeText(this, "저장이 완료 되었습니다", Toast.LENGTH_SHORT).show()
                 val returnIntent: Intent = Intent()
                 setResult(RESULT_OK, returnIntent)
@@ -58,8 +63,19 @@ class ContactActivity : AppCompatActivity() {
             val cDay = calendar.get(Calendar.DAY_OF_MONTH)
 
             DatePickerDialog(this,
-                { view, year, month, dayOfMonth -> birth.text = "$year-${month + 1}-$dayOfMonth" },
+                { _, year, month, dayOfMonth -> birth.text = "$year-%02d-%02d".format(month + 1, dayOfMonth) },
                 cYear, cMonth, cDay).show()
+        }
+
+        sex.setOnCheckedChangeListener { group, checkedId ->
+            when(checkedId) {
+                R.id.female -> {
+                    Toast.makeText(this, "여자!", Toast.LENGTH_SHORT).show()
+                }
+                R.id.male -> {
+                    Toast.makeText(this, "남자!", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 
@@ -89,6 +105,18 @@ class ContactActivity : AppCompatActivity() {
             Toast.makeText(this, "전화번호는 숫자로만 구성되어야 합니다", Toast.LENGTH_SHORT).show()
             false
         }
+    }
 
+    fun saveInfo(name: EditText, phoneNumber: EditText, mail: EditText,
+                 birth: TextView, sex: RadioGroup, memo: EditText): Contact {
+        val nameInfo: String = name.text.toString()
+        val phoneNumberInfo: String = phoneNumber.text.toString()
+        val mailInfo: String = mail.text.toString()
+        val birthInfo: String = birth.text.toString()
+        val sexInfo: Int = sex.checkedRadioButtonId
+        val memoInfo: String = memo.text.toString()
+
+        val contact: Contact = Contact(nameInfo, phoneNumberInfo,mailInfo, birthInfo, sexInfo, memoInfo)
+        return contact
     }
 }
