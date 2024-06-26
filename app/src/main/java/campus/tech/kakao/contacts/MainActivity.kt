@@ -13,6 +13,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var emailEditText: EditText
     private lateinit var cancelButton: TextView
     private lateinit var saveButton: TextView
+    private lateinit var phoneNumber: PhoneNumber
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         initViews()
+        phoneNumber = PhoneNumber(phoneEditText)
 
         // 토스트 리스너
         cancelButton.setOnClickListener {
@@ -53,6 +55,10 @@ class MainActivity : AppCompatActivity() {
         return when {
             missingFields.isNotEmpty() -> {
                 showToast("${missingFields.joinToString(", ")}을(를) 입력하세요.")
+                false
+            }
+            !phoneNumber.isValidPhoneNumber() -> {
+                showToast("전화번호 형식이 올바르지 않습니다.")
                 false
             }
             else -> true

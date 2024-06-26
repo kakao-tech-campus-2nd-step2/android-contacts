@@ -36,7 +36,8 @@
         android:padding="8dp"
         android:layout_marginHorizontal="8dp"
         android:drawableLeft="@drawable/ic_call_resized"
-        android:drawablePadding="8dp"/>
+        android:drawablePadding="8dp"
+        android:inputType="phone"/>
 
 
     <EditText
