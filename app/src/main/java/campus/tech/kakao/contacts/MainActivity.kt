@@ -2,6 +2,7 @@ package campus.tech.kakao.contacts
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -22,11 +23,13 @@ class MainActivity : AppCompatActivity() {
 //    }
     fun startCalenderDialog(textView: TextView) {
         val datePickerDialog = DatePickerDialog(this)
-        datePickerDialog.datePicker.init(
-            2000, 0, 1
-        ) { _, year, month, dayOfMonth ->
+        datePickerDialog.updateDate(2000,0,1)
+
+        datePickerDialog.setOnDateSetListener { _, year, month, dayOfMonth ->
+            Log.d("testt",getString(R.string.birthday, year, month + 1, dayOfMonth))
             textView.text = getString(R.string.birthday, year, month + 1, dayOfMonth)
         }
+
         datePickerDialog.show()
     }
 
