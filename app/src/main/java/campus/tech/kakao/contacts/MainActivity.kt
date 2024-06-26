@@ -50,10 +50,17 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
     }
 
+    fun setFocus(view: View){
+        view.requestFocus()
+        val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.showSoftInput(view, 0);
+    }
+
     fun isValidContact(views : List<EditText>) : Boolean{
         views.forEach{
             if(it.text.isEmpty()){
                 showToast(resources.getString(R.string.essential_value,it.hint.toString()))
+                setFocus(it)
                 return false
             }
         }
