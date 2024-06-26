@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Contacts</string>
+    <string name="name">이름</string>
+    <string name="phoneNumber">전화번호</string>
+    <string name="mail">메일</string>
+    <string name="extra">더보기</string>
+    <string name="brith">생일</string>
+    <string name="gender">성별</string>
+    <string name="female">여성</string>
+    <string name="male">남성</string>
+    <string name="memo">메모</string>
 </resources>
