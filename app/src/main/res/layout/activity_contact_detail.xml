@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ContactDetailActivity">
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/default_padding">
+
+            <ImageView
+                android:id="@+id/iv_profile"
+                android:layout_width="@dimen/profile_size"
+                android:layout_height="@dimen/profile_size"
+                android:layout_gravity="center"
+                android:layout_marginVertical="@dimen/default_padding"
+                android:contentDescription="@string/profile_image"
+                android:src="@drawable/baseline_face_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintGuide_percent="0.3"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.constraintlayout.helper.widget.Flow
+                android:id="@+id/flow_titles"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_padding"
+                android:orientation="vertical"
+                android:padding="@dimen/default_padding"
+                app:constraint_referenced_ids="tv_name_title, tv_phone_number_title, tv_mail_title, tv_birthday_title, tv_gender_title, tv_memo_title"
+                app:flow_verticalGap="@dimen/default_padding"
+                app:layout_constraintEnd_toEndOf="@id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_profile" />
+
+            <TextView
+                android:id="@+id/tv_name_title"
+                style="@style/detailTitleTextStyle"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/et_height"
+                android:gravity="center_vertical"
+                android:text="@string/name" />
+
+            <TextView
+                android:id="@+id/tv_phone_number_title"
+                style="@style/detailTitleTextStyle"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/et_height"
+                android:gravity="center_vertical"
+                android:text="@string/phone_number"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/tv_mail_title"
+                style="@style/detailTitleTextStyle"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/et_height"
+                android:gravity="center_vertical"
+                android:text="@string/mail"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/tv_birthday_title"
+                style="@style/detailTitleTextStyle"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/et_height"
+                android:gravity="center_vertical"
+                android:text="@string/birthday"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/tv_gender_title"
+                style="@style/detailTitleTextStyle"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/et_height"
+                android:gravity="center_vertical"
+                android:text="@string/gender"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/tv_memo_title"
+                style="@style/detailTitleTextStyle"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/et_height"
+                android:gravity="center_vertical"
+                android:text="@string/memo"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/tv_name"
+                style="@style/contentTitleTextStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="end"
+                android:hint="@string/name"
+                android:maxLines="1"
+                app:layout_constraintBottom_toBottomOf="@id/tv_name_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/guideline"
+                app:layout_constraintTop_toTopOf="@id/tv_name_title" />
+
+            <TextView
+                android:id="@+id/tv_phone_number"
+                style="@style/contentTitleTextStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:gravity="end"
+                android:maxLines="1"
+                app:layout_constraintBottom_toBottomOf="@id/tv_phone_number_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/guideline"
+                app:layout_constraintTop_toTopOf="@id/tv_phone_number_title" />
+
+            <TextView
+                android:id="@+id/tv_mail"
+                style="@style/contentTitleTextStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="end"
+                android:hint="@string/mail"
+                android:maxLines="1"
+                app:layout_constraintBottom_toBottomOf="@id/tv_mail_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/guideline"
+                app:layout_constraintTop_toTopOf="@id/tv_mail_title" />
+
+            <TextView
+                android:id="@+id/tv_birthday"
+                style="@style/contentTitleTextStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="end"
+                android:hint="@string/birthday"
+                android:maxLines="1"
+                app:layout_constraintBottom_toBottomOf="@id/tv_birthday_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/guideline"
+                app:layout_constraintTop_toTopOf="@id/tv_birthday_title" />
+
+            <TextView
+                android:id="@+id/tv_gender"
+                style="@style/contentTitleTextStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="end"
+                android:hint="@string/gender"
+                android:maxLines="1"
+                app:layout_constraintBottom_toBottomOf="@id/tv_gender_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/guideline"
+                app:layout_constraintTop_toTopOf="@id/tv_gender_title" />
+
+            <TextView
+                android:id="@+id/tv_memo"
+                style="@style/contentTitleTextStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/default_padding"
+                android:hint="@string/memo"
+                android:textAlignment="textStart"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/guideline"
+                app:layout_constraintTop_toTopOf="@id/tv_memo_title" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group_mail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:constraint_referenced_ids="tv_mail_title, tv_mail" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group_birthday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:constraint_referenced_ids="tv_birthday_title, tv_birthday" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group_gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:constraint_referenced_ids="tv_gender, tv_gender_title" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group_memo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:constraint_referenced_ids="tv_memo_title, tv_memo" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

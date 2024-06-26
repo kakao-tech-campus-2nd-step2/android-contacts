@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="default_padding">16dp</dimen>
+    <dimen name="large_padding">24dp</dimen>
+    <dimen name="small_padding">8dp</dimen>
+    <dimen name="default_radius">8dp</dimen>
+    <dimen name="profile_size">120dp</dimen>
+    <dimen name="et_height">56dp</dimen>
+    <dimen name="btn_height">56dp</dimen>
+    <dimen name="tv_short_name_size">60dp</dimen>
+</resources>

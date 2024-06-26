@@ -2,4 +2,13 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="bgPrimary">#FFFFFFFF</color>
+    <color name="bgSecondary">#E0F4F7</color>
+    <color name="fgPrimary">#000000</color>
+    <color name="fgSecondary">#2D2D2D</color>
+    <color name="fgTertiary">#8D8D8D</color>
+    <color name="yellow">#FFC107</color>
+    <color name="orange">#FF9800</color>
+    <color name="red">#E91E63</color>
+    <color name="blue">#2196F3</color>
 </resources>
