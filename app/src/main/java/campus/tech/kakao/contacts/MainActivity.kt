@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 
@@ -43,14 +44,39 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnCancel.setOnClickListener {
-            inputTextList.forEach{it.text.clear()}
-            radioGroupGender.clearCheck()
-            Toast.makeText(this, "취소 되었습니다", Toast.LENGTH_SHORT).show()
+            if (isInputFormFilled(inputTextList,radioGroupGender)){
+                showAlertDialog()
+            }else{
+                Toast.makeText(this, "취소 되었습니다", Toast.LENGTH_SHORT).show()
+                finish()
+            }
         }
 
         btnMore.setOnClickListener {
             btnMore.visibility = View.GONE
             additionalInputLayout.visibility = View.VISIBLE
         }
+    }
+    private fun isInputFormFilled(inputTextList: List<EditText>, radioGroup: RadioGroup ):Boolean{
+        inputTextList.forEach{
+            if (it.text.isNotEmpty()){
+                return true
+            }
+            if (radioGroup.checkedRadioButtonId != -1){
+                return true
+            }
+        }
+        return false
+    }
+
+    private fun showAlertDialog(){
+        AlertDialog.Builder(this)
+            .setMessage("작성 중인 내용이 있습니다. 정말 나가시겠습니까?")
+            .setPositiveButton("예"){dialog,which->
+                Toast.makeText(this, "취소 되었습니다", Toast.LENGTH_SHORT).show()
+                finish()
+            }
+            .setNegativeButton("아니오",null)
+            .show()
     }
 }
