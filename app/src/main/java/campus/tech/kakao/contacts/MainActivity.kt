@@ -52,9 +52,10 @@ class MainActivity : AppCompatActivity() {
             }
 
             //성별 선택
-            val gender = when (genderRadio.checkedRadioButtonId){
-                R.id.femaleButton -> "여성"
-                R.id.maleButton -> "남성"
+            val gender = if (genderRadio.checkedRadioButtonId == R.id.femaleButton) {
+                "여성"
+            } else {
+                "남성"
             }
 
             Toast.makeText(this, "저장되었습니다.", Toast.LENGTH_SHORT).show()

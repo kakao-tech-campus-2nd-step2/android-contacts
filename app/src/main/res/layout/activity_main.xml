@@ -73,7 +73,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailText"
-        android:background="@drawable/round_background"
         android:onClick="toggleMore" />
 
     <!--더보기 아래 생일, 성별, 메모 레이아웃 묶기-->
