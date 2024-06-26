@@ -27,6 +27,9 @@ class MainActivity : AppCompatActivity() {
         val see_more_button: LinearLayoutCompat = findViewById(R.id.see_more_button)
         val see_more_input_form: LinearLayoutCompat = findViewById(R.id.see_more_input_form)
 
+        // 초기화
+        see_more_input_form.visibility = View.GONE
+
         see_more_button.setOnClickListener{
             see_more_button.visibility = View.GONE
             see_more_input_form.visibility = View.VISIBLE
@@ -34,13 +37,13 @@ class MainActivity : AppCompatActivity() {
 
 
         save_button.setOnClickListener {
-            if (name_input.text == null) {
-                Toast.makeText(this, "이름을 입력해주세요.", Toast.LENGTH_SHORT)
+            if (name_input.text.isNullOrEmpty()) {
+                Toast.makeText(this, "이름을 입력해주세요.", Toast.LENGTH_SHORT).show()
             }
-            else if (phone_number_input.text == null) {
-                Toast.makeText(this, "전화번호를 입력해주세요.", Toast.LENGTH_SHORT)
-            } else {
-
+            else if (phone_number_input.text.isNullOrEmpty()) {
+                Toast.makeText(this, "전화번호를 입력해주세요.", Toast.LENGTH_SHORT).show()
+            } else if (!phone_number_input.text.all { Character.isDigit(it) }){
+                Toast.makeText(this, "전화번호는 숫자로만 입력해주세요.", Toast.LENGTH_SHORT).show()
             }
         }
 
