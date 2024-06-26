@@ -62,6 +62,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun onCancelClicked() {
         showToast("취소합니다.")
+        resetForm()
     }
 
     private fun onSaveClicked() {
@@ -71,6 +72,7 @@ class MainActivity : AppCompatActivity() {
                 val contact = createContactFromInput()
                 contactViewModel.insert(contact)
                 Log.d("testt", "User: data is inserted")
+                resetForm()
             } catch (e: Exception) {
                 Log.e("testt", "Error inserting user", e)
             }
@@ -124,6 +126,17 @@ class MainActivity : AppCompatActivity() {
             }
             else -> true
         }
+    }
+
+    private fun resetForm() {
+        nameEditText.text.clear()
+        phoneEditText.text.clear()
+        emailEditText.text.clear()
+        birthdayEditText.text.clear()
+        genderRadioGroup.clearCheck()
+        memoEditText.text.clear()
+        moreFields.visibility = LinearLayoutCompat.GONE
+        moreButton.visibility = LinearLayoutCompat.VISIBLE
     }
 
     private fun showToast(message: String) {
