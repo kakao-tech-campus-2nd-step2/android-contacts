@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
         val name = findViewById<EditText>(R.id.name)
         val phone = findViewById<EditText>(R.id.phone)
-        val moreBtn = findViewById<TextView>(R.id.moreBtn)
+        val moreBtn = findViewById<LinearLayoutCompat>(R.id.moreBtn)
         val moreInfo = findViewById<LinearLayoutCompat>(R.id.moreInfo)
         val birthday = findViewById<TextView>(R.id.birthday)
         val save = findViewById<TextView>(R.id.save)
@@ -30,6 +30,8 @@ class MainActivity : AppCompatActivity() {
 
         val inputMethodManager =
             getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+
+        moreInfo.visibility = View.INVISIBLE
 
         save.setOnClickListener {
             if (name.text.isEmpty()) {
