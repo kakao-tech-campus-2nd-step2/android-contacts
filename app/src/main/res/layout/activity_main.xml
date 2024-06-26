@@ -18,7 +18,7 @@
         android:id="@+id/name"
         android:layout_width="300dp"
         android:background="#AFEEEE"
-        android:hint=" 이름"
+        android:hint="이름"
         android:layout_marginTop="230dp"
         android:layout_marginLeft="50dp"
         android:layout_height="50dp"/>
@@ -49,6 +49,40 @@
         android:layout_marginTop="510dp"
         android:layout_marginLeft="50dp"
         android:layout_height="50dp"/>
+
+    <ImageView
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="580dp"
+        android:background="@drawable/rectangular2"
+        android:layout_width="300dp"
+        android:layout_height="50dp"/>
+
+    <Button
+        android:id="@+id/birthday"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:textSize="18dp"
+        android:text="생일"
+        android:gravity="start|center_vertical"
+        android:layout_marginTop="580dp"
+        android:layout_marginLeft="30dp"
+        android:textColor="@color/black"
+        android:background="@android:color/transparent"/>
+
+    <EditText
+        android:id="@+id/birthday_1"
+        android:layout_marginTop="580dp"
+        android:layout_marginLeft="130dp"
+        android:layout_width="200dp"
+        android:layout_height="50dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="54dp"
+        android:layout_marginTop="631dp"
+        android:text="생일을 클릭하시면 생일을 결정하실 수 있습니다."/>
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -90,7 +124,7 @@
         android:text="취소"
         android:textSize="20dp"
         android:layout_marginLeft="100dp"
-        android:layout_marginTop="650dp"
+        android:layout_marginTop="660dp"
         android:background="@color/white" />
 
     <Button
@@ -100,7 +134,7 @@
         android:text="저장"
         android:textSize="20dp"
         android:layout_marginLeft="220dp"
-        android:layout_marginTop="650dp"
+        android:layout_marginTop="660dp"
         android:background="@color/white" />
 
 </FrameLayout>
