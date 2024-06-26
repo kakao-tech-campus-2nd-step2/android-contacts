@@ -7,12 +7,13 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.LinearLayout
+import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
-
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
         val inputMethodManager: InputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
@@ -42,17 +43,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val name = findViewById<EditText>(R.id.contactName)
+        val tel = findViewById<EditText>(R.id.contactTel)
+        val mail = findViewById<EditText>(R.id.contactMail)
         val editTextList = findViewById<LinearLayout>(R.id.editTextList)
         val showDetail = findViewById<LinearLayout>(R.id.more)
         val bday = findViewById<TextView>(R.id.contactBirthDay)
-
-        bday.setOnClickListener{
-            startCalenderDialog(it as TextView)
-        }
+        val genderRadioGroup = findViewById<RadioGroup>(R.id.genderRadioGroup)
+        val memo = findViewById<EditText>(R.id.contactMemo)
 
         showDetail.setOnClickListener {
             extendEditTextList(editTextList,R.dimen.contact_list_height_detail)
             toggleViewVisibility(showDetail)
         }
+
     }
 }
