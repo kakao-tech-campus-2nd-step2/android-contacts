@@ -43,8 +43,7 @@ class MainActivity : AppCompatActivity() {
         birthdayInput.setOnFocusChangeListener { v, hasFocus ->
             if (hasFocus) {
                 showDatePicker()
-            }
-            else{
+            } else {
                 verifyBirthday(birthdayInput.text.toString())
             }
         }
@@ -124,9 +123,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun showDatePicker() {
-        val dialogInitialDate = birthday?:LocalDate.now()
+        val dialogInitialDate = birthday ?: LocalDate.now()
         val dialog =
-            DatePickerDialog(this, null, dialogInitialDate.year, dialogInitialDate.monthValue, dialogInitialDate.dayOfMonth)
+            DatePickerDialog(
+                this,
+                null,
+                dialogInitialDate.year,
+                dialogInitialDate.monthValue,
+                dialogInitialDate.dayOfMonth
+            )
         dialog.setOnDateSetListener { _, year, month, dayOfMonth ->
             birthday = LocalDate.of(year, month, dayOfMonth)
             birthdayInput.setText(birthday?.toString())
@@ -146,7 +151,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun setBirthdayFromText(birthdayText: String){
+    fun setBirthdayFromText(birthdayText: String) {
         birthday = try {
             LocalDate.parse(birthdayText)
         } catch (
@@ -157,14 +162,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun verifyBirthday(birthdayText: String) {
-        if(!checkDateValid(birthdayText)){
+        if (!checkDateValid(birthdayText)) {
             birthday = null
             birthdayInput.setText("")
             return
         }
 
         setBirthdayFromText(birthdayText)
-        birthdayInput.setText(birthday?.toString()?:"")
+        birthdayInput.setText(birthday?.toString() ?: "")
     }
 
     companion object {
