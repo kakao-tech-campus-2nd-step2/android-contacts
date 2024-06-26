@@ -69,7 +69,11 @@ class ContactActivity : AppCompatActivity() {
             if (checkTerms(name, phoneNum)) {
                 saveContact(contact)
             }
+        }
 
+        cancelButton.setOnClickListener {
+            clearFields()
+            Toast.makeText(this, "취소되었습니다.", Toast.LENGTH_SHORT).show()
         }
 
 
@@ -104,5 +108,18 @@ class ContactActivity : AppCompatActivity() {
         contactViewModel.addContact(contact)
         Toast.makeText(this, "연락처가 저장되었습니다.", Toast.LENGTH_SHORT).show()
         Log.d("testt",contactViewModel.getContact(contact.name).toString() )
+    }
+
+    private fun clearFields(){
+        nameEditText.text.clear()
+        phoneNumEditText.text.clear()
+        emailEditText.text.clear()
+        birthEditText.text.clear()
+        memoEditText.text.clear()
+        genderRadioGroup.clearCheck()
+        memoEditText.visibility = TextView.GONE
+        birthEditText.visibility = TextView.GONE
+        genderRadioGroup.visibility = TextView.GONE
+        moreButton.visibility = TextView.VISIBLE
     }
 }
