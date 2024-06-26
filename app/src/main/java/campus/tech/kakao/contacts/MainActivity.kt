@@ -1,6 +1,7 @@
 package campus.tech.kakao.contacts
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.icu.util.Calendar
 import android.os.Bundle
 import android.view.View
@@ -68,9 +69,23 @@ class MainActivity : AppCompatActivity() {
             } else if (phoneNumEditText.text.isEmpty()) {
                 Toast.makeText(this, "전화 번호는 필수 값 입니다.", Toast.LENGTH_LONG).show()
             } else {
-                Toast.makeText(this, "저장이 완료 되었습니다.", Toast.LENGTH_LONG).show()
+                val contact = createContact()
+                intent.putExtra("CONTACT_RESULT", contact)
+                setResult(RESULT_OK, intent)
+                finish()
             }
         }
+    }
+
+    private fun createContact(): Contact {
+        return Contact(
+            nameEditText.text.toString(),
+            phoneNumEditText.text.toString(),
+            emailEditText.text.toString(),
+            birthdayTextView.text.toString(),
+            gender,
+            memoEditText.text.toString()
+        )
     }
 
     private fun setOnClickListenerOfSeeMoreLayout() {
