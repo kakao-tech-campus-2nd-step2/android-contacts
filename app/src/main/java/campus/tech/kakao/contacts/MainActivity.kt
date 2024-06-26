@@ -38,16 +38,26 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this,"취소되었습니다.", Toast.LENGTH_SHORT).show()
         }
 
-        //이름 or 전화번호 미 입력 시 저장 불가
-        if(name.isEmpty() || phone.isEmpty()){
-            Toast.makeText(this, "이름과 전화번호는 필수 입력 값입니다.", Toast.LENGTH_SHORT).show()
-            return
-        }
+        saveButton.setOnClickListener {
+            val name = nameText.text.toString().trim()
+            val phone = phoneText.text.toString().trim()
+            val email = emailText.text.toString().trim()
+            val birth = birthText.text.toString().trim()
+            val memo = memoText.text.toString().trim()
 
-        //성별 선택
-        val gender = when(genderRadio.checkedRadioButtonId){
-            R.id.femaleButton -> "여성"
-            R.id.maleButton -> "남성"
+            //이름 or 전화번호 미 입력 시 저장 불가
+            if(name.isEmpty() || phone.isEmpty()){
+                Toast.makeText(this, "이름과 전화번호는 필수 입력 값입니다.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            //성별 선택
+            val gender = when (genderRadio.checkedRadioButtonId){
+                R.id.femaleButton -> "여성"
+                R.id.maleButton -> "남성"
+            }
+
+            Toast.makeText(this, "저장되었습니다.", Toast.LENGTH_SHORT).show()
         }
     }
 
