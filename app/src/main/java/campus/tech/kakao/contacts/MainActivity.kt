@@ -12,7 +12,9 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.RadioGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.button.MaterialButton
 
 class MainActivity : AppCompatActivity() {
 //    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
@@ -40,6 +42,16 @@ class MainActivity : AppCompatActivity() {
             else -> GONE
         }
     }
+
+    fun cancelContact(){
+        // TODO: implement cancel workflow
+        showToast("취소 되었습니다.")
+    }
+
+    fun showToast(message:String){
+        Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -52,6 +64,8 @@ class MainActivity : AppCompatActivity() {
         val bday = findViewById<TextView>(R.id.contactBirthDay)
         val genderRadioGroup = findViewById<RadioGroup>(R.id.genderRadioGroup)
         val memo = findViewById<EditText>(R.id.contactMemo)
+        val cancelBtn = findViewById<MaterialButton>(R.id.cancelBtn)
+        val submitBtn = findViewById<MaterialButton>(R.id.submitBtn)
 
         showDetail.setOnClickListener {
             extendEditTextList(editTextList,R.dimen.contact_list_height_detail)
@@ -60,6 +74,10 @@ class MainActivity : AppCompatActivity() {
 
         bday.setOnClickListener {
             startCalenderDialog(it as TextView)
+        }
+
+        cancelBtn.setOnClickListener {
+            cancelContact()
         }
 
     }

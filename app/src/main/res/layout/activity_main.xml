@@ -175,6 +175,7 @@
         android:orientation="horizontal">
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/cancelBtn"
             android:layout_width="0dp"
             android:layout_height="@dimen/element_height"
             android:layout_weight="1"
@@ -186,6 +187,7 @@
             android:textSize="@dimen/text_size"/>
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/submitBtn"
             android:layout_width="0dp"
             android:layout_height="@dimen/element_height"
             android:layout_weight="1"
