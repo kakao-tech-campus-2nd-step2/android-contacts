@@ -47,10 +47,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupPhoneNumberInput() {
-        //인풋 타입은 int로 해서 표시
         etPhone.inputType = InputType.TYPE_CLASS_PHONE
-        //번호는 13자리로 입력 가능함
-        etPhone.filters = arrayOf(InputFilter.LengthFilter(13))
+
+        val phoneNumberFilter = InputFilter { source, start, end, dest, dstart, dend ->
+            val phoneNumberRegex = Regex("^\\+?\\d{0,13}\$")
+            if (phoneNumberRegex.matches(source.toString())) {
+                null
+            } else {
+                ""
+            }
+        }
+        etPhone.filters = arrayOf(phoneNumberFilter)
     }
 
 
