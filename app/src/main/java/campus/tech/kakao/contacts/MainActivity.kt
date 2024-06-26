@@ -39,6 +39,12 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "이름과 전화번호는 필수 입력 값입니다.", Toast.LENGTH_SHORT).show()
             return
         }
+
+        //성별 선택
+        val gender = when(genderRadio.checkedRadioButtonId){
+            R.id.femaleButton -> "여성"
+            R.id.maleButton -> "남성"
+        }
     }
 
     //더보기 토글 기능 - 표시 및 숨기기
