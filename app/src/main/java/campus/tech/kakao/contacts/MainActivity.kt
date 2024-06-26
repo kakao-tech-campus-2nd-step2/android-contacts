@@ -3,7 +3,9 @@ package campus.tech.kakao.contacts
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.EditText
+import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -12,14 +14,36 @@ import kotlin.math.log
 class MainActivity : AppCompatActivity() {
     lateinit var name : EditText
     lateinit var phoneNumber : EditText
+    lateinit var mail : EditText
+    lateinit var gender : EditText
+    lateinit var genderRadioGroup : RadioGroup
+    lateinit var memo : EditText
+    lateinit var birthday : EditText
+    lateinit var moreInfoButton : TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         name = findViewById<EditText>(R.id.input_name)
         phoneNumber = findViewById<EditText>(R.id.input_phone_number)
+        mail = findViewById<EditText>(R.id.input_mail)
+        birthday = findViewById<EditText>(R.id.input_birthday)
+        gender = findViewById<EditText>(R.id.input_gender)
+        genderRadioGroup = findViewById<RadioGroup>(R.id.gender_radio_group)
+        memo = findViewById<EditText>(R.id.input_memo)
+        moreInfoButton = findViewById<TextView>(R.id.more_info_button)
+
         saveButtonSetOnClickListner(this)
         cancelButtonSetOnClickListner(this)
+        moreInfoButton.setOnClickListener(){
+            birthday.visibility = View.VISIBLE
+            gender.visibility = View.VISIBLE
+            genderRadioGroup.visibility = View.VISIBLE
+            memo.visibility = View.VISIBLE
+            moreInfoButton.visibility = View.GONE
+
+        }
+
     }
 
     fun cancelButtonSetOnClickListner(context : Context){
@@ -40,7 +64,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun displaySaveMessage(context: Context){
-        Log.d("phone", "" + name.text)
         val text = checkNameAndPhoneNum()
         val saveMessage = Toast.makeText(context, text, Toast.LENGTH_SHORT)
         saveMessage.show()

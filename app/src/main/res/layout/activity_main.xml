@@ -97,6 +97,7 @@
                 android:layout_marginEnd="20dp"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/input_form"
+                android:visibility="gone"
                 />
 
             <EditText
@@ -105,6 +106,7 @@
                 android:layout_height="55dp"
                 android:paddingLeft="10dp"
                 android:hint="성별"
+                android:focusable="false"
                 app:layout_constraintTop_toBottomOf="@id/input_birthday"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -113,15 +115,18 @@
                 android:layout_marginEnd="20dp"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/input_form"
+                android:visibility="gone"
                 />
             <RadioGroup
-                android:id="@+id/radio_group"
+                android:id="@+id/gender_radio_group"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="@id/input_gender"
                 app:layout_constraintRight_toRightOf="@id/input_gender"
-                app:layout_constraintTop_toTopOf="@id/input_gender">
+                app:layout_constraintTop_toTopOf="@id/input_gender"
+                android:visibility="gone"
+                >
                 <RadioButton
                     android:id="@+id/button_woman"
                     android:layout_width="wrap_content"
@@ -151,8 +156,10 @@
                 android:layout_marginEnd="20dp"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/input_form"
+                android:visibility="gone"
                 />
             <TextView
+                android:id="@+id/more_info_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="더보기"
