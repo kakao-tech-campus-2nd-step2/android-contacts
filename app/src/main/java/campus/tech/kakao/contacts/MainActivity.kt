@@ -33,5 +33,11 @@ class MainActivity : AppCompatActivity() {
         birthText.setOnClickListener{
             showDatePicker()
         }
+
+        //이름 or 전화번호 미 입력 시 저장 불가
+        if(name.isEmpty() || phone.isEmpty()){
+            Toast.makeText(this, "이름과 전화번호는 필수 입력 값입니다.", Toast.LENGTH_SHORT).show()
+            return
+        }
     }
 }
