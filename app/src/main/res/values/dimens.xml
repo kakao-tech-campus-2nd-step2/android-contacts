@@ -2,8 +2,8 @@
 <resources>
     <dimen name="text_size">18dp</dimen>
     <dimen name="element_height">60dp</dimen>
-    <dimen name="contact_list_height_default">220dp</dimen>
-    <dimen name="contact_list_height_detail">500dp</dimen>
+    <dimen name="contact_list_height_default">230dp</dimen>
+    <dimen name="contact_list_height_detail">520dp</dimen>
     <dimen name="margin">15dp</dimen>
     <dimen name="margin_double">30dp</dimen>
     <dimen name="horizontal_margin">20dp</dimen>
