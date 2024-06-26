@@ -139,20 +139,8 @@ class MainActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    fun checkDateValid(birthdayText: String): Boolean {
-        val sdf = SimpleDateFormat("yyyy-dd-dd", Locale.getDefault())
-        sdf.isLenient = false
-
+    fun getBirthdayFromText(birthdayText: String): LocalDate? {
         return try {
-            val date = sdf.parse(birthdayText)
-            true
-        } catch (e: ParseException) {
-            false
-        }
-    }
-
-    fun setBirthdayFromText(birthdayText: String) {
-        birthday = try {
             LocalDate.parse(birthdayText)
         } catch (
             e: DateTimeParseException
@@ -162,13 +150,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun verifyBirthday(birthdayText: String) {
-        if (!checkDateValid(birthdayText)) {
-            birthday = null
-            birthdayInput.setText("")
-            return
-        }
-
-        setBirthdayFromText(birthdayText)
+        birthday = getBirthdayFromText(birthdayText)
         birthdayInput.setText(birthday?.toString() ?: "")
     }
 
