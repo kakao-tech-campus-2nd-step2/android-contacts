@@ -5,6 +5,10 @@ import android.content.ContentValues
 import android.icu.util.Calendar
 import android.os.Bundle
 import android.provider.ContactsContract
+import android.text.Editable
+import android.text.InputFilter
+import android.text.InputType
+import android.text.TextWatcher
 import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioButton
@@ -39,6 +43,18 @@ class MainActivity : AppCompatActivity() {
             showDatePickerDialog()
         }
     }
+
+    private fun setupPhoneNumberInput() {
+        etPhone.inputType = InputType.TYPE_CLASS_PHONE
+        etPhone.filters = arrayOf(InputFilter.LengthFilter(13))
+        etPhone.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun afterTextChanged(s: CharSequence?, start: Int, count: Int, before: Int) {
+                
+            }
+        })
+    }
+
 
     private fun showDatePickerDialog() {
         val calendar = Calendar.getInstance()
