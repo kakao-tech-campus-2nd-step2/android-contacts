@@ -33,20 +33,13 @@ class MainActivity : AppCompatActivity() {
         memo = findViewById<EditText>(R.id.input_memo)
         moreInfoButton = findViewById<TextView>(R.id.more_info_button)
 
-        saveButtonSetOnClickListner(this)
-        cancelButtonSetOnClickListner(this)
-        moreInfoButton.setOnClickListener(){
-            birthday.visibility = View.VISIBLE
-            gender.visibility = View.VISIBLE
-            genderRadioGroup.visibility = View.VISIBLE
-            memo.visibility = View.VISIBLE
-            moreInfoButton.visibility = View.GONE
-
-        }
+        saveButtonSetOnClickListener(this)
+        cancelButtonSetOnClickListener(this)
+        moreButtonSetOnClickListener()
 
     }
 
-    fun cancelButtonSetOnClickListner(context : Context){
+    fun cancelButtonSetOnClickListener(context : Context){
         findViewById<TextView>(R.id.button_cancel).setOnClickListener(){
             displayCancelMessage(context)
         }
@@ -57,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         cancelMessage.show()
     }
 
-    fun saveButtonSetOnClickListner(context : Context){
+    fun saveButtonSetOnClickListener(context : Context){
         findViewById<TextView>(R.id.button_save).setOnClickListener(){
             displaySaveMessage(context)
         }
@@ -81,6 +74,20 @@ class MainActivity : AppCompatActivity() {
         else{
             return "저장이 완료 되었습니다"
         }
+    }
+
+    fun moreButtonSetOnClickListener(){
+        moreInfoButton.setOnClickListener(){
+            setInputFieldVisible()
+        }
+    }
+
+    fun setInputFieldVisible(){
+        birthday.visibility = View.VISIBLE
+        gender.visibility = View.VISIBLE
+        genderRadioGroup.visibility = View.VISIBLE
+        memo.visibility = View.VISIBLE
+        moreInfoButton.visibility = View.GONE
     }
 }
 
