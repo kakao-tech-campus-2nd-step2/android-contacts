@@ -2,8 +2,6 @@ package campus.tech.kakao.contacts
 
 import android.app.DatePickerDialog
 import android.os.Bundle
-import android.util.Log
-import android.view.MotionEvent
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -52,6 +50,21 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
     }
 
+    fun isValidContact(views : List<EditText>) : Boolean{
+        views.forEach{
+            if(it.text.isEmpty()){
+                showToast(resources.getString(R.string.essential_value,it.hint.toString()))
+                return false
+            }
+        }
+        return true
+    }
+
+    fun submitContact(){
+        // TODO: implement submit workflow
+        showToast("저장이 완료 되었습니다.")
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -78,6 +91,12 @@ class MainActivity : AppCompatActivity() {
 
         cancelBtn.setOnClickListener {
             cancelContact()
+        }
+
+        submitBtn.setOnClickListener {
+            if(isValidContact(listOf(name,tel))){
+                submitContact()
+            }
         }
 
     }
