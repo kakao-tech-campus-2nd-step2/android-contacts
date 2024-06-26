@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,9 +20,15 @@ class ContactListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contact_list)
 
+        // 데이터베이스 비우기
+        // clearDatabase()
+
         setupRecyclerView()
         setupAddContactButton()
         observeContacts()
+    }
+    private fun clearDatabase() {
+        contactViewModel.deleteAll()
     }
 
     private fun setupRecyclerView() {
@@ -38,11 +45,19 @@ class ContactListActivity : AppCompatActivity() {
     private fun observeContacts() {
         val inflater = LayoutInflater.from(this)
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+        val emptyMessage = findViewById<TextView>(R.id.emptyMessage)
 
         contactViewModel.allContacts.observe(this) { contacts ->
             contacts?.let {
-                val adapter = ContactAdapter(it, inflater)
-                recyclerView.adapter = adapter
+                if (it.isEmpty()) {
+                    recyclerView.visibility = RecyclerView.GONE
+                    emptyMessage.visibility = TextView.VISIBLE
+                } else {
+                    recyclerView.visibility = RecyclerView.VISIBLE
+                    emptyMessage.visibility = TextView.GONE
+                    val adapter = ContactAdapter(it, inflater)
+                    recyclerView.adapter = adapter
+                }
                 logContacts(it)
             }
         }

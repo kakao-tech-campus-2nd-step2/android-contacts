@@ -20,10 +20,13 @@ class ContactViewModel(application: Application) : AndroidViewModel(application)
             contactDao.insert(contact)
         }
     }
-
     fun delete(contactId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             contactDao.delete(contactId)
         }
+    }
+
+    fun deleteAll() = viewModelScope.launch {
+        contactDao.deleteAll()
     }
 }

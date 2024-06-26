@@ -16,4 +16,8 @@ interface ContactDao {
 
     @Query("SELECT * FROM contacts")
     fun getAll(): LiveData<List<Contact>>
+
+    @Query("DELETE FROM contacts")
+    suspend fun deleteAll()
+
 }
