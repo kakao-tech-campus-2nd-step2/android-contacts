@@ -58,5 +58,9 @@ class MainActivity : AppCompatActivity() {
             toggleViewVisibility(showDetail)
         }
 
+        bday.setOnClickListener {
+            startCalenderDialog(it as TextView)
+        }
+
     }
 }
