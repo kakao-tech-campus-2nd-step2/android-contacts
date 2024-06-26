@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         initializeView()
+        setUpListeners()
     }
 
     private fun initializeView() {
@@ -40,6 +41,21 @@ class MainActivity : AppCompatActivity() {
         viewMore = findViewById(R.id.viewMore)
         cancel = findViewById(R.id.cancel)
         save = findViewById(R.id.save)
+    }
+
+
+    private fun setUpListeners() {
+        viewMore.setOnClickListener {
+            expandView()
+        }
+    }
+
+    private fun expandView() {
+        birth.visibility = View.VISIBLE
+        gender.visibility = View.VISIBLE
+        genderRadio.visibility = View.VISIBLE
+        memo.visibility = View.VISIBLE
+        viewMore.visibility = View.INVISIBLE
     }
 
 
