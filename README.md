@@ -1,4 +1,20 @@
 # android-contacts
+## 📣 2단계 기능 업로드 (2024.06.26)
+---
+- 연락처 리스트 액티비티 추가하기
+    - `ContactListActivity` 클래스와 `activity_contact_list.xml` 레이아웃 파일을 추가
+- `activity_contact_list` 뷰 xml 제작하기
+    - RecyclerView 활용
+    - 연락처 목록은 스크롤 되어야함
+    - 연락처 추가 버튼이 존재함
+- 메인 액티비티에서 연락처 리스트 액티비티로 전환되도록 하기
+- 리스트 액티비티에서 연락처 추가 버튼을 누르면 1단계에서 작성한 추가 화면으로 전환되도록 하기
+- 추가 화면에서 연락처 저장 시 연락처 리스트에 추가하기
+- 추가 화면에서 작성 중 뒤로가기 클릭 시 확인 팝업 뜨도록 하기
+- `ContactItemActity` 클래스와 `activity_contact_item.xml` 추가하기
+- `activity_contact_item` 의 뷰 xml 제작하기
+- 리스트에서 연락처 목록 선택 시 상세 화면(`ContactItemActity`)으로 전환하기
+
 ## 📣 1단계 기능 업로드 (2024.06.25)
 ---
 ### 1. 스켈레톤 업로드
