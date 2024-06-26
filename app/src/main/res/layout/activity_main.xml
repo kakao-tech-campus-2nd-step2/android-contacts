@@ -84,8 +84,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginHorizontal="8dp" >
-<!--        android:visibility="gone"-->
+        android:layout_marginHorizontal="8dp"
+        android:visibility="gone" >
 
         <EditText
             android:id="@+id/birthdayEditText"
@@ -114,7 +114,6 @@
             <ImageView
                 android:layout_width="28dp"
                 android:layout_height="28dp"
-                android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_sex" />

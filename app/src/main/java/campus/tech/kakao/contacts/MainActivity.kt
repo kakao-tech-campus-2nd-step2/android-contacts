@@ -5,6 +5,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.LinearLayoutCompat
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,6 +15,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var cancelButton: TextView
     private lateinit var saveButton: TextView
     private lateinit var phoneNumber: PhoneNumber
+    private lateinit var moreButton: LinearLayoutCompat
+    private lateinit var moreFields: LinearLayoutCompat
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +36,12 @@ class MainActivity : AppCompatActivity() {
                 showToast("저장합니다.")
             }
         }
+
+        // 더보기 리스너
+        moreButton.setOnClickListener {
+            moreFields.visibility = LinearLayoutCompat.VISIBLE
+            moreButton.visibility = LinearLayoutCompat.GONE
+        }
     }
 
     private fun initViews() {
@@ -41,6 +50,9 @@ class MainActivity : AppCompatActivity() {
         emailEditText = findViewById(R.id.emailEditText)
         cancelButton = findViewById(R.id.cancelButton)
         saveButton = findViewById(R.id.saveButton)
+        moreButton = findViewById(R.id.moreButton)
+        moreFields = findViewById(R.id.moreFields)
+
     }
 
     // 기본 저장 설정을 추가할 수 있다.
