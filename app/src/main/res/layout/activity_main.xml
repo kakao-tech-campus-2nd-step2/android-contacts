@@ -21,76 +21,104 @@
         android:id="@+id/editTextList"
         android:layout_width="match_parent"
         android:layout_height="@dimen/contact_list_height_default"
+        android:layout_marginTop="@dimen/top_margin"
         android:orientation="vertical"
-        android:layout_marginTop="@dimen/top_margin_double"
         app:layout_constraintTop_toBottomOf="@+id/contactImage">
 
         <EditText
             android:id="@+id/contactName"
             android:layout_width="match_parent"
             android:layout_height="@dimen/contact_element_height"
-            android:hint="이름"
-            android:background="@drawable/edittext_background"
             android:layout_marginHorizontal="@dimen/horizontal_margin"
+            android:background="@drawable/edittext_background"
+            android:hint="이름"
             android:padding="@dimen/edittext_padding"
-            />
+            android:textSize="@dimen/hint_text_size"/>
 
         <EditText
             android:id="@+id/contactTel"
             android:layout_width="match_parent"
             android:layout_height="@dimen/contact_element_height"
-            android:hint="전화번호"
-            android:background="@drawable/edittext_background"
-            android:layout_marginTop="@dimen/top_margin"
             android:layout_marginHorizontal="@dimen/horizontal_margin"
-            android:padding="@dimen/edittext_padding"
+            android:layout_marginTop="@dimen/top_margin"
+            android:background="@drawable/edittext_background"
+            android:hint="전화번호"
             android:inputType="phone"
-            />
+            android:padding="@dimen/edittext_padding"
+            android:textSize="@dimen/hint_text_size"/>
 
         <EditText
             android:id="@+id/contactMail"
             android:layout_width="match_parent"
             android:layout_height="@dimen/contact_element_height"
-            android:hint="메일"
-            android:background="@drawable/edittext_background"
-            android:layout_marginTop="@dimen/top_margin"
             android:layout_marginHorizontal="@dimen/horizontal_margin"
+            android:layout_marginTop="@dimen/top_margin"
+            android:background="@drawable/edittext_background"
+            android:hint="메일"
             android:padding="@dimen/edittext_padding"
-            />
+            android:textSize="@dimen/hint_text_size"/>
 
-        <EditText
+        <TextView
             android:id="@+id/contactBirthDay"
             android:layout_width="match_parent"
             android:layout_height="@dimen/contact_element_height"
-            android:hint="생일"
-            android:background="@drawable/edittext_background"
-            android:layout_marginTop="@dimen/top_margin"
             android:layout_marginHorizontal="@dimen/horizontal_margin"
+            android:layout_marginTop="@dimen/top_margin"
+            android:background="@drawable/edittext_background"
             android:padding="@dimen/edittext_padding"
-            />
+            android:hint="생일"
+            android:textSize="@dimen/hint_text_size"/>
 
-        <EditText
+        <LinearLayout
             android:id="@+id/contactGender"
             android:layout_width="match_parent"
             android:layout_height="@dimen/contact_element_height"
-            android:hint="성별"
-            android:background="@drawable/edittext_background"
-            android:layout_marginTop="@dimen/top_margin"
             android:layout_marginHorizontal="@dimen/horizontal_margin"
+            android:layout_marginTop="@dimen/top_margin"
+            android:background="@drawable/edittext_background"
             android:padding="@dimen/edittext_padding"
-            />
+            android:orientation="horizontal"
+            android:textSize="@dimen/hint_text_size">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="성별"
+                android:textSize="@dimen/hint_text_size"
+                />
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittext_background"
+                android:orientation="horizontal"
+                android:textSize="@dimen/hint_text_size"
+                android:gravity="right"
+                android:layout_marginRight="@dimen/top_margin">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="여성"/>
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="남성"
+                    android:layout_marginLeft="@dimen/horizontal_margin"/>
+            </RadioGroup>
+        </LinearLayout>
 
         <EditText
             android:id="@+id/contactMemo"
             android:layout_width="match_parent"
             android:layout_height="@dimen/contact_element_height"
-            android:hint="메모"
-            android:background="@drawable/edittext_background"
-            android:layout_marginTop="@dimen/top_margin"
             android:layout_marginHorizontal="@dimen/horizontal_margin"
+            android:layout_marginTop="@dimen/top_margin"
+            android:background="@drawable/edittext_background"
+            android:hint="메모"
             android:padding="@dimen/edittext_padding"
-            />
-
+            android:textSize="@dimen/hint_text_size"/>
 
 
     </LinearLayout>
@@ -124,3 +152,4 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+

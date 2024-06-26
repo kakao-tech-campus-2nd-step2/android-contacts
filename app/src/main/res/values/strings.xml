@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Contacts</string>
+    <string name="birthday">%1$d.%2$02d.%3$02d</string>
 </resources>

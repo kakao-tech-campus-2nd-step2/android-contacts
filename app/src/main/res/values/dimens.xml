@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="hint_text_size">18dp</dimen>
     <dimen name="contact_element_height">60dp</dimen>
     <dimen name="contact_list_height_default">220dp</dimen>
     <dimen name="contact_list_height_detail">450dp</dimen>
