@@ -1,6 +1,7 @@
 package campus.tech.kakao.contacts
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.EditText
@@ -63,6 +64,7 @@ class MainActivity : AppCompatActivity() {
     private fun onCancelClicked() {
         showToast("취소합니다.")
         resetForm()
+        startActivity(Intent(this, ContactListActivity::class.java))
     }
 
     private fun onSaveClicked() {
@@ -73,6 +75,7 @@ class MainActivity : AppCompatActivity() {
                 contactViewModel.insert(contact)
                 Log.d("testt", "User: data is inserted")
                 resetForm()
+                startActivity(Intent(this, ContactListActivity::class.java))
             } catch (e: Exception) {
                 Log.e("testt", "Error inserting user", e)
             }

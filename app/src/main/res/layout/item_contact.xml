@@ -28,10 +28,9 @@
         android:layout_height="56dp"
         android:layout_weight="1"
         android:text="A"
-        android:textSize="28dp"
+        android:textSize="24dp"
         android:gravity="center_vertical"
         android:layout_marginLeft="12dp"
-        android:textStyle="bold"
         />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
