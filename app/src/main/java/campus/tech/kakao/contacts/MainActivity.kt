@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         cancelButtonSetOnClickListener(this)
         moreButtonSetOnClickListener()
         birthdayFieldSetOnclickListener()
-
+        genderFieldSetOnChangeListener()
 
     }
 
@@ -103,11 +103,23 @@ class MainActivity : AppCompatActivity() {
 
     fun setBirthday(){
         val datePicker = DatePickerDialog(this, DatePickerDialog.OnDateSetListener {
-            view : DatePicker?, year, month, day ->
+            view, year, month, day ->
             birthday.setText("${year}/${month}/${day}")
         }, 2000, 1, 1).show()
     }
 
+    fun genderFieldSetOnChangeListener(){
+        genderRadioGroup.setOnCheckedChangeListener { it, id ->
+            fillGenderField(id)
+        }
+    }
+    fun fillGenderField(id : Int){
+        when(id){
+            R.id.button_woman -> gender.setText("여성")
+            R.id.button_man -> gender.setText("남성")
+            else -> gender.setText("")
+        }
+    }
 
 }
 
