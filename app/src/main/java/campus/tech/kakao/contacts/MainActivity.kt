@@ -12,6 +12,7 @@ import android.text.TextWatcher
 import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import campus.tech.kakao.contacts.R.id.female
@@ -27,6 +28,7 @@ class MainActivity : AppCompatActivity() {
     private val rgmale: RadioButton by lazy { findViewById(R.id.male) }
     private val btnbirthday: Button by lazy { findViewById(R.id.birthday) }
     private val etbirthday : EditText by lazy { findViewById(R.id.birthday_1) }
+    private val rgGender : RadioGroup by lazy { findViewById(R.id.Gender)}
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -45,18 +47,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupPhoneNumberInput() {
+        //인풋 타입은 int로 해서 표시
         etPhone.inputType = InputType.TYPE_CLASS_PHONE
+        //번호는 13자리로 입력 가능함
         etPhone.filters = arrayOf(InputFilter.LengthFilter(13))
-        etPhone.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-                
-            }
-        })
     }
 
 

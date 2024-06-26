@@ -101,22 +101,26 @@
         android:layout_marginLeft="50dp"
         android:background="@drawable/rectangular2"/>
 
+    <RadioGroup
+        android:id="@+id/Gender"
+        android:layout_marginTop="440dp"
+        android:layout_marginLeft="170dp"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
         <RadioButton
             android:id="@+id/male"
-            android:layout_marginTop="440dp"
-            android:layout_marginLeft="180dp"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:text="male"/>
 
         <RadioButton
             android:id="@+id/female"
-            android:layout_marginTop="440dp"
-            android:layout_marginLeft="260dp"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:text="female"/>
-
+    </RadioGroup>
     <Button
         android:id="@+id/deny"
         android:layout_width="wrap_content"
