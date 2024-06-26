@@ -79,15 +79,18 @@
                     android:clickable="false"
                     android:focusable="false"/>
                 <RadioGroup
+                    android:id="@+id/birth_date_radiogroup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_weight="1">
                     <RadioButton
+                        android:id="@+id/woman_radiobutton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="여성"/>
                     <RadioButton
+                        android:id="@+id/man_radiobutton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="남성"/>

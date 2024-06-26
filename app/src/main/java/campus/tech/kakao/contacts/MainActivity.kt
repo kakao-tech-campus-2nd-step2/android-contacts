@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -20,7 +21,10 @@ class MainActivity : AppCompatActivity() {
         val name_input: EditText = findViewById(R.id.name_input)
         val phone_number_input: EditText = findViewById(R.id.phone_number_input)
         val email_input: EditText = findViewById(R.id.email_input)
+
         val birth_date_input: EditText = findViewById(R.id.birth_date_input)
+        val birth_date_radiogroup: RadioGroup = findViewById(R.id.birth_date_radiogroup)
+
         val gender_input: EditText = findViewById(R.id.gender_input)
         val memo_input: EditText = findViewById(R.id.memo_input)
 
@@ -55,6 +59,14 @@ class MainActivity : AppCompatActivity() {
             }?.show()
         }
 
+        birth_date_radiogroup.run {
+            setOnCheckedChangeListener { group, checkedId ->
+                when(checkedId){
+                    R.id.woman_radiobutton -> {gender_input.setText("여성")}
+                    R.id.man_radiobutton -> {gender_input.setText("남성")}
+                }
+            }
+        }
 
         save_button.setOnClickListener {
             if (name_input.text.isNullOrEmpty()) {
@@ -65,6 +77,17 @@ class MainActivity : AppCompatActivity() {
             } else if (!phone_number_input.text.all { Character.isDigit(it) }){
                 Toast.makeText(this, "전화번호는 숫자로만 입력해주세요.", Toast.LENGTH_SHORT).show()
             }
+            else{
+                Toast.makeText(this, "저장이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    "" + name_input.text + " "+ phone_number_input.text + " "+ email_input.text + " "+ birth_date_input.text + " "+ gender_input.text + " "+ memo_input.text,
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+        cancel_button.setOnClickListener {
+            Toast.makeText(this, "취소되었습니다.", Toast.LENGTH_SHORT).show()
         }
 
 
