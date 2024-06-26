@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:hint="전화번호"
         style="@style/inputBox"
-        app:layout_constraintTop_toBottomOf="@id/name"/>
+        app:layout_constraintTop_toBottomOf="@id/name" />
 
     <EditText
         android:id="@+id/mail"
@@ -42,6 +42,7 @@
         app:layout_constraintTop_toBottomOf="@id/tel"/>
 
     <TextView
+        android:id="@+id/viewMore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/mail"
@@ -70,19 +71,22 @@
         android:layout_marginTop="28dp"
         android:hint="성별"
         app:layout_constraintTop_toBottomOf="@id/birth"
-        android:visibility="invisible"/>
+        android:visibility="invisible"
+        android:focusable="false"/>
 
     <LinearLayout
+        android:id="@+id/genderRadio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@id/gender"
-        app:layout_constraintRight_toRightOf="@id/gender">
+        app:layout_constraintRight_toRightOf="@id/gender"
+        android:visibility="invisible">
 
         <RadioGroup
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:visibility="invisible">
+            >
 
             <RadioButton
                 android:layout_width="wrap_content"
@@ -122,6 +126,7 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <Button
+            android:id="@+id/cancel"
             style="@style/btn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -129,6 +134,7 @@
             android:text="취소" />
 
         <Button
+            android:id="@+id/save"
             style="@style/btn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
