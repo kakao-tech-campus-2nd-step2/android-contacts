@@ -34,6 +34,10 @@ class MainActivity : AppCompatActivity() {
             showDatePicker()
         }
 
+        cancelButton.setOnClickListener {
+            Toast.makeText(this,"취소되었습니다.", Toast.LENGTH_SHORT).show()
+        }
+
         //이름 or 전화번호 미 입력 시 저장 불가
         if(name.isEmpty() || phone.isEmpty()){
             Toast.makeText(this, "이름과 전화번호는 필수 입력 값입니다.", Toast.LENGTH_SHORT).show()
