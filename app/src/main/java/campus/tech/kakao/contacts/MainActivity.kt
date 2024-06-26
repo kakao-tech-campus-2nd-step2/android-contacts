@@ -27,21 +27,16 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        name = findViewById<EditText>(R.id.input_name)
-        phoneNumber = findViewById<EditText>(R.id.input_phone_number)
-        mail = findViewById<EditText>(R.id.input_mail)
-        birthday = findViewById<EditText>(R.id.input_birthday)
-        gender = findViewById<EditText>(R.id.input_gender)
-        genderRadioGroup = findViewById<RadioGroup>(R.id.gender_radio_group)
-        memo = findViewById<EditText>(R.id.input_memo)
-        moreInfoButton = findViewById<TextView>(R.id.more_info_button)
+        initVar()
+        initListener()
+    }
 
+    fun initListener(){
         saveButtonSetOnClickListener(this)
         cancelButtonSetOnClickListener(this)
         moreButtonSetOnClickListener()
         birthdayFieldSetOnclickListener()
         genderFieldSetOnChangeListener()
-
     }
 
     fun cancelButtonSetOnClickListener(context : Context){
@@ -103,13 +98,13 @@ class MainActivity : AppCompatActivity() {
 
     fun setBirthday(){
         val datePicker = DatePickerDialog(this, DatePickerDialog.OnDateSetListener {
-            view, year, month, day ->
+            _, year, month, day ->
             birthday.setText("${year}/${month}/${day}")
         }, 2000, 1, 1).show()
     }
 
     fun genderFieldSetOnChangeListener(){
-        genderRadioGroup.setOnCheckedChangeListener { it, id ->
+        genderRadioGroup.setOnCheckedChangeListener { _, id ->
             fillGenderField(id)
         }
     }
@@ -119,6 +114,17 @@ class MainActivity : AppCompatActivity() {
             R.id.button_man -> gender.setText("남성")
             else -> gender.setText("")
         }
+    }
+
+    fun initVar(){
+        name = findViewById<EditText>(R.id.input_name)
+        phoneNumber = findViewById<EditText>(R.id.input_phone_number)
+        mail = findViewById<EditText>(R.id.input_mail)
+        birthday = findViewById<EditText>(R.id.input_birthday)
+        gender = findViewById<EditText>(R.id.input_gender)
+        genderRadioGroup = findViewById<RadioGroup>(R.id.gender_radio_group)
+        memo = findViewById<EditText>(R.id.input_memo)
+        moreInfoButton = findViewById<TextView>(R.id.more_info_button)
     }
 
 }
