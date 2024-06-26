@@ -66,17 +66,6 @@ class ContactActivity : AppCompatActivity() {
                 { _, year, month, dayOfMonth -> birth.text = "$year-%02d-%02d".format(month + 1, dayOfMonth) },
                 cYear, cMonth, cDay).show()
         }
-
-        sex.setOnCheckedChangeListener { group, checkedId ->
-            when(checkedId) {
-                R.id.female -> {
-                    Toast.makeText(this, "여자!", Toast.LENGTH_SHORT).show()
-                }
-                R.id.male -> {
-                    Toast.makeText(this, "남자!", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
     }
 
     fun isValidInfo(name: EditText, phoneNumber: EditText): Boolean {
