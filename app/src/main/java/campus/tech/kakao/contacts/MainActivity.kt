@@ -55,4 +55,22 @@ class MainActivity : AppCompatActivity() {
             moreText.visibility = TextView.VISIBLE
         }
     }
+
+    private fun showDatePicker() {
+        val calendar = Calendar.getInstance()
+        val datePicker = DatePickerDialog(
+            this,
+            { _, year, month, day ->
+                val selectedDate = Calendar.getInstance()
+                selectedDate.set(year, month, day)
+                val setting = SimpleDateFormat("yyyy.mm.dd", Locale.getDefault())
+                val formDate = setting.format(selectedDate.time)
+                findViewById<TextView>(R.id.birthText).text = formDate
+            },
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
+        datePicker.show()
+    }
 }
