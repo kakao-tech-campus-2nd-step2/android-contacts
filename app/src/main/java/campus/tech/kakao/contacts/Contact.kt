@@ -1,8 +1,8 @@
 package campus.tech.kakao.contacts
 
 class Contact(
-    var name: String, var phoneNumber: String, var mail: String,
-    var birth: String, var gender: String, var memo: String
+    var name: String, var phoneNumber: String, var mail: String = "",
+    var birth: String = "", var gender: String = "", var memo: String = ""
 ) {
 
     override fun equals(other: Any?): Boolean {

@@ -4,15 +4,16 @@ class Contacts {
 
     lateinit var contacts: ArrayList<Contact>
 
+    init {
+        initializeContacts()
+    }
+
     fun initializeContacts() {
         contacts = ArrayList()
     }
 
-    fun addContact (
-        name: String, phoneNumber: String, mail: String,
-        birth: String, gender: String, memo: String
-    ): Boolean {
-        val contact = Contact(name, phoneNumber, mail, birth, gender, memo)
+    fun addContact (infos: Array<String>): Boolean {
+        val contact = Contact(infos[0], infos[1], infos[2], infos[3], infos[4], infos[5])
         if (!contacts.contains(contact)) {
             contacts.add(contact)
             return true

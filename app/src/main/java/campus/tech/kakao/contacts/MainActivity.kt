@@ -10,6 +10,8 @@ import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.Dispatchers
@@ -24,12 +26,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var inputFields: Array<View>
     private lateinit var buttons: Array<Button>
     private lateinit var checkButtons: LinearLayout
+    private lateinit var contacts: Contacts
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        var bb: EditText
 
         moreButton = findViewById(R.id.moreButton)
         inputFields = arrayOf(
@@ -51,11 +52,7 @@ class MainActivity : AppCompatActivity() {
                 moreButton -> showInputs()
                 inputFields[3] -> showDatePickerDialog(inputFields[3])
                 buttons[0] -> cancelContact()
-                buttons[1] -> {
-                    var name = (inputFields[0] as EditText).text.toString().trim()
-                    var phoneNumber = (inputFields[1] as EditText).text.toString().trim()
-                    saveContact(name, phoneNumber)
-                }
+                buttons[1] -> saveContact(inputsTrim())
             }
         }
 
@@ -63,6 +60,32 @@ class MainActivity : AppCompatActivity() {
         inputFields[3].setOnClickListener(clickListener)
         buttons[0].setOnClickListener(clickListener)
         buttons[1].setOnClickListener(clickListener)
+
+        contacts = Contacts()
+    }
+
+    private fun getGenderVal(): String {
+        val radioGroup = findViewById<RadioGroup>(R.id.radioGroup)
+        val selectedId = radioGroup.checkedRadioButtonId
+        if (selectedId != -1) {
+            val radioButton = findViewById<RadioButton>(selectedId)
+            val selectedText = radioButton.text.toString().trim()
+            return selectedText
+        }
+        return ""
+    }
+
+    private fun inputsTrim(): Array<String> {
+        val infos = Array(6) { "" }
+        for (i in 0..5) {
+            if (i == 4) {
+                val gender = getGenderVal()
+                infos[4] = gender
+                continue
+            }
+            infos[i] = (inputFields[i] as EditText).text.toString().trim()
+        }
+        return infos
     }
 
     private fun showInputs() {
@@ -96,15 +119,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun cancelContact() {
+        val name = (inputFields[0] as EditText).text.toString().trim()
+        val phoneNumber = (inputFields[1] as EditText).text.toString().trim()
+        contacts.delContact(name, phoneNumber)
         Toast.makeText(this, "취소 되었습니다", Toast.LENGTH_LONG).show()
     }
 
-    private fun saveContact(name: String, phoneNumber: String) {
-        if (name == "")
+    private fun saveContact(infos: Array<String>) {
+        if (infos[0] == "")
             Toast.makeText(this, "이름은 필수 값 입니다.", Toast.LENGTH_SHORT).show()
-        else if (phoneNumber == "")
+        else if (infos[1] == "")
             Toast.makeText(this, "전화 번호는 필수 값 입니다.", Toast.LENGTH_SHORT).show()
-        else
-            Toast.makeText(this, "저장이 완료 되었습니다", Toast.LENGTH_SHORT).show()
+        else {
+            if (contacts.addContact(infos))
+                Toast.makeText(this, "저장이 완료 되었습니다.", Toast.LENGTH_SHORT).show()
+            else
+                Toast.makeText(this, "이미 저장된 연락처 입니다.", Toast.LENGTH_SHORT).show()
+        }
     }
 }
