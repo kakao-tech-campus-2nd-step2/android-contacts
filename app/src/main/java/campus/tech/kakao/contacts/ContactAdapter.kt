@@ -1,12 +1,11 @@
 
 package campus.tech.kakao.contacts
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import campus.tech.kakao.contacts.database.Contact
 
@@ -15,13 +14,24 @@ class ContactAdapter(
     private val inflater: LayoutInflater
 ): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val firstName: TextView
         val fullName: TextView
 
         init {
             firstName = itemView.findViewById(R.id.textViewFirstName)
             fullName = itemView.findViewById(R.id.textViewFullName)
+            itemView.setOnClickListener{
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val context = itemView.context
+                    val contact = contactList[position]
+                    val intent = Intent(context, ContactDetailActivity::class.java).apply {
+                        putExtra("contact", contact)
+                    }
+                    context.startActivity(intent)
+                }
+            }
         }
     }
 
