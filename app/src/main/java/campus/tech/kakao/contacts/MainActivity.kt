@@ -40,4 +40,19 @@ class MainActivity : AppCompatActivity() {
             return
         }
     }
+
+    //더보기 토글 기능 - 표시 및 숨기기
+    private fun toggleMore(){
+        val moreLayout = findViewById<LinearLayout>(R.id.moreLayout)
+        val moreText = findViewById<TextView>(R.id.moreText)
+
+        if(moreLayout.visibility == LinearLayout.GONE){
+            moreLayout.visibility = LinearLayout.VISIBLE
+            moreText.visibility = TextView.GONE
+        }
+        else {
+            moreLayout.visibility = LinearLayout.GONE
+            moreText.visibility = TextView.VISIBLE
+        }
+    }
 }
