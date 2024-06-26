@@ -64,11 +64,37 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="생일" />
-            <EditText
-                android:id="@+id/gender_input"
+
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="성별" />
+                android:weightSum="10">
+
+                <EditText
+                    android:id="@+id/gender_input"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="성별"
+                    android:layout_weight="9"/>
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_weight="1">
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="여성"/>
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="남성"/>
+
+
+                </RadioGroup>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
             <EditText
                 android:id="@+id/memo_input"
                 android:layout_width="match_parent"
