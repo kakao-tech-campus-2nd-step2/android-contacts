@@ -20,17 +20,10 @@ class ContactListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contact_list)
 
-        // 데이터베이스 비우기
-        // clearDatabase()
-
         setupRecyclerView()
         setupAddContactButton()
         observeContacts()
     }
-    private fun clearDatabase() {
-        contactViewModel.deleteAll()
-    }
-
     private fun setupRecyclerView() {
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this@ContactListActivity)
@@ -58,14 +51,18 @@ class ContactListActivity : AppCompatActivity() {
                     val adapter = ContactAdapter(it, inflater)
                     recyclerView.adapter = adapter
                 }
-                logContacts(it)
             }
         }
     }
 
-    private fun logContacts(contacts: List<Contact>) {
-        contacts.forEach { contact ->
-            Log.d("testt", "(Contact Data) name : ${contact.name} phone : ${contact.phone}")
-        }
+    override fun onDestroy() {
+        Log.d("testt", "onDestroy called")
+        contactViewModel.deleteAll()
+        super.onDestroy()
     }
+//    override fun onStop() {
+//        Log.d("testt", "onStop called")
+//        contactViewModel.deleteAll()
+//        super.onStop()
+//    }
 }
