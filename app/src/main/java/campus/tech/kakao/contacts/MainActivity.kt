@@ -1,5 +1,6 @@
 package campus.tech.kakao.contacts
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -9,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.LinearLayoutCompat
+import java.util.Calendar
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,10 +31,28 @@ class MainActivity : AppCompatActivity() {
 
         // 초기화
         see_more_input_form.visibility = View.GONE
+        birth_date_input.setClickable(false)
+        birth_date_input.setFocusable(false)
+        gender_input.setClickable(false)
+        gender_input.setFocusable(false)
 
         see_more_button.setOnClickListener{
             see_more_button.visibility = View.GONE
             see_more_input_form.visibility = View.VISIBLE
+        }
+
+        birth_date_input.setOnClickListener{
+            var calendar = Calendar.getInstance()
+            var year = calendar.get(Calendar.YEAR)
+            var month = calendar.get(Calendar.MONTH)
+            var day = calendar.get(Calendar.DAY_OF_MONTH)
+            this.let { it1 ->
+                DatePickerDialog(it1, { _, year, month, day ->
+                    run {
+                        birth_date_input.setText(year.toString() + "." + (month + 1).toString() + "." + day.toString())
+                    }
+                }, year, month, day)
+            }?.show()
         }
 
 
