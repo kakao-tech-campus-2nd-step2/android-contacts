@@ -48,6 +48,12 @@ class MainActivity : AppCompatActivity() {
         viewMore.setOnClickListener {
             expandView()
         }
+        cancel.setOnClickListener {
+            Toast.makeText(this, "취소되었습니다.", Toast.LENGTH_SHORT).show()
+        }
+        save.setOnClickListener {
+            Toast.makeText(this, "저장되었습니다.", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun expandView() {
