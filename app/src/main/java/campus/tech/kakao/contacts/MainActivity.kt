@@ -1,14 +1,17 @@
 package campus.tech.kakao.contacts
 
+import android.app.DatePickerDialog
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.DatePicker
 import android.widget.EditText
 import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import java.util.Calendar
 import kotlin.math.log
 
 class MainActivity : AppCompatActivity() {
@@ -36,6 +39,8 @@ class MainActivity : AppCompatActivity() {
         saveButtonSetOnClickListener(this)
         cancelButtonSetOnClickListener(this)
         moreButtonSetOnClickListener()
+        birthdayFieldSetOnclickListener()
+
 
     }
 
@@ -89,5 +94,20 @@ class MainActivity : AppCompatActivity() {
         memo.visibility = View.VISIBLE
         moreInfoButton.visibility = View.GONE
     }
+
+    fun birthdayFieldSetOnclickListener(){
+        birthday.setOnClickListener(){
+            setBirthday()
+        }
+    }
+
+    fun setBirthday(){
+        val datePicker = DatePickerDialog(this, DatePickerDialog.OnDateSetListener {
+            view : DatePicker?, year, month, day ->
+            birthday.setText("${year}/${month}/${day}")
+        }, 2000, 1, 1).show()
+    }
+
+
 }
 
