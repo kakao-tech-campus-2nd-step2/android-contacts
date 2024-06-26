@@ -19,7 +19,7 @@
         android:id="@+id/name_form"
         android:layout_width="@dimen/edittext_width"
         android:layout_height="@dimen/edittext_height"
-        android:inputType="textPersonName"
+        android:inputType="text"
         android:hint="@string/name_hint"
         android:gravity="center_vertical"
         android:background="@drawable/rounded_edittext"
