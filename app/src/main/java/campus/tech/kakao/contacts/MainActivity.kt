@@ -3,6 +3,7 @@ package campus.tech.kakao.contacts
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -16,17 +17,19 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
 
 class MainActivity : AppCompatActivity() {
-    //    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
-//        val inputMethodManager: InputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+//    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
+//        val inputMethodManager: InputMethodManager =
+//            getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
 //        inputMethodManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
 //        return super.dispatchTouchEvent(ev)
 //    }
+
     fun startCalenderDialog(textView: TextView) {
         val datePickerDialog = DatePickerDialog(this)
-        datePickerDialog.updateDate(2000,0,1)
+        datePickerDialog.updateDate(2000, 0, 1)
 
         datePickerDialog.setOnDateSetListener { _, year, month, dayOfMonth ->
-            Log.d("testt",getString(R.string.birthday, year, month + 1, dayOfMonth))
+            Log.d("testt", getString(R.string.birthday, year, month + 1, dayOfMonth))
             textView.text = getString(R.string.birthday, year, month + 1, dayOfMonth)
         }
 
@@ -85,7 +88,7 @@ class MainActivity : AppCompatActivity() {
         val tel = findViewById<EditText>(R.id.contactTel)
         val mail = findViewById<EditText>(R.id.contactMail)
         val editTextList = findViewById<LinearLayout>(R.id.editTextList)
-        val showDetail = findViewById<LinearLayout>(R.id.more)
+        val showDetail = findViewById<TextView>(R.id.more)
         val bday = findViewById<TextView>(R.id.contactBirthDay)
         val genderRadioGroup = findViewById<RadioGroup>(R.id.genderRadioGroup)
         val memo = findViewById<EditText>(R.id.contactMemo)
