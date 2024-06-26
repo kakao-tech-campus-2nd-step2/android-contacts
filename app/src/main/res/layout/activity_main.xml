@@ -31,7 +31,9 @@
         android:layout_height="wrap_content"
         android:hint="전화번호"
         style="@style/inputBox"
-        app:layout_constraintTop_toBottomOf="@id/name" />
+        app:layout_constraintTop_toBottomOf="@id/name"
+        android:inputType="number"
+        android:digits="0123456789"/>
 
     <EditText
         android:id="@+id/mail"
