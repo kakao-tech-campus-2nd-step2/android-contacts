@@ -15,51 +15,53 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
 
 class MainActivity : AppCompatActivity() {
-//    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
+    //    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
 //        val inputMethodManager: InputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
 //        inputMethodManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
 //        return super.dispatchTouchEvent(ev)
 //    }
-    fun startCalenderDialog(textView : TextView){
+    fun startCalenderDialog(textView: TextView) {
         val datePickerDialog = DatePickerDialog(this)
-        datePickerDialog.setOnDateSetListener { view, year, month, dayOfMonth ->
-            textView.text = getString(R.string.birthday,year,month+1,dayOfMonth)
+        datePickerDialog.datePicker.init(
+            2000, 0, 1
+        ) { _, year, month, dayOfMonth ->
+            textView.text = getString(R.string.birthday, year, month + 1, dayOfMonth)
         }
         datePickerDialog.show()
     }
 
-    fun extendEditTextList(view : View, sizeId : Int){
+    fun extendEditTextList(view: View, sizeId: Int) {
         var layoutParams = view.layoutParams
         layoutParams.height = resources.getDimensionPixelSize(sizeId)
         view.layoutParams = layoutParams
     }
 
-    fun toggleViewVisibility(view : View){
-        view.visibility = when(view.visibility){
+    fun toggleViewVisibility(view: View) {
+        view.visibility = when (view.visibility) {
             GONE -> VISIBLE
             else -> GONE
         }
     }
 
-    fun cancelContact(){
+    fun cancelContact() {
         // TODO: implement cancel workflow
         showToast("취소 되었습니다.")
     }
 
-    fun showToast(message:String){
-        Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
+    fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
-    fun setFocus(view: View){
+    fun setFocus(view: View) {
         view.requestFocus()
         val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         imm.showSoftInput(view, 0);
     }
 
-    fun isValidContact(views : List<EditText>) : Boolean{
-        views.forEach{
-            if(it.text.isEmpty()){
-                showToast(resources.getString(R.string.essential_value,it.hint.toString()))
+    fun isValidContact(views: List<EditText>): Boolean {
+        views.forEach {
+            if (it.text.isEmpty()) {
+                showToast(resources.getString(R.string.essential_value, it.hint.toString()))
                 setFocus(it)
                 return false
             }
@@ -67,7 +69,7 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    fun submitContact(){
+    fun submitContact() {
         // TODO: implement submit workflow
         showToast("저장이 완료 되었습니다.")
     }
@@ -88,7 +90,7 @@ class MainActivity : AppCompatActivity() {
         val submitBtn = findViewById<MaterialButton>(R.id.submitBtn)
 
         showDetail.setOnClickListener {
-            extendEditTextList(editTextList,R.dimen.contact_list_height_detail)
+            extendEditTextList(editTextList, R.dimen.contact_list_height_detail)
             toggleViewVisibility(showDetail)
         }
 
@@ -101,7 +103,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         submitBtn.setOnClickListener {
-            if(isValidContact(listOf(name,tel))){
+            if (isValidContact(listOf(name, tel))) {
                 submitContact()
             }
         }
