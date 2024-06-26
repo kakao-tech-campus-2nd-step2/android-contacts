@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        
+
         cancelButton.setOnClickListener {
             nameEditText.text.clear()
             phoneNumberEditText.text.clear()
