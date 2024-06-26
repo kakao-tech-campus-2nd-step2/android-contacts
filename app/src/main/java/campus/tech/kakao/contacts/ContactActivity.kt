@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 
 import android.widget.EditText
 import android.widget.LinearLayout
@@ -73,7 +74,7 @@ class ContactActivity : AppCompatActivity() {
 
         cancelButton.setOnClickListener {
             clearFields()
-            Toast.makeText(this, "취소되었습니다.", Toast.LENGTH_SHORT).show()
+            showCancelToast()
         }
 
 
@@ -106,7 +107,7 @@ class ContactActivity : AppCompatActivity() {
 
     private fun saveContact(contact: Contact) {
         contactViewModel.addContact(contact)
-        Toast.makeText(this, "연락처가 저장되었습니다.", Toast.LENGTH_SHORT).show()
+        showSaveToast()
         Log.d("testt",contactViewModel.getContact(contact.name).toString() )
     }
 
@@ -121,5 +122,17 @@ class ContactActivity : AppCompatActivity() {
         birthEditText.visibility = TextView.GONE
         genderRadioGroup.visibility = TextView.GONE
         moreButton.visibility = TextView.VISIBLE
+    }
+
+    private fun showCancelToast(){
+        val toast = Toast.makeText(this, "취소 되었습니다", Toast.LENGTH_SHORT)
+        toast.setGravity(Gravity.TOP, 0, 100)
+        toast.show()
+    }
+
+    private fun showSaveToast(){
+        val toast = Toast.makeText(this, "저장이 완료 되었습니다", Toast.LENGTH_SHORT)
+        toast.setGravity(Gravity.TOP, 0, 100)
+        toast.show()
     }
 }
