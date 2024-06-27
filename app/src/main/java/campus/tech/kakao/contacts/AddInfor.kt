@@ -45,7 +45,7 @@ class AddInfor : AppCompatActivity() {
             removeMoreInformationButton(forMoreInformation)
         }
         cancelButton.setOnClickListener {cancelMessasge(cancelButton) }
-        saveButton.setOnClickListener{ saveOrNotSave(saveData(inputName,inputPhoneNumber,inputEmail),saveButton) }
+        saveButton.setOnClickListener{ saveOrNotSave(saveDataForSave(inputName,inputPhoneNumber,inputEmail),saveButton) }
     }
 }
 private fun saveMessage(saveButton: Button) {
@@ -180,10 +180,10 @@ private fun removeMoreInformationButton(button: View) {
     val parentLayoutButton = button.parent as? ConstraintLayout
     parentLayoutButton?.removeView(button)
 }
-private fun checkEmptyData(addName: String, addPhoneNumber: String): Boolean {
+private fun checkEmptyDataforSave(addName: String, addPhoneNumber: String): Boolean {
     return addName.isNotEmpty() && addPhoneNumber.isNotEmpty()
 }
-fun saveData(inputName: EditText, inputPhoneNumber: EditText, inputEmail: EditText): Boolean {
+fun saveDataForSave(inputName: EditText, inputPhoneNumber: EditText, inputEmail: EditText): Boolean {
     addName = inputName.text.toString()
     addPhoneNumber = inputPhoneNumber.text.toString()
     addEmail = inputEmail.text.toString()
@@ -193,7 +193,19 @@ fun saveData(inputName: EditText, inputPhoneNumber: EditText, inputEmail: EditTe
         addMemo = memoEditText!!.text.toString()
     }
 
-    return checkEmptyData(addName, addPhoneNumber)
+    return checkEmptyDataforSave(addName, addPhoneNumber)
+}
+fun saveDataForCencel(inputName: EditText, inputPhoneNumber: EditText, inputEmail: EditText): Boolean {
+    addName = inputName.text.toString()
+    addPhoneNumber = inputPhoneNumber.text.toString()
+    addEmail = inputEmail.text.toString()
+    if (genderRadioGroup != null || birthTextView != null || memoEditText != null) {
+        addGender = genderRadioGroup!!.findViewById<RadioButton>(genderRadioGroup!!.checkedRadioButtonId)?.text.toString()
+        addBirth = birthTextView!!.text.toString()
+        addMemo = memoEditText!!.text.toString()
+    }
+
+    return checkEmptyDataforCencel(addName, addPhoneNumber,addEmail)
 }
 private fun saveOrNotSave(checking: Boolean, saveButton: Button) {
     if (checking) {
