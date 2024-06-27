@@ -90,3 +90,15 @@ class ContactWritingActivity : AppCompatActivity() {
         }
     }
 }
+
+fun checkWriting(name : EditText, phone : EditText, mail : EditText, birthday : TextView,
+    gender : RadioGroup, memo : EditText) : Boolean {
+    if(name.text.isNotEmpty()|| phone.text.isNotEmpty() || mail.text.isNotEmpty()
+        || birthday.text.isNotEmpty() || memo.text.isNotEmpty()) {
+        return true
+    }
+    if(gender.checkedRadioButtonId != -1) {
+        return true
+    }
+    return false
+}
