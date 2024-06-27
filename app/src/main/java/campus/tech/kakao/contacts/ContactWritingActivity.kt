@@ -54,7 +54,7 @@ class ContactWritingActivity : AppCompatActivity() {
                 toast.show()
 
                 val intent = Intent(this, ContactMainActivity::class.java)
-                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 intent.putExtra("name", name.text.toString())
                 intent.putExtra("phone", phone.text.toString())
                 //intent.putExtra("mail", mail.text)
