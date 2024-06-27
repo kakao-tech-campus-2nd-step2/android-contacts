@@ -43,5 +43,28 @@ class Contact (
 				database.execSQL("ALTER TABLE new_Contact RENAME TO Contact")
 			}
 		}
+		val MIGRATION_2_3 = object : Migration(2, 3) {
+			override fun migrate(database: SupportSQLiteDatabase) {
+				database.execSQL(
+					"CREATE TABLE new_Contact (" +
+							"id INTEGER PRIMARY KEY NOT NULL, " +
+							"name TEXT NOT NULL, " +
+							"phone TEXT NOT NULL, " +
+							"email TEXT, " +
+							"birth TEXT, " +
+							"sex TEXT, " +
+							"memo TEXT)"
+				)
+				// 데이터 복사
+				database.execSQL(
+					"INSERT INTO new_Contact (id, name, phone, email, birth, sex, memo) " +
+							"SELECT id, name, CAST(phone AS TEXT), email, birth, sex, memo FROM Contact")
+				// 이전 테이블 제거
+				database.execSQL("DROP TABLE Contact")
+
+				// 새 테이블 이름 바꾸기
+				database.execSQL("ALTER TABLE new_Contact RENAME TO Contact")
+			}
+		}
 	}
 }

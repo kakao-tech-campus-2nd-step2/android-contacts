@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
 import campus.tech.kakao.contacts.Contact.Companion.MIGRATION_1_2
+import campus.tech.kakao.contacts.Contact.Companion.MIGRATION_2_3
 import java.util.Calendar
 
 class AddContact : AppCompatActivity() {
@@ -60,7 +61,7 @@ class AddContact : AppCompatActivity() {
         val database = Room.databaseBuilder(
             applicationContext,
             ContactDatabase::class.java, "database-name"
-        ).addMigrations(MIGRATION_1_2).allowMainThreadQueries().build()
+        ).addMigrations(MIGRATION_1_2, MIGRATION_2_3).allowMainThreadQueries().build()
 
         // Set click listener for save button
         save.setOnClickListener {

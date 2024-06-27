@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 
-@Database(entities = [Contact::class], version = 2)
+@Database(entities = [Contact::class], version = 3)
 abstract class ContactDatabase: RoomDatabase() {
 	abstract fun contactDao(): ContactDao
 }
