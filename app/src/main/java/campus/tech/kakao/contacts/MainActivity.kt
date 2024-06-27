@@ -1,5 +1,7 @@
 package campus.tech.kakao.contacts
 
+import android.app.DatePickerDialog
+import android.icu.util.Calendar
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -18,12 +20,24 @@ class MainActivity : AppCompatActivity() {
         val phoneInputForm = findViewById<EditText>(R.id.phoneInputForm)
         val moreButton = findViewById<LinearLayout>(R.id.moreButton)
         val moreInformationForm = findViewById<LinearLayout>(R.id.moreInformationForm)
+        val birthdayInputForm = findViewById<TextView>(R.id.birthdayInputForm)
         val saveButton = findViewById<Button>(R.id.saveButton)
         val cancelButton = findViewById<Button>(R.id.cancelButton)
+
 
         moreButton.setOnClickListener {
             moreInformationForm.setVisibility(View.VISIBLE)
             moreButton.setVisibility(View.GONE)
+        }
+
+        birthdayInputForm.setOnClickListener {
+            val datePickerDialog = DatePickerDialog(this,
+                { _, year, monthOfYear, dayOfMonth ->
+                    val formattedMonth = String.format("%02d", monthOfYear + 1)
+                    val formattedDay = String.format("%02d", dayOfMonth)
+                    birthdayInputForm.text = "$year.$formattedMonth.$formattedDay"
+                }, 2000, 0, 1)
+            datePickerDialog.show()
         }
 
         saveButton.setOnClickListener {
