@@ -10,14 +10,13 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.LinearLayoutCompat
-import androidx.core.view.isInvisible
 import java.util.Calendar
 
 
-class MainActivity : AppCompatActivity() {
+class ContactWritingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_contact_writing)
 
 
         val name = findViewById<EditText>(R.id.name)
