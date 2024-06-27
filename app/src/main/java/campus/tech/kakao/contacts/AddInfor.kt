@@ -27,3 +27,6 @@ private fun saveMessage(saveButton: Button) {
 private fun emptyDatamassage(saveButton: Button) {
     Toast.makeText(saveButton.context, "이름과 전화번호는 필수 값입니다.", Toast.LENGTH_SHORT).show()
 }
+private fun cancelMessasge(cancelButton: Button) {
+    Toast.makeText(cancelButton.context, "취소 되었습니다.", Toast.LENGTH_SHORT).show()
+}
