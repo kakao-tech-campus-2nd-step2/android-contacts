@@ -10,8 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
-import androidx.room.migration.Migration
-import androidx.sqlite.db.SupportSQLiteDatabase
+import campus.tech.kakao.contacts.Contact.Companion.MIGRATION_1_2
 import java.util.Calendar
 
 class AddContact : AppCompatActivity() {
@@ -29,29 +28,6 @@ class AddContact : AppCompatActivity() {
     private lateinit var moreText: TextView
     private lateinit var birthSexMemo: View
 
-    val MIGRATION_1_2 = object : Migration(1, 2) {
-        override fun migrate(database: SupportSQLiteDatabase) {
-            database.execSQL(
-                "CREATE TABLE new_Contact (" +
-                        "id INTEGER PRIMARY KEY NOT NULL, " +
-                        "name TEXT NOT NULL, " +
-                        "phone INTEGER NOT NULL, " +
-                        "email TEXT, " +
-                        "birth TEXT, " +
-                        "sex TEXT, " +
-                        "memo TEXT)"
-            )
-            // 데이터 복사
-            database.execSQL(
-                "INSERT INTO new_Contact (id, name, phone, email, birth, sex, memo) " +
-                        "SELECT id, name, CAST(phone AS INTEGER), email, birth, sex, memo FROM Contact")
-            // 이전 테이블 제거
-            database.execSQL("DROP TABLE Contact")
-
-            // 새 테이블 이름 바꾸기
-            database.execSQL("ALTER TABLE new_Contact RENAME TO Contact")
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -145,6 +121,8 @@ class AddContact : AppCompatActivity() {
             }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH))
         datePicker.show()
     }
+
+
 
 
 }
