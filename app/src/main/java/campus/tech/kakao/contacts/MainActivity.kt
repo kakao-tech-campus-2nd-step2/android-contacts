@@ -7,8 +7,15 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var addContact: ImageView
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var contactAdapter: ContactAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -19,11 +26,33 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        val addContact: ImageView = findViewById(R.id.add_contact)
+        addContact = findViewById(R.id.add_contact)
+        recyclerView = findViewById(R.id.recyclerView)
+        contactAdapter = ContactAdapter(mutableListOf())
+
+        recyclerView.adapter = contactAdapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
 
         addContact.setOnClickListener {
             val intent = Intent(this@MainActivity, AddContact::class.java)
-            startActivity(intent)
+            startActivityForResult(intent, ADD_CONTACT_REQUEST_CODE)
         }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == ADD_CONTACT_REQUEST_CODE && resultCode == RESULT_OK) {
+            val displayName = data?.getStringExtra("displayName")
+            val name = data?.getStringExtra("name")
+
+            if (displayName != null && name != null) {
+                val contact = Contact(displayName, name)
+                contactAdapter.addContact(contact)
+            }
+        }
+    }
+
+    companion object {
+        const val ADD_CONTACT_REQUEST_CODE = 1
     }
 }

@@ -1,10 +1,10 @@
 package campus.tech.kakao.contacts
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.*
-
 import androidx.appcompat.app.AppCompatActivity
 import java.util.*
 
@@ -48,16 +48,17 @@ class AddContact : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-//            if (!maleRadioButton.isChecked && !femaleRadioButton.isChecked) {
-//                Toast.makeText(this, "성별을 선택해 주세요.", Toast.LENGTH_SHORT).show()
-//                return@setOnClickListener
-//            }
-
-            Toast.makeText(this, "저장이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+            val resultIntent = Intent().apply {
+                putExtra("displayName", name)
+                putExtra("name", name)
+            }
+            setResult(RESULT_OK, resultIntent)
+            finish()
         }
 
         cancelButton.setOnClickListener {
-            Toast.makeText(this, "취소 되었습니다.", Toast.LENGTH_SHORT).show()
+            setResult(RESULT_CANCELED)
+            finish()
         }
     }
 
@@ -70,11 +71,9 @@ class AddContact : AppCompatActivity() {
         val datePickerDialog = DatePickerDialog(this, { _, selectedYear, selectedMonth, selectedDay ->
             val selectedDate = "$selectedYear-${selectedMonth + 1}-$selectedDay"
             val birthday: TextView = findViewById(R.id.birthday)
-            birthday.setText(selectedDate)
+            birthday.text = selectedDate
         }, year, month, day)
 
         datePickerDialog.show()
     }
 }
-
-
