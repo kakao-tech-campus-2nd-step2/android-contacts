@@ -74,3 +74,16 @@ private fun selectDate(context: Context, textView: TextView) {
 
     datePickerDialog.show()
 }
+private fun createMemo(context: Context, hint: String): EditText {
+    val editText = EditText(context).apply {
+        layoutParams = LinearLayout.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        ).apply {
+            setMargins(45, 16, 45, 16)
+        }
+        this.hint = hint
+        setBackgroundResource(R.drawable.edittextborder)
+    }
+    return editText
+}
