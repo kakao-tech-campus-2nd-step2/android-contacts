@@ -60,12 +60,13 @@ class MainActivity : AppCompatActivity() {
         contactRecyclerView.adapter = contactAdapter
         contactRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
     }
+    fun test() {}
 }
 
 class ContactRecyclerAdapter(
     var contactList: MutableList<Contact>,
     val inflater: LayoutInflater,
-    val context: Context
+    val mainContext: Context
 ) : RecyclerView.Adapter<ContactRecyclerAdapter.ContactViewHolder>() {
     inner class ContactViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val itemLayout: ConstraintLayout
@@ -74,13 +75,13 @@ class ContactRecyclerAdapter(
         init {
             itemLayout = itemView.findViewById<ConstraintLayout>(R.id.item_contact).apply {
                 setOnClickListener {
-                    Toast.makeText(context, "WOW",Toast.LENGTH_SHORT).show()
+                    val contactIntent: Intent = Intent(mainContext, ContactInfoActivity::class.java)
+                    contactIntent.putExtra("info", contactList[adapterPosition])
+                    mainContext.startActivity(contactIntent)
                 }
             }
-
             profile = itemView.findViewById(R.id.contact_item_profile)
             name = itemView.findViewById(R.id.contact_item_name)
-
         }
     }
 
