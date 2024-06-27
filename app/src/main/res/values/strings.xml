@@ -11,4 +11,5 @@
     <string name="save">저장</string>
     <string name="birthday">생일</string>
     <string name="gender">성별</string>
+    <string name="message">오른쪽 하단 + 버튼을 클릭하여\n 연락처를 등록해보세요.</string>
 </resources>
