@@ -13,7 +13,7 @@ class PersonAdapter (
 
     class PersonViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val nameTextView: TextView = view.findViewById(R.id.name_textview)
-        val telTextView: TextView = view.findViewById(R.id.tel_textview)
+        val initialTextView: TextView = view.findViewById(R.id.initial_name)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PersonViewHolder {
@@ -28,7 +28,7 @@ class PersonAdapter (
     override fun onBindViewHolder(holder: PersonViewHolder, position: Int) {
         val person = personList[position]
         holder.nameTextView.text = person.name
-        holder.telTextView.text = person.tel
+        holder.initialTextView.text = person.name[0].toString()
         holder.itemView.setOnClickListener { clickListener(person) }
     }
 
