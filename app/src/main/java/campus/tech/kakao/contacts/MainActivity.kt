@@ -1,5 +1,6 @@
 package campus.tech.kakao.contacts
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
@@ -9,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.widget.EditText
 import android.widget.Toast
 import android.widget.RadioGroup
+import androidx.activity.OnBackPressedCallback
 import java.util.Calendar
 
 class MainActivity : AppCompatActivity() {
@@ -103,6 +105,12 @@ class MainActivity : AppCompatActivity() {
             memoEditText.text.clear()
             Toast.makeText(this, "취소되었습니다", Toast.LENGTH_SHORT).show()
         }
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                showExitConfirmationDialog()
+            }
+        })
     }
     private fun showDatePickerDialog() {
         val calendar = Calendar.getInstance()
@@ -121,5 +129,15 @@ class MainActivity : AppCompatActivity() {
             day
         )
         datePickerDialog.show()
+    }
+
+    private fun showExitConfirmationDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setMessage("작성 중인 내용이 있습니다. 정말 나가시겠습니까?")
+            .setPositiveButton("확인") { _, _ ->
+                finish()
+            }
+            .setNegativeButton("취소", null)
+        builder.create().show()
     }
 }
