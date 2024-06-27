@@ -2,6 +2,7 @@ package campus.tech.kakao.contacts
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,19 +29,11 @@ class ContactListActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        userList = mutableListOf()
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
-        recyclerViewAdapter=RecyclerViewAdapter(userList)
-        recyclerView.adapter = recyclerViewAdapter
-        recyclerView.layoutManager = LinearLayoutManager(this)
 
+        initUserList()
+        initRecyclerView()
+        initAddButton()
 
-        val btnAdd = findViewById<ImageView>(R.id.btnAdd)
-
-        btnAdd.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivityForResult(intent, REQUEST_CODE_ADD_USER)
-        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -54,11 +47,39 @@ class ContactListActivity : AppCompatActivity() {
 
             }
         }
+        helpMessage.visibility = if (userList.isEmpty()) View.VISIBLE else View.GONE
+    }
 
-        if(userList.isEmpty()){
-            helpMessage.visibility = View.VISIBLE
-        }else{
-            helpMessage.visibility = View.GONE
+    private fun setOnApplyWindowInsetsListener(){
+    }
+
+    private fun initUserList(){
+        Log.d("ContactListActivity", "inituserlist")
+        userList = mutableListOf()
+    }
+
+    private fun initRecyclerView(){
+        Log.d("ContactListActivity", "initrecyclerview")
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+        recyclerViewAdapter=RecyclerViewAdapter(userList)
+        recyclerView.adapter = recyclerViewAdapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
+    }
+
+    private fun initAddButton(){
+        Log.d("ContactListActivity", "initaddbtn")
+        setAddButtonListener()
+    }
+
+    private fun setAddButtonListener(){
+        Log.d("ContactListActivity", "setaddbuttonlistener")
+        val btnAdd = findViewById<ImageView>(R.id.btnAdd)
+
+        btnAdd.setOnClickListener {
+            Log.d("ContactListActivity", "Add button clicked")
+            val intent = Intent(this, MainActivity::class.java)
+            startActivityForResult(intent, REQUEST_CODE_ADD_USER)
+            Log.d("ContactListActivity", "startActivityForResult called")
         }
     }
 
