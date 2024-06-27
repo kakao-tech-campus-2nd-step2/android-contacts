@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -40,10 +41,11 @@ class MainActivity : AppCompatActivity() {
             if (inputName.text.isEmpty() || inputPhoneNumber.text.isEmpty()){
                 Toast.makeText(this, "이름 또는 전화번호를 입력하세요", Toast.LENGTH_SHORT).show()
             }else{
-                val intent = Intent(this,ContactListActivity::class.java)
+                val intent = Intent()
                 intent.putExtra("userData", UserData(inputName.text.toString(),
                     inputPhoneNumber.text.toString().toInt()))
-                startActivity(intent)
+                setResult(RESULT_OK,intent)
+                finish()
                 Toast.makeText(this, "저장이 완료 되었습니다", Toast.LENGTH_SHORT).show()
             }
         }
@@ -60,6 +62,13 @@ class MainActivity : AppCompatActivity() {
         btnMore.setOnClickListener {
             btnMore.visibility = View.GONE
             additionalInputLayout.visibility = View.VISIBLE
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == RESULT_OK) {
+            val resultData = data?.getStringExtra("resultKey")
         }
     }
     private fun isInputFormFilled(inputTextList: List<EditText>, radioGroup: RadioGroup ):Boolean{
