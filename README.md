@@ -2,6 +2,19 @@
 
 - 카카오 테크 캠퍼스 과제(연락처 앱) 수행을 위한 저장소입니다.
 
+## *Contents*
+1. 홈 화면　　　　　　2. 연락처 추가 화면　　　　　3. 취소 / 뒤로가기 팝업
+
+<img src=https://github.com/ichanguk/android-contacts/blob/ichanguk/img/registerActivity.png width="200" height="350"><img src=https://github.com/ichanguk/android-contacts/blob/ichanguk/img/mainActivity.png width="200" height="350"><img src=https://github.com/ichanguk/android-contacts/blob/ichanguk/img/cancelEvent.png width="200" height="350">
+
+4. 연락처 목록 화면　　　　　　5. 연락처 목록 화면(회전)
+
+<img src=https://github.com/ichanguk/android-contacts/blob/ichanguk/img/contactList.png width="200" height="350"><img src=https://github.com/ichanguk/android-contacts/blob/ichanguk/img/listRotation.png width="500" height="200">
+
+6. 상세화면1　　　　　7. 상세 화면2
+
+<img src=https://github.com/ichanguk/android-contacts/blob/ichanguk/img/detailActivity.png width="200" height="350"><img src=https://github.com/ichanguk/android-contacts/blob/ichanguk/img/detailActivity2.png width="200" height="350">
+
 ## feature
 
 ### 1단계 - 연락처 추가
