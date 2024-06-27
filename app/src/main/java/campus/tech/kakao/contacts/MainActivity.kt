@@ -43,7 +43,13 @@ class MainActivity : AppCompatActivity() {
         save = findViewById(R.id.save)
         cancel = findViewById(R.id.cancel)
 
+        //더보기 버튼
+        more.setOnClickListener {
+            more.visibility = View.GONE
+            extraFieldsLayout.visibility = View.VISIBLE
+        }
 
+        //저장 버튼
         save.setOnClickListener {
             if(name.text.toString().isEmpty()) {
                 Toast.makeText(this, "이름은 필수 값 입니다.", Toast.LENGTH_SHORT).show()
