@@ -1,7 +1,9 @@
 package campus.tech.kakao.contacts
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -12,6 +14,7 @@ import android.widget.EditText
 import android.widget.RadioButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -111,6 +114,17 @@ class MainActivity : AppCompatActivity() {
                 showDatePicker()
             }
         }
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                val builder = AlertDialog.Builder(this@MainActivity)
+                builder.setMessage("작성중인 내용이 있습니다. 정말 나가겠습니까?")
+                builder.setPositiveButton("나가기", DialogInterface.OnClickListener { dialog, which ->
+                    finish()
+                })
+                builder.setNegativeButton("작성 재개", null)
+                builder.show()
+            }
+        })
     }
     fun showDatePicker() {
         val birthday = findViewById<TextView>(R.id.birthday)
