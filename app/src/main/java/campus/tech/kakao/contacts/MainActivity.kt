@@ -1,5 +1,6 @@
 package campus.tech.kakao.contacts
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
@@ -39,6 +40,10 @@ class MainActivity : AppCompatActivity() {
             if (inputName.text.isEmpty() || inputPhoneNumber.text.isEmpty()){
                 Toast.makeText(this, "이름 또는 전화번호를 입력하세요", Toast.LENGTH_SHORT).show()
             }else{
+                val intent = Intent(this,ContactListActivity::class.java)
+                intent.putExtra("userData", UserData(inputName.text.toString(),
+                    inputPhoneNumber.text.toString().toInt()))
+                startActivity(intent)
                 Toast.makeText(this, "저장이 완료 되었습니다", Toast.LENGTH_SHORT).show()
             }
         }
@@ -72,11 +77,12 @@ class MainActivity : AppCompatActivity() {
     private fun showAlertDialog(){
         AlertDialog.Builder(this)
             .setMessage("작성 중인 내용이 있습니다. 정말 나가시겠습니까?")
-            .setPositiveButton("예"){dialog,which->
+            .setPositiveButton("나가기"){dialog,which->
                 Toast.makeText(this, "취소 되었습니다", Toast.LENGTH_SHORT).show()
                 finish()
             }
-            .setNegativeButton("아니오",null)
+            .setNegativeButton("작성하기",null)
             .show()
     }
+
 }

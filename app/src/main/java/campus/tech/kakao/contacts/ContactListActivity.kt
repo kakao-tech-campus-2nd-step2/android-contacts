@@ -2,7 +2,9 @@ package campus.tech.kakao.contacts
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -19,6 +21,10 @@ class ContactListActivity : AppCompatActivity() {
             insets
         }
 
+        val userData = intent.getSerializableExtra("userData")
+        if(userData is UserData){
+            Log.d("datatrans", userData.name+userData.phoneNumber)
+        }
         val btnAdd = findViewById<ImageView>(R.id.btnAdd)
 
         btnAdd.setOnClickListener {
