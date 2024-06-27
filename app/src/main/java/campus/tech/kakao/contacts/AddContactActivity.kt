@@ -1,6 +1,8 @@
 package campus.tech.kakao.contacts
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.RadioGroup
@@ -44,12 +46,27 @@ class AddContactActivity : AppCompatActivity() {
         }
 
         save.setOnClickListener {
-            if(contactManager.checkIsFilled(name.getText().toString())&&contactManager.checkIsFilled(phoneNumber.getText().toString()))
-            {
+            val nameText = name.text.toString()
+            val phoneNumberText = phoneNumber.text.toString()
+            val emailText = email.text.toString()
+            val birthDayText = birthDay.text.toString()
+            val genderText = when (gender.checkedRadioButtonId) {
+                R.id.radioMale -> "Male"
+                R.id.radioFemale -> "Female"
+                else -> ""
+            }
+            val memoText = memo.text.toString()
+
+            if (contactManager.checkIsFilled(nameText) && contactManager.checkIsFilled(phoneNumberText)) {
+                val contact = Contact(nameText, phoneNumberText, emailText, birthDayText, genderText, memoText)
+                ContactList.add(contact)
                 contactManager.showToast(this@AddContactActivity, "저장되었습니다.")
+                startActivity(Intent(this@AddContactActivity, MainActivity::class.java))
+                finish()
             } else {
                 contactManager.showToast(this@AddContactActivity, "이름과 번호 입력은 필수입니다.")
             }
         }
+
     }
 }
