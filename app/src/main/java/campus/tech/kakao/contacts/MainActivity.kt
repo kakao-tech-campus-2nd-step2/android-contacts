@@ -63,5 +63,11 @@ class MainActivity : AppCompatActivity() {
 
             Toast.makeText(this, "저장이 완료 되었습니다.", Toast.LENGTH_SHORT).show()
         }
+
+        //취소 버튼
+        cancel.setOnClickListener {
+            Toast.makeText(this, "취소 되었습니다.", Toast.LENGTH_SHORT).show()
+            //finish()
+        }
     }
 }
