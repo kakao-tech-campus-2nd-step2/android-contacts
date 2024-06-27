@@ -1,14 +1,23 @@
 package campus.tech.kakao.contacts
 
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
@@ -16,17 +25,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val contactList = mutableListOf<Contact>()
+        val contactAdapter = ContactRecyclerAdapter(contactList, layoutInflater, this)
         val activityResultLauncher: ActivityResultLauncher<Intent> =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 when (it.resultCode) {
                     RESULT_OK -> {
                         Log.d("Main","Success")
-                            val resContact =
-                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
-                                    intent.getSerializableExtra("res",Contact::class.java)
-                                else
-                                    it.data?.extras?.getSerializable("res") as Contact?
-                        Log.d("MainActivity", resContact.toString() )
+                        val resContact =
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
+                                intent.getSerializableExtra("res",Contact::class.java)
+                            else
+                                it.data?.extras?.getSerializable("res") as Contact?
+                        resContact?.let { contactList.add(resContact) }
+                        contactAdapter.notifyDataSetChanged()
                         Toast.makeText(this, "저장이 완료 되었습니다", Toast.LENGTH_SHORT).show()
                     }
                     RESULT_CANCELED -> {
@@ -36,9 +48,50 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         val addButton: FloatingActionButton = findViewById(R.id.add_contact)
+        val contactRecyclerView: RecyclerView = findViewById(R.id.contact_recycler_view)
+
         addButton.setOnClickListener {
             val contactIntent: Intent = Intent(this, ContactActivity::class.java)
             activityResultLauncher.launch(contactIntent)
         }
+
+        contactRecyclerView.adapter = contactAdapter
+        contactRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+    }
+}
+
+class ContactRecyclerAdapter(
+    var contactList: MutableList<Contact>,
+    val inflater: LayoutInflater,
+    val context: Context
+) : RecyclerView.Adapter<ContactRecyclerAdapter.ContactViewHolder>() {
+    inner class ContactViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val itemLayout: ConstraintLayout
+        val profileImage: ImageView
+        val name: TextView
+        init {
+            itemLayout = itemView.findViewById<ConstraintLayout>(R.id.item_contact).apply {
+                setOnClickListener {
+                    Toast.makeText(context, "WOW",Toast.LENGTH_SHORT).show()
+                }
+            }
+            profileImage = itemView.findViewById(R.id.contact_item_profile_image)
+            name = itemView.findViewById(R.id.contact_item_name)
+
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder {
+        val view = inflater.inflate(R.layout.item_contact, parent, false)
+        return ContactViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
+        holder.profileImage.setImageDrawable(context.resources.getDrawable(R.drawable.ic_launcher_background, null))
+        holder.name.text = contactList[position].name
+    }
+
+    override fun getItemCount(): Int {
+        return contactList.size
     }
 }
