@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.content.Context
 import android.icu.util.Calendar
 import android.os.Bundle
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
@@ -13,6 +14,7 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 
 private var addName: String = ""
 private var addPhoneNumber: String = ""
@@ -32,6 +34,13 @@ class AddInfor : AppCompatActivity() {
         val cancelButton = findViewById<Button>(R.id.cancelButton)
         val inputName = findViewById<EditText>(R.id.inputName)
         val inputPhoneNumber = findViewById<EditText>(R.id.inputPhoneNumber)
+
+        forMoreInformation.setOnClickListener {
+            moreInformationBirth(this, addInfor)
+            moreInformationGender(this, addInfor)
+            moreInformationMemo(this, addInfor)
+            removeMoreInformationButton(forMoreInformation)
+        }
 
     }
 }
@@ -162,4 +171,8 @@ private fun moreInformationMemo(context: Context, addInfor: LinearLayout) {
     val editText = createMemo(context, "메모")
     memoEditText = editText
     addInfor.addView(editText)
+}
+private fun removeMoreInformationButton(button: View) {
+    val parentLayoutButton = button.parent as? ConstraintLayout
+    parentLayoutButton?.removeView(button)
 }
