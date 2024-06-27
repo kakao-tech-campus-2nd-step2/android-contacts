@@ -2,6 +2,7 @@ package campus.tech.kakao.contacts
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -45,6 +46,12 @@ class MainActivity : AppCompatActivity() {
                     getString(R.string.toast_phone_number_is_essential), Toast.LENGTH_SHORT).show()
             } else {
                 val message = getString(R.string.toast_saved)
+                Log.d("MainActivity", "Name: $name")
+                Log.d("MainActivity", "Phone: $phone")
+                Log.d("MainActivity", "Email: $email")
+                Log.d("MainActivity", "Birthday: $birthday")
+                Log.d("MainActivity", "Gender ID: $genderId")
+                Log.d("MainActivity", "Memo: $memo")
                 Toast.makeText(this, message, Toast.LENGTH_LONG).show()
             }
         }
