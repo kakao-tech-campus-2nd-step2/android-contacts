@@ -1,6 +1,7 @@
 package campus.tech.kakao.contacts
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -108,11 +109,13 @@ class AddContactActivity : AppCompatActivity() {
     }
 
     fun saveSuccess() {
-        showToast("저장이 완료 되었습니다")
+        returnResultAndFinish()
     }
 
     fun cancel() {
-        showToast("취소 되었습니다")
+        val intent: Intent = Intent()
+        setResult(RESULT_CANCELED, intent)
+        finish()
     }
 
     fun showToast(message: String) {
@@ -155,5 +158,32 @@ class AddContactActivity : AppCompatActivity() {
         const val GENDER_NONE = -1
         const val GENDER_FEMALE = 0
         const val GENDER_MALE = 1
+
+        const val KEY_NAME = "name"
+        const val KEY_BIRTHDAY = "birthday"
+        const val KEY_PHONE = "phonenumber"
+        const val KEY_GENDER = "gender"
+        const val KEY_MEMO = "memo"
+        const val KEY_EMAIL = "email"
+    }
+
+    fun getTextOrNull(editText: EditText): String?{
+        val str = editText.text.toString()
+        return str.ifEmpty { null }
+    }
+
+    fun returnResultAndFinish(){
+        val intent: Intent = Intent()
+        intent.putExtra(KEY_NAME, getTextOrNull(nameInput))
+        intent.putExtra(KEY_PHONE, getTextOrNull(phoneInput))
+        intent.putExtra(KEY_EMAIL, getTextOrNull(emailInput))
+        intent.putExtra(KEY_BIRTHDAY, birthday?.toString())
+        if(getGender() != -1){
+            intent.putExtra(KEY_GENDER, getGender())
+        }
+        intent.putExtra(KEY_MEMO, getTextOrNull(memoInput))
+
+        setResult(RESULT_OK, intent)
+        finish()
     }
 }
