@@ -75,4 +75,76 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/moreInformationForm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/moreButton"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/birthdayInputForm"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:padding="12dp"
+            android:textSize="18sp"
+            android:background="@color/inputFormBackgroundColor"
+            android:hint="생일"/>
+
+        <LinearLayout
+            android:id="@+id/genderInputForm"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:weightSum="2"
+            android:background="@color/inputFormBackgroundColor">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="12dp"
+                android:textSize="18sp"
+                android:hint="성별"/>
+
+            <RadioGroup
+                android:id="@+id/genderRadioGroup"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <RadioButton
+                    android:id="@+id/womanRadioButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="여성"/>
+
+                <RadioButton
+                    android:id="@+id/manRadioButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="남성"/>
+            </RadioGroup>
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/memoInputForm"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:padding="12dp"
+            android:textSize="18sp"
+            android:inputType="none"
+            android:background="@color/inputFormBackgroundColor"
+            android:hint="메모"/>
+
+    </LinearLayout>
+
+
 </RelativeLayout>
