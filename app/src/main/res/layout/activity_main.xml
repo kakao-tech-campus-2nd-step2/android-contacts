@@ -64,7 +64,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="">
 
         <EditText
             android:id="@+id/birthday"
@@ -112,7 +112,7 @@
 
                 <RadioButton
                     android:id="@+id/male"
-                    android:layout_width="wrap_content"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:text="남성"
                     android:layout_gravity="center_vertical" />
