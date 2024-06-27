@@ -43,6 +43,14 @@ class MainActivity : AppCompatActivity() {
             showDatePickerDialog(birthDayET)
         }
 
+        saveBtn.setOnClickListener {
+            saveCheck(nameET, phoneET)
+        }
+
+        cancelBtn.setOnClickListener {
+            showToast("취소되었습니다")
+        }
+
     }
 
     private fun showMoreFields(moreBtnLayout: LinearLayout, moreETLayout: LinearLayout) {
@@ -60,6 +68,30 @@ class MainActivity : AppCompatActivity() {
             birthDayET.setText("$selectedYear-${selectedMonth + 1}-$selectedDay")
         }, year, month, day)
         datePickerDialog.show()
+    }
+
+    private fun saveCheck(nameET: EditText, phoneET: EditText) {
+        val name = nameET.text.toString()
+        val phone = phoneET.text.toString()
+
+        when {
+            name.isEmpty() && phone.isEmpty() -> {
+                showToast("이름과 전화번호를 입력하세요")
+            }
+            name.isEmpty() -> {
+                showToast("이름을 입력하세요")
+            }
+            phone.isEmpty() -> {
+                showToast("전화번호를 입력하세요")
+            }
+            else -> {
+                showToast("저장이 완료되었습니다")
+            }
+        }
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
 }
