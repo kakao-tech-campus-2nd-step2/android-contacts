@@ -24,11 +24,11 @@ class MainActivity : AppCompatActivity() {
         contactsRecyclerView = findViewById(R.id.contactsRecyclerView)
         addContactButton = findViewById(R.id.addContactButton)
 
-        //Recyclerview - 수직 배열
+        //Recyclerview - 수직 배열 & 세부 조회 (5,6번 기능 한 번에 commit함)
         contactsRecyclerView.layoutManager = LinearLayoutManager(this)
         contactsRecyclerView.adapter = ContactsAdapter(contactsList) {
                     contact ->
-            //세부사항 조회
+            //세부 조회
             val intent = Intent(this, ContactDetailActivity::class.java)
 
                     //intent 담아서 전달
