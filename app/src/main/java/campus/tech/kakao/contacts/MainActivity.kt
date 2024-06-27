@@ -1,6 +1,8 @@
 package campus.tech.kakao.contacts
 
+import android.app.Activity
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -58,6 +60,10 @@ class MainActivity : AppCompatActivity() {
         save.setOnClickListener {
             val writename = name.text.toString()
             val writenumber = phone.text.toString()
+            val writemail = mail.text.toString()
+            val writebir = birthday.text.toString().ifEmpty{""}
+            var writegender = if (female.isChecked) "Female" else if (male.isChecked) "Male" else ""
+            val writememo = memo.text.toString()
 
             var namecomplete = false
             var numbercomplete = false
@@ -79,6 +85,19 @@ class MainActivity : AppCompatActivity() {
 
             if (namecomplete == true && numbercomplete == true) {
                 Toast.makeText(this@MainActivity, "저장이 완료 되었습니다", Toast.LENGTH_SHORT).show()
+            }
+
+            if (writename.isNotEmpty() && writenumber.isNotEmpty() && writenumber.all { it.isDigit() }) {
+                val intent = Intent().apply {
+                    putExtra("name", writename)
+                    putExtra("phone", writenumber)
+                    putExtra("email", writemail)
+                    putExtra("birth", writebir)
+                    putExtra("gender", writegender)
+                    putExtra("memo", writememo)
+                }
+                setResult(Activity.RESULT_OK, intent)
+                finish()
             }
         }
 
