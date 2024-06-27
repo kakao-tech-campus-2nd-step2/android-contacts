@@ -9,14 +9,32 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
+    //전체
+    lateinit var noContactsText: TextView
+    lateinit var contactsRecyclerView: RecyclerView
+    lateinit var addContactButton: FloatingActionButton
+    val contactsList = mutableListOf<Contact>() //list 조회
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         //view 설정
-        noContactsText = findViewById<TextView>(R.id.noContactsText)
-        contactsRecyclerView = findViewById<RecyclerView>(R.id.contactsRecyclerView)
-        addContactButton = findViewById<FloatingActionButton>(R.id.addContactButton)
+        noContactsText = findViewById(R.id.noContactsText)
+        contactsRecyclerView = findViewById(R.id.contactsRecyclerView)
+        addContactButton = findViewById(R.id.addContactButton)
+
+        //Recyclerview - 수직 배열
+        contactsRecyclerView.layoutManager = LinearLayoutManager(this)
+        contactsRecyclerView.adapter = ContactsAdapter(contactsList) {
+                    contact ->
+            //세부사항 조회
+            val intent = Intent(this, ContactDetailActivity::class.java)
+
+                    //intent 담아서 전달
+                    intent.putExtra("contact", contact)
+                    startActivity(intent)
+                }
 
         //연락처 추가 floating click listener
         addContactButton.setOnClickListener{
@@ -28,8 +46,30 @@ class MainActivity : AppCompatActivity() {
             //추가 후 요청 결과 받기
             startActivityForResult(intent, REQUEST_CODE_ADD)
         }
-
         updateUI()
+    }
+
+    // 연락처 추가 시 비교
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        //요청 코드 비교
+        if(requestCode == REQUEST_CODE_ADD && resultCode == RESULT_OK) {
+            val intentData = data
+
+            //parcelable 객체 추출
+            val parcelableContact = intentData?.getParcelableExtra<Contact>("contact")
+
+            //null 여부 확인
+            if (parcelableContact != null) {
+                val contact = parcelableContact
+
+                //연락처 리스트에 추가
+                contactsList.add(contact)
+
+                updateUI()
+            }
+        }
     }
 
     //요청 코드
@@ -38,7 +78,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     //UI 업데이트
-    private fun UpdateUI(){
+    private fun updateUI(){
         //contactslist 비어있는 경우
         if (contactsList.isEmpty()) {
             noContactsText.visibility = TextView.VISIBLE
