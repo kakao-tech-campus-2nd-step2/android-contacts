@@ -56,6 +56,7 @@ class ContactDetailActivity : AppCompatActivity() {
             //birth
             if (!it.birth.isNullOrEmpty()) {
                 birthView.text = it.birth
+                birthView.visibility = TextView.VISIBLE
                 birthLabelText.visibility = TextView.VISIBLE
             } else {
                 birthView.visibility = TextView.GONE
