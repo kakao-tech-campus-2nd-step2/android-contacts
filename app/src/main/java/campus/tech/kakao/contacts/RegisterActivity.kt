@@ -31,16 +31,31 @@ class RegisterActivity : AppCompatActivity() {
         setStartActivityLauncher()
     }
 
+    /**
+     * 사용할 view들을 초기화하는 함수
+     *
+     * - `registerBtnLayout` : 연락처 등록 버튼을 나타내는 FrameLayout
+     * - `contactRecyclerView` : 연락처 목록을 나타내는 RecyclerView
+     * - `howToRegisterTextView` : 연락처 등록 방법 메시지를 나타내는 TextView
+     */
     private fun initViews() {
         registerBtnLayout = findViewById(R.id.register_btn_layout)
         contactRecyclerView = findViewById(R.id.contact_recycler_view)
         howToRegisterTextView = findViewById(R.id.how_to_register_text_view)
     }
 
+    /**
+     * 사용할 클릭 리스너들을 설정하는 함수
+     */
     private fun setOnClickListeners() {
         setOnClickListenerOfRegisterBtnLayout()
     }
 
+    /**
+     * 연락처 추가 버튼에 대한 클릭 리스너를 설정하는 함수
+     *
+     * 클릭 시 MainActivity로 넘어가고 Contact 객체를 결과로 받는 것을 기다림.
+     */
     private fun setOnClickListenerOfRegisterBtnLayout() {
         registerBtnLayout.setOnClickListener {
             val intent = Intent(this@RegisterActivity, MainActivity::class.java)
@@ -48,12 +63,22 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * 연락처 리사이클러뷰를 설정하는 함수
+     *
+     */
     private fun setContactRecyclerView() {
         contactRecyclerView.adapter =
             ContactRecyclerViewAdapter(contactList, LayoutInflater.from(this))
         contactRecyclerView.layoutManager = LinearLayoutManager(this)
     }
 
+    /**
+     * startActivityLauncher를 설정하는 함수
+     *
+     * result로 contact 객체를 받아와 list에 추가.
+     * 하나 이상의 contact 객체가 들어오면 등록 안내 textview의 visibility를 gone으로 설정.
+     */
     private fun setStartActivityLauncher() {
         startActivityLauncher = registerForActivityResult(StartActivityForResult()) { result ->
             if (result.resultCode == RESULT_OK) {
