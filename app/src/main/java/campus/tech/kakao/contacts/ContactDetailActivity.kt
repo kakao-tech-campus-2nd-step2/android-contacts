@@ -30,6 +30,41 @@ class ContactDetailActivity : AppCompatActivity() {
         val contact = intent.getParcelableExtra<Contact>("contact")
 
         //연락처 정보 설정하기 - 조건
+        contact?.let {
+            nameView.text = it.name //필수
+            phoneView.text = it.phone //필수
 
+            //email
+            if (!it.email.isNullOrEmpty()) {
+                emailView.text = it.email
+            } else {
+                emailView.visibility = TextView.GONE
+                emailLabelText.visibility = TextView.GONE
+            }
+
+            //birth
+            if (!it.birth.isNullOrEmpty()) {
+                birthView.text = it.birth
+            } else {
+                birthView.visibility = TextView.GONE
+                birthLabelText.visibility = TextView.GONE
+            }
+
+            //gender
+            if (!it.gender.isNullOrEmpty()) {
+                genderView.text = it.gender
+            } else {
+                genderView.visibility = TextView.GONE
+                genderLabelText.visibility = TextView.GONE
+            }
+
+            //memo
+            if (!it.memo.isNullOrEmpty()) {
+                memoView.text = it.memo
+            } else {
+                memoView.visibility = TextView.GONE
+                memoLabelText.visibility = TextView.GONE
+            }
+        }
     }
 }
