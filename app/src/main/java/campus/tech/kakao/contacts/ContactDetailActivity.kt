@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.ImageView
 import android.widget.TextView
+import org.w3c.dom.Text
 
 class ContactDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,12 +32,22 @@ class ContactDetailActivity : AppCompatActivity() {
 
         //연락처 정보 설정하기 - 조건
         contact?.let {
-            nameView.text = it.name //필수
-            phoneView.text = it.phone //필수
+
+            //이름 필수조건
+            nameView.text = it.name
+            nameView.visibility = TextView.VISIBLE
+            nameLabelText.visibility = TextView.VISIBLE
+
+            //이메일 필수조건
+            phoneView.text = it.phone
+            phoneView.visibility = TextView.VISIBLE
+            phoneLabelText.visibility = TextView.VISIBLE
 
             //email
             if (!it.email.isNullOrEmpty()) {
                 emailView.text = it.email
+                emailView.visibility = TextView.VISIBLE
+                emailLabelText.visibility = TextView.VISIBLE
             } else {
                 emailView.visibility = TextView.GONE
                 emailLabelText.visibility = TextView.GONE
@@ -45,14 +56,18 @@ class ContactDetailActivity : AppCompatActivity() {
             //birth
             if (!it.birth.isNullOrEmpty()) {
                 birthView.text = it.birth
+                birthLabelText.visibility = TextView.VISIBLE
             } else {
                 birthView.visibility = TextView.GONE
                 birthLabelText.visibility = TextView.GONE
             }
 
             //gender
-            if (!it.gender.isNullOrEmpty()) {
+            //default 값이 아닌 경우 값을 집어 넣도록 설정 - '성별' 문구 안뜨도록
+            if (!it.gender.isNullOrEmpty() && it.gender != " ") {
                 genderView.text = it.gender
+                genderView.visibility = TextView.VISIBLE
+                genderLabelText.visibility = TextView.VISIBLE
             } else {
                 genderView.visibility = TextView.GONE
                 genderLabelText.visibility = TextView.GONE
@@ -61,6 +76,8 @@ class ContactDetailActivity : AppCompatActivity() {
             //memo
             if (!it.memo.isNullOrEmpty()) {
                 memoView.text = it.memo
+                memoView.visibility = TextView.VISIBLE
+                memoLabelText.visibility = TextView.VISIBLE
             } else {
                 memoView.visibility = TextView.GONE
                 memoLabelText.visibility = TextView.GONE
