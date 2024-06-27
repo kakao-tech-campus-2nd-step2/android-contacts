@@ -26,15 +26,16 @@ class MainActivity : AppCompatActivity() {
 
         //Recyclerview - 수직 배열 & 세부 조회 (5,6번 기능 한 번에 commit함)
         contactsRecyclerView.layoutManager = LinearLayoutManager(this)
-        contactsRecyclerView.adapter = ContactsAdapter(contactsList) {
+        contactsRecyclerView.adapter =
+            ContactsAdapter(contactsList) {
                     contact ->
-            //세부 조회
-            val intent = Intent(this, ContactDetailActivity::class.java)
+                //세부 조회
+                val intent = Intent(this, ContactDetailActivity::class.java)
 
-                    //intent 담아서 전달
-                    intent.putExtra("contact", contact)
-                    startActivity(intent)
-                }
+                //intent 담아서 전달
+                intent.putExtra("contact", contact)
+                startActivity(intent)
+        }
 
         //연락처 추가 floating click listener
         addContactButton.setOnClickListener{
@@ -86,6 +87,7 @@ class MainActivity : AppCompatActivity() {
         } else { //연락처 하나 이상 있는 경우
             noContactsText.visibility = TextView.GONE
             contactsRecyclerView.visibility = RecyclerView.VISIBLE
+            contactsRecyclerView.adapter?.notifyDataSetChanged() //adapter에 추가된 데이터 변경사항 알리기
         }
     }
 }
