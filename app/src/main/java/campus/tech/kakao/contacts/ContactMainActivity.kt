@@ -33,7 +33,7 @@ class ContactMainActivity : AppCompatActivity() {
 
         floatingBtn.setOnClickListener{
             val intent = Intent(this, ContactWritingActivity::class.java)
-            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+            //intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
             startActivity(intent)
         }
 
