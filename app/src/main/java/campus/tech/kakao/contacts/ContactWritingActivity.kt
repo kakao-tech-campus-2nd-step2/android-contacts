@@ -97,14 +97,33 @@ class ContactWritingActivity : AppCompatActivity() {
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         if(keyCode == KeyEvent.KEYCODE_BACK) {
+            val name = findViewById<EditText>(R.id.name)
+            val phone = findViewById<EditText>(R.id.phone)
+            val mail = findViewById<EditText>(R.id.mail)
+            val birthday = findViewById<TextView>(R.id.birthday)
+            val gender = findViewById<RadioGroup>(R.id.gender)
+            val memo = findViewById<EditText>(R.id.memo)
+
+            if(checkWriting(name, phone, mail, birthday, gender, memo)) {
+                val dialogListener = DialogInterface.OnClickListener { dialog, which ->
+                    if(which == DialogInterface.BUTTON_POSITIVE) {
+                        Log.d("uin", "작성하기 버튼")
+                    } else if(which == DialogInterface.BUTTON_NEGATIVE) {
+                        Log.d("uin", "나가기 버튼")
+                        val intent = Intent(this, ContactMainActivity::class.java)
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                        startActivity(intent)
+                    }
+                }
                 AlertDialog.Builder(this).run {
                     setMessage("작성 중인 내용이 있습니다. 정말 나가시겠습니까?")
-                    setNegativeButton("나가기", null)
-                    setPositiveButton("작성하기", null)
+                    setNegativeButton("나가기", dialogListener)
+                    setPositiveButton("작성하기", dialogListener)
                     show()
                 }
                 return true;
             }
+        }
         return super.onKeyDown(keyCode, event)
     }
 }
