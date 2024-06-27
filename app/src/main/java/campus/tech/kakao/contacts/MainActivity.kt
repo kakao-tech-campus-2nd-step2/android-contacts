@@ -1,5 +1,6 @@
 package campus.tech.kakao.contacts
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.provider.MediaStore.Audio.Radio
 import android.widget.Button
@@ -9,6 +10,7 @@ import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import org.w3c.dom.Text
+import java.util.Calendar
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,7 +25,6 @@ class MainActivity : AppCompatActivity() {
         val showMore = findViewById<LinearLayout>(R.id.showMore)
         val birth = findViewById<EditText>(R.id.birthday)
         val radioGender = findViewById<EditText>(R.id.radioGender)
-        val radioGroup = findViewById<RadioGroup>(R.id.radioGroup)
         val memo = findViewById<EditText>(R.id.memo)
         val saveBtn = findViewById<Button>(R.id.saveBtn)
         val cancelBtn = findViewById<Button>(R.id.cancelBtn)
@@ -35,17 +36,25 @@ class MainActivity : AppCompatActivity() {
             showMoreBtn.visibility = Button.GONE
         }
 
-        // 성별 onCheckedChange 체크 변경 리스너
-        radioGroup.setOnCheckedChangeListener { group, checkedId ->
-            val radioButton = group.findViewById<Button>(checkedId)
-            radioGender.setText(radioButton.text)
+
+
+        // 생일 클릭 리스너 설정
+        birth.setOnClickListener {
+            // 현재 날짜를 기본값으로 설정
+            val calendar = Calendar.getInstance()
+            val year = calendar.get(Calendar.YEAR)
+            val month = calendar.get(Calendar.MONTH)
+            val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+            val datePickerDialog = DatePickerDialog(this, { _, selectedYear, selectedMonth, selectedDay ->
+                // 선택된 날짜를 EditText에 설정
+                val formattedDate = "$selectedYear.${selectedMonth + 1}.$selectedDay"
+                birth.setText(formattedDate)
+            }, year, month, day)
+            datePickerDialog.show()
         }
 
-        /*
-        * radioGroup에 체크 변경 리스너를 설정
-        * 이 리스너는 { group, checkedId -> } 람다 표현식으로 group은 RadioGroup 객체를 참조하고,
-        * checkedId는 선택된 라디오 버튼의 ID (Int 형태)
-        */
+
 
 
         // 저장 버튼 리스너
@@ -54,14 +63,15 @@ class MainActivity : AppCompatActivity() {
             if (name.text.isNullOrEmpty() || phone.text.isNullOrEmpty()) {
                 Toast.makeText(this, "이름과 전화번호를 입력해 주세요.", Toast.LENGTH_SHORT).show()
             } else {
-                // 저장 로직
                 Toast.makeText(this, "저장이 완료되었습니다.", Toast.LENGTH_SHORT).show()
             }
         }
 
+
+
+
         // 취소 버튼 리스너
         cancelBtn.setOnClickListener {
-            // 취소 로직
             Toast.makeText(this, "취소되었습니다.", Toast.LENGTH_SHORT).show()
         }
 
