@@ -9,3 +9,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
     }
 }
+data class ContactInfo(
+    val name: String,
+    val phoneNumber: String,
+    val email: String,
+    val birth: String,
+    val memo: String,
+    val gender: String
+)
