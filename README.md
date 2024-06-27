@@ -81,6 +81,14 @@ app
 ├── build.gradle.kts
 └── proguard-rules.pro
 ```
+### 구현 화면 
+<img src="https://github.com/YJY1220/Programmers_prac/assets/93771689/6cd67398-f9af-483a-8f5c-d2f50c154352" width="200" height="400"/>
+<img src="https://github.com/YJY1220/Programmers_prac/assets/93771689/bb312d57-7b6d-4c30-ab6a-febfadb8d7cc" width="200" height="400"/>
+<img src="https://github.com/YJY1220/Programmers_prac/assets/93771689/f522fb92-7139-469f-b7d2-fffdf0f75d9d" width="200" height="400"/>
+<img src="https://github.com/YJY1220/Programmers_prac/assets/93771689/ea04d308-2bb5-4387-9b2c-2e9853cb37ee" width="200" height="400"/>
+<img src="https://github.com/YJY1220/Programmers_prac/assets/93771689/b2e5f425-d791-4265-8b07-da94115e3044" width="200" height="400"/>
+<img src="https://github.com/YJY1220/Programmers_prac/assets/93771689/f6f155cd-7e36-4c83-9be9-24aa1165c2e6" width="200" height="400"/>
+<img src="https://github.com/YJY1220/Programmers_prac/assets/93771689/fcc10402-f863-4a88-9b59-f36be7779d0e" width="200" height="400"/>
 
 ### 실행 영상 (전체 실행영상)
-https://youtu.be/re7rHcPNlhE
+[https://youtu.be/re7rHcPNlhE](https://youtu.be/S2kDtQot_4Y)
