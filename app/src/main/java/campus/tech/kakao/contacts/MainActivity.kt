@@ -41,5 +41,33 @@ class MainActivity : AppCompatActivity() {
         cancel.setOnClickListener {
             Toast.makeText(this@MainActivity, "취소 되었습니다.", Toast.LENGTH_SHORT).show()
         }
+
+        save.setOnClickListener {
+            val writename = name.text.toString()
+            val writenumber = phone.text.toString()
+
+            var namecomplete = false
+            var numbercomplete = false
+
+            if (writename.isBlank()) {
+                Toast.makeText(this@MainActivity, "이름은 필수 입력 값입니다.", Toast.LENGTH_SHORT).show()
+            } else {
+                namecomplete = true
+            }
+
+            if (writenumber.isBlank()) {
+                Toast.makeText(this@MainActivity, "전화번호는 필수 입력 값입니다.", Toast.LENGTH_SHORT).show()
+            } else if (!writenumber.all { it.isDigit() }) {
+                Toast.makeText(this@MainActivity, "전화번호에는 숫자만 입력할 수 있습니다.", Toast.LENGTH_SHORT)
+                    .show()
+            } else {
+                numbercomplete = true
+            }
+
+            if (namecomplete == true && numbercomplete == true) {
+                Toast.makeText(this@MainActivity, "저장이 완료 되었습니다", Toast.LENGTH_SHORT).show()
+            }
+        }
+
     }
 }
