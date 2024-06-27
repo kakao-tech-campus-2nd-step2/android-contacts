@@ -42,7 +42,21 @@ class AddContactActivity : AppCompatActivity() {
         }
 
         cancle.setOnClickListener {
-            contactManager.showCancelAlert(this@AddContactActivity)
+            val nameText = name.text.toString()
+            val phoneNumberText = phoneNumber.text.toString()
+            val emailText = email.text.toString()
+            val birthDayText = birthDay.text.toString()
+            val genderText = when (gender.checkedRadioButtonId) {
+                R.id.radioMale -> "Male"
+                R.id.radioFemale -> "Female"
+                else -> ""
+            }
+            val memoText = memo.text.toString()
+            if(contactManager.checkIsFilled(nameText) && contactManager.checkIsFilled(phoneNumberText)
+                &&contactManager.checkIsFilled(emailText) && contactManager.checkIsFilled(birthDayText)
+                &&contactManager.checkIsFilled(genderText) && contactManager.checkIsFilled(memoText))
+            {contactManager.showCancelAlert(this@AddContactActivity, "작성 중인 내용이 있습니다. 정말 나가시겠습니까?")}
+            else contactManager.showCancelAlert(this@AddContactActivity, "나가시겠습니까?")
         }
 
         save.setOnClickListener {
@@ -67,6 +81,5 @@ class AddContactActivity : AppCompatActivity() {
                 contactManager.showToast(this@AddContactActivity, "이름과 번호 입력은 필수입니다.")
             }
         }
-
     }
 }
