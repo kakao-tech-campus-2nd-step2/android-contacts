@@ -7,9 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.ListView
 import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
@@ -20,6 +22,36 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        listView = findViewById(R.id.listView)
+        adapter = ContactAdapter(this, contactList)
+        listView.adapter = adapter
+
+        addInforLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == RESULT_OK) {
+                    val data: Intent? = result.data
+                    receivedInfor(data)
+                    adapter.notifyDataSetChanged()
+                }
+            }
+        val addInfor = findViewById<Button>(R.id.imageButton)
+        addInfor.setOnClickListener {
+            val toAddInfor = Intent(this@MainActivity, AddInfor::class.java)
+            addInforLauncher.launch(toAddInfor)
+        }
+
+        listView.setOnItemClickListener { parent, view, position, id ->
+            val selectedItem = adapter.getItem(position)
+            val tosp = Intent(this@MainActivity, SpecificInformationActivity::class.java).apply {
+                putExtra("name", selectedItem?.name ?: "")
+                putExtra("phoneNumber", selectedItem?.phoneNumber ?: "")
+                putExtra("email", selectedItem?.email ?: "")
+                putExtra("birth", selectedItem?.birth ?: "")
+                putExtra("memo", selectedItem?.memo ?: "")
+                putExtra("gender", selectedItem?.gender ?: "")
+            }
+            startActivity(tosp)
+        }
     }
     private fun receivedInfor(intent: Intent?) {
         intent?.let {
