@@ -1,7 +1,10 @@
 package campus.tech.kakao.contacts
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Context
+import android.content.DialogInterface
+import android.content.Intent
 import android.icu.util.Calendar
 import android.os.Bundle
 import android.view.View
@@ -216,4 +219,18 @@ private fun saveOrNotSave(checking: Boolean, saveButton: Button) {
     } else {
         emptyDatamassage(saveButton)
     }
+}
+fun alertDialog(context: Context,intent : Intent) {
+    val builder = AlertDialog.Builder(context)
+    builder.setTitle("타이틀 입니다.")
+        .setMessage("작성하시던 내용이 있습니다.")
+        .setPositiveButton("취소하기",
+            DialogInterface.OnClickListener { dialog, id ->
+                context.startActivity(intent)
+
+            })
+        .setNegativeButton("돌아가기",
+            DialogInterface.OnClickListener { dialog, id ->
+            })
+    builder.show()
 }
