@@ -1,6 +1,8 @@
 package campus.tech.kakao.contacts
 
 import android.os.Bundle
+import android.util.Log
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -16,5 +18,18 @@ class UserInfoActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        val userData = intent.getSerializableExtra("userData")
+        val name = findViewById<TextView>(R.id.name)
+        val phoneNumber = findViewById<TextView>(R.id.phoneNumber)
+
+        if (userData is UserData) {
+            name.text = userData.name
+            phoneNumber.text = userData.phoneNumber.toString()
+        }
+
+
+
+
     }
 }

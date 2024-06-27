@@ -74,6 +74,15 @@ class RecyclerViewAdapter(
         init {
             userName = itemView.findViewById(R.id.userName)
             userFirstName = itemView.findViewById(R.id.userFirstName)
+
+            itemView.setOnClickListener{
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val intent = Intent(itemView.context, UserInfoActivity::class.java)
+                    intent.putExtra("userData", userList[position])
+                    itemView.context.startActivity(intent)
+                }
+            }
         }
     }
 
