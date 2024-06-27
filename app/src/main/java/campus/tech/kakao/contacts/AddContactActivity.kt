@@ -52,9 +52,10 @@ class AddContactActivity : AppCompatActivity() {
                 else -> ""
             }
             val memoText = memo.text.toString()
-            if(contactManager.checkIsFilled(nameText) && contactManager.checkIsFilled(phoneNumberText)
-                &&contactManager.checkIsFilled(emailText) && contactManager.checkIsFilled(birthDayText)
-                &&contactManager.checkIsFilled(genderText) && contactManager.checkIsFilled(memoText))
+            if(nameText.isNotEmpty() && phoneNumberText.isNotEmpty()
+                && emailText.isNotEmpty() && birthDayText.isNotEmpty()
+                && genderText.isNotEmpty() && memoText.isNotEmpty()
+            )
             {contactManager.showCancelAlert(this@AddContactActivity, "작성 중인 내용이 있습니다. 정말 나가시겠습니까?")}
             else contactManager.showCancelAlert(this@AddContactActivity, "나가시겠습니까?")
         }
@@ -71,11 +72,16 @@ class AddContactActivity : AppCompatActivity() {
             }
             val memoText = memo.text.toString()
 
-            if (contactManager.checkIsFilled(nameText) && contactManager.checkIsFilled(phoneNumberText)) {
-                val contact = Contact(nameText, phoneNumberText, emailText, birthDayText, genderText, memoText)
-                ContactList.add(contact)
+            if (nameText.isNotEmpty() && phoneNumberText.isNotEmpty()) {
+                intent.putExtra("nameText", nameText)
+                intent.putExtra("emailText", emailText)
+                intent.putExtra("phoneNumberText", phoneNumberText)
+                intent.putExtra("birthDayText", birthDayText)
+                intent.putExtra("genderText", genderText)
+                intent.putExtra("memoText", memoText)
+                setResult(RESULT_OK, intent)
+                Log.d("result", "넘어갑니다아아" + nameText)
                 contactManager.showToast(this@AddContactActivity, "저장되었습니다.")
-                startActivity(Intent(this@AddContactActivity, MainActivity::class.java))
                 finish()
             } else {
                 contactManager.showToast(this@AddContactActivity, "이름과 번호 입력은 필수입니다.")

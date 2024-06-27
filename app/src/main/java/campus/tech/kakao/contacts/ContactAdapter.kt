@@ -15,6 +15,10 @@ class ContactAdapter(val itemList: List<Contact>,
         init {
             name = itemView.findViewById<TextView>(R.id.name)
             phoneNumber= itemView.findViewById<TextView>(R.id.phoneNumber)
+
+            itemView.setOnClickListener {
+
+            }
         }
     }
 
