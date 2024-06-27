@@ -23,37 +23,41 @@ class ContactMainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contact_main)
 
+        val text = findViewById<TextView>(R.id.text)
         val floatingBtn = findViewById<FloatingActionButton>(R.id.floatingBtn)
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         val name = intent.getStringExtra("name")
         val phone = intent.getStringExtra("phone")
 
-        if(name != null && phone != null) {
+        if (name != null && phone != null) {
             contactList.add(Contact(name, phone))
         }
 
-        floatingBtn.setOnClickListener{
+        if (contactList.size > 0) {
+            text.visibility = View.INVISIBLE
+        } else {
+            text.visibility = View.VISIBLE
+        }
+
+        floatingBtn.setOnClickListener {
             val intent = Intent(this, ContactWritingActivity::class.java)
             //intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
             startActivity(intent)
         }
 
-        Log.d("uin", "main " + name + " " + phone + " " + contactList.size)
-
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
-
         recyclerView.adapter = RecyclerViewAdapter(contactList, LayoutInflater.from(this))
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-
     }
 }
 
 class RecyclerViewAdapter(
-    val contactList : MutableList<Contact>, val layoutInflater: LayoutInflater
-): RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
-    inner class ViewHolder(itemView : View): RecyclerView.ViewHolder(itemView) {
-        val name : TextView
-        val profile : TextView
-        init{
+    val contactList: MutableList<Contact>, val layoutInflater: LayoutInflater
+) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val name: TextView
+        val profile: TextView
+
+        init {
             name = itemView.findViewById<TextView>(R.id.name)
             profile = itemView.findViewById<TextView>(R.id.profile)
         }
@@ -74,4 +78,4 @@ class RecyclerViewAdapter(
     }
 }
 
-class Contact(val name : String, val phone : String)
+class Contact(val name: String, val phone: String)
