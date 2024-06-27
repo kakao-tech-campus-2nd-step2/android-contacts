@@ -22,4 +22,5 @@
 - 추가된 연락처는 앱을 다시 실행하면 유지되지 않는다.
 
 <img src="https://github.com/sumintnals/android-contacts/assets/127755029/068c5c65-49b7-47ca-b60a-c8a8dc0004ce" width="250"/>
+<img src="https://github.com/sumintnals/android-contacts/assets/127755029/03d4ed07-5ffd-48f5-9acd-40590d74e658" width="250"/>
 기본 연락처 앱 디자인을 참고해서 구성해본다!
