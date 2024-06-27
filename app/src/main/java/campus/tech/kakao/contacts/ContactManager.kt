@@ -14,10 +14,6 @@ class ContactManager() {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
-    fun checkIsFilled(text: String): Boolean {
-        return text != ""
-    }
-
     fun showCancelAlert(activity: Activity, msg: String) {
         val builder = AlertDialog.Builder(activity)
         builder.setMessage(msg)
