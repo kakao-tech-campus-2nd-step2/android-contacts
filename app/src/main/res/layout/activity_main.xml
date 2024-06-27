@@ -23,6 +23,7 @@
         android:layout_width="0dp"
         android:layout_height="70dp"
         android:layout_marginTop="10dp"
+        android:textColorHint="@color/faded"
         app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,6 +41,7 @@
         android:id="@+id/numberText"
         android:layout_width="0dp"
         android:layout_height="70dp"
+        android:textColorHint="@color/faded"
         app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,6 +59,7 @@
         android:id="@+id/mailText"
         android:layout_width="0dp"
         android:layout_height="70dp"
+        android:textColorHint="@color/faded"
         app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -71,6 +74,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
+        android:id="@+id/seeMoreButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/transparent"
@@ -86,12 +90,14 @@
         android:id="@+id/birthdayText"
         android:layout_width="0dp"
         android:layout_height="70dp"
+        android:textColorHint="@color/faded"
         app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/mailText">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/birthdayEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/color_shape"
@@ -104,6 +110,7 @@
         android:id="@+id/genderText"
         android:layout_width="0dp"
         android:layout_height="70dp"
+        android:textColorHint="@color/faded"
         app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -111,6 +118,7 @@
         app:layout_constraintTop_toBottomOf="@id/birthdayText">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/genderEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/color_shape"
@@ -120,6 +128,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <RadioGroup
+        android:id="@+id/genderRadio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="16dp"
@@ -147,12 +156,14 @@
         android:id="@+id/memoText"
         android:layout_width="0dp"
         android:layout_height="70dp"
+        android:textColorHint="@color/faded"
         app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/genderText">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/memoEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/color_shape"
