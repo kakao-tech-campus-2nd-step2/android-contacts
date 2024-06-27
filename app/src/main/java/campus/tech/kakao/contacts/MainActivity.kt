@@ -66,6 +66,14 @@ class contactListAdapter(
 
         init {
             nameView = itemView.findViewById(R.id.contact_owner_name)
+            itemView.setOnClickListener {
+                val position = adapterPosition
+                val context = itemView.context
+                val intent = Intent(context, ContactOwnerInfo::class.java)
+                intent.putExtra("name", contacts.get(position)[0])
+                intent.putExtra("phoneNumber", contacts.get(position)[1])
+                context.startActivity(intent)
+            }
         }
     }
 
