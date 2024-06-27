@@ -41,9 +41,16 @@ class AddContact : AppCompatActivity() {
     }
 
     fun clickCancelEvent() {
-        val output = "취소 되었습니다"
-        Toast.makeText(this, output, Toast.LENGTH_SHORT).show()
-        finish()
+        val dialog = AlertDialog.Builder(this)
+        dialog
+            .setMessage("작성 중인 내용이 있습니다. 정말 나가시겠습니까?")
+            .setPositiveButton("나가기") { _, _ ->
+                val output = "취소 되었습니다"
+                Toast.makeText(this, output, Toast.LENGTH_SHORT).show()
+                finish()
+            }
+            .setNegativeButton("작성하기", null)
+            .show()
     }
 
     fun clickSaveEvent() {
