@@ -25,6 +25,13 @@ class MainActivity : AppCompatActivity() {
         var SaveText : TextView = findViewById(R.id.SaveText)
         var CancleText : TextView = findViewById(R.id.CancleText)
 
+        MoreText.setOnClickListener {
+            MoreText.visibility = View.GONE
+            BirthEdit.visibility = View.VISIBLE
+            MemoEdit.visibility = View.VISIBLE
+            GenderArea.visibility = View.VISIBLE
+        }
+
         
         SaveText.setOnClickListener {
             if (NameEdit.text.toString().trim().isEmpty()){
