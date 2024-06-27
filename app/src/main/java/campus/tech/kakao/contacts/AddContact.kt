@@ -14,7 +14,7 @@ import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import java.util.Calendar
 
-class MainActivity : AppCompatActivity() {
+class AddContact : AppCompatActivity() {
     // Declare UI elements
     private lateinit var name: EditText
     private lateinit var phone: EditText
@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_addcontact)
         // Initialize UI elements
         name = findViewById(R.id.name)
         phone = findViewById(R.id.phone)
