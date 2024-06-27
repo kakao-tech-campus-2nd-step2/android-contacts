@@ -39,11 +39,27 @@ class MainActivity : AppCompatActivity() {
             showMoreFields(moreBtnLayout, moreETLayout)
         }
 
+        birthDayET.setOnClickListener {
+            showDatePickerDialog(birthDayET)
+        }
+
     }
 
     private fun showMoreFields(moreBtnLayout: LinearLayout, moreETLayout: LinearLayout) {
         moreBtnLayout.visibility = View.GONE
         moreETLayout.visibility = View.VISIBLE
+    }
+
+    private fun showDatePickerDialog(birthDayET: EditText) {
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+        val datePickerDialog = DatePickerDialog(this, { _, selectedYear, selectedMonth, selectedDay ->
+            birthDayET.setText("$selectedYear-${selectedMonth + 1}-$selectedDay")
+        }, year, month, day)
+        datePickerDialog.show()
     }
 
 }
