@@ -8,13 +8,10 @@ import android.widget.EditText
 import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import java.text.ParseException
-import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeParseException
-import java.util.Locale
 
-class MainActivity : AppCompatActivity() {
+class AddContactActivity : AppCompatActivity() {
     lateinit var emailInput: EditText
     lateinit var nameInput: EditText
     lateinit var phoneInput: EditText
