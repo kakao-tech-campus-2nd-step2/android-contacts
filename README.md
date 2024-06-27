@@ -31,7 +31,18 @@
   - 추가된 연락처는 앱이 다시 실행시 유지되지 않음
 
 ## 실행화면
-
+1. 연락처 목록 첫화면
+![연락처_목록_첫화면](https://github.com/arieum/android-contacts/blob/step1_arieum/%EC%97%B0%EB%9D%BD%EC%B2%98_%EB%AA%A9%EB%A1%9D_%EC%B2%AB%ED%99%94%EB%A9%B4.png)
+2. 연락처 등록 화면 ver1
+![연락처_등록화면_ver1](https://github.com/arieum/android-contacts/blob/step1_arieum/%EC%97%B0%EB%9D%BD%EC%B2%98_%EB%93%B1%EB%A1%9D_%ED%99%94%EB%A9%B4.png)    
+3. 연락처 등록 화면 ver2(더보기버튼클릭시)
+![연락처_등록화면_ver2](https://github.com/arieum/android-contacts/blob/step1_arieum/%EB%8D%94%EB%B3%B4%EA%B8%B0%EB%B2%84%ED%8A%BC.png)
+4. 연락처 목록 업데이트 후
+![연락처_목록_화면_업데이트](https://github.com/arieum/android-contacts/blob/step1_arieum/%EC%97%B0%EB%9D%BD%EC%B2%98_%EB%AA%A9%EB%A1%9D_recyclerview.png)   
+5. 특정 연락처 화면
+![특정_연락처_화면](https://github.com/arieum/android-contacts/blob/step1_arieum/%ED%8A%B9%EC%A0%95%20%EC%97%B0%EB%9D%BD%EC%B2%98%20%ED%99%94%EB%A9%B4.png)
+6. 뒤로가기 버튼클릭시
+![뒤로가기_버튼_클릭시](https://github.com/arieum/android-contacts/blob/step1_arieum/%EB%92%A4%EB%A1%9C%EA%B0%80%EA%B8%B0%EB%B2%84%ED%8A%BC%ED%81%B4%EB%A6%AD%EC%8B%9C.png)
 
 ## 코드 개요
 #### MainActivity.kt
