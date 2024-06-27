@@ -1,13 +1,19 @@
 package campus.tech.kakao.contacts
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.RadioButton
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.constraintlayout.widget.ConstraintLayout
+import java.util.Calendar
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,6 +26,13 @@ class MainActivity : AppCompatActivity() {
         val save = findViewById<Button>(R.id.save)
         val cancel = findViewById<Button>(R.id.cancel)
         val more = findViewById<LinearLayoutCompat>(R.id.more)
+        val birthday = findViewById<TextView>(R.id.birthday)
+        val moreLayout = findViewById<LinearLayoutCompat>(R.id.moreLayout)
+        val birthdayLayout = findViewById<ConstraintLayout>(R.id.birthdayLayout)
+        val genderLayout = findViewById<ConstraintLayout>(R.id.genderLayout)
+        val female = findViewById<RadioButton>(R.id.female)
+        val male = findViewById<RadioButton>(R.id.male)
+        val memo = findViewById<EditText>(R.id.memo)
 
         name.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -69,5 +82,26 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        more.setOnClickListener {
+            moreLayout.visibility = View.GONE
+            birthdayLayout.visibility = View.VISIBLE
+            genderLayout.visibility = View.VISIBLE
+            memo.visibility = View.VISIBLE
+
+            birthdayLayout.setOnClickListener {
+                showDatePicker()
+            }
+        }
+    }
+    fun showDatePicker() {
+        val birthday = findViewById<TextView>(R.id.birthday)
+        val calendar = Calendar.getInstance()
+        val data = DatePickerDialog.OnDateSetListener { view, year, month, day ->
+            birthday.text = "${year}.${month}.${day}"
+        }
+
+        DatePickerDialog(this, data, calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)).show()
     }
 }
