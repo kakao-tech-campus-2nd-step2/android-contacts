@@ -21,6 +21,8 @@ class MainActivity : AppCompatActivity() {
         val moreButton: LinearLayout = findViewById(R.id.more_button)
         val additionalFields: LinearLayout = findViewById(R.id.additional_fields)
         val birthdayField: EditText = findViewById(R.id.birthday_field)
+        val genderGroup: RadioGroup = findViewById(R.id.gender_group)
+        val memoField: EditText = findViewById(R.id.memo_field)
 
 
         moreButton.setOnClickListener {
@@ -33,6 +35,8 @@ class MainActivity : AppCompatActivity() {
             val phone = phoneField.text.toString()
             val email = emailField.text.toString()
             val birthday = birthdayField.text.toString()
+            val genderId = genderGroup.checkedRadioButtonId
+            val memo = memoField.text.toString()
 
             if (name.isEmpty()) {
                 Toast.makeText(this, getString(R.string.toast_name_is_essential), Toast.LENGTH_SHORT).show()
@@ -61,6 +65,5 @@ class MainActivity : AppCompatActivity() {
 
             datePickerDialog.show()
         }
-
     }
 }
