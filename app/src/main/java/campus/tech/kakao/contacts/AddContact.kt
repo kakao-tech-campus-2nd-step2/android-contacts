@@ -29,6 +29,8 @@ class AddContact : AppCompatActivity() {
         emptyView = findViewById(R.id.empty)
         fab = findViewById(R.id.fab)
 
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = contactsAdapter
 
         fab.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
@@ -38,7 +40,16 @@ class AddContact : AppCompatActivity() {
         updateUI()
     }
 
-
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE_ADD_CONTACT && requestCode == Activity.RESULT_OK) {
+            data?.getParcelableExtra<Contact>("contact")?.let {newContact ->
+                contactsList.add(newContact)
+                contactsAdapter.notifyItemInserted(contactsList.size - 1)
+                updateUI()
+            }
+        }
+    }
 
     private fun updateUI() {
         if (contactsList.isEmpty()) {

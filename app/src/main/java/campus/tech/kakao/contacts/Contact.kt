@@ -5,7 +5,7 @@ import android.os.Parcelable
 
 
 data class Contact(
-    val profile: Int,
+    val profileImage: Int,
     val name: String?,
     val phoneNumber: String?,
     val email: String?,
@@ -26,7 +26,7 @@ data class Contact(
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeInt(profile)
+        parcel.writeInt(profileImage)
         parcel.writeString(name)
         parcel.writeString(phoneNumber)
         parcel.writeString(email)
