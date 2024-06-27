@@ -35,7 +35,6 @@ class ContactActivity : AppCompatActivity() {
         val memo: EditText = findViewById(R.id.memo)
 
         cancelButton.setOnClickListener {
-            Toast.makeText(this, "취소 되었습니다", Toast.LENGTH_SHORT).show()
             val returnIntent: Intent = Intent()
             setResult(RESULT_CANCELED, returnIntent)
             finish()
@@ -43,9 +42,10 @@ class ContactActivity : AppCompatActivity() {
 
         saveButton.setOnClickListener {
             if (isValidInfo(name, phoneNumber)) {
-                saveInfo(name, phoneNumber, mail, birth, sex, memo)
-                Toast.makeText(this, "저장이 완료 되었습니다", Toast.LENGTH_SHORT).show()
-                val returnIntent: Intent = Intent()
+                val contact: Contact = saveInfo(name, phoneNumber, mail, birth, sex, memo)
+                Log.d("ContactActivity", contact.toString())
+                val returnIntent: Intent = Intent(this,MainActivity::class.java)
+                returnIntent.putExtra("res", contact)
                 setResult(RESULT_OK, returnIntent)
                 finish()
             }
