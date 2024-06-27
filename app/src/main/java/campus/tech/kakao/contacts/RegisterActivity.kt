@@ -19,7 +19,7 @@ class RegisterActivity : AppCompatActivity() {
     lateinit var contactRecyclerView: RecyclerView
     lateinit var howToRegisterTextView: TextView
     private lateinit var startActivityLauncher: ActivityResultLauncher<Intent>
-    private val contactList = mutableListOf<Contact>()
+    private var contactList = ArrayList<Contact>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +29,9 @@ class RegisterActivity : AppCompatActivity() {
         setOnClickListeners()
         setContactRecyclerView()
         setStartActivityLauncher()
+        restoreInstanceState(savedInstanceState)
     }
+
 
     /**
      * 사용할 view들을 초기화하는 함수
@@ -89,7 +91,9 @@ class RegisterActivity : AppCompatActivity() {
                 }
                 contact?.let {
                     contactList.add(it)
-                    howToRegisterTextView.visibility = View.GONE
+                    if (howToRegisterTextView.visibility != View.GONE) {
+                        howToRegisterTextView.visibility = View.GONE
+                    }
                     contactRecyclerView.adapter?.notifyDataSetChanged()
 
                 }
@@ -98,7 +102,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     class ContactRecyclerViewAdapter(
-        var contactList: MutableList<Contact>,
+        var contactList: ArrayList<Contact>,
         var inflater: LayoutInflater
     ) : RecyclerView.Adapter<ContactRecyclerViewAdapter.ViewHolder>() {
         inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -123,6 +127,41 @@ class RegisterActivity : AppCompatActivity() {
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             holder.lastNameTextView.text = contactList.get(position).name.get(0).toString()
             holder.nameTextView.text = contactList.get(position).name
+        }
+    }
+
+    /**
+     * 화면 방향 전환 등으로 인해 Activity의 정보가 사라지지 않도록 저장하는 함수
+     *
+     * @param outState Activity의 현재 상태를 저장하는 Bundle 객체.
+     */
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putParcelableArrayList("contact_list", ArrayList(contactList))
+    }
+
+    /**
+     * 화면 방향 전환 등으로 인해 Activity의 정보가 사라지지 않도록 복원하는 함수
+     *
+     * @param savedInstanceState onSaveInstanceState에서 저장된 데이터를 포함하는 Bundle 객체.
+     */
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        contactList = savedInstanceState.getParcelableArrayList("contact_list")!!
+    }
+
+    /**
+     * 화면 방향 전환 등으로 인해 Activity의 정보가 사라지지 않도록 복원하는 함수
+     *
+     * @param savedInstanceState onSaveInstanceState에서 저장된 데이터를 포함하는 Bundle 객체.
+     */
+    private fun restoreInstanceState(savedInstanceState: Bundle?) {
+        if (savedInstanceState != null) {
+            contactList = savedInstanceState.getParcelableArrayList("contact_list") ?: ArrayList()
+            setContactRecyclerView()
+            if (contactList.isNotEmpty()) {
+                howToRegisterTextView.visibility = View.GONE
+            }
         }
     }
 
