@@ -1,5 +1,6 @@
 package campus.tech.kakao.contacts
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.provider.MediaStore.Audio.Radio
 import android.view.View
@@ -10,6 +11,9 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import java.util.Calendar
+import android.view.inputmethod.InputMethodManager
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -69,5 +73,20 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "취소 되었습니다.", Toast.LENGTH_SHORT).show()
             //finish()
         }
+
+        //생일 입력 설정(달력 사용)
+        birthday.setOnClickListener {
+            val calendar = Calendar.getInstance()
+            val year = calendar.get(Calendar.YEAR)
+            val month = calendar.get(Calendar.MONTH)
+            val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+            val datePickerDialog = DatePickerDialog(this, { _, selectedYear, selectedMonth, selectedDay ->
+                birthday.setText("$selectedYear-${selectedMonth + 1}-$selectedDay")
+            }, year, month, day)
+
+            datePickerDialog.show()
+        }
+
     }
 }

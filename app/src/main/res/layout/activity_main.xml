@@ -61,7 +61,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="17"
-            android:inputType="date"
+            android:inputType="none"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             android:hint="생일"
             android:layout_margin="10dp"/>
 
@@ -77,6 +79,8 @@
                 android:ems="11"
                 android:hint="성별"
                 android:layout_gravity="center_vertical"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
                 android:paddingEnd="16dp" />
 
             <RadioGroup
