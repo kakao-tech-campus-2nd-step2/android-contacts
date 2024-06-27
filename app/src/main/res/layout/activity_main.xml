@@ -52,13 +52,14 @@
                     android:layout_marginRight="10dp"
                     />
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/name"
+                    android:id="@+id/nameTextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
                     >
 
                     <EditText
+                        android:id="@+id/name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="이름"
@@ -86,13 +87,14 @@
                     />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/phoneNumber"
+                    android:id="@+id/phoneNumberTextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
                     >
 
                     <EditText
+                        android:id="@+id/phoneNumber"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="전화번호"
@@ -121,13 +123,14 @@
                     />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/email"
+                    android:id="@+id/emailTextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
                     >
 
                     <EditText
+                        android:id="@+id/email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="메일"
@@ -188,13 +191,14 @@
                     android:layout_marginRight="10dp"
                     />
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/birthDay"
+                    android:id="@+id/birthDayTextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
                     >
 
                     <EditText
+                        android:id="@+id/birthDay"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="생일"
@@ -292,13 +296,14 @@
                     />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/memo"
+                    android:id="@+id/memoTextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
                     >
 
                     <EditText
+                        android:id="@+id/memo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="메모" />
