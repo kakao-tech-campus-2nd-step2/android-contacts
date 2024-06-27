@@ -1,5 +1,6 @@
 package campus.tech.kakao.contacts
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
@@ -8,6 +9,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import campus.tech.kakao.contacts.model.Contact
 import java.time.LocalDate
@@ -29,6 +32,10 @@ class AddContactActivity : AppCompatActivity() {
         initiateInputFields()
         setMoreOptionsListener()
         setButtonsListener()
+
+        onBackPressedDispatcher.addCallback(this){
+            alertBack()
+        }
     }
 
     fun initiateInputFields() {
@@ -61,7 +68,7 @@ class AddContactActivity : AppCompatActivity() {
             }
         }
         findViewById<Button>(R.id.button_cancel).setOnClickListener {
-            cancel()
+            alertBack()
         }
     }
 
@@ -185,5 +192,15 @@ class AddContactActivity : AppCompatActivity() {
         )
         setResult(RESULT_OK, intent)
         finish()
+    }
+
+    fun alertBack(){
+        val builder:androidx.appcompat.app.AlertDialog.Builder = androidx.appcompat.app.AlertDialog.Builder(this)
+            .setMessage("작성 중인 내용이 있습니다. 정말 나가시겠습니까?")
+        builder.setPositiveButton("나가기") { _, _ ->
+            cancel() }
+        builder.setNegativeButton("작성하기") {_, _ ->
+        }
+        builder.create().show()
     }
 }
