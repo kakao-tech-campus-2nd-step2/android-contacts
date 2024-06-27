@@ -1,11 +1,8 @@
 package campus.tech.kakao.contacts
 
-import android.app.DatePickerDialog
-import android.icu.util.Calendar
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import android.widget.DatePicker
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -59,9 +56,6 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "저장되었습니다.", Toast.LENGTH_SHORT).show()
             }
         }
-        birth.setOnClickListener {
-            showCalendar()
-        }
     }
 
     private fun expandView() {
@@ -84,18 +78,6 @@ class MainActivity : AppCompatActivity() {
         else {
             return true
         }
-    }
-
-    private fun showCalendar() {
-        var dateString = ""
-        val cal = Calendar.getInstance()
-        val dateSetListener = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-            dateString = "${year}.${month+1}.${dayOfMonth}"
-            birth.setText(dateString)
-
-        }
-        DatePickerDialog(this, dateSetListener, cal.get(Calendar.YEAR),
-            cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)).show()
     }
 
 
