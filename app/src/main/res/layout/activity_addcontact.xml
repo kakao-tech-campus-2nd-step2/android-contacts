@@ -112,6 +112,7 @@
                 android:textColor="@color/material_dynamic_neutral_variant60"
                 android:textSize="18sp"
                 app:layout_constraintLeft_toLeftOf="parent" />
+
             <RadioGroup
                 android:id="@+id/input_gender"
                 android:layout_width="wrap_content"
@@ -121,9 +122,9 @@
                 app:layout_constraintRight_toRightOf="parent">
 
                 <RadioButton
-                    android:layout_marginRight="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
                     android:text="여성" />
 
                 <RadioButton
@@ -132,6 +133,7 @@
                     android:text="남성" />
             </RadioGroup>
         </androidx.constraintlayout.widget.ConstraintLayout>
+
         <EditText
             android:id="@+id/input_memo"
             android:layout_width="match_parent"
@@ -155,8 +157,8 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <Button
-            style="@style/Widget.Material3.Button.TextButton.Dialog"
             android:id="@+id/button_cancel"
+            style="@style/Widget.Material3.Button.TextButton.Dialog"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="5dp"
@@ -165,8 +167,8 @@
             android:textSize="24dp" />
 
         <Button
-            style="@style/Widget.Material3.Button.TextButton.Dialog"
             android:id="@+id/button_submit"
+            style="@style/Widget.Material3.Button.TextButton.Dialog"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="5dp"
