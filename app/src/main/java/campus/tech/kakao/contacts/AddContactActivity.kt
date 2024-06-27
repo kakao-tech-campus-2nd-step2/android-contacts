@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.get
 import campus.tech.kakao.contacts.model.Contact
 import java.time.LocalDate
 import java.time.format.DateTimeParseException
@@ -72,8 +73,14 @@ class AddContactActivity : AppCompatActivity() {
         }
     }
 
-    fun getGender(): Int {
-        return genderInput.checkedRadioButtonId
+    fun getGender(): Int? {
+        if(genderInput.checkedRadioButtonId == -1)
+            return null
+        if(genderInput.checkedRadioButtonId == genderInput[GENDER_FEMALE].id)
+            return GENDER_FEMALE
+        else if(genderInput.checkedRadioButtonId == genderInput[GENDER_MALE].id)
+            return GENDER_MALE
+        else return -1
     }
 
     fun validateInputs(): Boolean {
@@ -176,7 +183,6 @@ class AddContactActivity : AppCompatActivity() {
     }
 
     fun returnResultAndFinish() {
-        val gender:Int? = if(getGender() == -1) null else getGender()
 
         val intent = Intent()
         intent.putExtra(
@@ -185,7 +191,7 @@ class AddContactActivity : AppCompatActivity() {
                 nameInput.text.toString(),
                 phoneInput.text.toString(),
                 getTextOrNull(emailInput),
-                gender,
+                getGender(),
                 birthday,
                 getTextOrNull(memoInput)
             )
