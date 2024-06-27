@@ -13,11 +13,13 @@
 
     </androidx.recyclerview.widget.RecyclerView>
     <TextView
+        android:id="@+id/guidePhrase"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="오른쪽 + 버튼을 클릭하여\n연락처를 등록해보세요."
         android:layout_gravity="center"
         android:visibility="visible"/>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addButton"
         android:layout_width="wrap_content"
