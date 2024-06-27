@@ -32,6 +32,7 @@ class AddInfor : AppCompatActivity() {
         val cancelButton = findViewById<Button>(R.id.cancelButton)
         val inputName = findViewById<EditText>(R.id.inputName)
         val inputPhoneNumber = findViewById<EditText>(R.id.inputPhoneNumber)
+
     }
 }
 private fun saveMessage(saveButton: Button) {
@@ -142,4 +143,23 @@ private fun createSelectGender(context: Context, hint: String): LinearLayout {
     container.addView(radioGroup)
 
     return container
+}
+
+private fun moreInformationBirth(context: Context, addInfor: LinearLayout) {
+    val textView = createSelectBirth(context, "생일")
+    birthTextView = textView
+    addInfor.addView(textView)
+}
+
+private fun moreInformationGender(context: Context, addInfor: LinearLayout) {
+    val layout = createSelectGender(context, "성별")
+    val radioGroup = layout.findViewById<RadioGroup>(R.id.radioGroup)
+    genderRadioGroup = radioGroup
+    addInfor.addView(layout)
+}
+
+private fun moreInformationMemo(context: Context, addInfor: LinearLayout) {
+    val editText = createMemo(context, "메모")
+    memoEditText = editText
+    addInfor.addView(editText)
 }
