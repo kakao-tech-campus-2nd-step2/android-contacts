@@ -1,5 +1,6 @@
 package campus.tech.kakao.contacts
 
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -71,7 +72,7 @@ class RegisterActivity : AppCompatActivity() {
      */
     private fun setContactRecyclerView() {
         contactRecyclerView.adapter =
-            ContactRecyclerViewAdapter(contactList, LayoutInflater.from(this))
+            ContactRecyclerViewAdapter(contactList, LayoutInflater.from(this), this)
         contactRecyclerView.layoutManager = LinearLayoutManager(this)
     }
 
@@ -103,7 +104,8 @@ class RegisterActivity : AppCompatActivity() {
 
     class ContactRecyclerViewAdapter(
         var contactList: ArrayList<Contact>,
-        var inflater: LayoutInflater
+        var inflater: LayoutInflater,
+        val context: Context
     ) : RecyclerView.Adapter<ContactRecyclerViewAdapter.ViewHolder>() {
         inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             val lastNameTextView: TextView
@@ -112,8 +114,26 @@ class RegisterActivity : AppCompatActivity() {
             init {
                 lastNameTextView = itemView.findViewById(R.id.last_name_text_view)
                 nameTextView = itemView.findViewById(R.id.name_text_view)
+                setOnClickListenerOfContactItemView(itemView)
+            }
+
+            /**
+             * 아이템 뷰에 대한 클릭 리스너를 설정하는 함수
+             *
+             * 연락처를 intent에 담아 DetailActivity로 전달
+             * @param itemView 리사이클러뷰의 각 아이템에 대한 뷰
+             */
+            private fun setOnClickListenerOfContactItemView(itemView: View) {
+                itemView.setOnClickListener {
+                    val contact = contactList[adapterPosition]
+                    val intent = Intent(context, DetailActivity::class.java).apply {
+                        putExtra("contact", contact)
+                    }
+                    context.startActivity(intent)
+                }
             }
         }
+
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val view = inflater.inflate(R.layout.contact_item, parent, false)
