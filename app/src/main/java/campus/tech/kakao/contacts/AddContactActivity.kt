@@ -1,6 +1,7 @@
 package campus.tech.kakao.contacts
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.EditText
@@ -8,14 +9,14 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.LinearLayoutCompat
-import androidx.lifecycle.Observer
 import campus.tech.kakao.contacts.database.Contact
 import campus.tech.kakao.contacts.viewmodel.ContactViewModel
 
 
-class MainActivity : AppCompatActivity() {
+class AddContactActivity : AppCompatActivity() {
 
     private lateinit var nameEditText: EditText
     private lateinit var phoneEditText: EditText
@@ -62,7 +63,18 @@ class MainActivity : AppCompatActivity() {
 
     private fun onCancelClicked() {
         showToast("취소합니다.")
-        resetForm()
+        onBackPressed()
+    }
+
+    override fun onBackPressed(){
+        AlertDialog.Builder(this)
+            .setMessage("작성 중인 내용이 있습니다. 정말 나가시겠습니까?")
+            .setPositiveButton("나가기") { _, _ ->
+                resetForm()
+                super.onBackPressed()
+            }
+            .setNegativeButton("작성하기", null)
+            .show()
     }
 
     private fun onSaveClicked() {
@@ -73,6 +85,10 @@ class MainActivity : AppCompatActivity() {
                 contactViewModel.insert(contact)
                 Log.d("testt", "User: data is inserted")
                 resetForm()
+                val intent = Intent(this, ContactListActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+                finish()
             } catch (e: Exception) {
                 Log.e("testt", "Error inserting user", e)
             }

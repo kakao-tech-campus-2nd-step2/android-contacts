@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    android:background="@color/white"
+    tools:context=".AddContactActivity">
 
     <ImageView
         android:id="@+id/userIcon"
@@ -20,6 +21,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="이름*"
+        android:textColorHint="@color/gray"
+        android:textColor="@color/text"
         android:background="@drawable/inputfield"
         android:padding="8dp"
         android:layout_marginHorizontal="8dp"
@@ -32,6 +35,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:hint="전화번호*"
+        android:textColorHint="@color/gray"
+        android:textColor="@color/text"
         android:background="@drawable/inputfield"
         android:padding="8dp"
         android:layout_marginHorizontal="8dp"
@@ -46,6 +51,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:hint="메일"
+        android:textColorHint="@color/gray"
+        android:textColor="@color/text"
         android:background="@drawable/inputfield"
         android:padding="8dp"
         android:layout_marginHorizontal="8dp"
@@ -92,6 +99,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="생일"
+            android:textColorHint="@color/gray"
+            android:textColor="@color/text"
             android:background="@drawable/inputfield"
             android:padding="8dp"
             android:layout_marginTop="10dp"
@@ -137,12 +146,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="여성"
+                    android:textColor="@color/gray"
                     android:layout_marginEnd="16dp" />
 
                 <RadioButton
                     android:id="@+id/maleRadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/gray"
                     android:layout_marginRight="16dp"
                     android:text="남성" />
             </RadioGroup>
@@ -153,7 +164,8 @@
             android:id="@+id/memoEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="메모"
+            android:textColorHint="@color/gray"
+            android:textColor="@color/text"
             android:background="@drawable/inputfield"
             android:padding="8dp"
             android:layout_marginTop="10dp"

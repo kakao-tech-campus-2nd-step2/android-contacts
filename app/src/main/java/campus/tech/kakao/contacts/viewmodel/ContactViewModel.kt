@@ -1,6 +1,7 @@
 package campus.tech.kakao.contacts.viewmodel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
@@ -24,6 +25,12 @@ class ContactViewModel(application: Application) : AndroidViewModel(application)
     fun delete(contactId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             contactDao.delete(contactId)
+        }
+    }
+
+    fun deleteAll() {
+        viewModelScope.launch(Dispatchers.IO) {
+            contactDao.deleteAll()
         }
     }
 }
