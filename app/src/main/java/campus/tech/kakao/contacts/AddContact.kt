@@ -80,7 +80,7 @@ class AddContact : AppCompatActivity() {
                 // Insert data into database
                 val contact = Contact(
                     name.text.toString(),
-                    phone.text.toString().toInt(),
+                    phone.text.toString(),
                     mail.text.toString(),
                     birth.text.toString(),
                     sex,
@@ -105,7 +105,7 @@ class AddContact : AppCompatActivity() {
         }
         cancel.setOnClickListener {
             Toast.makeText(this, "취소 되었습니다", Toast.LENGTH_SHORT).show()
-//            loadAllData()
+            loadAllData()
         }
 
 
