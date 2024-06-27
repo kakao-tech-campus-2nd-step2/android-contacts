@@ -159,5 +159,33 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/saveCancleLayout"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/cancelBtn"
+            android:layout_weight="1"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:text="취소"
+            android:textColor="@color/black"/>
+
+        <Button
+            android:id="@+id/saveBtn"
+            android:layout_weight="1"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:text="저장"
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
