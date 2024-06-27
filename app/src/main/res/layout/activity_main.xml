@@ -77,6 +77,18 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:visibility="gone">
+
+        <EditText
+            android:id="@+id/birthday_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="#E0F7FA"
+            android:clickable="true"
+            android:focusable="false"
+            android:hint="생일"
+            android:padding="10dp" />
+
     </LinearLayout>
 
 
