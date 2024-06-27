@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -86,4 +88,58 @@ private fun createMemo(context: Context, hint: String): EditText {
         setBackgroundResource(R.drawable.edittextborder)
     }
     return editText
+}
+private fun createSelectGender(context: Context, hint: String): LinearLayout {
+    val container = LinearLayout(context).apply {
+        orientation = LinearLayout.HORIZONTAL
+        layoutParams = LinearLayout.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        ).apply {
+            setMargins(45, 16, 45, 16)
+        }
+        setBackgroundResource(R.drawable.edittextborder)
+        setPadding(16, 16, 16, 16)
+    }
+    val textView = TextView(context).apply {
+        layoutParams = LinearLayout.LayoutParams(
+            0,
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            1f
+        )
+        this.text = hint
+        this.textSize = 18f
+    }
+    val radioGroup = RadioGroup(context).apply {
+        id = R.id.radioGroup
+        orientation = RadioGroup.HORIZONTAL
+        layoutParams = LinearLayout.LayoutParams(
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+    }
+
+    val radioButtonMale = RadioButton(context).apply {
+        layoutParams = RadioGroup.LayoutParams(
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+        this.text = "Male"
+    }
+
+    val radioButtonFemale = RadioButton(context).apply {
+        layoutParams = RadioGroup.LayoutParams(
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+        this.text = "Female"
+    }
+
+    radioGroup.addView(radioButtonMale)
+    radioGroup.addView(radioButtonFemale)
+
+    container.addView(textView)
+    container.addView(radioGroup)
+
+    return container
 }
