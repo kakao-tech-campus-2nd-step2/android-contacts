@@ -11,10 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ContactPlus : AppCompatActivity() {
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var emptyView: TextView
-    private lateinit var fab: FloatingActionButton
-    private lateinit var contactsAdapter: ContactsAdapter
+    private lateinit var recyclerView : RecyclerView
+    private lateinit var emptyView : TextView
+    private lateinit var fab : FloatingActionButton
+    private lateinit var contactsAdapter : ContactsAdapter
     private val contactsList = mutableListOf<Contact>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
