@@ -7,6 +7,7 @@ import android.widget.Button
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,7 +25,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
-        val addButton: Button = findViewById(R.id.add_contact)
+        val addButton: FloatingActionButton = findViewById(R.id.add_contact)
         addButton.setOnClickListener {
             val contactIntent: Intent = Intent(this, ContactActivity::class.java)
             activityResultLauncher.launch(contactIntent)
