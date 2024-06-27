@@ -16,9 +16,14 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
 import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
+
+    lateinit var recyclerView: RecyclerView
+
+    var PersonList: MutableList<Person> = mutableListOf<Person>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
