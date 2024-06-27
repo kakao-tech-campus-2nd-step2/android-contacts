@@ -140,7 +140,7 @@ class AddContactActivity : AppCompatActivity() {
                 this,
                 null,
                 dialogInitialDate.year,
-                dialogInitialDate.monthValue,
+                dialogInitialDate.monthValue - 1,
                 dialogInitialDate.dayOfMonth
             )
         dialog.setOnDateSetListener { _, year, month, dayOfMonth ->
