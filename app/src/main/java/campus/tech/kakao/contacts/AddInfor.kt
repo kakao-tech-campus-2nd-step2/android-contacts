@@ -183,6 +183,9 @@ private fun removeMoreInformationButton(button: View) {
 private fun checkEmptyDataforSave(addName: String, addPhoneNumber: String): Boolean {
     return addName.isNotEmpty() && addPhoneNumber.isNotEmpty()
 }
+private fun checkEmptyDataforCencel(addName: String, addPhoneNumber: String,addEmail : String): Boolean {
+    return addName.isNotEmpty() || addPhoneNumber.isNotEmpty() || addEmail.isNotEmpty()
+}
 fun saveDataForSave(inputName: EditText, inputPhoneNumber: EditText, inputEmail: EditText): Boolean {
     addName = inputName.text.toString()
     addPhoneNumber = inputPhoneNumber.text.toString()
