@@ -12,7 +12,7 @@ class FragmentUser : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view =  inflater.inflate(R.layout.fragment_user, container, false)
+        val view =  inflater.inflate(R.layout.item_user, container, false)
         return view
     }
 }
