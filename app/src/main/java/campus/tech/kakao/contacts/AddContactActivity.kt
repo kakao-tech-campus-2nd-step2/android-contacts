@@ -169,6 +169,8 @@ class AddContactActivity : AppCompatActivity() {
     }
 
     fun returnResultAndFinish() {
+        val gender:Int? = if(getGender() == -1) null else getGender()
+
         val intent = Intent()
         intent.putExtra(
             KEY_CONTACT,
@@ -176,7 +178,7 @@ class AddContactActivity : AppCompatActivity() {
                 nameInput.text.toString(),
                 phoneInput.text.toString(),
                 getTextOrNull(emailInput),
-                getGender(),
+                gender,
                 birthday,
                 getTextOrNull(memoInput)
             )
