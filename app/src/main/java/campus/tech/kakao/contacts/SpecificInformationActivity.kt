@@ -14,5 +14,11 @@ class SpecificInformationActivity : AppCompatActivity() {
         val textViewBirth = findViewById<TextView>(R.id.textViewBirth)
         val textViewGender = findViewById<TextView>(R.id.textViewGender)
         val textViewMemo = findViewById<TextView>(R.id.textViewMemo)
+        val name = intent.getStringExtra("name") ?: ""
+        val birth = intent.getStringExtra("birth") ?: ""
+        val memo = intent.getStringExtra("memo") ?: ""
+        val phoneNumber = intent.getStringExtra("phoneNumber") ?: ""
+        val gender = intent.getStringExtra("gender") ?: ""
+        val email = intent.getStringExtra("email") ?: ""
     }
 }
