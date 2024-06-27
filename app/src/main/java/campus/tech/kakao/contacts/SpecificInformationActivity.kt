@@ -1,6 +1,7 @@
 package campus.tech.kakao.contacts
 
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
@@ -20,5 +21,30 @@ class SpecificInformationActivity : AppCompatActivity() {
         val phoneNumber = intent.getStringExtra("phoneNumber") ?: ""
         val gender = intent.getStringExtra("gender") ?: ""
         val email = intent.getStringExtra("email") ?: ""
+        setTextViewIfNotNullOrEmpty(textViewName, name)
+        setTextViewIfNotNullOrEmpty(textViewPhoneNumber, phoneNumber)
+        setTextViewIfNotNullOrEmpty(textViewEmail, email)
+        setTextViewIfNotNullOrEmpty(textViewBirth, birth)
+        setTextViewIfNotNullOrEmpty(textViewGender, gender)
+        setTextViewIfNotNullOrEmpty(textViewMemo, memo)
     }
+    private fun setTextViewIfNotNullOrEmpty(textView: TextView, text: String) {
+        val fieldName = when (textView.id) {
+            R.id.textViewName -> "Name"
+            R.id.textViewPhoneNumber -> "Phone Number"
+            R.id.textViewEmail -> "Email"
+            R.id.textViewBirth -> "Birth"
+            R.id.textViewGender -> "Gender"
+            R.id.textViewMemo -> "Memo"
+            else -> ""
+        }
+        if (text.isNotEmpty()) {
+            textView.text = " ${fieldName} : ${text}"
+            textView.visibility = View.VISIBLE
+        } else {
+            textView.visibility = View.GONE
+        }
+    }
+
+
 }
