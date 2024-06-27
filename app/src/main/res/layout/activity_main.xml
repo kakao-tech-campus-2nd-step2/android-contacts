@@ -16,5 +16,16 @@
         android:layout_alignParentTop="true"
         android:src="@drawable/face"/>
 
+    <EditText
+        android:id="@+id/nameInputForm"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:layout_below="@+id/faceIcon"
+        android:padding="12dp"
+        android:textSize="18sp"
+        android:inputType="textPersonName"
+        android:background="@color/inputFormBackgroundColor"
+        android:hint="이름" />
 
 </RelativeLayout>
