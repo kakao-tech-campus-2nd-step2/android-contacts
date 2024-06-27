@@ -45,6 +45,7 @@ class AddInfor : AppCompatActivity() {
             removeMoreInformationButton(forMoreInformation)
         }
         cancelButton.setOnClickListener {cancelMessasge(cancelButton) }
+        saveButton.setOnClickListener{ saveOrNotSave(saveData(inputName,inputPhoneNumber,inputEmail),saveButton) }
     }
 }
 private fun saveMessage(saveButton: Button) {
