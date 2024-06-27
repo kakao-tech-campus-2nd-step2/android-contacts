@@ -35,5 +35,15 @@ class MainActivity : AppCompatActivity() {
             source.filter { it.isLetter() || it.isWhitespace() }
         })
 
+        detailBtn.setOnClickListener {
+            showMoreFields(moreBtnLayout, moreETLayout)
+        }
+
     }
+
+    private fun showMoreFields(moreBtnLayout: LinearLayout, moreETLayout: LinearLayout) {
+        moreBtnLayout.visibility = View.GONE
+        moreETLayout.visibility = View.VISIBLE
+    }
+
 }
