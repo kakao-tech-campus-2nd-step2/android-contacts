@@ -21,6 +21,9 @@ class AddInfor : AppCompatActivity() {
         val inputPhoneNumber = findViewById<EditText>(R.id.inputPhoneNumber)
     }
 }
-private fun savemessage(saveButton: Button) {
+private fun saveMessage(saveButton: Button) {
     Toast.makeText(saveButton.context, "저장이 완료 되었습니다.", Toast.LENGTH_SHORT).show()
+}
+private fun emptyDatamassage(saveButton: Button) {
+    Toast.makeText(saveButton.context, "이름과 전화번호는 필수 값입니다.", Toast.LENGTH_SHORT).show()
 }
