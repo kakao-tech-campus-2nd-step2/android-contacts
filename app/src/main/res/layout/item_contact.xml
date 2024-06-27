@@ -6,7 +6,7 @@
     android:padding="20dp">
 
     <TextView
-        android:id="@+id/circularTextView"
+        android:id="@+id/display_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -16,6 +16,7 @@
         android:textSize="20dp"/>
 
     <TextView
+        android:id="@+id/full_name"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="성이름"
