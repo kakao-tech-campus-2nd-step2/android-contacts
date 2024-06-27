@@ -234,3 +234,14 @@ fun alertDialog(context: Context,intent : Intent) {
             })
     builder.show()
 }
+private fun clearGlobalVariables() {
+    addName = ""
+    addPhoneNumber = ""
+    addEmail = ""
+    addBirth = ""
+    addMemo = ""
+    addGender = ""
+    memoEditText = null
+    genderRadioGroup = null
+    birthTextView = null
+}
