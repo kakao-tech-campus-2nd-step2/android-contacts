@@ -47,7 +47,10 @@
                 android:layout_marginRight="15dp"
                 android:background="@drawable/textbox"
                 android:hint="@string/phoneNumber"
-                android:padding="15dp" />
+                android:inputType="number"
+                android:digits="0123456789"
+                android:padding="15dp"
+                tools:ignore="TextFields" />
 
             <EditText
                 android:id="@+id/mail"

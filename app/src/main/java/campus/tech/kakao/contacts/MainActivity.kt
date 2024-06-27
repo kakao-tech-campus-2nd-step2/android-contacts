@@ -10,6 +10,7 @@ import androidx.appcompat.widget.ButtonBarLayout
 
 class MainActivity : AppCompatActivity() {
     lateinit var name: EditText
+    lateinit var phoneNumber: EditText
     lateinit var cancel: Button
     lateinit var save: Button
 
@@ -21,12 +22,16 @@ class MainActivity : AppCompatActivity() {
 
         cancel.setOnClickListener {
             name.setText(null);
+            phoneNumber.setText(null);
             Toast.makeText(this, "취소 되었습니다", Toast.LENGTH_LONG).show()
         }
 
         save.setOnClickListener {
-            if (name.text.isEmpty()) {
+            if (name.getText().isEmpty()) {
                 Toast.makeText(this, "이름을 반드시 적어야 합니다", Toast.LENGTH_LONG).show()
+            }
+            else if (phoneNumber.getText().isEmpty()) {
+                Toast.makeText(this, "전화번호를 반드시 적어야 합니다", Toast.LENGTH_LONG).show()
             }
             else {
                 Toast.makeText(this, "저장이 완료 되었습니다", Toast.LENGTH_LONG).show()
@@ -37,6 +42,7 @@ class MainActivity : AppCompatActivity() {
 
     fun findViews() {
         name = findViewById(R.id.name)
+        phoneNumber = findViewById(R.id.phoneNumber)
         cancel = findViewById(R.id.cancel)
         save = findViewById(R.id.save)
     }
