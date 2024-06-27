@@ -22,6 +22,9 @@ private var addEmail: String = ""
 private var addBirth: String = ""
 private var addMemo: String = ""
 private var addGender: String = ""
+private var memoEditText: EditText? = null
+private var genderRadioGroup: RadioGroup? = null
+private var birthTextView: TextView? = null
 class AddInfor : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -175,4 +178,19 @@ private fun moreInformationMemo(context: Context, addInfor: LinearLayout) {
 private fun removeMoreInformationButton(button: View) {
     val parentLayoutButton = button.parent as? ConstraintLayout
     parentLayoutButton?.removeView(button)
+}
+private fun checkEmptyData(addName: String, addPhoneNumber: String): Boolean {
+    return addName.isNotEmpty() && addPhoneNumber.isNotEmpty()
+}
+fun saveData(inputName: EditText, inputPhoneNumber: EditText, inputEmail: EditText): Boolean {
+    addName = inputName.text.toString()
+    addPhoneNumber = inputPhoneNumber.text.toString()
+    addEmail = inputEmail.text.toString()
+    if (genderRadioGroup != null && birthTextView != null && memoEditText != null) {
+        addGender = genderRadioGroup!!.findViewById<RadioButton>(genderRadioGroup!!.checkedRadioButtonId)?.text.toString()
+        addBirth = birthTextView!!.text.toString()
+        addMemo = memoEditText!!.text.toString()
+    }
+
+    return checkEmptyData(addName, addPhoneNumber)
 }
