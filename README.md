@@ -46,3 +46,41 @@
 6. 추가된 연락처 스크롤 및 세부사항 화면 클릭 기능 구현
 7. 연락처 세부 사항 조회 기능 구현
 8. 세부 조회 데이터 조건 구현
+
+---
+
+### 전체 디렉토리 구조 (2단계 기준)
+app
+├── build
+├── src
+│   ├── androidTest
+│   │   └── java
+│   │       └── contacts
+│   │           └── .gitkeep
+│   ├── main
+│   │   ├── java
+│   │   │   └── contacts
+│   │   │       ├── Contact.kt
+│   │   │       ├── ContactAddActivity.kt
+│   │   │       ├── ContactDetailActivity.kt
+│   │   │       ├── ContactsAdapter.kt
+│   │   │       └── MainActivity.kt
+│   │   └── res
+│   │       ├── drawable
+│   │       │   ├── circle_background.xml
+│   │       │   ├── ic_add.xml
+│   │       │   ├── ic_launcher_background.xml
+│   │       │   ├── ic_launcher_foreground.xml
+│   │       │   ├── profile_image.png
+│   │       │   ├── round_background.xml
+│   │       │   └── round_corners.xml
+│   │       └── layout
+│   │           ├── activity_main.xml
+│   │           ├── contact_add.xml
+│   │           ├── contact_detail.xml
+│   │           └── contact_item.xml
+├── .gitignore
+├── build.gradle.kts
+└── proguard-rules.pro
+
+### 실행 영상 (전체 실행영상)
