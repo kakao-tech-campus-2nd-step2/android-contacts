@@ -4,12 +4,14 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.icu.util.Calendar
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -72,13 +74,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * 취소 버튼에 대한 클릭 리스너를 설정하는 함수
+     * 취소 버튼에 대한 클릭 리스너를 설정하는 함수.
      *
-     * 취소 버튼을 누르면 취소 되었습니다.라는 Toast 메시지 출력.
+     * 취소 버튼을 누르면 확인 팝업 보여줌.
      */
     private fun setOnClickListenerOfCancelBtn() {
         cancelBtn.setOnClickListener {
-            Toast.makeText(this, "취소 되었습니다.", Toast.LENGTH_LONG).show()
+            showAlertDialog()
         }
     }
 
@@ -166,6 +168,39 @@ class MainActivity : AppCompatActivity() {
                 birthdayTextView.text = formattedDate
             }
             DatePickerDialog(this, dateListener, year, month, day).show()
+        }
+    }
+
+
+    /**
+     * 뒤로 가기 버튼을 누르면 확인 팝업을 보여주도록 설정하는 함수
+     *
+     * @param keyCode 누른 키의 코드 값
+     * @param event 키 이벤트 객체
+     */
+    @Override
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            showAlertDialog()
+            return true
+        }
+        return false
+    }
+
+    /**
+     * 작성 내용 취소 / 뒤로가기 시 확인 팝업을 보여주는 함수.
+     *
+     * 나가기를 누르면 액티비티가 종료되고 작성하기를 누르면 다시 작성 가능함.
+     */
+    private fun showAlertDialog() {
+        AlertDialog.Builder(this).apply {
+            setMessage("작성 중인 내용이 있습니다. 정말 나가시겠습니까?")
+            setPositiveButton("나가기") { _, _ ->
+                finish()
+            }
+            setNegativeButton("작성하기", null)
+            create()
+            show()
         }
     }
 }
