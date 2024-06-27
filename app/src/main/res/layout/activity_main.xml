@@ -11,8 +11,7 @@
     <TextView
         android:id="@+id/empty_textview"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="10"
+        android:layout_height="650dp"
         android:gravity="center"
         android:text="@string/resiter_recommended_msg"
         android:visibility="visible" />
@@ -20,16 +19,15 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="650dp"
         android:visibility="gone"/>
 
     <Button
         android:id="@+id/addButton"
         android:layout_width="60dp"
-        android:layout_weight="1"
-        android:layout_height="0dp"
-        android:layout_gravity="right"
+        android:layout_height="60dp"
+        android:layout_gravity="right|bottom"
+        android:layout_margin="16dp"
         android:backgroundTint="#FFEB3B"
         android:textColor="@color/black"
         android:textStyle="bold"

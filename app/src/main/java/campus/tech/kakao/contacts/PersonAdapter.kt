@@ -12,12 +12,12 @@ class PersonAdapter (
 ) : RecyclerView.Adapter<PersonAdapter.PersonViewHolder>() {
 
     class PersonViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val nameTextView: TextView = view.findViewById(R.id.input_name)
-        val telTextView: TextView = view.findViewById(R.id.input_tel)
+        val nameTextView: TextView = view.findViewById(R.id.name_textview)
+        val telTextView: TextView = view.findViewById(R.id.tel_textview)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PersonViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.activity_view_contact, parent, false) as View
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_person, parent, false)
         return PersonViewHolder(view)
     }
 

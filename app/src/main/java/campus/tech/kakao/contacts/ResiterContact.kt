@@ -3,11 +3,9 @@ package campus.tech.kakao.contacts
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
-import android.content.res.Configuration
 import android.icu.text.SimpleDateFormat
 import android.icu.util.Calendar
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -81,26 +79,36 @@ class ResiterContact : AppCompatActivity() {
         saveButton.setOnClickListener {
             name = nameForm.text.toString()
             tel = telForm.text.toString()
-            mail = mailForm.text.toString()
-            memo = memoForm.text.toString()
-            birth = birthForm.text.toString()
-            if (sexMale.isChecked) sex = sexMale.text.toString()
-            else if (sexFemale.isChecked) sex = sexFemale.text.toString()
+            mail = if (mailForm.text.toString().isNotEmpty()) mailForm.text.toString() else null.toString()
+            memo = if (memoForm.text.toString().isNotEmpty()) memoForm.text.toString() else null.toString()
+            birth = if (birthForm.text.toString().isNotEmpty()) birthForm.text.toString() else null.toString()
+            sex = when {
+                sexMale.isChecked -> sexMale.text.toString()
+                sexFemale.isChecked -> sexFemale.text.toString()
+                else -> null.toString()
+            }
             //Log.d("Log", sex)
 
-            if (name.isEmpty())
+            if (name.isEmpty()) {
                 Toast.makeText(this, "이름을 입력해주세요.", Toast.LENGTH_SHORT).show()
-            if (tel.isEmpty())
+                return@setOnClickListener
+            }
+            if (tel.isEmpty()) {
                 Toast.makeText(this, "전화번호를 입력해주세요.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
-            if (!name.isEmpty() && !tel.isEmpty())
-                Toast.makeText(this, "저장이 완료되었습니다.", Toast.LENGTH_SHORT).show()
-                val resultIntent = Intent().apply {
-                    putExtra("name", name)
-                    putExtra("tel", tel)
-                }
-                setResult(Activity.RESULT_OK, resultIntent)
-                finish()
+            val resultIntent = Intent().apply {
+                putExtra("name", name)
+                putExtra("tel", tel)
+                putExtra("mail", mail)
+                putExtra("sex", sex)
+                putExtra("memo", memo)
+                putExtra("birth", birth)
+            }
+            setResult(Activity.RESULT_OK, resultIntent)
+            Toast.makeText(this, "저장이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+            finish()
         }
 
         cancelButton.setOnClickListener {
