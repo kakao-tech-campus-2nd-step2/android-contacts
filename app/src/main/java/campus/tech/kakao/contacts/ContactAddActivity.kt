@@ -1,6 +1,5 @@
 package campus.tech.kakao.contacts
 
-import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.util.Log
@@ -16,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 
 
-class ContactActivity : AppCompatActivity() {
+class ContactAddActivity : AppCompatActivity() {
 
     private lateinit var nameEditText: EditText
     private lateinit var emailEditText: EditText

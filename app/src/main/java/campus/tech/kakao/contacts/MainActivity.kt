@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val intent = Intent(this, ContactActivity::class.java)
+        val intent = Intent(this, ContactAddActivity::class.java)
         startActivity(intent)
         finish()
     }
