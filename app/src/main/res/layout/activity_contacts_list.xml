@@ -6,12 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ContactsListActivity">
+
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginTop="20dp"
         android:id="@+id/contact_list_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        >
+        android:layout_marginTop="20dp">
 
     </androidx.recyclerview.widget.RecyclerView>
 
@@ -19,16 +19,27 @@
         android:id="@+id/button_add_contact"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_margin="30dp"
+        android:autoSizeMaxTextSize="42dp"
+        android:autoSizeTextType="uniform"
         android:background="@drawable/drawable_add_contact_button"
 
-        android:translationZ="15dp"
-        android:text="+"
-        android:autoSizeMaxTextSize="42dp"
         android:gravity="center"
-        android:autoSizeTextType="uniform"
-        />
+        android:text="+"
+        android:translationZ="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:textColor="#bb000000"
+        android:id="@+id/text_help"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="오른쪽 + 버튼을 클릭하여\n연락처를 등록해보세요."
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="16sp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
