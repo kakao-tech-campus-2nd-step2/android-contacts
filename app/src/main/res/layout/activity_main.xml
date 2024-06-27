@@ -5,202 +5,213 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="24dp"
+
     tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/personIcon"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="5dp"
-        android:src="@drawable/face_24px"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/nameText"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="10dp"
-        android:textColorHint="@color/faded"
-        app:errorEnabled="true"
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toTopOf="@id/cancleButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/personIcon">
+        app:layout_constraintStart_toStartOf="parent">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/nameEdit"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/color_shape"
-            android:hint="이름" />
+            android:layout_height="match_parent"
+            android:padding="24dp">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <ImageView
+                android:id="@+id/personIcon"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/face_24px"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/numberText"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:textColorHint="@color/faded"
-        app:errorEnabled="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/nameText">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/nameText"
+                android:layout_width="0dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="10dp"
+                android:textColorHint="@color/faded"
+                app:errorEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/personIcon">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/numberEdit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/color_shape"
-            android:hint="전화번호" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nameEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/color_shape"
+                    android:hint="이름" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/numberText"
+                android:layout_width="0dp"
+                android:layout_height="70dp"
+                android:textColorHint="@color/faded"
+                app:errorEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/nameText">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/mailText"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:textColorHint="@color/faded"
-        app:errorEnabled="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/numberText">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/numberEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/color_shape"
+                    android:hint="전화번호" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/color_shape"
-            android:hint="메일" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/mailText"
+                android:layout_width="0dp"
+                android:layout_height="70dp"
+                android:textColorHint="@color/faded"
+                app:errorEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/numberText">
 
-    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/color_shape"
+                    android:hint="메일" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/seeMoreButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/transparent"
-        android:drawableRight="@drawable/stat_minus_1_24px"
-        android:text="더보기"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mailText" />
+            <Button
+                android:id="@+id/seeMoreButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/transparent"
+                android:drawableRight="@drawable/stat_minus_1_24px"
+                android:text="더보기"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mailText" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/birthdayText"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:textColorHint="@color/faded"
-        app:errorEnabled="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mailText">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/birthdayText"
+                android:layout_width="0dp"
+                android:layout_height="70dp"
+                android:textColorHint="@color/faded"
+                app:errorEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mailText">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/birthdayEdit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/color_shape"
-            android:hint="생일"
-            android:visibility="gone" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/birthdayEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/color_shape"
+                    android:hint="생일"
+                    android:visibility="gone" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/genderText"
+                android:layout_width="0dp"
+                android:layout_height="70dp"
+                android:textColorHint="@color/faded"
+                app:errorEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/birthdayText">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/genderText"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:textColorHint="@color/faded"
-        app:errorEnabled="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/genderEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/color_shape"
+                    android:hint="성별"
+                    android:visibility="gone" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        app:layout_constraintTop_toBottomOf="@id/birthdayText">
+            <RadioGroup
+                android:id="@+id/genderRadio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:visibility="gone"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/birthdayText">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/genderEdit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/color_shape"
-            android:hint="성별"
-            android:visibility="gone" />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="16dp"
+                    android:text="여성" />
 
-    </com.google.android.material.textfield.TextInputLayout>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="남성" />
+            </RadioGroup>
 
-    <RadioGroup
-        android:id="@+id/genderRadio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="16dp"
-        android:orientation="horizontal"
-        android:padding="10dp"
-        android:visibility="gone"
-        app:layout_constraintRight_toRightOf="parent"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/memoText"
+                android:layout_width="0dp"
+                android:layout_height="70dp"
+                android:textColorHint="@color/faded"
+                app:errorEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/genderText">
 
-        app:layout_constraintTop_toBottomOf="@id/birthdayText">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/memoEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/color_shape"
+                    android:hint="메모"
+                    android:visibility="gone" />
 
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="16dp"
-            android:text="여성" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="남성" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </RadioGroup>
+    </androidx.core.widget.NestedScrollView>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/memoText"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:textColorHint="@color/faded"
-        app:errorEnabled="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/genderText">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/memoEdit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/color_shape"
-            android:hint="메모"
-            android:visibility="gone" />
-
-    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/cancleButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/transparent"
+        android:background="@drawable/button_shape"
         android:padding="16dp"
-        app:layout_constraintVertical_weight="1"
         android:text="취소"
         android:textColor="@color/black"
         android:textSize="20sp"
-
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/saveButton"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_weight="1" />
 
     <Button
         android:id="@+id/saveButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/button_shape"
         android:backgroundTint="@color/transparent"
-        app:layout_constraintVertical_weight="1"
         android:padding="16dp"
         android:text="저장"
         android:textColor="@color/black"
         android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/cancleButton"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintVertical_weight="1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
