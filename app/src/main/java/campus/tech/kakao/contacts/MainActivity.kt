@@ -36,6 +36,25 @@ class MainActivity : AppCompatActivity() {
         contactList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
     }
 
+    fun gotoAddContact() {
+        val intent = Intent(this@MainActivity, AddContact::class.java)
+        startActivityForResult(intent, 1)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        when (requestCode) {
+            1 -> {
+                when (resultCode) {
+                    RESULT_OK -> {
+                        val name = data?.extras?.getString("name")
+                        val phoneNumber = data?.extras?.getString("phoneNumber")
+                        contacts.add(mutableListOf(name!!, phoneNumber!!))
+                    }
+                }
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data)
+    }
 }
 
 class contactListAdapter(
