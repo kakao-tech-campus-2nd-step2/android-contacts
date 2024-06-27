@@ -34,11 +34,13 @@ class MainActivity : AppCompatActivity() {
                         Log.d("Main","Success")
                         val resContact =
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
-                                intent.getSerializableExtra("res",Contact::class.java)
+                                it.data?.extras?.getSerializable("res",Contact::class.java)
                             else
                                 it.data?.extras?.getSerializable("res") as Contact?
                         resContact?.let { contactList.add(resContact) }
                         contactAdapter.notifyDataSetChanged()
+                        if (contactList.size > 0)
+                            findViewById<TextView>(R.id.init_message).visibility = TextView.GONE
                         Toast.makeText(this, "저장이 완료 되었습니다", Toast.LENGTH_SHORT).show()
                     }
                     RESULT_CANCELED -> {
@@ -67,7 +69,7 @@ class ContactRecyclerAdapter(
 ) : RecyclerView.Adapter<ContactRecyclerAdapter.ContactViewHolder>() {
     inner class ContactViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val itemLayout: ConstraintLayout
-        val profileImage: ImageView
+        val profile: TextView
         val name: TextView
         init {
             itemLayout = itemView.findViewById<ConstraintLayout>(R.id.item_contact).apply {
@@ -75,7 +77,8 @@ class ContactRecyclerAdapter(
                     Toast.makeText(context, "WOW",Toast.LENGTH_SHORT).show()
                 }
             }
-            profileImage = itemView.findViewById(R.id.contact_item_profile_image)
+
+            profile = itemView.findViewById(R.id.contact_item_profile)
             name = itemView.findViewById(R.id.contact_item_name)
 
         }
@@ -87,7 +90,7 @@ class ContactRecyclerAdapter(
     }
 
     override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
-        holder.profileImage.setImageDrawable(context.resources.getDrawable(R.drawable.ic_launcher_background, null))
+        holder.profile.text = contactList[position].name[0].toString()
         holder.name.text = contactList[position].name
     }
 
