@@ -44,7 +44,7 @@ class AddInfor : AppCompatActivity() {
             moreInformationMemo(this, addInfor)
             removeMoreInformationButton(forMoreInformation)
         }
-
+        cancelButton.setOnClickListener {cancelMessasge(cancelButton) }
     }
 }
 private fun saveMessage(saveButton: Button) {
@@ -193,4 +193,11 @@ fun saveData(inputName: EditText, inputPhoneNumber: EditText, inputEmail: EditTe
     }
 
     return checkEmptyData(addName, addPhoneNumber)
+}
+private fun saveOrNotSave(checking: Boolean, saveButton: Button) {
+    if (checking) {
+        saveMessage(saveButton)
+    } else {
+        emptyDatamassage(saveButton)
+    }
 }
