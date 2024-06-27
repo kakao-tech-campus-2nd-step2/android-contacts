@@ -3,15 +3,13 @@ package campus.tech.kakao.contacts
 import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Button
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import campus.tech.kakao.contacts.model.Contact
@@ -40,7 +38,9 @@ class ContactsListActivity : AppCompatActivity() {
 
     fun initiateRecyclerView() {
         recyclerView = findViewById(R.id.contact_list_recyclerView)
-        recyclerView.adapter = ContactListAdapter(LayoutInflater.from(this), this, contactList)
+        recyclerView.adapter = ContactListAdapter(LayoutInflater.from(this), this, contactList){ _, index ->
+            clickContactItem(contactList[index])
+        }
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
     }
 
@@ -93,5 +93,9 @@ class ContactsListActivity : AppCompatActivity() {
             extras.getString(AddContactActivity.KEY_GENDER)?.toIntOrNull(),
             birthdayFromString(extras.getString(AddContactActivity.KEY_BIRTHDAY)),
             extras.getString(AddContactActivity.KEY_MEMO))
+    }
+
+    fun clickContactItem(contactItem:Contact){
+        Log.d("KSC", "Name: ${contactItem.name}, Phone: ${contactItem.phoneNumber}\nBirthday: ${contactItem.birthday?:"NULL"},Email: ${contactItem.email?:"NULL"}")
     }
 }
