@@ -2,6 +2,7 @@ package campus.tech.kakao.contacts
 
 import android.content.ComponentName
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -21,7 +22,7 @@ class ContactsListActivity : AppCompatActivity() {
     lateinit var recyclerView: RecyclerView
     val activityLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
         if(it.resultCode == RESULT_OK) {
-            val contact = getContactFromResult(it)
+            val contact = getContactFromIntent(it.data)
             if (contact != null) {
                 addNewContact(contact)
             }
@@ -68,7 +69,21 @@ class ContactsListActivity : AppCompatActivity() {
         )
         intent.component = componentName
         activityLauncher.launch(intent)
+    }
 
+    fun startShowContactInfoActivity(contact: Contact){
+        val intent = Intent()
+        val componentName: ComponentName = ComponentName(
+            this@ContactsListActivity,
+            AddContactActivity::class.java
+        )
+        intent.putExtra("contact", contact)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getSerializableExtra("contact", Contact::class.java)
+        }
+        else{
+            intent.getSerializableExtra("contact")
+        }
     }
 
     fun birthdayFromString(str: String?): LocalDate?{
@@ -82,17 +97,14 @@ class ContactsListActivity : AppCompatActivity() {
         }
     }
 
-    fun getContactFromResult(result: ActivityResult): Contact?{
-        val extras = result.data?.extras ?: return null
-        val name = extras.getString(AddContactActivity.KEY_NAME)
-        val phoneNumber = extras.getString(AddContactActivity.KEY_PHONE)
-        if(name == null || phoneNumber == null)
+    fun getContactFromIntent(intent: Intent?): Contact?{
+        if(intent == null)
             return null
-
-        return Contact(name, phoneNumber, extras.getString(AddContactActivity.KEY_EMAIL),
-            extras.getString(AddContactActivity.KEY_GENDER)?.toIntOrNull(),
-            birthdayFromString(extras.getString(AddContactActivity.KEY_BIRTHDAY)),
-            extras.getString(AddContactActivity.KEY_MEMO))
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getSerializableExtra(AddContactActivity.KEY_CONTACT, Contact::class.java) as Contact
+        } else{
+            intent.getSerializableExtra(AddContactActivity.KEY_CONTACT) as Contact?
+        }
     }
 
     fun clickContactItem(contactItem:Contact){

@@ -9,6 +9,7 @@ import android.widget.EditText
 import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import campus.tech.kakao.contacts.model.Contact
 import java.time.LocalDate
 import java.time.format.DateTimeParseException
 
@@ -159,12 +160,7 @@ class AddContactActivity : AppCompatActivity() {
         const val GENDER_FEMALE = 0
         const val GENDER_MALE = 1
 
-        const val KEY_NAME = "name"
-        const val KEY_BIRTHDAY = "birthday"
-        const val KEY_PHONE = "phonenumber"
-        const val KEY_GENDER = "gender"
-        const val KEY_MEMO = "memo"
-        const val KEY_EMAIL = "email"
+        const val KEY_CONTACT = "contact"
     }
 
     fun getTextOrNull(editText: EditText): String?{
@@ -172,17 +168,19 @@ class AddContactActivity : AppCompatActivity() {
         return str.ifEmpty { null }
     }
 
-    fun returnResultAndFinish(){
-        val intent: Intent = Intent()
-        intent.putExtra(KEY_NAME, getTextOrNull(nameInput))
-        intent.putExtra(KEY_PHONE, getTextOrNull(phoneInput))
-        intent.putExtra(KEY_EMAIL, getTextOrNull(emailInput))
-        intent.putExtra(KEY_BIRTHDAY, birthday?.toString())
-        if(getGender() != -1){
-            intent.putExtra(KEY_GENDER, getGender())
-        }
-        intent.putExtra(KEY_MEMO, getTextOrNull(memoInput))
-
+    fun returnResultAndFinish() {
+        val intent = Intent()
+        intent.putExtra(
+            KEY_CONTACT,
+            Contact(
+                nameInput.text.toString(),
+                phoneInput.text.toString(),
+                getTextOrNull(emailInput),
+                getGender(),
+                birthday,
+                getTextOrNull(memoInput)
+            )
+        )
         setResult(RESULT_OK, intent)
         finish()
     }

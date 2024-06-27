@@ -13,8 +13,11 @@
         android:theme="@style/Theme.Contacts"
         tools:targetApi="31">
         <activity
+            android:name=".ContactInfoActivity"
+            android:exported="false" />
+        <activity
             android:name=".ContactsListActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,7 +26,7 @@
         </activity>
         <activity
             android:name=".AddContactActivity"
-            android:exported="false"/>
+            android:exported="false" />
     </application>
 
 </manifest>
