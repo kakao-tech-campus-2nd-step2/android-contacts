@@ -40,17 +40,41 @@ class AddInfor : AppCompatActivity() {
         val cancelButton = findViewById<Button>(R.id.cancelButton)
         val inputName = findViewById<EditText>(R.id.inputName)
         val inputPhoneNumber = findViewById<EditText>(R.id.inputPhoneNumber)
-
+        val toMain = Intent(this@AddInfor, MainActivity::class.java)
         forMoreInformation.setOnClickListener {
             moreInformationBirth(this, addInfor)
             moreInformationGender(this, addInfor)
             moreInformationMemo(this, addInfor)
             removeMoreInformationButton(forMoreInformation)
         }
-        cancelButton.setOnClickListener {cancelMessasge(cancelButton) }
-        saveButton.setOnClickListener{ saveOrNotSave(saveDataForSave(inputName,inputPhoneNumber,inputEmail),saveButton) }
+        saveButton.setOnClickListener {
+            saveOrNotSave(saveDataForSave(inputName, inputPhoneNumber, inputEmail), saveButton)
+            if (saveDataForSave(inputName, inputPhoneNumber, inputEmail)) {
+                val resultIntent = Intent().apply {
+                    putExtra("inforname", addName)
+                    putExtra("infornumber", addPhoneNumber)
+                    putExtra("inforEmail", addEmail)
+                    putExtra("inforBirth", addBirth)
+                    putExtra("inforMemo", addMemo)
+                    putExtra("inforGender", addGender)
+                }
+                setResult(RESULT_OK, resultIntent)
+                finish()
+                clearGlobalVariables()
+            }
+        }
+
+        cancelButton.setOnClickListener {
+            if(saveDataForCencel(inputName, inputPhoneNumber, inputEmail)){
+                alertDialog(this,toMain)
+
+            }else{
+                cancelMessasge(cancelButton)
+                startActivity(toMain)
+                finish()
+            }
+        }
     }
-}
 private fun saveMessage(saveButton: Button) {
     Toast.makeText(saveButton.context, "저장이 완료 되었습니다.", Toast.LENGTH_SHORT).show()
 }
@@ -244,4 +268,4 @@ private fun clearGlobalVariables() {
     memoEditText = null
     genderRadioGroup = null
     birthTextView = null
-}
+}}
