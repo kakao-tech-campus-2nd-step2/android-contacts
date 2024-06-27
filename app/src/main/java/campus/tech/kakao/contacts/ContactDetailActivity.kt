@@ -52,7 +52,10 @@ class ContactDetailActivity : AppCompatActivity() {
 
     private fun setBackButtonListener() {
         backButton.setOnClickListener {
-            startActivity(Intent(this, ContactListActivity::class.java))
+            val intent = Intent(this, ContactListActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(intent)
+            finish()
         }
     }
 }

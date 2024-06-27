@@ -12,12 +12,11 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.LinearLayoutCompat
-import androidx.lifecycle.Observer
 import campus.tech.kakao.contacts.database.Contact
 import campus.tech.kakao.contacts.viewmodel.ContactViewModel
 
 
-class MainActivity : AppCompatActivity() {
+class AddContactActivity : AppCompatActivity() {
 
     private lateinit var nameEditText: EditText
     private lateinit var phoneEditText: EditText
@@ -86,7 +85,10 @@ class MainActivity : AppCompatActivity() {
                 contactViewModel.insert(contact)
                 Log.d("testt", "User: data is inserted")
                 resetForm()
-                startActivity(Intent(this, ContactListActivity::class.java))
+                val intent = Intent(this, ContactListActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+                finish()
             } catch (e: Exception) {
                 Log.e("testt", "Error inserting user", e)
             }
