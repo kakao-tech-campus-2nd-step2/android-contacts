@@ -14,6 +14,8 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import java.util.Locale
 
@@ -115,5 +117,22 @@ class ResiterContact : AppCompatActivity() {
             Toast.makeText(this, "취소되었습니다", Toast.LENGTH_SHORT).show()
             finish()
         }
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                AlertDialog.Builder(this@ResiterContact).apply {
+                    setMessage("작성 중인 내용이 있습니다. 정말로 나가시겠습니까?")
+                    setPositiveButton("작성하기") { dialog, which ->
+                        dialog.dismiss()
+                    }
+                    setNegativeButton("나가기") { dialog, which ->
+                        finish()
+                    }
+                    create()
+                    show()
+                }
+            }
+        })
     }
+
 }
