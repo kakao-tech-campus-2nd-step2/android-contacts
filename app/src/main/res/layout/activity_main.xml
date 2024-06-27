@@ -132,7 +132,6 @@
                 app:layout_constraintTop_toBottomOf="@id/gender"
                 android:visibility="invisible"/>
 
-            <!-- 기존 내용을 여기에 그대로 넣습니다 (버튼 제외) -->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
