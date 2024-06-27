@@ -16,17 +16,26 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var recyclerView: RecyclerView
-
-    var PersonList: MutableList<Person> = mutableListOf<Person>()
+    lateinit var viewAdapter: PersonAdapter
+    lateinit var viewManager: RecyclerView.LayoutManager
+    lateinit var emptyTextview: TextView
+    var personList: MutableList<Person> = mutableListOf<Person>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        viewManager = LinearLayoutManager(this)
+
+        emptyTextview = findViewById(R.id.empty_textview)
+
+
     }
 }

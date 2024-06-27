@@ -31,5 +31,5 @@ class PersonAdapter (
         holder.telTextView.text = person.tel
         holder.itemView.setOnClickListener { clickListener(person) }
     }
-    
+
 }

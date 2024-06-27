@@ -1,5 +1,6 @@
 package campus.tech.kakao.contacts
 
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.content.res.Configuration
@@ -94,10 +95,17 @@ class ResiterContact : AppCompatActivity() {
 
             if (!name.isEmpty() && !tel.isEmpty())
                 Toast.makeText(this, "저장이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                val resultIntent = Intent().apply {
+                    putExtra("name", name)
+                    putExtra("tel", tel)
+                }
+                setResult(Activity.RESULT_OK, resultIntent)
+                finish()
         }
 
         cancelButton.setOnClickListener {
             Toast.makeText(this, "취소되었습니다", Toast.LENGTH_SHORT).show()
+            finish()
         }
     }
 }
