@@ -2,4 +2,5 @@
     <string name="app_name">Contacts</string>
     <string name="birthday">%1$d.%2$02d.%3$02d</string>
     <string name="essential_value">%1$s은(는) 필수 값 입니다.</string>
+    <string name="back_check_message">작성중인 내용이 있습니다.\n정말 나가시겠습니까?</string>
 </resources>

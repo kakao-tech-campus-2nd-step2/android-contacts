@@ -1,11 +1,13 @@
 package campus.tech.kakao.contacts
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
-import android.view.MotionEvent
 import android.view.View
 import android.view.View.GONE
+import android.view.View.OnClickListener
 import android.view.View.VISIBLE
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -13,17 +15,24 @@ import android.widget.LinearLayout
 import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.OnBackPressedDispatcher
+import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
 
 class MainActivity : AppCompatActivity() {
-//    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
-//        val inputMethodManager: InputMethodManager =
-//            getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-//        inputMethodManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
-//        return super.dispatchTouchEvent(ev)
-//    }
-
+    fun showExitConfirmDialog(){
+        AlertDialog.Builder(this)
+            .setTitle("")
+            .setMessage(R.string.back_check_message)
+            .setPositiveButton("나가기"){ _, _ ->
+                finish()
+            }
+            .setNegativeButton("작성하기",null)
+            .create()
+            .show()
+    }
     fun startCalenderDialog(textView: TextView) {
         val datePickerDialog = DatePickerDialog(this)
         datePickerDialog.updateDate(2000, 0, 1)
@@ -75,6 +84,17 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
+    fun isWriting(views: List<View>): Boolean{
+        views.forEach{
+            when(it){
+                is EditText -> if(it.text.isNotEmpty()) return true
+                is TextView -> if(it.text.isNotEmpty()) return true
+                is RadioGroup -> if(it.checkedRadioButtonId != -1) return true
+            }
+        }
+        return false
+    }
+
     fun submitContact() {
         // TODO: implement submit workflow
         showToast("저장이 완료 되었습니다.")
@@ -95,6 +115,9 @@ class MainActivity : AppCompatActivity() {
         val cancelBtn = findViewById<MaterialButton>(R.id.cancelBtn)
         val submitBtn = findViewById<MaterialButton>(R.id.submitBtn)
 
+        val essentialInputViews = listOf(name,tel)
+        val views = listOf(name,tel,mail,bday,genderRadioGroup,memo)
+
         showDetail.setOnClickListener {
             extendEditTextList(editTextList, R.dimen.contact_list_height_detail)
             toggleViewVisibility(showDetail)
@@ -109,8 +132,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         submitBtn.setOnClickListener {
-            if (isValidContact(listOf(name, tel))) {
+            if (isValidContact(essentialInputViews)) {
                 submitContact()
+            }
+        }
+
+        this.onBackPressedDispatcher.addCallback(this){
+            if(isWriting(views)){
+                showExitConfirmDialog()
+            } else{
+                finish()
             }
         }
 
