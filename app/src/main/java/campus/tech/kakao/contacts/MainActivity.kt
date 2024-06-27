@@ -14,6 +14,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val nameInputForm = findViewById<EditText>(R.id.nameInputForm)
+        val phoneInputForm = findViewById<EditText>(R.id.phoneInputForm)
         val saveButton = findViewById<Button>(R.id.saveButton)
         val cancelButton = findViewById<Button>(R.id.cancelButton)
 
@@ -21,11 +22,17 @@ class MainActivity : AppCompatActivity() {
             if (nameInputForm.text.toString().trim().isEmpty()) {
                 Toast.makeText(this, "이름은 필수 값 입니다.", Toast.LENGTH_SHORT).show()
             }
+            else if (phoneInputForm.text.toString().trim().isEmpty()) {
+                Toast.makeText(this, "전화 번호는 필수 값 입니다.", Toast.LENGTH_SHORT).show()
+            }
         }
 
         cancelButton.setOnClickListener {
             if (nameInputForm.text.toString().trim().isEmpty()) {
                 Toast.makeText(this, "이름은 필수 값 입니다.", Toast.LENGTH_SHORT).show()
+            }
+            else if (phoneInputForm.text.toString().trim().isEmpty()) {
+                Toast.makeText(this, "전화 번호는 필수 값 입니다.", Toast.LENGTH_SHORT).show()
             }
         }
     }
