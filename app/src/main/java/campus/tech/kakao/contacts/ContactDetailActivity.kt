@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.ImageView
 import android.widget.TextView
-import org.w3c.dom.Text
 
 class ContactDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
