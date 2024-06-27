@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ContactDetail">
+
+    <ImageView
+        android:id="@+id/detailhead"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/dnameLayout"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:src="@drawable/face"
+        android:layout_marginTop="32dp"/>
+
+    <!--    이름-->
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/dnameLayout"
+        app:layout_constraintTop_toBottomOf="@+id/detailhead"
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="이름"
+            android:textStyle="bold"
+            android:textSize="25dp"
+            android:gravity="center_vertical"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/detailname"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:textSize="25dp"
+            android:text="이름"
+            android:gravity="right|center_vertical" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <!--    전화번호-->
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/dphoneLayout"
+        app:layout_constraintTop_toBottomOf="@+id/dnameLayout"
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="전화번호"
+            android:textStyle="bold"
+            android:textSize="25dp"
+            android:gravity="center_vertical"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/detailphone"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:textSize="25dp"
+            android:text="전화번호"
+            android:gravity="right|center_vertical" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <!--    메일-->
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/dmailLayout"
+        app:layout_constraintTop_toBottomOf="@+id/dphoneLayout"
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="메일"
+            android:textStyle="bold"
+            android:textSize="25dp"
+            android:gravity="center_vertical"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/detailmail"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:textSize="25dp"
+            android:text="메일"
+            android:gravity="right|center_vertical" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <!--    생일-->
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/dbirthLayout"
+        app:layout_constraintTop_toBottomOf="@+id/dmailLayout"
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="생일"
+            android:textStyle="bold"
+            android:textSize="25dp"
+            android:gravity="center_vertical"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/detailbirth"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:textSize="25dp"
+            android:text="생일"
+            android:gravity="right|center_vertical" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <!--    성별-->
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/dgenderLayout"
+        app:layout_constraintTop_toBottomOf="@+id/dbirthLayout"
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="성별"
+            android:textStyle="bold"
+            android:textSize="25dp"
+            android:gravity="center_vertical"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/detailgender"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:textSize="25dp"
+            android:text="성별"
+            android:gravity="right|center_vertical" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <!--    메모-->
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/dmemoLayout"
+        app:layout_constraintTop_toBottomOf="@+id/dgenderLayout"
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="메모"
+            android:textStyle="bold"
+            android:textSize="25dp"
+            android:gravity="center_vertical"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/detailmemo"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:textSize="25dp"
+            android:text="메모"
+            android:gravity="right|center_vertical" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.constraintlayout.widget.ConstraintLayout>
