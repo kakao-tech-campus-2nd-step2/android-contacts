@@ -5,12 +5,8 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RelativeLayout
 import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.get
 import campus.tech.kakao.contacts.model.Contact
 
@@ -32,7 +28,7 @@ class ContactInfoActivity : AppCompatActivity() {
         }
     }
 
-    fun getContactFromIntent(intent: Intent?): Contact?{
+    private fun getContactFromIntent(intent: Intent?): Contact?{
         if(intent == null)
             return null
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -42,7 +38,7 @@ class ContactInfoActivity : AppCompatActivity() {
         }
     }
 
-    fun initiateLayoutValues(){
+    private fun initiateLayoutValues(){
         nameLayout = findViewById(R.id.name_layout)
         phoneLayout = findViewById(R.id.phone_layout)
         emailLayout = findViewById(R.id.email_layout)
@@ -51,7 +47,7 @@ class ContactInfoActivity : AppCompatActivity() {
         memoLayout = findViewById(R.id.memo_layout)
     }
 
-    fun updateLayout(layout:ViewGroup, value:String?){
+    private fun updateLayout(layout:ViewGroup, value:String?){
         if(value == null){
             layout.visibility = View.GONE
         }
@@ -60,7 +56,7 @@ class ContactInfoActivity : AppCompatActivity() {
         }
     }
 
-    fun parseGender(gender: Int?): String?{
+    private fun parseGender(gender: Int?): String?{
         return when(gender){
             null -> null
             AddContactActivity.GENDER_FEMALE -> "여성"
@@ -69,7 +65,7 @@ class ContactInfoActivity : AppCompatActivity() {
         }
     }
 
-    fun updateValuesWithContact(contact: Contact){
+    private fun updateValuesWithContact(contact: Contact){
         (nameLayout[CONTACT_LAYOUT_VALUE_INDEX] as TextView?)?.text = contact.name
         (phoneLayout[CONTACT_LAYOUT_VALUE_INDEX] as TextView?)?.text = contact.phoneNumber
 
@@ -80,6 +76,6 @@ class ContactInfoActivity : AppCompatActivity() {
     }
 
     companion object{
-        private val CONTACT_LAYOUT_VALUE_INDEX = 1
+        private const val CONTACT_LAYOUT_VALUE_INDEX = 1
     }
 }

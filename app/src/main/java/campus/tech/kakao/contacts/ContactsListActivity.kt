@@ -9,22 +9,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import campus.tech.kakao.contacts.model.Contact
-import java.lang.Exception
 import java.time.LocalDate
 
 class ContactsListActivity : AppCompatActivity() {
-    val contactList: MutableList<Contact> = mutableListOf()
-    lateinit var recyclerView: RecyclerView
-    lateinit var helpMessageText: TextView
+    private val contactList: MutableList<Contact> = mutableListOf()
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var helpMessageText: TextView
 
-    val activityLauncher: ActivityResultLauncher<Intent> =
+    private val activityLauncher: ActivityResultLauncher<Intent> =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == RESULT_OK) {
                 val contact = getContactFromIntent(it.data)
@@ -38,13 +36,13 @@ class ContactsListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contacts_list)
 
+        helpMessageText = findViewById(R.id.text_help)
         initiateRecyclerView()
         initiateAddContactButton()
-        //testAddContacts()
-        helpMessageText = findViewById(R.id.text_help)
+        testAddContacts()
     }
 
-    fun testAddContacts() {
+    private fun testAddContacts() {
         addNewContact(
             Contact(
                 "권성찬",
@@ -55,10 +53,10 @@ class ContactsListActivity : AppCompatActivity() {
                 "Hello!!"
             )
         )
-        addNewContact(Contact("박병호", "4442358", null, null, null, null))
+        addNewContact(Contact("장진욱", "4442358", null, null, null, null))
     }
 
-    fun initiateRecyclerView() {
+    private fun initiateRecyclerView() {
         recyclerView = findViewById(R.id.contact_list_recyclerView)
         recyclerView.adapter =
             ContactListAdapter(LayoutInflater.from(this), this, contactList) { _, index ->
@@ -67,21 +65,21 @@ class ContactsListActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
     }
 
-    fun initiateAddContactButton() {
+    private fun initiateAddContactButton() {
         val addContactButton = findViewById<Button>(R.id.button_add_contact)
         addContactButton.setOnClickListener {
             startAddContactActivity()
         }
     }
 
-    fun addNewContact(contact: Contact) {
+    private fun addNewContact(contact: Contact) {
         contactList.add(contact)
         recyclerView.adapter?.notifyItemInserted(contactList.size)
 
         setHelpMessageActive(false)
     }
 
-    fun removeContact(contact: Contact) {
+    private fun removeContact(contact: Contact) {
         contactList.remove(contact)
 
         if (contactList.size == 0) {
@@ -89,9 +87,9 @@ class ContactsListActivity : AppCompatActivity() {
         }
     }
 
-    fun startAddContactActivity() {
+    private fun startAddContactActivity() {
         val intent = Intent()
-        val componentName: ComponentName = ComponentName(
+        val componentName = ComponentName(
             this@ContactsListActivity,
             AddContactActivity::class.java
         )
@@ -99,7 +97,7 @@ class ContactsListActivity : AppCompatActivity() {
         activityLauncher.launch(intent)
     }
 
-    fun startShowContactInfoActivity(contact: Contact) {
+    private fun startShowContactInfoActivity(contact: Contact) {
         val intent = Intent()
         val componentName = ComponentName(
             this@ContactsListActivity,
@@ -110,7 +108,8 @@ class ContactsListActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun getContactFromIntent(intent: Intent?): Contact? {
+    @Suppress("DEPRECATION")
+    private fun getContactFromIntent(intent: Intent?): Contact? {
         if (intent == null)
             return null
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -123,7 +122,7 @@ class ContactsListActivity : AppCompatActivity() {
         }
     }
 
-    fun clickContactItem(contactItem: Contact) {
+    private fun clickContactItem(contactItem: Contact) {
         Log.d(
             "KSC",
             "Name: ${contactItem.name}, Phone: ${contactItem.phoneNumber}\nBirthday: ${contactItem.birthday ?: "NULL"},Email: ${contactItem.email ?: "NULL"}"
@@ -131,7 +130,7 @@ class ContactsListActivity : AppCompatActivity() {
         startShowContactInfoActivity(contactItem)
     }
 
-    fun setHelpMessageActive(active: Boolean) {
+    private fun setHelpMessageActive(active: Boolean) {
         helpMessageText.visibility = if (active) View.VISIBLE else View.GONE
     }
 }

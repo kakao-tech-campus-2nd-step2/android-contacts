@@ -1,6 +1,5 @@
 package campus.tech.kakao.contacts
 
-import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
@@ -9,7 +8,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioGroup
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.get
@@ -18,14 +16,13 @@ import java.time.LocalDate
 import java.time.format.DateTimeParseException
 
 class AddContactActivity : AppCompatActivity() {
-    lateinit var emailInput: EditText
-    lateinit var nameInput: EditText
-    lateinit var phoneInput: EditText
-    lateinit var birthdayInput: EditText
-    lateinit var genderInput: RadioGroup
-    lateinit var memoInput: EditText
-
-    var birthday: LocalDate? = null
+    private lateinit var emailInput: EditText
+    private lateinit var nameInput: EditText
+    private lateinit var phoneInput: EditText
+    private lateinit var birthdayInput: EditText
+    private lateinit var genderInput: RadioGroup
+    private lateinit var memoInput: EditText
+    private var birthday: LocalDate? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,20 +31,20 @@ class AddContactActivity : AppCompatActivity() {
         setMoreOptionsListener()
         setButtonsListener()
 
-        onBackPressedDispatcher.addCallback(this){
+        onBackPressedDispatcher.addCallback(this) {
             alertBack()
         }
     }
 
-    fun initiateInputFields() {
+    private fun initiateInputFields() {
         nameInput = findViewById(R.id.input_name)
         emailInput = findViewById(R.id.input_mail)
         phoneInput = findViewById(R.id.input_tel)
         birthdayInput = findViewById(R.id.input_birthday)
         memoInput = findViewById(R.id.input_memo)
-        genderInput = findViewById<RadioGroup>(R.id.input_gender)
+        genderInput = findViewById(R.id.input_gender)
 
-        birthdayInput.setOnFocusChangeListener { v, hasFocus ->
+        birthdayInput.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
                 showDatePicker()
             } else {
@@ -56,13 +53,13 @@ class AddContactActivity : AppCompatActivity() {
         }
     }
 
-    fun setMoreOptionsListener() {
+    private fun setMoreOptionsListener() {
         findViewById<View>(R.id.more_options).setOnClickListener {
             appendOptions()
         }
     }
 
-    fun setButtonsListener() {
+    private fun setButtonsListener() {
         findViewById<Button>(R.id.button_submit).setOnClickListener {
             if (validateInputs()) {
                 saveSuccess()
@@ -73,14 +70,13 @@ class AddContactActivity : AppCompatActivity() {
         }
     }
 
-    fun getGender(): Int? {
-        if(genderInput.checkedRadioButtonId == -1)
-            return null
-        if(genderInput.checkedRadioButtonId == genderInput[GENDER_FEMALE].id)
-            return GENDER_FEMALE
-        else if(genderInput.checkedRadioButtonId == genderInput[GENDER_MALE].id)
-            return GENDER_MALE
-        else return -1
+    private fun getGender(): Int? {
+        return when (genderInput.checkedRadioButtonId) {
+            -1 -> null
+            genderInput[GENDER_FEMALE].id -> GENDER_FEMALE
+            genderInput[GENDER_MALE].id -> GENDER_MALE
+            else -> -1
+        }
     }
 
     fun validateInputs(): Boolean {
@@ -101,43 +97,43 @@ class AddContactActivity : AppCompatActivity() {
         return true
     }
 
-    fun checkNameEmpty(): Boolean {
+    private fun checkNameEmpty(): Boolean {
         return nameInput.text.isEmpty()
     }
 
-    fun checkPhoneNumberEmpty(): Boolean {
+    private fun checkPhoneNumberEmpty(): Boolean {
         return phoneInput.text.isEmpty()
     }
 
-    fun checkEmailEmpty(): Boolean {
+    private fun checkEmailEmpty(): Boolean {
         return emailInput.text.isEmpty()
     }
 
     fun verifyEmail(emailText: String): Boolean {
-        val emailVerifyingRegex = Regex("^[a-zA-Z0-9+-\\_.]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+\$")
+        val emailVerifyingRegex = Regex("^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+\$")
         return emailVerifyingRegex.matches(emailText)
     }
 
-    fun appendOptions() {
+    private fun appendOptions() {
         findViewById<View>(R.id.more_options).visibility = View.GONE
         findViewById<View>(R.id.additional_inputs).visibility = View.VISIBLE
     }
 
-    fun saveSuccess() {
+    private fun saveSuccess() {
         returnResultAndFinish()
     }
 
-    fun cancel() {
-        val intent: Intent = Intent()
+    private fun cancel() {
+        val intent = Intent()
         setResult(RESULT_CANCELED, intent)
         finish()
     }
 
-    fun showToast(message: String) {
+    private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
-    fun showDatePicker() {
+    private fun showDatePicker() {
         val dialogInitialDate = birthday ?: LocalDate.now()
         val dialog =
             DatePickerDialog(
@@ -164,7 +160,7 @@ class AddContactActivity : AppCompatActivity() {
         }
     }
 
-    fun verifyBirthday(birthdayText: String) {
+    private fun verifyBirthday(birthdayText: String) {
         birthday = getBirthdayFromText(birthdayText)
         birthdayInput.setText(birthday?.toString() ?: "")
     }
@@ -177,12 +173,12 @@ class AddContactActivity : AppCompatActivity() {
         const val KEY_CONTACT = "contact"
     }
 
-    fun getTextOrNull(editText: EditText): String?{
+    private fun getTextOrNull(editText: EditText): String? {
         val str = editText.text.toString()
         return str.ifEmpty { null }
     }
 
-    fun returnResultAndFinish() {
+    private fun returnResultAndFinish() {
 
         val intent = Intent()
         intent.putExtra(
@@ -200,12 +196,14 @@ class AddContactActivity : AppCompatActivity() {
         finish()
     }
 
-    fun alertBack(){
-        val builder:androidx.appcompat.app.AlertDialog.Builder = androidx.appcompat.app.AlertDialog.Builder(this)
-            .setMessage("작성 중인 내용이 있습니다. 정말 나가시겠습니까?")
+    private fun alertBack() {
+        val builder: androidx.appcompat.app.AlertDialog.Builder =
+            androidx.appcompat.app.AlertDialog.Builder(this)
+                .setMessage("작성 중인 내용이 있습니다. 정말 나가시겠습니까?")
         builder.setPositiveButton("나가기") { _, _ ->
-            cancel() }
-        builder.setNegativeButton("작성하기") {_, _ ->
+            cancel()
+        }
+        builder.setNegativeButton("작성하기") { _, _ ->
         }
         builder.create().show()
     }

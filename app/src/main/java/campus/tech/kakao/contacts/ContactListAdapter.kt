@@ -37,7 +37,7 @@ class ContactListAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder {
         val view = inflater.inflate(R.layout.contact_item, parent, false)
-        var holder = ContactViewHolder(view)
+        val holder = ContactViewHolder(view)
         holder.setOnViewClickListener(listener)
         return holder
     }
