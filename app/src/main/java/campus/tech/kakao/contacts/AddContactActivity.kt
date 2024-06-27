@@ -144,7 +144,7 @@ class AddContactActivity : AppCompatActivity() {
                 dialogInitialDate.dayOfMonth
             )
         dialog.setOnDateSetListener { _, year, month, dayOfMonth ->
-            birthday = LocalDate.of(year, month, dayOfMonth)
+            birthday = LocalDate.of(year, month + 1, dayOfMonth)
             birthdayInput.setText(birthday?.toString())
         }
         dialog.show()

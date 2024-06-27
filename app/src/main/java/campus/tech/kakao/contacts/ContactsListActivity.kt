@@ -39,7 +39,7 @@ class ContactsListActivity : AppCompatActivity() {
         helpMessageText = findViewById(R.id.text_help)
         initiateRecyclerView()
         initiateAddContactButton()
-        testAddContacts()
+        // testAddContacts()
     }
 
     private fun testAddContacts() {
