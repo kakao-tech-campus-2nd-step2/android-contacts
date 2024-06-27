@@ -3,16 +3,14 @@ package campus.tech.kakao.contacts
 import android.os.Parcel
 import android.os.Parcelable
 
-
 data class Contact(
-    val profileImage: Int,
+    val profile: Int,
     val name: String?,
     val phoneNumber: String?,
     val email: String?,
     val birthday: String?,
     val gender: String?,
     val memo: String?
-
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
@@ -26,7 +24,7 @@ data class Contact(
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeInt(profileImage)
+        parcel.writeInt(profile)
         parcel.writeString(name)
         parcel.writeString(phoneNumber)
         parcel.writeString(email)

@@ -1,8 +1,8 @@
 package campus.tech.kakao.contacts
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
-import android.text.method.TextKeyListener.clear
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
@@ -64,6 +64,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         saveButton.setOnClickListener {
+            val name = nameEditText.text.toString()
+            val phone = phoneNumberEditText.text.toString()
+            val email = mailEditText.text.toString()
+            val birthday = birthdayEditText.text.toString()
+            val gender = when (genderRadioGroup.checkedRadioButtonId) {
+                R.id.female -> "여성"
+                R.id.male -> "남성"
+                else -> ""
+            }
+            val memo = memoEditText.text.toString()
+
             when {
                 nameEditText.text.toString().isEmpty() -> {
                     Toast.makeText(this, "이름은 필수 값 입니다.", Toast.LENGTH_SHORT).show()
@@ -75,6 +86,10 @@ class MainActivity : AppCompatActivity() {
 
                 else -> {
                     Toast.makeText(this, "저장이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                    val resultIntent = Intent()
+                    resultIntent.putExtra("contact", Contact(R.drawable.profile, name, phone, email, birthday, gender, memo))
+                    setResult(RESULT_OK, resultIntent)
+                    finish()
                 }
             }
         }
