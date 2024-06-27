@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
     private val btnbirthday: Button by lazy { findViewById(R.id.birthday) }
     private val etbirthday: EditText by lazy { findViewById(R.id.birthday_1) }
     private val rgGender: RadioGroup by lazy { findViewById(R.id.Gender) }
-    private lateinit var db: AppDatabase
+    lateinit var db: AppDatabase
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -76,7 +76,12 @@ class MainActivity : AppCompatActivity() {
         val message: String,
         val birthday: String
     )
-
+    @Entity(tableName = "name")
+    data class User(
+        @PrimaryKey(autoGenerate = true) val id: Int = 0,
+        val name: String,
+    )
+    val hasContacts = db.contactDao().getAllContacts().isNotEmpty()
     @Dao
     interface ContactDao {
         @Insert
@@ -90,11 +95,26 @@ class MainActivity : AppCompatActivity() {
 
         @Query("SELECT * FROM contacts")
         fun getAllContacts(): List<Contact>
+
+    }
+    @Dao
+    interface UserDao {
+        @Insert
+        suspend fun insert(user: User)
+
+        @Update
+        suspend fun update(user: User)
+
+        @Delete
+        suspend fun delete(user: User)
+
+        @Query("SELECT * FROM name")
+        fun getAllUsers(): List<User>
     }
 
     abstract class AppDatabase : RoomDatabase() {
         abstract fun contactDao(): ContactDao
-        abstract fun userDao(): Any
+        abstract fun userDao(): UserDao
     }
 
     private fun setupPhoneNumberInput() {
@@ -182,3 +202,5 @@ class MainActivity : AppCompatActivity() {
     }
 
 }
+
+

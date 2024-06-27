@@ -30,17 +30,17 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class ContactAdapter<Contact>(private val contacts: List<Contact>) : RecyclerView.Adapter<ContactAdapter<Any?>.ViewHolder>() {
+class ContactAdapter<Contact>(private val contacts: List<Contact>) : RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val nameTextView: TextView = itemView.findViewById(R.id.)
+        val nameTextView: TextView = itemView.findViewById(R.id.namelist)
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_contact, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.activity_person, parent, false)
         return ViewHolder(view)
     }
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val contact = contacts[position]
-        holder.nameTextView.text = contact.name
+        holder.nameTextView.text = contact.toString()
     }
     override fun getItemCount(): Int {
         return contacts.size
@@ -51,7 +51,6 @@ class CollectionActivity : AppCompatActivity() {
     private lateinit var tvmessage: TextView
     private lateinit var recyclerView: RecyclerView
     private lateinit var contactAdapter: ContactAdapter<Any?>
-    private val container: FrameLayout by lazy { findViewById(R.id.container) }
     private val addButton: Button by lazy { findViewById(R.id.addbutton) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,13 +64,26 @@ class CollectionActivity : AppCompatActivity() {
         tvmessage = findViewById(R.id.message)
 
         // MainActivity에서 생성한 AppDatabase 인스턴스 가져오기
-        db = (application as MyApplication).db
+        db = (application as MainActivity).db
+
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        loadContacts()
+        showMessage()
 
         addButton.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
 
+    }
+
+    private fun showMessage() {
+        GlobalScope.launch {
+            val hasUsers = db.userDao().getAllUsers().isEmpty()
+            withContext(Dispatchers.Main) {
+                findViewById<TextView>(R.id.message).visibility = if (hasUsers) View.GONE else View.VISIBLE
+            }
+        }
     }
 
     private fun loadContacts() {
@@ -83,28 +95,12 @@ class CollectionActivity : AppCompatActivity() {
             }
         }
     }
-
-    private fun showMessage() {
-        GlobalScope.launch {
-            val hasUsers = db.userDao().getUsers().isNotEmpty()
-            withContext(Dispatchers.Main) {
-                tvmessage.visibility = if (hasUsers) View.GONE else View.VISIBLE
-            }
-        }
-    }
 }
 
-class MyApplication : Application() {
-    lateinit var db: MainActivity.AppDatabase
 
-    override fun onCreate() {
-        super.onCreate()
-        db = Room.databaseBuilder(
-            applicationContext,
-            MainActivity.AppDatabase::class.java, "PhoneCollection"
-        ).build()
-    }
-}
+
+
+
 
 
 
