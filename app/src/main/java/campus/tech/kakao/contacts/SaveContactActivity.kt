@@ -12,7 +12,7 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
-class MainActivity : AppCompatActivity() {
+class SaveContactActivity : AppCompatActivity() {
 
     lateinit var cancel: Button
     lateinit var save: Button
@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showToast(message: String){
-        Toast.makeText(this@MainActivity, message, Toast.LENGTH_SHORT).show()
+        Toast.makeText(this@SaveContactActivity, message, Toast.LENGTH_SHORT).show()
     }
 
     fun onCancelClicked(){
