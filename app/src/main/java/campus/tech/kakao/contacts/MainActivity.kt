@@ -28,6 +28,9 @@ import androidx.room.Update
 import campus.tech.kakao.contacts.R.id.female
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.xmlpull.v1.XmlSerializer
+import java.io.File
+import java.io.FileOutputStream
 
 class MainActivity : AppCompatActivity() {
     private val etName: EditText by lazy { findViewById(R.id.name) }
@@ -91,6 +94,7 @@ class MainActivity : AppCompatActivity() {
 
     abstract class AppDatabase : RoomDatabase() {
         abstract fun contactDao(): ContactDao
+        abstract fun userDao(): Any
     }
 
     private fun setupPhoneNumberInput() {
@@ -150,6 +154,8 @@ class MainActivity : AppCompatActivity() {
 
             GlobalScope.launch {
                 db.contactDao().insert(contact)
+                val allContacts = db.contactDao().getAllContacts()
+                writeContactsToXml(allContacts)
             }
 
             Toast.makeText(this, "연락처가 저장되었습니다.", Toast.LENGTH_SHORT).show()
@@ -158,5 +164,21 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "정확한 값을 입력해주세요", Toast.LENGTH_SHORT).show()
         }
     }
-}
 
+    private fun writeContactsToXml(allContacts: List<MainActivity.Contact>) {
+        val xml = buildString {
+            appendLine("<?xml version=\"1.0\" encoding=\"UTF-8\"?>")
+            appendLine("<contacts>")
+            for (contact in allContacts) {
+                appendLine("    <contact>")
+                appendLine("        <name>${contact.name}</name>")
+                appendLine("    </contact>")
+            }
+            appendLine("</contacts>")
+        }
+
+        val file = File("res/layout/collection.xml")
+        file.writeText(xml)
+    }
+
+}

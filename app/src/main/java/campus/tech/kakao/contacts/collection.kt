@@ -1,10 +1,14 @@
 package campus.tech.kakao.contacts
 
+import android.app.Application
 import android.os.Bundle
 import android.provider.ContactsContract.CommonDataKinds.Phone
 import android.provider.Settings.Global
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -25,13 +29,30 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class collection : AppCompatActivity() {
-    private lateinit var db: AppDatabase
+class ContactAdapter<Contact>(private val contacts: List<Contact>) : RecyclerView.Adapter<ContactAdapter<Any?>.ViewHolder>() {
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val nameTextView: TextView = itemView.findViewById(R.id.contact_name)
+    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_contact, parent, false)
+        return ViewHolder(view)
+    }
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val contact = contacts[position]
+        holder.nameTextView.text = contact.name
+    }
+    override fun getItemCount(): Int {
+        return contacts.size
+    }
+}
+class CollectionActivity : AppCompatActivity() {
+    private lateinit var db: MainActivity.AppDatabase
     private lateinit var tvmessage: TextView
-    private lateinit var recyclerView : RecyclerView
-    private lateinit var contactAdapter: ContactAdapter
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var contactAdapter: ContactAdapter<Any?>
+    private val container: FrameLayout by lazy { findViewById(R.id.container) }
+    private val addButton: Button by lazy { findViewById(R.id.addbutton) }
     override fun onCreate(savedInstanceState: Bundle?) {
-        //데이터 저장 및 로드
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_collection)
@@ -41,53 +62,44 @@ class collection : AppCompatActivity() {
             insets
         }
         tvmessage = findViewById(R.id.message)
-        //데이터 베이스 생성
-        db = Room.databaseBuilder(
-            applicationContext,
-            AppDatabase::class.java, "PhoneCollection"
-        ).build()
-        //RecyclerView 설정
-        recyclerView = findViewById<TextView>(R.id.recycler_View)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        contactAdapter = ContactAdapter()
-        recyclerView.adapter = contactAdapter
-        //db에서 연락처 목록 가져옴
+
+        // MainActivity에서 생성한 AppDatabase 인스턴스 가져오기
+        db = (application as MyApplication).db
+
+    }
+
+    private fun loadContacts() {
         GlobalScope.launch {
             val contacts = db.contactDao().getAllContacts()
             withContext(Dispatchers.Main) {
-                contactAdapter.setData(contacts)
-            }
-        }
-        fun showMessage() {
-            GlobalScope.launch {
-                if (db.userDao().getUsers().isEmpty()) {
-                    withContext(Dispatchers.Main) {
-                        tvmessage.visibility = View.VISIBLE
-                    }
-                } else {
-                    withContext(Dispatchers.Main) {
-                        tvmessage.visibility = View.GONE
-                    }
-                }
+                contactAdapter = ContactAdapter(contacts)
+                recyclerView.adapter = contactAdapter
             }
         }
     }
-    class ContactAdapter : RecyclerView.Adapter<ContactAdapter.ViewHolder> () {
-        private var contacts : List<Contact> = emptyList()
 
-        fun setData(newContacts : List<Contact>) {
-            contacts = newContacts
-            notifyDataSetChanged()
-        }
-
-        override fun onCreateViewHolder(
-            parent: ViewGroup,
-            viewType: Int
-        ): ContactAdapter.ViewHolder {
-            TODO("Not yet implemented")
+    private fun showMessage() {
+        GlobalScope.launch {
+            val hasUsers = db.userDao().getUsers().isNotEmpty()
+            withContext(Dispatchers.Main) {
+                tvmessage.visibility = if (hasUsers) View.GONE else View.VISIBLE
+            }
         }
     }
 }
+
+class MyApplication : Application() {
+    lateinit var db: MainActivity.AppDatabase
+
+    override fun onCreate() {
+        super.onCreate()
+        db = Room.databaseBuilder(
+            applicationContext,
+            MainActivity.AppDatabase::class.java, "PhoneCollection"
+        ).build()
+    }
+}
+
 
 
 
