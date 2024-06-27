@@ -1,5 +1,5 @@
-# android-contacts
-## KakaoTechCampus 2기 step2 1주차 1단계 과제 - 연락처 추가
+# KakaoTechCampus 2기 step2 
+## 1주차 1단계 과제 - 연락처 추가
 
 ### 기능 설명
 1. 전체 폼 디자인
@@ -14,10 +14,7 @@
 
 ---
 
-## KakatoTechCampus 2기 step2 1주차 2단계 과제 - 연락처 목록
-# android-contacts
-
-## KakaoTechCampus 2기 step2 1주차 2단계 과제 - 연락처 목록
+## 1주차 2단계 과제 - 연락처 목록
 
 ### 화면 3가지
 > main 화면
@@ -50,6 +47,7 @@
 ---
 
 ### 전체 디렉토리 구조 (2단계 기준)
+```bash
 app
 ├── build
 ├── src
@@ -82,5 +80,7 @@ app
 ├── .gitignore
 ├── build.gradle.kts
 └── proguard-rules.pro
+```
 
 ### 실행 영상 (전체 실행영상)
+https://youtu.be/re7rHcPNlhE
