@@ -15,7 +15,7 @@ class ContactDetail : AppCompatActivity() {
         val name = intent.getStringExtra("name")
         val phone = intent.getStringExtra("phone")
         val mail = intent.getStringExtra("email")
-        val birth = intent.getStringExtra("birthday")
+        val birth = intent.getStringExtra("birth")
         val gender = intent.getStringExtra("gender")
         val memo = intent.getStringExtra("memo")
 
