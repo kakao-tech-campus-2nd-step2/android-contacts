@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class ContactListActivity : AppCompatActivity() {
     private lateinit var recyclerViewAdapter: RecyclerViewAdapter
+    private lateinit var userList: MutableList<UserData>
     private val REQUEST_CODE_ADD_USER = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +28,7 @@ class ContactListActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val userList = mutableListOf<UserData>()
+        userList = mutableListOf()
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         recyclerViewAdapter=RecyclerViewAdapter(userList)
         recyclerView.adapter = recyclerViewAdapter
@@ -44,11 +45,20 @@ class ContactListActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        val helpMessage: TextView = findViewById<TextView>(R.id.helpMessage)
+
         if (requestCode == REQUEST_CODE_ADD_USER && resultCode == RESULT_OK) {
             val userData = data?.getSerializableExtra("userData") as? UserData
             if (userData != null) {
                 recyclerViewAdapter.addUserData(userData)
+
             }
+        }
+
+        if(userList.isEmpty()){
+            helpMessage.visibility = View.VISIBLE
+        }else{
+            helpMessage.visibility = View.GONE
         }
     }
 
