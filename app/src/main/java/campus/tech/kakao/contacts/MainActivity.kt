@@ -1,7 +1,6 @@
 package campus.tech.kakao.contacts
 
 import android.app.DatePickerDialog
-import android.content.Intent
 import android.icu.util.Calendar
 import android.os.Bundle
 import android.view.KeyEvent
@@ -28,6 +27,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var seeMoreLayout: LinearLayoutCompat
     lateinit var genderRadioGroup: RadioGroup
     private var gender = 0 // 0 : 무응답, 1 : 여성, 2 : 남성
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -119,7 +119,7 @@ class MainActivity : AppCompatActivity() {
             emailEditText.text.toString(),
             birthdayTextView.text.toString(),
             gender,
-            memoEditText.text.toString()
+            memoEditText.text.toString(),
         )
     }
 
@@ -144,11 +144,12 @@ class MainActivity : AppCompatActivity() {
      */
     private fun setOnClickListenerOfGenderRadioGroup() {
         genderRadioGroup.setOnCheckedChangeListener { group, checkId ->
-            gender = when (checkId) {
-                R.id.woman_radio_btn -> 1
-                R.id.man_radio_btn -> 2
-                else -> 0
-            }
+            gender =
+                when (checkId) {
+                    R.id.woman_radio_btn -> 1
+                    R.id.man_radio_btn -> 2
+                    else -> 0
+                }
         }
     }
 
@@ -163,14 +164,14 @@ class MainActivity : AppCompatActivity() {
             val year = calendar.get(Calendar.YEAR)
             val month = calendar.get(Calendar.MONTH)
             val day = calendar.get(Calendar.DAY_OF_MONTH)
-            val dateListener = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-                val formattedDate = "${year}.${month}.${dayOfMonth}"
-                birthdayTextView.text = formattedDate
-            }
+            val dateListener =
+                DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+                    val formattedDate = "$year.$month.$dayOfMonth"
+                    birthdayTextView.text = formattedDate
+                }
             DatePickerDialog(this, dateListener, year, month, day).show()
         }
     }
-
 
     /**
      * 뒤로 가기 버튼을 누르면 확인 팝업을 보여주도록 설정하는 함수
@@ -179,7 +180,10 @@ class MainActivity : AppCompatActivity() {
      * @param event 키 이벤트 객체
      */
     @Override
-    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+    override fun onKeyDown(
+        keyCode: Int,
+        event: KeyEvent?,
+    ): Boolean {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             showAlertDialog()
             return true
@@ -204,4 +208,3 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
-

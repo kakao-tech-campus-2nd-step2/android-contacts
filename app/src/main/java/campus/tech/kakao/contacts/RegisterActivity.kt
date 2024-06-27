@@ -33,7 +33,6 @@ class RegisterActivity : AppCompatActivity() {
         restoreInstanceState(savedInstanceState)
     }
 
-
     /**
      * 사용할 view들을 초기화하는 함수
      *
@@ -83,29 +82,30 @@ class RegisterActivity : AppCompatActivity() {
      * 하나 이상의 contact 객체가 들어오면 등록 안내 textview의 visibility를 gone으로 설정.
      */
     private fun setStartActivityLauncher() {
-        startActivityLauncher = registerForActivityResult(StartActivityForResult()) { result ->
-            if (result.resultCode == RESULT_OK) {
-                val contact: Contact? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                    result.data?.getParcelableExtra("CONTACT_RESULT", Contact::class.java)
-                } else {
-                    result.data?.getParcelableExtra("CONTACT_RESULT")
-                }
-                contact?.let {
-                    contactList.add(it)
-                    if (howToRegisterTextView.visibility != View.GONE) {
-                        howToRegisterTextView.visibility = View.GONE
+        startActivityLauncher =
+            registerForActivityResult(StartActivityForResult()) { result ->
+                if (result.resultCode == RESULT_OK) {
+                    val contact: Contact? =
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                            result.data?.getParcelableExtra("CONTACT_RESULT", Contact::class.java)
+                        } else {
+                            result.data?.getParcelableExtra("CONTACT_RESULT")
+                        }
+                    contact?.let {
+                        contactList.add(it)
+                        if (howToRegisterTextView.visibility != View.GONE) {
+                            howToRegisterTextView.visibility = View.GONE
+                        }
+                        contactRecyclerView.adapter?.notifyDataSetChanged()
                     }
-                    contactRecyclerView.adapter?.notifyDataSetChanged()
-
                 }
             }
-        }
     }
 
     class ContactRecyclerViewAdapter(
         var contactList: ArrayList<Contact>,
         var inflater: LayoutInflater,
-        val context: Context
+        val context: Context,
     ) : RecyclerView.Adapter<ContactRecyclerViewAdapter.ViewHolder>() {
         inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             val lastNameTextView: TextView
@@ -126,25 +126,34 @@ class RegisterActivity : AppCompatActivity() {
             private fun setOnClickListenerOfContactItemView(itemView: View) {
                 itemView.setOnClickListener {
                     val contact = contactList[adapterPosition]
-                    val intent = Intent(context, DetailActivity::class.java).apply {
-                        putExtra("contact", contact)
-                    }
+                    val intent =
+                        Intent(context, DetailActivity::class.java).apply {
+                            putExtra("contact", contact)
+                        }
                     context.startActivity(intent)
                 }
             }
         }
 
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        @Override
+        override fun onCreateViewHolder(
+            parent: ViewGroup,
+            viewType: Int,
+        ): ViewHolder {
             val view = inflater.inflate(R.layout.contact_item, parent, false)
             return ViewHolder(view)
         }
 
+        @Override
         override fun getItemCount(): Int {
             return contactList.size
         }
 
-        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        @Override
+        override fun onBindViewHolder(
+            holder: ViewHolder,
+            position: Int,
+        ) {
             holder.lastNameTextView.text = contactList.get(position).name.get(0).toString()
             holder.nameTextView.text = contactList.get(position).name
         }
@@ -155,6 +164,7 @@ class RegisterActivity : AppCompatActivity() {
      *
      * @param outState Activity의 현재 상태를 저장하는 Bundle 객체.
      */
+    @Override
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putParcelableArrayList("contact_list", ArrayList(contactList))
@@ -165,6 +175,7 @@ class RegisterActivity : AppCompatActivity() {
      *
      * @param savedInstanceState onSaveInstanceState에서 저장된 데이터를 포함하는 Bundle 객체.
      */
+    @Override
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         contactList = savedInstanceState.getParcelableArrayList("contact_list")!!
@@ -175,6 +186,7 @@ class RegisterActivity : AppCompatActivity() {
      *
      * @param savedInstanceState onSaveInstanceState에서 저장된 데이터를 포함하는 Bundle 객체.
      */
+    @Override
     private fun restoreInstanceState(savedInstanceState: Bundle?) {
         if (savedInstanceState != null) {
             contactList = savedInstanceState.getParcelableArrayList("contact_list") ?: ArrayList()
@@ -184,5 +196,4 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
     }
-
 }

@@ -19,7 +19,6 @@ class DetailActivity : AppCompatActivity() {
     lateinit var detailGenderLayout: ConstraintLayout
     lateinit var detailMemoLayout: ConstraintLayout
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
@@ -56,16 +55,16 @@ class DetailActivity : AppCompatActivity() {
         detailMemoLayout = findViewById(R.id.detail_memo_layout)
     }
 
-
     /**
      * 전달된 contact 정보를 view와 layout에 설정하는 함수.
      */
     private fun setContactDetails() {
-        val contact: Contact? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            intent.getParcelableExtra("contact", Contact::class.java)
-        } else {
-            intent.getParcelableExtra("contact")
-        }
+        val contact: Contact? =
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                intent.getParcelableExtra("contact", Contact::class.java)
+            } else {
+                intent.getParcelableExtra("contact")
+            }
 
         contact?.let {
             setDetailTextViews(it)
@@ -83,11 +82,12 @@ class DetailActivity : AppCompatActivity() {
         detailPhoneNumTextView.text = contact.phoneNum
         detailEmailTextView.text = contact.email ?: ""
         detailBirthdayTextView.text = contact.birthday ?: ""
-        detailGenderTextView.text = when (contact.gender) {
-            1 -> "여성"
-            2 -> "남성"
-            else -> ""
-        }
+        detailGenderTextView.text =
+            when (contact.gender) {
+                1 -> "여성"
+                2 -> "남성"
+                else -> ""
+            }
         detailMemoTextView.text = contact.memo ?: ""
     }
 
