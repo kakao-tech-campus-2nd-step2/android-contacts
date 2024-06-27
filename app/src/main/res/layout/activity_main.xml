@@ -109,14 +109,21 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/mailText">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/birthdayEdit"
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/birthdayButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/color_shape"
                     android:hint="생일"
-                    android:visibility="gone" />
+                    android:paddingStart="15dp"
+                    android:textAlignment="textStart"
+                    android:textColorHint="@color/faded"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/mailText" />
             </com.google.android.material.textfield.TextInputLayout>
+
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/genderText"
@@ -133,6 +140,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/color_shape"
+                    android:focusable="false"
                     android:hint="성별"
                     android:visibility="gone" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -185,12 +193,12 @@
     </androidx.core.widget.NestedScrollView>
 
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/cancleButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/button_shape"
-        android:padding="16dp"
+        android:padding="10dp"
         android:text="취소"
         android:textColor="@color/black"
         android:textSize="20sp"
@@ -199,13 +207,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintVertical_weight="1" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/saveButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/button_shape"
-        android:backgroundTint="@color/transparent"
-        android:padding="16dp"
+        android:backgroundTint="@color/white"
+        android:padding="10dp"
         android:text="저장"
         android:textColor="@color/black"
         android:textSize="20sp"
@@ -213,5 +221,26 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/cancleButton"
         app:layout_constraintVertical_weight="1" />
+
+
+    <FrameLayout
+        android:id="@+id/frm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@color/white"
+        android:visibility="gone">
+
+        <CalendarView
+            android:id="@+id/birthdayCalendar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/birthdayText" />
+    </FrameLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
