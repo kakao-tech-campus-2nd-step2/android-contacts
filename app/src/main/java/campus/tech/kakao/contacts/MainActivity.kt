@@ -1,6 +1,7 @@
 package campus.tech.kakao.contacts
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
@@ -15,8 +16,15 @@ class MainActivity : AppCompatActivity() {
 
         val nameInputForm = findViewById<EditText>(R.id.nameInputForm)
         val phoneInputForm = findViewById<EditText>(R.id.phoneInputForm)
+        val moreButton = findViewById<LinearLayout>(R.id.moreButton)
+        val moreInformationForm = findViewById<LinearLayout>(R.id.moreInformationForm)
         val saveButton = findViewById<Button>(R.id.saveButton)
         val cancelButton = findViewById<Button>(R.id.cancelButton)
+
+        moreButton.setOnClickListener {
+            moreInformationForm.setVisibility(View.VISIBLE)
+            moreButton.setVisibility(View.GONE)
+        }
 
         saveButton.setOnClickListener {
             if (nameInputForm.text.toString().trim().isEmpty()) {
