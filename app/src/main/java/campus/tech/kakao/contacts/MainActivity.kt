@@ -25,12 +25,42 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        getContactList()
     }
 
+    fun getContactList() {
+        val contactList = findViewById<RecyclerView>(R.id.contact_list)
+        contactList.adapter = contactListAdapter(contacts, LayoutInflater.from(this))
+        contactList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
     }
 
+}
 
+class contactListAdapter(
+    val contacts: MutableList<MutableList<String>>,
+    val layoutInflater: LayoutInflater
+) : RecyclerView.Adapter<contactListAdapter.ViewHolder>() {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val nameView: TextView
 
-
+        init {
+            nameView = itemView.findViewById(R.id.contact_owner_name)
+        }
     }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view = layoutInflater.inflate(R.layout.contact_list_item, parent, false)
+        return ViewHolder(view)
+    }
+
+    override fun getItemCount(): Int {
+        return contacts.size
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.nameView.text = contacts.get(position)[0]
+    }
+
 }
