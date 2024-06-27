@@ -3,7 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="120dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#fdfdfd"
+    style="@style/CardView"
+    android:layout_marginHorizontal="30dp"
+    android:layout_marginVertical="20dp"
+    android:background="@drawable/background_contact_item"
+    android:translationZ="10dp"
     android:orientation="horizontal">
     <ImageView
         app:layout_constraintLeft_toLeftOf="parent"
