@@ -5,6 +5,7 @@ import android.content.ContentValues
 import android.icu.util.Calendar
 import android.os.Bundle
 import android.provider.ContactsContract
+import android.provider.Settings.Global
 import android.text.Editable
 import android.text.InputFilter
 import android.text.InputType
@@ -15,7 +16,18 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Entity
+import androidx.room.Insert
+import androidx.room.PrimaryKey
+import androidx.room.Query
+import androidx.room.Room
+import androidx.room.RoomDatabase
+import androidx.room.Update
 import campus.tech.kakao.contacts.R.id.female
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private val etName: EditText by lazy { findViewById(R.id.name) }
@@ -27,11 +39,16 @@ class MainActivity : AppCompatActivity() {
     private val rgfemale: RadioButton by lazy { findViewById(R.id.female) }
     private val rgmale: RadioButton by lazy { findViewById(R.id.male) }
     private val btnbirthday: Button by lazy { findViewById(R.id.birthday) }
-    private val etbirthday : EditText by lazy { findViewById(R.id.birthday_1) }
-    private val rgGender : RadioGroup by lazy { findViewById(R.id.Gender)}
+    private val etbirthday: EditText by lazy { findViewById(R.id.birthday_1) }
+    private val rgGender: RadioGroup by lazy { findViewById(R.id.Gender) }
+    private lateinit var db: AppDatabase
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        db = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java, "PhoneCollection"
+        ).build()
         btnsave.setOnClickListener {
             saveContact()
             Toast.makeText(this, "저장이 완료되었습니다.", Toast.LENGTH_SHORT).show()
@@ -44,6 +61,36 @@ class MainActivity : AppCompatActivity() {
         btnbirthday.setOnClickListener {
             showDatePickerDialog()
         }
+    }
+
+    @Entity(tableName = "contacts")
+    data class Contact(
+        @PrimaryKey(autoGenerate = true) val id: Int = 0,
+        val name: String,
+        val phone: String,
+        val gender: String,
+        val email: String,
+        val message: String,
+        val birthday: String
+    )
+
+    @Dao
+    interface ContactDao {
+        @Insert
+        suspend fun insert(contact: Contact)
+
+        @Update
+        suspend fun update(contact: Contact)
+
+        @Delete
+        suspend fun delete(contact: Contact)
+
+        @Query("SELECT * FROM contacts")
+        fun getAllContacts(): List<Contact>
+    }
+
+    abstract class AppDatabase : RoomDatabase() {
+        abstract fun contactDao(): ContactDao
     }
 
     private fun setupPhoneNumberInput() {
@@ -70,7 +117,8 @@ class MainActivity : AppCompatActivity() {
         DatePickerDialog(
             this,
             { _, selectedYear, selectedMonth, selectedDay ->
-                val selectedDate = String.format("%d-%02d-%02d", selectedYear, selectedMonth + 1, selectedDay)
+                val selectedDate =
+                    String.format("%d-%02d-%02d", selectedYear, selectedMonth + 1, selectedDay)
                 etbirthday.setText(selectedDate)
             },
             year, month, day
@@ -91,19 +139,23 @@ class MainActivity : AppCompatActivity() {
         }
 
         if (name.isNotEmpty() && phone.isNotEmpty() && email.isNotEmpty() && message.isNotEmpty()) {
-            val values = ContentValues().apply {
-                put(ContactsContract.Contacts.DISPLAY_NAME, name)
-                put(ContactsContract.Contacts.IN_DEFAULT_DIRECTORY, birthday)
-                put(ContactsContract.CommonDataKinds.Phone.NUMBER, phone)
-                put(ContactsContract.Contacts.IN_DEFAULT_DIRECTORY, email)
-                put(ContactsContract.Contacts.IN_DEFAULT_DIRECTORY, message)
-                put(ContactsContract.CommonDataKinds.StructuredName.CONTACT_ID, gender)
+            val contact = Contact(
+                name = name,
+                phone = phone,
+                email = email,
+                message = message,
+                gender = gender,
+                birthday = birthday
+            )
+
+            GlobalScope.launch {
+                db.contactDao().insert(contact)
             }
 
-            contentResolver.insert(ContactsContract.Contacts.CONTENT_URI, values)
+            Toast.makeText(this, "연락처가 저장되었습니다.", Toast.LENGTH_SHORT).show()
+            finish()
         } else {
             Toast.makeText(this, "정확한 값을 입력해주세요", Toast.LENGTH_SHORT).show()
-            finish()
         }
     }
 }
