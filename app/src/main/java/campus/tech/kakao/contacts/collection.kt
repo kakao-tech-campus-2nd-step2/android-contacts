@@ -1,6 +1,7 @@
 package campus.tech.kakao.contacts
 
 import android.app.Application
+import android.content.Intent
 import android.os.Bundle
 import android.provider.ContactsContract.CommonDataKinds.Phone
 import android.provider.Settings.Global
@@ -31,7 +32,7 @@ import kotlinx.coroutines.withContext
 
 class ContactAdapter<Contact>(private val contacts: List<Contact>) : RecyclerView.Adapter<ContactAdapter<Any?>.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val nameTextView: TextView = itemView.findViewById(R.id.contact_name)
+        val nameTextView: TextView = itemView.findViewById(R.id.)
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_contact, parent, false)
@@ -65,6 +66,11 @@ class CollectionActivity : AppCompatActivity() {
 
         // MainActivity에서 생성한 AppDatabase 인스턴스 가져오기
         db = (application as MyApplication).db
+
+        addButton.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 
