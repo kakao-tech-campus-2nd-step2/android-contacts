@@ -3,150 +3,164 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/face"
+    <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="130dp"
-        android:src="@drawable/baseline_face_24"
-        app:layout_constraintTop_toTopOf="@id/main"
-        
-        />
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/buttonLayout"
+        android:fillViewport="true">
 
-    <EditText
-        android:id="@+id/name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="이름"
-        style="@style/inputBox"
-        app:layout_constraintTop_toBottomOf="@id/face"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/tel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="전화번호"
-        style="@style/inputBox"
-        app:layout_constraintTop_toBottomOf="@id/name"
-        android:inputType="number"
-        android:digits="0123456789"/>
+            <ImageView
+                android:id="@+id/face"
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:src="@drawable/baseline_face_24"
+                app:layout_constraintTop_toTopOf="parent"
 
-    <EditText
-        android:id="@+id/mail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="메일"
-        style="@style/inputBox"
-        app:layout_constraintTop_toBottomOf="@id/tel"/>
+                />
 
-    <TextView
-        android:id="@+id/viewMore"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/mail"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:text="더보기"
-        android:drawableEnd="@drawable/arrow_down"
-        />
+            <EditText
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="이름"
+                style="@style/inputBox"
+                app:layout_constraintTop_toBottomOf="@id/face"/>
+
+            <EditText
+                android:id="@+id/tel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="전화번호"
+                style="@style/inputBox"
+                app:layout_constraintTop_toBottomOf="@id/name"
+                android:inputType="number"
+                android:digits="0123456789"/>
+
+            <EditText
+                android:id="@+id/mail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="메일"
+                style="@style/inputBox"
+                app:layout_constraintTop_toBottomOf="@id/tel"/>
+
+            <TextView
+                android:id="@+id/viewMore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/mail"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="더보기"
+                android:drawableEnd="@drawable/arrow_down"
+                />
 
 
 
 
 
-    <EditText
-        android:id="@+id/birth"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="생일"
-        style="@style/inputBox"
-        app:layout_constraintTop_toBottomOf="@id/mail"
-        android:visibility="invisible"/>
+            <EditText
+                android:id="@+id/birth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="생일"
+                style="@style/inputBox"
+                app:layout_constraintTop_toBottomOf="@id/mail"
+                android:visibility="invisible"/>
 
 
-    <EditText
-        android:id="@+id/gender"
-        style="@style/inputBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:hint="성별"
-        app:layout_constraintTop_toBottomOf="@id/birth"
-        android:visibility="invisible"
-        android:focusable="false"/>
+            <EditText
+                android:id="@+id/gender"
+                style="@style/inputBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:hint="성별"
+                app:layout_constraintTop_toBottomOf="@id/birth"
+                android:visibility="invisible"
+                android:focusable="false"/>
+
+            <LinearLayout
+                android:id="@+id/genderRadio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@id/gender"
+                app:layout_constraintRight_toRightOf="@id/gender"
+                android:visibility="invisible">
+
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="여성"
+                        android:padding="5dp"
+                        android:layout_marginRight="15dp"/>
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="남성"
+                        android:padding="5dp"/>
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+
+
+            <EditText
+                android:id="@+id/memo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="메모"
+                style="@style/inputBox"
+                app:layout_constraintTop_toBottomOf="@id/gender"
+                android:visibility="invisible"/>
+
+            <!-- 기존 내용을 여기에 그대로 넣습니다 (버튼 제외) -->
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
     <LinearLayout
-        android:id="@+id/genderRadio"
-        android:layout_width="wrap_content"
+        android:id="@+id/buttonLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@id/gender"
-        app:layout_constraintRight_toRightOf="@id/gender"
-        android:visibility="invisible">
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-        <RadioGroup
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/cancel"
+            style="@style/btn"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
+            android:text="취소" />
 
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="여성"
-                android:padding="5dp"
-                android:layout_marginRight="15dp"/>
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="남성"
-                android:padding="5dp"/>
-
-        </RadioGroup>
+        <Button
+            android:id="@+id/save"
+            style="@style/btn"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="저장"/>
 
     </LinearLayout>
 
-
-
-    <EditText
-        android:id="@+id/memo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="메모"
-        style="@style/inputBox"
-        app:layout_constraintTop_toBottomOf="@id/gender"
-        android:visibility="invisible"/>
-
-
-    <Button
-        android:id="@+id/cancel"
-        style="@style/btn"
-        android:layout_width="0dp"
-        app:layout_constraintWidth_percent="0.5"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="취소" />
-
-    <Button
-        android:id="@+id/save"
-        style="@style/btn"
-        android:layout_width="0dp"
-        app:layout_constraintWidth_percent="0.5"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:text="저장"/>
-
-
-
-
-
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
+
