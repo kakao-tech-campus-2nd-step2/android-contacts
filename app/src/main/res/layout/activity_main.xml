@@ -157,6 +157,7 @@
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/cancel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -165,6 +166,7 @@
             android:textSize="20sp" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/save"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
