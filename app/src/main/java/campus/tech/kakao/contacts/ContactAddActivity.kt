@@ -54,10 +54,11 @@ class ContactAddActivity : AppCompatActivity() {
             }
 
             //성별 선택
-            val gender = if (genderRadio.checkedRadioButtonId == R.id.femaleButton) {
-                "여성"
-            } else {
-                "남성"
+            //아무런 성별도 선택하지 않은 경우 " " 값이 default 이어야 함
+            val gender = when(genderRadio.checkedRadioButtonId){
+                R.id.femaleButton -> "여성"
+                R.id.maleButton -> "남성"
+                else -> " "
             }
 
             //contact 객체 생성
