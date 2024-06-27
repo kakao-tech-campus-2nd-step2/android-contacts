@@ -7,13 +7,171 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+    <ScrollView
+        android:id="@+id/field"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintVertical_weight="10"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btnlayout"
+        app:layout_constraintEnd_toEndOf="@+id/btnlayout">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            >
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/icon"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:src="@drawable/icon"
+                android:scaleType="centerInside"
+                app:layout_constraintBottom_toTopOf="@+id/edit_name"/>
+
+            <EditText
+                android:id="@+id/edit_name"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:hint="@string/edittext_name"
+                android:lineSpacingExtra="100dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/textfield_bg"/>
+
+            <EditText
+                android:id="@+id/edit_phone"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:hint="@string/edittext_phone"
+                android:inputType="phone"
+                android:lineSpacingExtra="100dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/textfield_bg"/>
+
+            <EditText
+                android:id="@+id/edit_email"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:hint="@string/edittext_email"
+                android:inputType="textEmailAddress"
+                android:lineSpacingExtra="100dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/textfield_bg"/>
+
+
+            <LinearLayout
+                android:id="@+id/addfield"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:visibility="gone">
+
+                <EditText
+                    android:id="@+id/edit_birth"
+                    android:layout_width="350dp"
+                    android:layout_height="50dp"
+                    android:hint="@string/edittext_birth"
+                    android:focusableInTouchMode="false"
+                    android:lineSpacingExtra="100dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/textfield_bg"/>
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/edit_gender"
+                        android:layout_width="350dp"
+                        android:layout_height="50dp"
+                        android:hint="@string/edittext_gender"
+                        android:enabled="false"
+                        android:lineSpacingExtra="100dp"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/textfield_bg"/>
+
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_gravity="end">
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/gender_w"
+                            android:paddingEnd="20dp"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/gender_m"
+                            android:paddingEnd="20dp"/>
+                    </RadioGroup>
+
+                </FrameLayout>
+
+
+                <EditText
+                    android:id="@+id/edit_note"
+                    android:layout_width="350dp"
+                    android:layout_height="50dp"
+                    android:hint="@string/edittext_note"
+                    android:lineSpacingExtra="100dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/textfield_bg"/>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00FF0000"
+                android:text="@string/button_more"
+                android:drawableEnd="@drawable/icon_downarrow"
+                android:textColor="@color/black"
+                />
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </ScrollView>
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/btnlayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintVertical_weight="1"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="@+id/field"
+        app:layout_constraintTop_toBottomOf="@+id/field"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="#00FF0000"
+            android:textColor="@color/black"
+            android:text="@string/button_cancel"
+            android:textSize="20sp"/>
+
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="#00FF0000"
+            android:textColor="@color/black"
+            android:text="@string/button_save"
+            android:textSize="20sp"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

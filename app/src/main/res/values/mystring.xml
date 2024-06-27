@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="button_cancel">취소</string>
+    <string name="button_save">저장</string>
+    <string name="edittext_name">이름</string>
+    <string name="edittext_phone">전화번호</string>
+    <string name="edittext_email">메일</string>
+    <string name="edittext_birth">생일</string>
+    <string name="edittext_gender">성별</string>
+    <string name="gender_w">여성</string>
+    <string name="gender_m">남성</string>
+    <string name="edittext_note">메모</string>
+    <string name="button_more">더보기</string>
+</resources>
