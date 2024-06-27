@@ -28,4 +28,16 @@
         android:background="@color/inputFormBackgroundColor"
         android:hint="이름" />
 
+    <EditText
+        android:id="@+id/phoneInputForm"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:layout_below="@+id/nameInputForm"
+        android:padding="12dp"
+        android:textSize="18sp"
+        android:inputType="phone"
+        android:background="@color/inputFormBackgroundColor"
+        android:hint="전화번호"/>
+
 </RelativeLayout>
