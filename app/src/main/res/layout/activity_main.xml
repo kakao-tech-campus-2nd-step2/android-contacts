@@ -121,32 +121,28 @@
         app:layout_constraintTop_toBottomOf="@id/gender"
         android:visibility="invisible"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:orientation="horizontal"
-        android:weightSum="1"
+
+    <Button
+        android:id="@+id/cancel"
+        style="@style/btn"
+        android:layout_width="0dp"
+        app:layout_constraintWidth_percent="0.5"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:text="취소" />
 
-        <Button
-            android:id="@+id/cancel"
-            style="@style/btn"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.5"
-            android:text="취소" />
+    <Button
+        android:id="@+id/save"
+        style="@style/btn"
+        android:layout_width="0dp"
+        app:layout_constraintWidth_percent="0.5"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="저장"/>
 
-        <Button
-            android:id="@+id/save"
-            style="@style/btn"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.5"
-            android:text="저장"/>
 
-    </LinearLayout>
 
 
 

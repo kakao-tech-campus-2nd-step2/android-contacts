@@ -52,7 +52,9 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "취소되었습니다.", Toast.LENGTH_SHORT).show()
         }
         save.setOnClickListener {
-            Toast.makeText(this, "저장되었습니다.", Toast.LENGTH_SHORT).show()
+            if (checkValide()) {
+                Toast.makeText(this, "저장되었습니다.", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -62,6 +64,20 @@ class MainActivity : AppCompatActivity() {
         genderRadio.visibility = View.VISIBLE
         memo.visibility = View.VISIBLE
         viewMore.visibility = View.INVISIBLE
+    }
+
+    private fun checkValide(): Boolean {
+        if (name.text.isEmpty()) {
+            Toast.makeText(this, "이름은 필수 입력값입니다.", Toast.LENGTH_SHORT).show()
+            return false
+        }
+        else if (tel.text.isEmpty()) {
+            Toast.makeText(this, "전화번호는 필수 입력값입니다.", Toast.LENGTH_SHORT).show()
+            return false
+        }
+        else {
+            return true
+        }
     }
 
 
