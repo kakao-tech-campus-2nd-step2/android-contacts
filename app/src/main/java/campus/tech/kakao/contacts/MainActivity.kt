@@ -25,14 +25,14 @@ class MainActivity : AppCompatActivity() {
         var SaveText : TextView = findViewById(R.id.SaveText)
         var CancleText : TextView = findViewById(R.id.CancleText)
 
-        MoreText.setOnClickListener {
+         MoreText.setOnClickListener {
             MoreText.visibility = View.GONE
             BirthEdit.visibility = View.VISIBLE
             MemoEdit.visibility = View.VISIBLE
             GenderArea.visibility = View.VISIBLE
         }
 
-        
+
         SaveText.setOnClickListener {
             if (NameEdit.text.toString().trim().isEmpty()){
                 Toast
@@ -51,9 +51,12 @@ class MainActivity : AppCompatActivity() {
                     .makeText(this@MainActivity,"저장되었습니다.",Toast.LENGTH_SHORT)
                     .show()
             }
-
-            
         }
 
+        CancleText.setOnClickListener{
+            Toast
+                .makeText(this@MainActivity,"취소되었습니다.",Toast.LENGTH_SHORT)
+                .show()
+        }
     }
 }
