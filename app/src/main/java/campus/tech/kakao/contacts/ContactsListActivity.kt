@@ -35,6 +35,12 @@ class ContactsListActivity : AppCompatActivity() {
 
         initiateRecyclerView()
         initiateAddContactButton()
+        testAddContacts()
+    }
+
+    fun testAddContacts(){
+        addNewContact(Contact("권성찬", "010123123", "kscksc@ksc.com", AddContactActivity.GENDER_MALE, LocalDate.now(), "Hello!!"))
+        addNewContact(Contact("박병호", "4442358", null, null, null, null))
     }
 
     fun initiateRecyclerView() {
@@ -73,28 +79,13 @@ class ContactsListActivity : AppCompatActivity() {
 
     fun startShowContactInfoActivity(contact: Contact){
         val intent = Intent()
-        val componentName: ComponentName = ComponentName(
+        val componentName = ComponentName(
             this@ContactsListActivity,
-            AddContactActivity::class.java
+            ContactInfoActivity::class.java
         )
+        intent.component = componentName
         intent.putExtra("contact", contact)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            intent.getSerializableExtra("contact", Contact::class.java)
-        }
-        else{
-            intent.getSerializableExtra("contact")
-        }
-    }
-
-    fun birthdayFromString(str: String?): LocalDate?{
-        if(str == null){
-            return null
-        }
-        return try{
-            LocalDate.parse(str)
-        } catch(e: Exception){
-            null
-        }
+        startActivity(intent)
     }
 
     fun getContactFromIntent(intent: Intent?): Contact?{
@@ -109,5 +100,6 @@ class ContactsListActivity : AppCompatActivity() {
 
     fun clickContactItem(contactItem:Contact){
         Log.d("KSC", "Name: ${contactItem.name}, Phone: ${contactItem.phoneNumber}\nBirthday: ${contactItem.birthday?:"NULL"},Email: ${contactItem.email?:"NULL"}")
+        startShowContactInfoActivity(contactItem)
     }
 }
