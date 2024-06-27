@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
                         Toast.makeText(this, "저장이 완료 되었습니다", Toast.LENGTH_SHORT).show()
                     }
                     RESULT_CANCELED -> {
-                        Log.d("Main","Canceled")
+                        Log.d("MainActivity","Canceled")
                         Toast.makeText(this, "취소 되었습니다", Toast.LENGTH_SHORT).show()
                     }
                 }

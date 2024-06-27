@@ -1,6 +1,8 @@
 package campus.tech.kakao.contacts
 
 import android.app.DatePickerDialog
+import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.icu.util.Calendar
 import android.os.Bundle
@@ -10,11 +12,14 @@ import android.widget.EditText
 import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.isEmpty
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class ContactActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +38,15 @@ class ContactActivity : AppCompatActivity() {
         val birth: TextView = findViewById(R.id.birthday)
         val sex: RadioGroup = findViewById(R.id.sex_radio_group)
         val memo: EditText = findViewById(R.id.memo)
+
+        val onBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (!isInfoEmpty(name, phoneNumber, mail, birth, sex, memo)) {
+                    buildAlertDialog(this@ContactActivity)
+                } else finish()
+            }
+        }
+        onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
 
         cancelButton.setOnClickListener {
             val returnIntent: Intent = Intent()
@@ -66,6 +80,18 @@ class ContactActivity : AppCompatActivity() {
                 { _, year, month, dayOfMonth -> birth.text = "$year-%02d-%02d".format(month + 1, dayOfMonth) },
                 cYear, cMonth, cDay).show()
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d("ContactActivity","onPause")
+//        val backDialog = Dialog(this)
+//        backDialog.
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d("ContactActivity","onStop")
     }
 
     fun isValidInfo(name: EditText, phoneNumber: EditText): Boolean {
@@ -107,5 +133,26 @@ class ContactActivity : AppCompatActivity() {
 
         val contact: Contact = Contact(nameInfo, phoneNumberInfo,mailInfo, birthInfo, sexInfo, memoInfo)
         return contact
+    }
+
+    fun isInfoEmpty(name: EditText, phoneNumber: EditText, mail: EditText,
+                    birth: TextView, sex: RadioGroup, memo: EditText): Boolean {
+        return name.text.isEmpty() &&
+        phoneNumber.text.isEmpty() &&
+        mail.text.isEmpty() &&
+        birth.text.isEmpty() &&
+        sex.checkedRadioButtonId == -1 &&
+        memo.text.isEmpty()
+    }
+
+    private fun buildAlertDialog(aContext: Context) {
+        MaterialAlertDialogBuilder(aContext)
+            .setMessage("작성 중인 내용이 있습니다. 정말 나가시겠습니까?")
+            .setNegativeButton("취소") { dialog, which ->
+            }
+            .setPositiveButton("확인") { dialog, which ->
+                finish()
+            }
+            .show()
     }
 }
