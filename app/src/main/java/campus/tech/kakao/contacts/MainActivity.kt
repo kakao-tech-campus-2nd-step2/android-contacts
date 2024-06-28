@@ -2,6 +2,7 @@ package campus.tech.kakao.contacts
 
 import android.app.DatePickerDialog
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -52,27 +53,60 @@ class MainActivity : AppCompatActivity() {
 
     fun saveButtonSetOnClickListener(context : Context){
         findViewById<TextView>(R.id.button_save).setOnClickListener(){
-            displaySaveMessage(context)
+            saveContact(context)
         }
     }
 
+    fun existNameAndPhoneNum() : Boolean{
+        val checkNum = checkNameAndPhoneNum()
+        return if(checkNum == 2 || checkNum == 3) false
+        else true
+    }
+
+    fun saveContact(context:Context){
+        val intent = Intent(this, ListActivity::class.java)
+        if (existNameAndPhoneNum()){
+            displaySaveMessage(context)
+            intent.putExtra("name", name.text.toString())
+            intent.putExtra("phoneNumber", phoneNumber.text.toString())
+            intent.putExtra("mail", mail.text.toString())
+            intent.putExtra("birthday", birthday.text.toString())
+            intent.putExtra("gender", gender.text.toString())
+            intent.putExtra("memo", memo.text.toString())
+            startActivity(intent)
+        }
+        else {
+            displaySaveMessage(context)
+        }
+
+    }
+
     fun displaySaveMessage(context: Context){
-        val text = checkNameAndPhoneNum()
+        val text = getToastMessageToNameAndPhoneNum()
         val saveMessage = Toast.makeText(context, text, Toast.LENGTH_SHORT)
         saveMessage.show()
     }
 
-    fun checkNameAndPhoneNum() : String{
-        if (name.text.toString() == ""){
+
+    fun checkNameAndPhoneNum() : Int{
+        return if (name.text.toString() == ""){
             name.requestFocus()
-            return "이름을 입력해야만 합니다"
-        }
-        else if(phoneNumber.text.toString() == ""){
+            2
+        } else if(phoneNumber.text.toString() == ""){
             phoneNumber.requestFocus()
-            return "번호를 입력해야만 합니다"
+            3
+        } else{
+            1
         }
-        else{
-            return "저장이 완료 되었습니다"
+    }
+
+    fun getToastMessageToNameAndPhoneNum() : String{
+        val checkNum = checkNameAndPhoneNum()
+        return when(checkNum){
+            1 -> "저장이 완료되었습니다"
+            2 -> "이름을 입력해 주세요"
+            3 -> "전화번호를 입력해 주세요"
+            else -> "오류"
         }
     }
 
@@ -126,6 +160,5 @@ class MainActivity : AppCompatActivity() {
         memo = findViewById<EditText>(R.id.input_memo)
         moreInfoButton = findViewById<TextView>(R.id.more_info_button)
     }
-
 }
 

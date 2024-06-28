@@ -10,5 +10,33 @@ class ListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
+        val intent = getIntent()
+        val contactList = mutableListOf<Contact>()
+        val contact = Contact(
+            intent.getStringExtra("name").toString(),
+            intent.getStringExtra("phoneNumber").toString(),
+            intent.getStringExtra("mail").toString(),
+            intent.getStringExtra("birthday").toString(),
+            intent.getStringExtra("gender").toString(),
+            intent.getStringExtra("memo").toString())
+        contactList.add(contact)
+    }
+}
+
+class Contact(var name : String, var phoneNumber : String, var mail : String, var birthday : String, var gender : String, var memo : String){
+    fun existsMail(): Boolean {
+        return mail != ""
+    }
+
+    fun existsBirthday(): Boolean {
+        return birthday != ""
+    }
+
+    fun existsGender(): Boolean {
+        return gender != ""
+    }
+
+    fun existsMemo(): Boolean {
+        return memo != ""
     }
 }
