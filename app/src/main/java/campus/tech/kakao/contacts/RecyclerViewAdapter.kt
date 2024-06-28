@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 
 class RecyclerViewAdapter(
@@ -29,6 +30,7 @@ class RecyclerViewAdapter(
 //				Toast.makeText(context, ""+contact.name+" "+contact.phone, Toast.LENGTH_SHORT).show()
 				val intent = Intent(context, ContactDetail::class.java)
 				intent.putExtra("contact-id", contact.id)
+				startActivity(context, intent, null)
 			}
 		}
 	}
