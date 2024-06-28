@@ -1,6 +1,8 @@
 package campus.tech.kakao.contacts
 
 import android.app.DatePickerDialog
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -55,6 +57,7 @@ class MainActivity : AppCompatActivity() {
         }
         save.setOnClickListener {
             if (checkValide()) {
+                saveData()
                 Toast.makeText(this, "저장되었습니다.", Toast.LENGTH_SHORT).show()
             }
         }
@@ -96,6 +99,25 @@ class MainActivity : AppCompatActivity() {
             cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)).show()
     }
 
+    private fun saveData() {
+        val nameData = name.text.toString()
+        val telData = tel.text.toString()
+        val mailData = mail.text.toString()
+        val birthData = birth.text.toString()
+        val genderData = genderRadio
+        val memoData = memo.text.toString()
 
+        val intent = Intent().apply {
+            putExtra("newData", true)
+            putExtra("name", nameData)
+            putExtra("tel", telData)
+            putExtra("mail", mailData)
+            putExtra("birth", birthData)
+            putExtra("memo", memoData)
+        }
+
+        setResult(RESULT_OK, intent)
+        finish()
+    }
 
 }
