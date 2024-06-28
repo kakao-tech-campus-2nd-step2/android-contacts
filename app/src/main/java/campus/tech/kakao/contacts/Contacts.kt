@@ -1,8 +1,8 @@
 package campus.tech.kakao.contacts
 
-class Contacts {
+object Contacts {
 
-    lateinit var contacts: ArrayList<Contact>
+    private lateinit var contacts: ArrayList<Contact>
 
     init {
         initializeContacts()
@@ -12,9 +12,22 @@ class Contacts {
         contacts = ArrayList()
     }
 
-    fun addContact (infos: Array<String>): Boolean {
+    fun getSize(): Int {
+        return contacts.size
+    }
+
+    fun getList(): ArrayList<Contact> {
+        return contacts
+    }
+
+    fun findContact(name: String, phoneNumber: String): Int {
+        val contact = Contact(name, phoneNumber)
+        return contacts.indexOf(contact)
+    }
+
+    fun addContact(infos: Array<String>): Boolean {
         val contact = Contact(infos[0], infos[1], infos[2], infos[3], infos[4], infos[5])
-        if (!contacts.contains(contact)) {
+        if (findContact(infos[0], infos[1]) == -1) {
             contacts.add(contact)
             return true
         }
@@ -22,8 +35,9 @@ class Contacts {
     }
 
     fun delContact(name: String, phoneNumber: String) {
-        val contact = Contact(name, phoneNumber,"","","","")
-        contacts.remove(contact)
+        var idx = findContact(name, phoneNumber)
+        if (idx != -1)
+            contacts.removeAt(idx)
     }
 
 }

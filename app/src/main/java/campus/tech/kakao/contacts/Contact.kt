@@ -1,6 +1,6 @@
 package campus.tech.kakao.contacts
 
-class Contact(
+data class Contact(
     var name: String, var phoneNumber: String, var mail: String = "",
     var birth: String = "", var gender: String = "", var memo: String = ""
 ) {

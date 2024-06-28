@@ -9,6 +9,7 @@
 
     <TextView
         android:id="@+id/textView"
+        android:visibility="visible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="오른쪽 + 버튼을 클릭하여\n연락처를 등록해보세요."
@@ -20,6 +21,9 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:visibility="visible"
+        tools:listitem="@layout/contact_cardview"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

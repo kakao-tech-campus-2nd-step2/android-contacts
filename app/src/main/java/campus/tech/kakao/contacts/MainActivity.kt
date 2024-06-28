@@ -1,10 +1,7 @@
 package campus.tech.kakao.contacts
 
-import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.os.Bundle
-import android.os.Message
-import android.view.MotionEvent
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.Button
@@ -14,6 +11,7 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -26,7 +24,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var inputFields: Array<View>
     private lateinit var buttons: Array<Button>
     private lateinit var checkButtons: LinearLayout
-    private lateinit var contacts: Contacts
+    private lateinit var viewModel: SubViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,7 +59,8 @@ class MainActivity : AppCompatActivity() {
         buttons[0].setOnClickListener(clickListener)
         buttons[1].setOnClickListener(clickListener)
 
-        contacts = Contacts()
+        viewModel = ViewModelProvider(this).get(SubViewModel::class.java)
+
     }
 
     private fun getGenderVal(): String {
@@ -121,7 +120,7 @@ class MainActivity : AppCompatActivity() {
     private fun cancelContact() {
         val name = (inputFields[0] as EditText).text.toString().trim()
         val phoneNumber = (inputFields[1] as EditText).text.toString().trim()
-        contacts.delContact(name, phoneNumber)
+        Contacts.delContact(name, phoneNumber)
         Toast.makeText(this, "취소 되었습니다", Toast.LENGTH_LONG).show()
     }
 
@@ -131,8 +130,10 @@ class MainActivity : AppCompatActivity() {
         else if (infos[1] == "")
             Toast.makeText(this, "전화 번호는 필수 값 입니다.", Toast.LENGTH_SHORT).show()
         else {
-            if (contacts.addContact(infos))
+            if (Contacts.addContact(infos)) {
                 Toast.makeText(this, "저장이 완료 되었습니다.", Toast.LENGTH_SHORT).show()
+                viewModel.updateData(Contacts.getList())
+            }
             else
                 Toast.makeText(this, "이미 저장된 연락처 입니다.", Toast.LENGTH_SHORT).show()
         }
