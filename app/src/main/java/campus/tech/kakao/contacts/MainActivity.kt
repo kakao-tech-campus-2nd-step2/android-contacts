@@ -1,11 +1,13 @@
 package campus.tech.kakao.contacts
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.LinearLayoutCompat
 
@@ -46,13 +48,24 @@ class MainActivity : AppCompatActivity() {
                     putExtra("phoneNumber", phoneNumber)
                 }
                 startActivity(intent)
-                finish()  // MainActivity를 종료하여 ListActivity로 돌아감
+                finish()
             }
         }
 
         cancelText.setOnClickListener {
             Toast.makeText(this@MainActivity, "취소되었습니다.", Toast.LENGTH_SHORT).show()
-            finish()  // MainActivity를 종료하여 ListActivity로 돌아감
+            finish()
         }
+    }
+
+    override fun onBackPressed() {
+        // 확인 다이얼로그 표시
+        AlertDialog.Builder(this)
+            .setMessage("작성을 취소하시겠습니까?")
+            .setPositiveButton("예") { dialog, which ->
+                super.onBackPressed()
+            }
+            .setNegativeButton("아니오", null)
+            .show()
     }
 }
