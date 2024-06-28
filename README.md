@@ -2,6 +2,9 @@
 
 ## 화면구성
 
+![image](https://github.com/yb0x00/android-contacts/assets/169421565/341b94d5-8b84-45c3-8330-79188e8688ab)
+
+
 [화면 구성 요소]
 - 연락처 등록 화면(A)
   - 연락처 추가 버튼
