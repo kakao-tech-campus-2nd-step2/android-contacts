@@ -64,7 +64,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun saveContact(context:Context){
-        val intent = Intent(this, ListActivity::class.java)
         if (existNameAndPhoneNum()){
             displaySaveMessage(context)
             intent.putExtra("name", name.text.toString())
@@ -73,7 +72,8 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("birthday", birthday.text.toString())
             intent.putExtra("gender", gender.text.toString())
             intent.putExtra("memo", memo.text.toString())
-            startActivity(intent)
+            setResult(RESULT_OK, intent)
+            finish()
         }
         else {
             displaySaveMessage(context)
