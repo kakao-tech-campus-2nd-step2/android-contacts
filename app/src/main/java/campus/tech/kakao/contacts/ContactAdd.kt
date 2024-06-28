@@ -61,6 +61,16 @@ class ContactAdd : AppCompatActivity() {
                 if (checkContact()) {
                     val intent: Intent = Intent()
                     intent.putExtra("name", name.text.toString())
+                    intent.putExtra("phoneNumber", phoneNumber.text.toString())
+                    intent.putExtra("mail", mail.text.toString())
+                    intent.putExtra("birth", birth.text.toString())
+                    val gender = when (genderRadio.checkedRadioButtonId) {
+                        R.id.female -> "여성"
+                        R.id.male -> "남성"
+                        else -> ""
+                    }
+                    intent.putExtra("gender", gender)
+                    intent.putExtra("memo", memo.text.toString())
                     setResult(RESULT_OK, intent)
                     finish()
                 }
