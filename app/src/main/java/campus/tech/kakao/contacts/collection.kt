@@ -30,7 +30,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-
 class ContactAdapter<Contact>(private val contacts: List<Contact>) : RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nameTextView: TextView = itemView.findViewById(R.id.namelist)
@@ -112,7 +111,7 @@ class ContactAdapter(private val context: Context, private val contacts: List<An
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val contact = contacts[position]
-        holder.nameTextView.text = contact.name
+        holder.nameTextView.text = contact.toString()
 
         holder.itemView.setOnClickListener {
             val intent = Intent(context, whoamI::class.java)
@@ -122,6 +121,19 @@ class ContactAdapter(private val context: Context, private val contacts: List<An
     }
 
     override fun getItemCount() = contacts.size
+}
+
+class whoamI : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_whoam_i)
+        val contact = intent.getSerializableExtra("contact") as? Any
+
+    }
+}
+
+private fun Intent.putExtra(s: String, contact: Any?) {
+
 }
 
 
