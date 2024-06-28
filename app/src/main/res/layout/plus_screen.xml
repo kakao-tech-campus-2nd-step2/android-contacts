@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+   >
+    
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        android:text="오른쪽 + 버튼을 클릭하여\n 연락처를 등록해보세요."
+        android:gravity="center"
+        />
+
+    <ImageButton
+        android:id="@+id/PlusButton"
+        android:layout_width="180dp"
+        android:layout_height="100dp"
+        android:src = "@drawable/yellow_rectengle"
+        android:layout_weight="1"
+        android:layout_gravity="end"
+        android:background="@color/white"
+        />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
