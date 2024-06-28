@@ -64,7 +64,19 @@ class ContactAdapter(private var contacts: List<Contact>): RecyclerView.Adapter<
 
         init {
             view.setOnClickListener {
-                // TODO : 클릭 시 연락처 세부 정보 창 이동하기
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val contact = contacts[position]
+                    val intent = Intent(view.context, ContactDetailActivity::class.java).apply {
+                        putExtra("name", contact.name)
+                        putExtra("phoneNum", contact.phoneNumber)
+                        putExtra("email", contact.email)
+                        putExtra("birthday", contact.birth)
+                        putExtra("gender", contact.gender)
+                        putExtra("memo", contact.memo)
+                    }
+                    view.context.startActivity(intent)
+                }
             }
         }
     }
