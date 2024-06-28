@@ -1,9 +1,11 @@
 package campus.tech.kakao.contacts
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,9 +29,16 @@ class ContactListActivity : AppCompatActivity() {
         )
 
         val contactRecyclerView: RecyclerView = findViewById<RecyclerView>(R.id.contact_list_recyclerview)
+
         with(contactRecyclerView) {
             this.layoutManager = LinearLayoutManager(this@ContactListActivity)
             this.adapter= adapter
+        }
+
+        val addButton: ImageView = findViewById<ImageView>(R.id.add_button)
+        addButton.setOnClickListener{
+            val intent: Intent = Intent(this@ContactListActivity, ContactAddActivity::class.java)
+            startActivityForResult(intent, 1)
         }
     }
 }
