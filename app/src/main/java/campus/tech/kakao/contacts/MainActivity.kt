@@ -1,5 +1,6 @@
 package campus.tech.kakao.contacts
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -11,6 +12,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import java.util.Calendar
 
 class MainActivity : AppCompatActivity() {
     private lateinit var btnSave: TextView
@@ -18,6 +20,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnMore: ImageView
     private lateinit var inputName: EditText
     private lateinit var inputPhoneNumber: EditText
+    private lateinit var inputEmail: EditText
+    private lateinit var inputBirthDay: EditText
+    private lateinit var inputMemo: EditText
     private lateinit var radioGroupGender: RadioGroup
     private lateinit var additionalInputLayout: ConstraintLayout
 
@@ -39,8 +44,32 @@ class MainActivity : AppCompatActivity() {
         btnMore = findViewById(R.id.btnMore)
         inputName = findViewById(R.id.inputName)
         inputPhoneNumber = findViewById(R.id.inputPhoneNumber)
+        inputEmail = findViewById(R.id.inputEmail)
+        inputBirthDay = findViewById(R.id.inputBirthDay)
+        inputMemo = findViewById(R.id.inputMemo)
         radioGroupGender = findViewById(R.id.radioGroupGender)
         additionalInputLayout = findViewById(R.id.additionalInputLayout)
+
+        inputBirthDay.setOnClickListener {
+            showCalendar()
+        }
+    }
+
+    private fun showCalendar(){
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+        val datePickerDialog = DatePickerDialog(
+            this,
+            { view, selectedYear, selectedMonth, selectedDay ->
+                val selectedDate = "${selectedYear}-${selectedMonth + 1}-${selectedDay}"
+                inputBirthDay.setText(selectedDate)
+            },
+            year, month, day
+        )
+        datePickerDialog.show()
     }
 
     private fun setEventListener() {
@@ -63,10 +92,9 @@ class MainActivity : AppCompatActivity() {
         val inputTextList = listOf(
             inputName,
             inputPhoneNumber,
-            findViewById<EditText>(R.id.inputBirthDay),
-            findViewById<EditText>(R.id.inputEmail),
-            findViewById<EditText>(R.id.inputGender),
-            findViewById<EditText>(R.id.inputMemo)
+            inputBirthDay,
+            inputEmail,
+            inputMemo
         )
 
         btnCancel.setOnClickListener {
@@ -91,8 +119,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun saveUserData() {
+        val selectedGenderId = radioGroupGender.checkedRadioButtonId
+        val gender = when (selectedGenderId) {
+            R.id.radioBtnMan-> "남성"
+            R.id.radioBtnWoman -> "여성"
+            else -> ""
+        }
+
         val intent = Intent().apply {
-            putExtra("userData", UserData(inputName.text.toString(), inputPhoneNumber.text.toString().toInt()))
+            putExtra("userData",
+                UserData(inputName.text.toString(),
+                    inputPhoneNumber.text.toString().toInt(),
+                    inputEmail.text.toString(),
+                    inputBirthDay.text.toString(),
+                    gender,
+                    inputMemo.text.toString()))
         }
         setResult(RESULT_OK, intent)
         finish()
