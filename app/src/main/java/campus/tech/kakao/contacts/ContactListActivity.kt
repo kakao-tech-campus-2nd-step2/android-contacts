@@ -29,6 +29,7 @@ class ContactListActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
         setUI()
         goToAddContact()
         displayContact()
@@ -54,12 +55,14 @@ class ContactListActivity : AppCompatActivity() {
             infotext.visibility = View.GONE
 
             personList.add(Person(name.toString(), phone))
+
             with(findViewById<RecyclerView>(R.id.contactRecyclerView)) {
                 this.layoutManager = LinearLayoutManager(this@ContactListActivity)
                 this.adapter = PersonAdapter(
                     personList = personList,
                     inflater = LayoutInflater.from(this@ContactListActivity)
                 )
+                adapter?.notifyItemInserted(personList.size - 1)
             }
         }
     }
