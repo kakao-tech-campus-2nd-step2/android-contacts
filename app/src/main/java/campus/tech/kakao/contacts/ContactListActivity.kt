@@ -17,6 +17,7 @@ import java.io.Serializable
 class ContactListActivity : AppCompatActivity() {
     private lateinit var contactList: MutableList<Contact>
     private lateinit var adapter: ContactRecyclerAdapter
+    private lateinit var message: TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contact_list)
@@ -24,6 +25,7 @@ class ContactListActivity : AppCompatActivity() {
         contactList = mutableListOf<Contact>()
 
         val contactRecyclerView: RecyclerView = findViewById<RecyclerView>(R.id.contact_list_recyclerview)
+        message = findViewById<TextView>(R.id.add_message)
 
         adapter = ContactRecyclerAdapter(
             contactList = contactList,
@@ -50,6 +52,7 @@ class ContactListActivity : AppCompatActivity() {
                             contactList.add(it)
                             adapter.notifyItemInserted(contactList.size-1)
                         }
+                        message.visibility=View.GONE
                     }
                 }
             }
