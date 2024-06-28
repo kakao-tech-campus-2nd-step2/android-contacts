@@ -2,6 +2,7 @@ package campus.tech.kakao.contacts
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -28,7 +29,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var buttons: Array<Button>
     private lateinit var checkButtons: LinearLayout
     private lateinit var viewModel: SubViewModel
-    private var save: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -138,9 +138,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun cancelContact() {
-        val name = (inputFields[0] as EditText).text.toString().trim()
-        val phoneNumber = (inputFields[1] as EditText).text.toString().trim()
-        Contacts.delContact(name, phoneNumber)
         Toast.makeText(this, "취소 되었습니다", Toast.LENGTH_LONG).show()
     }
 
@@ -152,7 +149,8 @@ class MainActivity : AppCompatActivity() {
         else {
             if (Contacts.addContact(infos)) {
                 Toast.makeText(this, "저장이 완료 되었습니다.", Toast.LENGTH_SHORT).show()
-                viewModel.updateData(Contacts.getList())
+                val intent = Intent(this, SubActivity::class.java)
+                startActivity(intent)
             }
             else
                 Toast.makeText(this, "이미 저장된 연락처 입니다.", Toast.LENGTH_SHORT).show()
