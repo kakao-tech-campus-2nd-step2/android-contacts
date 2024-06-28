@@ -1,19 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
     tools:context=".MainActivity">
 
-    <TextView
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/face"/>
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:ems="17"
+        android:layout_margin="10dp"
+        android:inputType="text"
+        android:background="@color/material_dynamic_primary95"
+        android:hint="이름"
+        android:padding="10dp" />
+
+    <EditText
+        android:id="@+id/phoneNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:ems="17"
+        android:layout_margin="10dp"
+        android:inputType="phone"
+        android:background="@color/material_dynamic_primary95"
+        android:hint="전화번호"
+        android:padding="10dp"/>
+
+    <EditText
+        android:id="@+id/emailAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:ems="17"
+        android:layout_margin="10dp"
+        android:inputType="textEmailAddress"
+        android:background="@color/material_dynamic_primary95"
+        android:hint="메일"
+        android:padding="10dp"/>
+
+    <Button
+        android:id="@+id/more"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="더보기 ▼"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        android:background="@android:color/transparent"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/extra_fields"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <EditText
+            android:id="@+id/birthday"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:ems="17"
+            android:inputType="none"
+            android:background="@color/material_dynamic_primary95"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:hint="생일"
+            android:layout_margin="10dp"
+            android:padding="10dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp" >
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:ems="11"
+                android:hint="성별"
+                android:background="@color/material_dynamic_primary95"
+                android:layout_gravity="center_vertical"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:padding="10dp" />
+
+            <RadioGroup
+                android:id="@+id/genderGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/material_dynamic_primary95" >
+
+                <RadioButton
+                    android:id="@+id/female"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="여성"
+                    android:layout_gravity="center_vertical" />
+
+                <RadioButton
+                    android:id="@+id/male"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:text="남성"
+                    android:layout_gravity="center_vertical" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/memo"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:ems="17"
+            android:inputType="textMultiLine"
+            android:background="@color/material_dynamic_primary95"
+            android:hint="메모"
+            android:layout_margin="10dp"
+            android:padding="10dp"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="9"
+            android:text="취소"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:background="@android:color/transparent"/>
+
+        <Button
+            android:id="@+id/save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="9"
+            android:text="저장"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:background="@android:color/transparent"/>
+
+    </LinearLayout>
+
+</LinearLayout>
