@@ -1,12 +1,13 @@
 package campus.tech.kakao.contacts
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class ContactAdapter(val contacts : MutableList<Contact>) :
+class ContactAdapter(val contacts: MutableList<Contact>) :
     RecyclerView.Adapter<ContactAdapter.ContactViewHolder>() {
 
     class ContactViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -22,8 +23,17 @@ class ContactAdapter(val contacts : MutableList<Contact>) :
 
     override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
         val contact = contacts[position]
-        holder.displayName.text = contact.displayName
+        holder.displayName.text = contact.name.first().toString()
         holder.name.text = contact.name
+
+        holder.itemView.setOnClickListener {
+            val context = it.context
+            val intent = Intent(context, DetailActivity::class.java).apply {
+                putExtra("phoneNum", contact.phoneNum)
+                putExtra("name", contact.name)
+            }
+            context.startActivity(intent)
+        }
     }
 
     override fun getItemCount() = contacts.size
@@ -32,5 +42,4 @@ class ContactAdapter(val contacts : MutableList<Contact>) :
         contacts.add(contact)
         notifyItemInserted(contacts.size - 1)
     }
-
 }

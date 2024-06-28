@@ -8,6 +8,7 @@
     tools:context=".MainActivity">
     
     <TextView
+        android:id="@+id/mainText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="오른쪽 + 버튼을 클릭하여 \n연락처를 등록해보세요."

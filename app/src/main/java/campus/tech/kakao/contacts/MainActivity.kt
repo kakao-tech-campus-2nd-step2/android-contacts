@@ -3,6 +3,7 @@ package campus.tech.kakao.contacts
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -26,6 +27,7 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        val mainText : TextView = findViewById(R.id.mainText)
         addContact = findViewById(R.id.add_contact)
         recyclerView = findViewById(R.id.recyclerView)
         contactAdapter = ContactAdapter(mutableListOf())
@@ -37,16 +39,20 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this@MainActivity, AddContact::class.java)
             startActivityForResult(intent, ADD_CONTACT_REQUEST_CODE)
         }
+
+        if (contactAdapter.getItemCount() >= 4){
+
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == ADD_CONTACT_REQUEST_CODE && resultCode == RESULT_OK) {
-            val displayName = data?.getStringExtra("displayName")
             val name = data?.getStringExtra("name")
+            val phoneNum = data?.getStringExtra("phoneNum")
 
-            if (displayName != null && name != null) {
-                val contact = Contact(displayName, name)
+            if (name != null && phoneNum != null) {
+                val contact = Contact(name, phoneNum)
                 contactAdapter.addContact(contact)
             }
         }
