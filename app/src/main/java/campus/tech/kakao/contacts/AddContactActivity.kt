@@ -54,8 +54,7 @@ class AddContactActivity : AppCompatActivity() {
                 finish()
             } else {
                 Toast.makeText(
-                    this@AddContactActivity,
-                    "Name and Phone are required fields",
+                    this@AddContactActivity, getString(R.string.toast_name_and_phone_is_essential),
                     Toast.LENGTH_SHORT
                 ).show()
             }
