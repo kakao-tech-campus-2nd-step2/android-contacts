@@ -1,10 +1,13 @@
 package campus.tech.kakao.contacts
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.contacts.Contact
+import com.example.contacts.ContactDetailActivity
 
 class ContactAdapter(private val contacts: List<Contact>) : RecyclerView.Adapter<ContactAdapter.ContactViewHolder>() {
 
@@ -20,8 +23,20 @@ class ContactAdapter(private val contacts: List<Contact>) : RecyclerView.Adapter
 
     override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
         val contact = contacts[position]
-        holder.profileView.text = contact.name.first().toString()
         holder.nameView.text = contact.name
+        holder.profileView.text = contact.name.first().toString()
+        holder.itemView.setOnClickListener {
+            val context = holder.itemView.context
+            val intent = Intent(context, ContactDetailActivity::class.java).apply {
+                putExtra("name", contact.name)
+                putExtra("phone", contact.phone)
+                putExtra("email", contact.email)
+                putExtra("birthday", contact.birthday)
+                putExtra("gender", contact.gender)
+                putExtra("memo", contact.memo)
+            }
+            context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int = contacts.size
