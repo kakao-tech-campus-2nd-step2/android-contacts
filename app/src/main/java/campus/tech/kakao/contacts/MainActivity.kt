@@ -3,6 +3,7 @@ package campus.tech.kakao.contacts
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
@@ -52,9 +53,19 @@ class MainActivity : AppCompatActivity() {
 		if (contactList.isNotEmpty()) {
 			guidePhrase.visibility = View.GONE
 		}
+		else{
+			guidePhrase.visibility = View.VISIBLE
+		}
 		val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
 		recyclerView.adapter = RecyclerViewAdapter(
 			contactList, LayoutInflater.from(this), this)
 		recyclerView.layoutManager = LinearLayoutManager(this)
+	}
+
+	override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			database.contactDao().deleteAll()
+		}
+		return super.onKeyDown(keyCode, event)
 	}
 }
