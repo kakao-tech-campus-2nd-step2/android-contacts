@@ -24,6 +24,10 @@
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_marginRight="20dp"
+            android:textColor="@color/white"
+            android:text="이"
+            android:textSize="28dp"
+            android:gravity="center"
             android:background="@drawable/name_background"/>
 
         <TextView

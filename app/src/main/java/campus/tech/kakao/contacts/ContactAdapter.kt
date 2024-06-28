@@ -18,10 +18,12 @@ class ContactAdapter(val itemList: List<Contact>,
     inner class ContactViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val name: TextView
         val phoneNumber: TextView
+        val firstLetter: TextView
 
         init {
             name = itemView.findViewById<TextView>(R.id.name)
             phoneNumber= itemView.findViewById<TextView>(R.id.phoneNumber)
+            firstLetter = itemView.findViewById<TextView>(R.id.nameFirstLetter)
 
             itemView.setOnClickListener {
                 itemClickListener?.onItemClick(adapterPosition)
@@ -37,6 +39,7 @@ class ContactAdapter(val itemList: List<Contact>,
     override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
         holder.name.text = itemList[position].name
         holder.phoneNumber.text = itemList[position].phoneNumber
+        holder.firstLetter.text = itemList[position].name.first().toString()
     }
 
     override fun getItemCount(): Int {
