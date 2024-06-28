@@ -52,12 +52,10 @@ class ContactListActivity : AppCompatActivity() {
 
 
     private fun initUserList(){
-        Log.d("ContactListActivity", "inituserlist")
         userList = mutableListOf()
     }
 
     private fun initRecyclerView(){
-        Log.d("ContactListActivity", "initrecyclerview")
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         recyclerViewAdapter=RecyclerViewAdapter(userList)
         recyclerView.adapter = recyclerViewAdapter
@@ -65,19 +63,15 @@ class ContactListActivity : AppCompatActivity() {
     }
 
     private fun initAddButton(){
-        Log.d("ContactListActivity", "initaddbtn")
         setAddButtonListener()
     }
 
     private fun setAddButtonListener(){
-        Log.d("ContactListActivity", "setaddbuttonlistener")
         val btnAdd = findViewById<ImageView>(R.id.btnAdd)
 
         btnAdd.setOnClickListener {
-            Log.d("ContactListActivity", "Add button clicked")
             val intent = Intent(this, MainActivity::class.java)
             startActivityForResult(intent, REQUEST_CODE_ADD_USER)
-            Log.d("ContactListActivity", "startActivityForResult called")
         }
     }
 
