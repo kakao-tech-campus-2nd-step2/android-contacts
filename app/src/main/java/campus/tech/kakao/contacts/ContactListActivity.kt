@@ -66,29 +66,30 @@ class RecyclerAdapter(
 
     ) : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>(){
 
-    class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
+    class ViewHolder(context: Context,itemView : View) : RecyclerView.ViewHolder(itemView){
         val contactName : TextView
         val contactImage : TextView
         init{
             contactImage = itemView.findViewById<TextView>(R.id.contactImage)
             contactName = itemView.findViewById<TextView>(R.id.contactName)
+
+            itemView.setOnClickListener {
+                val intent = Intent(context,ContactDetailActivity::class.java)
+                intent.putExtra("position",adapterPosition)
+                context.startActivity(intent)
+            }
         }
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = inflater.inflate(R.layout.contact_element,parent,false)
 
-        return RecyclerAdapter.ViewHolder(view)
+        return RecyclerAdapter.ViewHolder(context,view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val contact = contactList[position]
         holder.contactName.text = contact.name
         holder.contactImage.text = contact.name[0].toString()
-        holder.itemView.setOnClickListener {
-            val intent = Intent(context,ContactDetailActivity::class.java)
-            intent.putExtra("position",position)
-            context.startActivity(intent)
-        }
     }
 
     override fun getItemCount(): Int {
