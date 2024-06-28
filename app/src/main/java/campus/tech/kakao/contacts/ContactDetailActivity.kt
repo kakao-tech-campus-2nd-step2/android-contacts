@@ -1,6 +1,7 @@
 package campus.tech.kakao.contacts
 
 import android.os.Bundle
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -19,6 +20,7 @@ class ContactDetailActivity : AppCompatActivity() {
         val birthdayTextView: TextView = findViewById(R.id.birthdayTextView)
         val genderTextView: TextView = findViewById(R.id.genderTextView)
         val memoTextView: TextView = findViewById(R.id.memoTextView)
+        val backButton: ImageButton = findViewById(R.id.back)
 
         // 인텐트로부터 연락처 정보 수신
         val name = intent.getStringExtra("name")
@@ -36,5 +38,9 @@ class ContactDetailActivity : AppCompatActivity() {
         genderTextView.text = gender
         memoTextView.text = memo
 
+        // 뒤로가기 버튼 클릭 리스너 설정
+        backButton.setOnClickListener {
+            finish()
         }
     }
+}
