@@ -14,9 +14,10 @@ class ContactInfoActivity : AppCompatActivity() {
         setContentView(R.layout.activity_contact_info)
         val infoContact =
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
-                intent.extras?.getSerializable("info",Contact::class.java)
+                intent.extras?.getSerializable(Contact.KEY,Contact::class.java)
             else
-                intent.extras?.getSerializable("info") as Contact?
+                intent.extras?.getSerializable(Contact.KEY) as Contact?
+
         if (infoContact is Contact) {
             val infoProfile: TextView = findViewById(R.id.info_profile)
             val infoName: TextView = findViewById(R.id.info_name)
@@ -26,16 +27,24 @@ class ContactInfoActivity : AppCompatActivity() {
             val infoSex: TextView = findViewById(R.id.info_sex)
             val infoMemo: TextView = findViewById(R.id.info_memo)
 
-            infoProfile.text = infoContact.name[0].toString()
-            infoName.text = infoContact.name
-            infoPhoneNumber.text = infoContact.phoneNumber
-            infoMail.text = infoContact.mail
-            infoBirth.text = infoContact.birth
-            infoSex.text =
-                if (infoContact.sex == infoContact.FEMALE) "여"
-                else if (infoContact.sex == infoContact.MALE) "남"
-                else ""
-            infoMemo.text = infoContact.memo
+            matchInfo(infoProfile, infoName, infoPhoneNumber, infoMail, infoBirth, infoSex, infoMemo, infoContact)
         }
+    }
+
+    private fun matchInfo(infoProfile: TextView, infoName: TextView, infoPhoneNumber: TextView, infoMail: TextView,
+                          infoBirth: TextView, infoSex: TextView, infoMemo: TextView, infoContact: Contact) {
+
+        infoProfile.text = infoContact.name[0].toString()
+        infoName.text = infoContact.name
+        infoPhoneNumber.text = infoContact.phoneNumber
+        infoMail.text = infoContact.mail
+        infoBirth.text = infoContact.birth
+        infoSex.text =
+            when (infoContact.sex) {
+                infoContact.FEMALE -> "여"
+                infoContact.MALE -> "남"
+                else -> ""
+            }
+        infoMemo.text = infoContact.memo
     }
 }

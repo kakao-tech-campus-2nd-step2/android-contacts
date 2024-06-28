@@ -12,6 +12,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -27,75 +28,61 @@ class MainActivity : AppCompatActivity() {
 
         val contactList = mutableListOf<Contact>()
         val contactAdapter = ContactRecyclerAdapter(contactList, layoutInflater, this)
-        val activityResultLauncher: ActivityResultLauncher<Intent> =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-                when (it.resultCode) {
-                    RESULT_OK -> {
-                        Log.d("Main","Success")
-                        val resContact =
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
-                                it.data?.extras?.getSerializable("res",Contact::class.java)
-                            else
-                                it.data?.extras?.getSerializable("res") as Contact?
-                        resContact?.let { contactList.add(resContact) }
-                        contactAdapter.notifyDataSetChanged()
-                        if (contactList.size > 0)
-                            findViewById<TextView>(R.id.init_message).visibility = TextView.GONE
-                        Toast.makeText(this, "저장이 완료 되었습니다", Toast.LENGTH_SHORT).show()
-                    }
-                    RESULT_CANCELED -> {
-                        Log.d("MainActivity","Canceled")
-                        Toast.makeText(this, "취소 되었습니다", Toast.LENGTH_SHORT).show()
-                    }
-                }
-            }
+        val addContactLauncher: ActivityResultLauncher<Intent> = createAddContactLauncher(contactList, contactAdapter)
+
         val addButton: FloatingActionButton = findViewById(R.id.add_contact)
         val contactRecyclerView: RecyclerView = findViewById(R.id.contact_recycler_view)
 
-        addButton.setOnClickListener {
-            val contactIntent: Intent = Intent(this, ContactActivity::class.java)
-            activityResultLauncher.launch(contactIntent)
-        }
-
         contactRecyclerView.adapter = contactAdapter
         contactRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-    }
-    fun test() {}
-}
 
-class ContactRecyclerAdapter(
-    var contactList: MutableList<Contact>,
-    val inflater: LayoutInflater,
-    val mainContext: Context
-) : RecyclerView.Adapter<ContactRecyclerAdapter.ContactViewHolder>() {
-    inner class ContactViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val itemLayout: ConstraintLayout
-        val profile: TextView
-        val name: TextView
-        init {
-            itemLayout = itemView.findViewById<ConstraintLayout>(R.id.item_contact).apply {
-                setOnClickListener {
-                    val contactIntent: Intent = Intent(mainContext, ContactInfoActivity::class.java)
-                    contactIntent.putExtra("info", contactList[adapterPosition])
-                    mainContext.startActivity(contactIntent)
-                }
-            }
-            profile = itemView.findViewById(R.id.contact_item_profile)
-            name = itemView.findViewById(R.id.contact_item_name)
+        addButton.setOnClickListener {
+            launchAddContact(addContactLauncher)
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder {
-        val view = inflater.inflate(R.layout.item_contact, parent, false)
-        return ContactViewHolder(view)
+    fun createAddContactLauncher(contactList: MutableList<Contact>, contactAdapter: ContactRecyclerAdapter): ActivityResultLauncher<Intent> {
+        return registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            when (result.resultCode) {
+                RESULT_OK -> {
+                    val resContact = getResultContact(result)
+                    updateLayout(resContact, contactList, contactAdapter)
+                }
+                RESULT_CANCELED -> {
+                    Toast.makeText(this, "취소 되었습니다", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 
-    override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
-        holder.profile.text = contactList[position].name[0].toString()
-        holder.name.text = contactList[position].name
+    private fun getResultContact(result: ActivityResult): Contact? {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
+            result.data?.extras?.getSerializable(Contact.KEY ,Contact::class.java)
+        else
+            result.data?.extras?.getSerializable(Contact.KEY) as Contact?
     }
 
-    override fun getItemCount(): Int {
-        return contactList.size
+    private fun updateLayout(contact: Contact?, contactList: MutableList<Contact>, contactAdapter: ContactRecyclerAdapter) {
+        if (contact is Contact) {
+            updateList(contact, contactList)
+            updateAdapter(contactAdapter, contactList.size - 1)
+            Toast.makeText(this, "저장이 완료 되었습니다", Toast.LENGTH_SHORT).show()
+        } else
+            Toast.makeText(this, "Contact is Null", Toast.LENGTH_SHORT).show()
+        if (contactList.size > 0)
+            findViewById<TextView>(R.id.init_message).visibility = TextView.GONE
+    }
+
+    private fun updateList(contact: Contact, contactList: MutableList<Contact>) {
+        contactList.add(contact)
+    }
+
+    private fun updateAdapter(contactAdapter: ContactRecyclerAdapter, pos: Int) {
+        contactAdapter.notifyItemInserted(pos)
+    }
+
+    fun launchAddContact(addContactLauncher: ActivityResultLauncher<Intent>) {
+        val contactIntent: Intent = Intent(this, ContactActivity::class.java)
+        addContactLauncher.launch(contactIntent)
     }
 }

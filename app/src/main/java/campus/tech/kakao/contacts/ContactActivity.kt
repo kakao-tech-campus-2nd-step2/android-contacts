@@ -13,6 +13,7 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.OnBackPressedDispatcher
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -34,11 +35,32 @@ class ContactActivity : AppCompatActivity() {
         val mail: EditText = findViewById(R.id.mail)
 
         val viewMore: ConstraintLayout = findViewById(R.id.view_more)
-
+        val moreInfos: ConstraintLayout = findViewById(R.id.more_infos)
         val birth: TextView = findViewById(R.id.birthday)
         val sex: RadioGroup = findViewById(R.id.sex_radio_group)
         val memo: EditText = findViewById(R.id.memo)
 
+        registerBackPressedCallback(name, phoneNumber, mail, birth, sex, memo)
+
+        cancelButton.setOnClickListener {
+            cancelProcess()
+        }
+
+        saveButton.setOnClickListener {
+            saveProcess(name, phoneNumber, mail, birth, sex, memo)
+        }
+
+        viewMore.setOnClickListener {
+            extendInput(viewMore, moreInfos)
+        }
+
+        birth.setOnClickListener {
+            birthInput(birth)
+        }
+    }
+
+    fun registerBackPressedCallback(name: EditText, phoneNumber: EditText, mail: EditText,
+                                    birth: TextView, sex: RadioGroup, memo: EditText) {
         val onBackPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 if (!isInfoEmpty(name, phoneNumber, mail, birth, sex, memo)) {
@@ -47,51 +69,43 @@ class ContactActivity : AppCompatActivity() {
             }
         }
         onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
+    }
 
-        cancelButton.setOnClickListener {
-            val returnIntent: Intent = Intent()
-            setResult(RESULT_CANCELED, returnIntent)
-            finish()
-        }
+    private fun isInfoEmpty(name: EditText, phoneNumber: EditText, mail: EditText,
+                            birth: TextView, sex: RadioGroup, memo: EditText): Boolean {
+        return name.text.isEmpty() &&
+                phoneNumber.text.isEmpty() &&
+                mail.text.isEmpty() &&
+                birth.text.isEmpty() &&
+                sex.checkedRadioButtonId == -1 &&
+                memo.text.isEmpty()
+    }
 
-        saveButton.setOnClickListener {
-            if (isValidInfo(name, phoneNumber)) {
-                val contact: Contact = saveInfo(name, phoneNumber, mail, birth, sex, memo)
-                Log.d("ContactActivity", contact.toString())
-                val returnIntent: Intent = Intent(this,MainActivity::class.java)
-                returnIntent.putExtra("res", contact)
-                setResult(RESULT_OK, returnIntent)
+    private fun buildAlertDialog(aContext: Context) {
+        MaterialAlertDialogBuilder(aContext)
+            .setMessage("작성 중인 내용이 있습니다. 정말 나가시겠습니까?")
+            .setNegativeButton("취소") { dialog, which ->
+            }
+            .setPositiveButton("확인") { dialog, which ->
                 finish()
             }
-        }
-
-        viewMore.setOnClickListener {
-            findViewById<ConstraintLayout>(R.id.more_infos).visibility = ConstraintLayout.VISIBLE
-            viewMore.visibility = Button.GONE
-        }
-
-        birth.setOnClickListener {
-            val calendar = Calendar.getInstance()
-            val cYear = calendar.get(Calendar.YEAR)
-            val cMonth = calendar.get(Calendar.MONTH)
-            val cDay = calendar.get(Calendar.DAY_OF_MONTH)
-
-            DatePickerDialog(this,
-                { _, year, month, dayOfMonth -> birth.text = "$year-%02d-%02d".format(month + 1, dayOfMonth) },
-                cYear, cMonth, cDay).show()
-        }
+            .show()
     }
 
-    override fun onPause() {
-        super.onPause()
-        Log.d("ContactActivity","onPause")
-//        val backDialog = Dialog(this)
-//        backDialog.
+    fun cancelProcess() {
+        setResult(RESULT_CANCELED, Intent())
+        finish()
     }
 
-    override fun onStop() {
-        super.onStop()
-        Log.d("ContactActivity","onStop")
+    fun saveProcess(name: EditText, phoneNumber: EditText, mail: EditText,
+                    birth: TextView, sex: RadioGroup, memo: EditText) {
+        if (isValidInfo(name, phoneNumber)) {
+            val contact: Contact = saveInfo(name, phoneNumber, mail, birth, sex, memo)
+            val returnIntent: Intent = Intent(this, MainActivity::class.java)
+            returnIntent.putExtra(Contact.KEY, contact)
+            setResult(RESULT_OK, returnIntent)
+            finish()
+        }
     }
 
     fun isValidInfo(name: EditText, phoneNumber: EditText): Boolean {
@@ -122,7 +136,7 @@ class ContactActivity : AppCompatActivity() {
         }
     }
 
-    fun saveInfo(name: EditText, phoneNumber: EditText, mail: EditText,
+    private fun saveInfo(name: EditText, phoneNumber: EditText, mail: EditText,
                  birth: TextView, sex: RadioGroup, memo: EditText): Contact {
         val nameInfo: String = name.text.toString()
         val phoneNumberInfo: String = phoneNumber.text.toString()
@@ -135,24 +149,19 @@ class ContactActivity : AppCompatActivity() {
         return contact
     }
 
-    fun isInfoEmpty(name: EditText, phoneNumber: EditText, mail: EditText,
-                    birth: TextView, sex: RadioGroup, memo: EditText): Boolean {
-        return name.text.isEmpty() &&
-        phoneNumber.text.isEmpty() &&
-        mail.text.isEmpty() &&
-        birth.text.isEmpty() &&
-        sex.checkedRadioButtonId == -1 &&
-        memo.text.isEmpty()
+    fun extendInput(viewMore: ConstraintLayout, moreInfos: ConstraintLayout) {
+        viewMore.visibility = ConstraintLayout.GONE
+        moreInfos.visibility = ConstraintLayout.VISIBLE
     }
 
-    private fun buildAlertDialog(aContext: Context) {
-        MaterialAlertDialogBuilder(aContext)
-            .setMessage("작성 중인 내용이 있습니다. 정말 나가시겠습니까?")
-            .setNegativeButton("취소") { dialog, which ->
-            }
-            .setPositiveButton("확인") { dialog, which ->
-                finish()
-            }
-            .show()
+    fun birthInput(birth: TextView) {
+        val calendar = Calendar.getInstance()
+        val cYear = calendar.get(Calendar.YEAR)
+        val cMonth = calendar.get(Calendar.MONTH)
+        val cDay = calendar.get(Calendar.DAY_OF_MONTH)
+
+        DatePickerDialog(this,
+            { _, year, month, dayOfMonth -> birth.text = "$year-%02d-%02d".format(month + 1, dayOfMonth) },
+            cYear, cMonth, cDay).show()
     }
 }

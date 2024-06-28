@@ -11,4 +11,7 @@ data class Contact (
     var memo: String) : Serializable {
     val FEMALE: Int = R.id.female
     val MALE: Int   = R.id.male
+    companion object CONST {
+        const val KEY: String = "CONTACT"
+    }
 }
