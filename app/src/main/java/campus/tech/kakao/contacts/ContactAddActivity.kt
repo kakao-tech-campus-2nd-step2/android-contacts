@@ -80,16 +80,23 @@ class ContactAddActivity : AppCompatActivity() {
         return true
     }
 
-    fun isWriting(views: List<View>): Boolean{
-        views.forEach{
-            when(it){
-                is EditText -> if(it.text.isNotEmpty()) return true
-                is TextView -> if(it.text.isNotEmpty()) return true
-                is RadioGroup -> if(it.checkedRadioButtonId != -1) return true
+    fun isWriting(views: List<View>): Boolean {
+        views.forEach {
+            when (it) {
+                is EditText -> if (it.text.isNotEmpty()) return true
+                is TextView -> if (it.text.isNotEmpty()) return true
+                is RadioGroup -> if (getGender() == null) return true
             }
         }
         return false
     }
+
+    fun getGender(): Gender? = when (genderRadioGroup.checkedRadioButtonId) {
+        R.id.male -> Gender.MALE
+        R.id.female -> Gender.FEMALE
+        else -> null
+    }
+
 
     fun submitContact() {
         // TODO: implement submit workflow
