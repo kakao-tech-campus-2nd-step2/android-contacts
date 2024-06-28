@@ -1,6 +1,5 @@
 package campus.tech.kakao.contacts
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -17,8 +16,6 @@ class AddContactActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_contact)
 
-        val ContactList = ArrayList<Contact>()
-
         val name = findViewById<EditText>(R.id.name)
         val phoneNumber = findViewById<EditText>(R.id.phoneNumber)
         val email = findViewById<EditText>(R.id.email)
@@ -32,7 +29,7 @@ class AddContactActivity : AppCompatActivity() {
 
         val more = findViewById<LinearLayoutCompat>(R.id.more)
         val save = findViewById<TextView>(R.id.save)
-        val cancle = findViewById<TextView>(R.id.cancle)
+        val cancel = findViewById<TextView>(R.id.cancel)
 
         more.setOnClickListener {
             birthDayLayout.visibility = View.VISIBLE
@@ -41,7 +38,7 @@ class AddContactActivity : AppCompatActivity() {
             more.visibility = View.GONE
         }
 
-        cancle.setOnClickListener {
+        cancel.setOnClickListener {
             val nameText = name.text.toString()
             val phoneNumberText = phoneNumber.text.toString()
             val emailText = email.text.toString()
