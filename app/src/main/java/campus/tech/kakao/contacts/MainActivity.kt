@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
 
     fun cancelButtonSetOnClickListener(context : Context){
         findViewById<TextView>(R.id.button_cancel).setOnClickListener(){
-            displayCancelToastMessage(context)
+            finishContactAdding(context)
         }
     }
 
