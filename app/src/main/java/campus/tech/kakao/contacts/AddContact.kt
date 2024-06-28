@@ -100,7 +100,7 @@ class AddContact : AppCompatActivity() {
             else{
                 val list = database.contactDao().getAll()
                 list.forEach {
-                    Log.d("contacttest", ""+it.id+", "+it.name+", "+it.phone+", "+it.email+", "+it.birth+", "+it.sex+" ")
+                    Log.d("contacttest", ""+it.id+", "+it.name+", "+it.phone+", "+it.email+", "+it.birth+", "+it.sex+", "+it.memo)
                 }
             }
         }
