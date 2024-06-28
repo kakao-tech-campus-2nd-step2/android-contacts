@@ -2,6 +2,7 @@ package campus.tech.kakao.contacts
 
 import android.app.DatePickerDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +12,8 @@ import android.widget.EditText
 import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import java.util.Calendar
 import kotlin.math.log
@@ -30,6 +33,40 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         initVar()
         initListener()
+        onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
+    }
+
+    private val onBackPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            finishContactAdding(this@MainActivity)
+        }
+    }
+
+    fun finishContactAdding(context: Context){
+        if(isNowWritting())
+            displayCancelDialog(context)
+        else
+            finish()
+    }
+
+
+    fun displayCancelDialog(context: Context){
+        val alert = AlertDialog.Builder(this@MainActivity)
+        alert.setTitle("")
+        alert.setMessage("작성중인 내용이 있습니다. 정말 나가시겠습니까?")
+        alert.setPositiveButton("작성하기", DialogInterface.OnClickListener{ dialog, which ->
+        })
+        alert.setNegativeButton("나가기", DialogInterface.OnClickListener { dialog, which ->
+            displayCancelToastMessage(context)
+            finish()
+        })
+        alert.show()
+    }
+
+    fun isNowWritting() : Boolean{
+        return if(name.text.toString() != "" || phoneNumber.text.toString() != "" || mail.text.toString() != "" || birthday.text.toString() != "" || gender.text.toString() != "" || memo.text.toString() != "")
+            true
+        else false
     }
 
     fun initListener(){
@@ -42,11 +79,11 @@ class MainActivity : AppCompatActivity() {
 
     fun cancelButtonSetOnClickListener(context : Context){
         findViewById<TextView>(R.id.button_cancel).setOnClickListener(){
-            displayCancelMessage(context)
+            displayCancelToastMessage(context)
         }
     }
 
-    fun displayCancelMessage(context: Context){
+    fun displayCancelToastMessage(context: Context){
         val cancelMessage = Toast.makeText(context, "취소 되었습니다", Toast.LENGTH_SHORT)
         cancelMessage.show()
     }
