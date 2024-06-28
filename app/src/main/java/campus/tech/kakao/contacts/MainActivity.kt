@@ -15,6 +15,7 @@ import java.util.Calendar
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AlertDialog
 import androidx.activity.OnBackPressedCallback
+import android.content.Intent
 
 
 
@@ -68,7 +69,22 @@ class MainActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            val contact = Contact(
+                name.text.toString(),
+                phone.text.toString(),
+                email.text.toString(),
+                birthday.text.toString(),
+                if (female.isChecked) "여성" else if (male.isChecked) "남성" else null,
+                memo.text.toString()
+            )
+
+
+            val intent = Intent().apply {
+                putExtra("CONTACT", contact)
+            }
+            setResult(RESULT_OK, intent)
             Toast.makeText(this, "저장이 완료 되었습니다.", Toast.LENGTH_SHORT).show()
+            finish()
         }
 
         //취소 버튼
