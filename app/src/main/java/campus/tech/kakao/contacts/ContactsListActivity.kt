@@ -32,7 +32,7 @@ class ContactsListActivity : AppCompatActivity() {
 		emptyInfoView = findViewById(R.id.contact_list_empty_textview)
 		addButton = findViewById(R.id.contact_add_button)
 
-		contactsList.adapter = ContactsListAdapter(contactsDataList, LayoutInflater.from(this))
+		contactsList.adapter = ContactsListAdapter(contactsDataList, LayoutInflater.from(this), this)
 		contactsList.layoutManager = LinearLayoutManager(this)
 
 		val startActivityLauncher: ActivityResultLauncher<Intent> =
