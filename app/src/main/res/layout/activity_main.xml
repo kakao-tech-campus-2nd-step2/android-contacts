@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:inputType="text"
-        android:hint="이름"
+        android:hint="@string/userName"
         android:background="#CFFFFF"
         android:layout_marginTop="25dp"
         app:layout_constraintBottom_toTopOf="@+id/phoneET"
@@ -36,7 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:inputType="phone"
-        android:hint="전화번호"
+        android:hint="@string/userPhoneNumber"
         android:background="#CFFFFF"
         android:layout_marginTop="20dp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -50,7 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:inputType="textEmailAddress"
-        android:hint="메일"
+        android:hint="@string/userEmail"
         android:background="#CFFFFF"
         android:layout_marginTop="20dp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -74,7 +74,7 @@
             android:id="@+id/birthDayET"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:hint="생일"
+            android:hint="@string/userBirthDay"
             android:background="#CFFFFF"
             android:focusable="false"
             android:clickable="true" />
@@ -90,7 +90,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="성별"
+                android:hint="@string/userGender"
                 android:textSize="18sp"
                 android:layout_gravity="center_vertical"/>
 
@@ -110,13 +110,13 @@
                     android:id="@+id/femaleRbtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="여성"   />
+                    android:text="@string/female"   />
 
                 <RadioButton
                     android:id="@+id/maleRbtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="남성"   />
+                    android:text="@string/male"   />
 
             </RadioGroup>
 
@@ -127,7 +127,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:inputType="text"
-            android:hint="메모"
+            android:hint="@string/userMemo"
             android:background="#CFFFFF"
             android:layout_marginTop="20dp" />
 
@@ -149,7 +149,7 @@
             android:id="@+id/detailBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="더보기"
+            android:text="@string/moreBtn"
             android:layout_gravity="center" />
 
         <ImageView
@@ -174,7 +174,7 @@
             android:layout_width="48dp"
             android:layout_height="match_parent"
             style="@style/Widget.AppCompat.Button.Borderless"
-            android:text="취소"
+            android:text="@string/cancleBtn"
             android:textColor="@color/black"/>
 
         <Button
@@ -183,7 +183,7 @@
             android:layout_width="48dp"
             android:layout_height="match_parent"
             style="@style/Widget.AppCompat.Button.Borderless"
-            android:text="저장"
+            android:text="@string/saveBtn"
             android:textColor="@color/black"/>
 
     </LinearLayout>
