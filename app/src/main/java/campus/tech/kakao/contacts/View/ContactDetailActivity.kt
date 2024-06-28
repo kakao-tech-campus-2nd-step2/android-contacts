@@ -37,7 +37,10 @@ class ContactDetailActivity : AppCompatActivity() {
         if(gender != null){
             genderLayout.visibility = VISIBLE
             val genderView = findViewById<TextView>(R.id.gender)
-            genderView.text = gender.name
+            genderView.text = when(gender){
+                Gender.MALE -> "남성"
+                Gender.FEMALE -> "여성"
+            }
 
         }
     }
