@@ -1,6 +1,7 @@
 package campus.tech.kakao.contacts
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
@@ -74,6 +75,7 @@ class ContactAddActivity : AppCompatActivity() {
         cancelButton.setOnClickListener {
             clearFields()
             showCancelToast()
+            finish()
         }
 
 
@@ -105,9 +107,10 @@ class ContactAddActivity : AppCompatActivity() {
     }
 
     private fun saveContact(contact: Contact) {
+        Log.d("ContactAddActivity", "Saving contact: $contact")
         contactViewModel.addContact(contact)
         showSaveToast()
-        Log.d("testt",contactViewModel.getContact(contact.name).toString() )
+        finish()
     }
 
     private fun clearFields(){
