@@ -1,15 +1,11 @@
 package campus.tech.kakao.contacts
 
 import android.app.DatePickerDialog
-import android.content.ContentValues
 import android.icu.util.Calendar
 import android.os.Bundle
 import android.provider.ContactsContract
-import android.provider.Settings.Global
-import android.text.Editable
 import android.text.InputFilter
 import android.text.InputType
-import android.text.TextWatcher
 import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioButton
@@ -25,12 +21,9 @@ import androidx.room.Query
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.Update
-import campus.tech.kakao.contacts.R.id.female
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import org.xmlpull.v1.XmlSerializer
 import java.io.File
-import java.io.FileOutputStream
 
 class MainActivity : AppCompatActivity() {
     private val etName: EditText by lazy { findViewById(R.id.name) }
