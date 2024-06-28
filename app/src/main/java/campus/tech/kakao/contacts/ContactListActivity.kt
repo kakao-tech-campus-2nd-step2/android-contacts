@@ -21,6 +21,24 @@ class ContactListActivity : AppCompatActivity() {
     lateinit var contactListEmptyText : TextView
     lateinit var contactRecyclerView : RecyclerView
 
+    val addContactLauncher : ActivityResultLauncher<Intent> = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+        when(it.resultCode){
+            RESULT_OK -> {
+                updateRecyclerView()
+                handleEmptyText()
+            }
+        }
+    }
+
+    fun handleEmptyText(){
+        if(contactListEmptyText.visibility == VISIBLE) contactListEmptyText.visibility = GONE
+    }
+
+    fun updateRecyclerView(){
+        contactRecyclerView.adapter?.notifyItemInserted(contactList.size-1)
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contact_list)
@@ -28,8 +46,14 @@ class ContactListActivity : AppCompatActivity() {
         contactRecyclerView = findViewById<RecyclerView>(R.id.contactList)
         contactListEmptyText = findViewById<TextView>(R.id.contactListEmptyText)
 
+        addContactBtn.setOnClickListener {
+            val intent = Intent(this,ContactAddActivity::class.java)
+            addContactLauncher.launch(intent)
+        }
+
         contactRecyclerView.adapter = RecyclerAdapter(this,contactList,LayoutInflater.from(this))
         contactRecyclerView.layoutManager = LinearLayoutManager(this)
+
 
     }
 
