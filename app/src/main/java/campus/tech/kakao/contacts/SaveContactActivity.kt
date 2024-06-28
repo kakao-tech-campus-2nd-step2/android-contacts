@@ -2,7 +2,9 @@ package campus.tech.kakao.contacts
 
 import android.app.DatePickerDialog
 import android.content.Context
+import android.content.Intent
 import android.icu.util.Calendar
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -100,7 +102,14 @@ class SaveContactActivity : AppCompatActivity() {
                 showToast("전화번호는 필수 입력 항목입니다")
                 phone.requestFocus()
             }
-            else {showToast("저장이 완료 되었습니다")}
+            else {
+                showToast("저장이 완료 되었습니다")
+                val intent = Intent(this@SaveContactActivity, ContactListActivity::class.java).apply {
+                    putExtra("name", name.text.toString())
+                    putExtra("phone", phone.text.toString())
+                }
+                startActivity(intent)
+            }
         }
     }
 }
