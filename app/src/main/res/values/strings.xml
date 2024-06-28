@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Contacts</string>
+    <string name="name_hint">이름</string>
+    <string name="tel_hint">전화번호</string>
+    <string name="mail_hint">메일</string>
+    <string name="see_more_button">더보기</string>
+    <string name="bith_hint">생일</string>
+    <string name="sex_hint">성별</string>
+    <string name="sex_female">여자</string>
+    <string name="sex_male">남자</string>
+    <string name="memo_hint">메모</string>
+    <string name="resiter_recommended_msg">오른쪽 + 버튼을 클릭하여\n연락처를 등록해보세요</string>
 </resources>

@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ResiterContact">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/men_icon"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"></ImageView>
+
+    <EditText
+        android:id="@+id/name_form"
+        android:layout_width="@dimen/edittext_width"
+        android:layout_height="@dimen/edittext_height"
+        android:inputType="text"
+        android:hint="@string/name_hint"
+        android:gravity="center_vertical"
+        android:background="@drawable/rounded_edittext"
+        android:layout_marginTop="100dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tel_form"
+        />
+
+    <EditText
+        android:id="@+id/tel_form"
+        android:layout_width="@dimen/edittext_width"
+        android:layout_height="@dimen/edittext_height"
+        android:inputType="phone"
+        android:hint="@string/tel_hint"
+        android:gravity="center_vertical"
+        android:background="@drawable/rounded_edittext"
+        android:layout_marginTop="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name_form"
+        app:layout_constraintBottom_toTopOf="@+id/mail_form"
+        />
+
+    <EditText
+        android:id="@+id/mail_form"
+        android:layout_width="@dimen/edittext_width"
+        android:layout_height="@dimen/edittext_height"
+        android:inputType="textEmailAddress"
+        android:hint="@string/mail_hint"
+        android:gravity="center_vertical"
+        android:background="@drawable/rounded_edittext"
+        android:layout_marginTop="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tel_form"
+        app:layout_constraintBottom_toTopOf="@id/detail_button_area"
+        />
+
+    <LinearLayout
+        android:id="@+id/detail_form_area"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/mail_form"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="invisible">
+
+        <EditText
+            android:id="@+id/birth_form"
+            android:layout_width="@dimen/edittext_width"
+            android:layout_height="@dimen/edittext_height"
+            android:inputType="none"
+            android:focusable="false"
+            android:hint="@string/bith_hint"
+            android:gravity="center_vertical"
+            android:background="@drawable/rounded_edittext" />
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_edittext"
+            android:layout_width="@dimen/edittext_width"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/sex_hint"
+                android:textSize="18sp"
+                android:layout_gravity="center_vertical"/>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+            <RadioGroup
+                android:layout_gravity="right"
+                android:id="@+id/sex_form"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/female"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sex_female"   />
+
+                <RadioButton
+                    android:id="@+id/male"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sex_male"   />
+
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/memo_form"
+            android:layout_width="@dimen/edittext_width"
+            android:layout_height="@dimen/edittext_height"
+            android:layout_marginTop="10dp"
+            android:inputType="textLongMessage"
+            android:hint="@string/memo_hint"
+            android:gravity="center_vertical"
+            android:background="@drawable/rounded_edittext" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/detail_button_area"
+        android:layout_width="@dimen/edittext_width"
+        android:layout_height="@dimen/edittext_height"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mail_form"
+        android:visibility="visible">
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/detail_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/see_more_button"
+            android:layout_gravity="center" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/seemore" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        app:layout_constraintVertical_weight="1"
+        android:id="@+id/bottom_button_area"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/cancel_button"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/white"
+            android:text="취소"
+            android:textColor="@color/black"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/save_button"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/white"
+            android:text="저장"
+            android:textColor="@color/black"
+            android:textStyle="bold"/>
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
