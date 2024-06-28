@@ -1,6 +1,7 @@
 package campus.tech.kakao.contacts
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -48,15 +49,14 @@ class ContactAdd : AppCompatActivity() {
             Toast.makeText(this, "취소 되었습니다", Toast.LENGTH_LONG).show()
         }
 
-        save.setOnClickListener {
-            if (name.getText().isEmpty()) {
-                Toast.makeText(this, "이름을 반드시 적어야 합니다", Toast.LENGTH_LONG).show()
-            }
-            else if (phoneNumber.getText().isEmpty()) {
-                Toast.makeText(this, "전화번호를 반드시 적어야 합니다", Toast.LENGTH_LONG).show()
-            }
-            else {
-                Toast.makeText(this, "저장이 완료 되었습니다", Toast.LENGTH_LONG).show()
+        save.apply {
+            this.setOnClickListener {
+                if(checkContact()) {
+                    val intent: Intent = Intent()
+                    intent.putExtra("name", name.text.toString())
+                    setResult(RESULT_OK, intent)
+                    finish()
+                }
             }
         }
 
@@ -90,4 +90,20 @@ class ContactAdd : AppCompatActivity() {
         )
         datePickerDialog.show()
     }
+
+    private fun checkContact(): Boolean {
+        if (name.getText().isEmpty()) {
+            Toast.makeText(this, "이름을 반드시 적어야 합니다", Toast.LENGTH_LONG).show()
+            return false
+        }
+        else if (phoneNumber.getText().isEmpty()) {
+            Toast.makeText(this, "전화번호를 반드시 적어야 합니다", Toast.LENGTH_LONG).show()
+            return false
+        }
+        else {
+            Toast.makeText(this, "저장이 완료 되었습니다", Toast.LENGTH_LONG).show()
+            return true
+        }
+    }
+
 }
