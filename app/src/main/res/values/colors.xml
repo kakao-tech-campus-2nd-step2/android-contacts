@@ -3,4 +3,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="inputFormBackgroundColor">#E0F4F7</color>
+    <color name="plusButtonColor">#FFC108</color>
 </resources>
