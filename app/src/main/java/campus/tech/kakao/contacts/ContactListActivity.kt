@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import java.io.Serializable
@@ -21,17 +22,13 @@ class ContactListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_contact_list)
 
         contactList = mutableListOf<Contact>()
-        contactList.add(Contact("이지은", "1","1","1","1","1"))
-        contactList.add(Contact("1", "1","1","1","1","1"))
-        contactList.add(Contact("1", "1","1","1","1","1"))
-        contactList.add(Contact("1", "1","1","1","1","1"))
-        contactList.add(Contact("1", "1","1","1","1","1"))
 
         val contactRecyclerView: RecyclerView = findViewById<RecyclerView>(R.id.contact_list_recyclerview)
 
         adapter = ContactRecyclerAdapter(
             contactList = contactList,
-            inflater = LayoutInflater.from(this@ContactListActivity)
+            inflater = LayoutInflater.from(this@ContactListActivity),
+            activity = this@ContactListActivity
         )
         contactRecyclerView.layoutManager = LinearLayoutManager(this@ContactListActivity)
         contactRecyclerView.adapter = adapter
@@ -71,17 +68,27 @@ class Contact(
 ) : Serializable
 
 class ContactRecyclerAdapter(
-    val contactList: MutableList<Contact>,
-    val inflater: LayoutInflater
+    private val contactList: MutableList<Contact>,
+    private val inflater: LayoutInflater,
+    private val activity: ContactListActivity
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    class ViewHolder(val itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(val itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nameInitialTextView: TextView
         val nameTextView: TextView
         init {
             nameInitialTextView = itemView.findViewById(R.id.name_initial_text)
             nameTextView = itemView.findViewById(R.id.name_text)
 
+            itemView.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val contact = contactList[position]
+                    val intent = Intent(activity, ContactDetailActivity::class.java)
+                    intent.putExtra("contactDetail", contact)
+                    activity.startActivity(intent)
+                }
+            }
         }
     }
 

@@ -15,6 +15,19 @@
         tools:layout_editor_absoluteX="168dp"
         tools:layout_editor_absoluteY="350dp" />
 
+    <TextView
+        android:id="@+id/add_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="오른쪽 +버튼을 클릭하여\n 연락처를 등록해보세요."
+
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/contact_list_recyclerview"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/contact_list_recyclerview" />
+
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
