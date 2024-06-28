@@ -1,6 +1,7 @@
 package campus.tech.kakao.contacts
 
 import android.app.Application
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.provider.ContactsContract.CommonDataKinds.Phone
@@ -50,8 +51,9 @@ class CollectionActivity : AppCompatActivity() {
     private lateinit var db: MainActivity.AppDatabase
     private lateinit var tvmessage: TextView
     private lateinit var recyclerView: RecyclerView
-    private lateinit var contactAdapter: ContactAdapter<Any?>
+    private lateinit var contactAdapter: ContactAdapter
     private val addButton: Button by lazy { findViewById(R.id.addbutton) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -74,24 +76,13 @@ class CollectionActivity : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
-
-    }
-    override fun onBindViewHolder(holder:ContactAdapter.ViewHolder,position: Int){
-        val contact = contacts[position]
-        holder.nameTextView = contact.name
-
-        holder.itemViewView.setOnClickListener {
-            val intent = Intent(context, whoamI::class.java)
-            intent.putExtra("contact", contact)
-            context.startActivity(intent)
-        }
     }
 
     private fun showMessage() {
         GlobalScope.launch {
             val hasUsers = db.userDao().getAllUsers().isEmpty()
             withContext(Dispatchers.Main) {
-                findViewById<TextView>(R.id.message).visibility = if (hasUsers) View.GONE else View.VISIBLE
+                tvmessage.visibility = if (hasUsers) View.GONE else View.VISIBLE
             }
         }
     }
@@ -100,11 +91,37 @@ class CollectionActivity : AppCompatActivity() {
         GlobalScope.launch {
             val contacts = db.contactDao().getAllContacts()
             withContext(Dispatchers.Main) {
-                contactAdapter = ContactAdapter(contacts)
+                contactAdapter = ContactAdapter(this@CollectionActivity, contacts)
                 recyclerView.adapter = contactAdapter
             }
         }
     }
+}
+
+class ContactAdapter(private val context: Context, private val contacts: List<Any?>) :
+    RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
+
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var nameTextView: TextView = itemView.findViewById(R.id.nameTextView)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.activity_whoam_i, parent, false)
+        return ViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val contact = contacts[position]
+        holder.nameTextView.text = contact?.name
+
+        holder.itemView.setOnClickListener {
+            val intent = Intent(context, whoamI::class.java)
+            intent.putExtra("contact", contact)
+            context.startActivity(intent)
+        }
+    }
+
+    override fun getItemCount() = contacts.size
 }
 
 

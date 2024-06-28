@@ -19,14 +19,5 @@ class WhoAmI : AppCompatActivity() {
             insets
         }
 
-        val contact = intent.getParcelableExtra<MainActivity.Contact>("contacts")
-        contact?.let {
-            val nameTextView = findViewById<TextView>(R.id.nameTextView)
-            val emailTextView = findViewById<TextView>(R.id.emailTextView)
-            val phoneTextView = findViewById<TextView>(R.id.phoneTextView)
-            nameTextView.text = it.name
-            emailTextView.text = it.email
-            phoneTextView.text = it.phone
-        }
     }
 }
