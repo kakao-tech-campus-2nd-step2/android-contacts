@@ -80,6 +80,7 @@
                 app:layout_constraintTop_toBottomOf="@id/numberText">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/mailEdit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/color_shape"
@@ -157,12 +158,14 @@
                 app:layout_constraintTop_toBottomOf="@id/birthdayText">
 
                 <RadioButton
+                    android:id="@+id/femaleButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="16dp"
                     android:text="여성" />
 
                 <RadioButton
+                    android:id="@+id/maleButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="남성" />
