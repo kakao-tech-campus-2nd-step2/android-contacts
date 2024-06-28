@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
             val writename = name.text.toString()
             val writenumber = phone.text.toString()
             val writemail = mail.text.toString()
-            val writebir = if (birthday.text.toString().isNotEmpty()) { birthday.text.toString() } else {""}
+            val writebir = birthday.text.toString().ifEmpty {""}
             var writegender = if (female.isChecked) "Female" else if (male.isChecked) "Male" else ""
             val writememo = memo.text.toString()
 
@@ -95,7 +95,7 @@ class MainActivity : AppCompatActivity() {
                     putExtra("name", writename)
                     putExtra("phone", writenumber)
                     putExtra("email", writemail)
-                    putExtra("birth", writebir)
+                    putExtra("birthday", writebir)
                     putExtra("gender", writegender)
                     putExtra("memo", writememo)
                 }

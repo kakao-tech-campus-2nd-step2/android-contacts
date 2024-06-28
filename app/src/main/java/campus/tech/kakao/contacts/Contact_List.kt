@@ -29,11 +29,11 @@ class Contact_List : AppCompatActivity() {
                 val name = data?.getStringExtra("name")
                 val phone = data?.getStringExtra("phone")
                 val email = data?.getStringExtra("email") ?: ""
-                val birth = data?.getStringExtra("birth") ?: ""
+                val birthday = data?.getStringExtra("birthday") ?: ""
                 val gender = data?.getStringExtra("gender") ?: ""
                 val memo = data?.getStringExtra("memo") ?: ""
                 if (name != null && phone != null) {
-                    addContactItem(name, phone, email, birth, gender, memo)
+                    addContactItem(name, phone, email, birthday, gender, memo)
                 }
             }
         }
