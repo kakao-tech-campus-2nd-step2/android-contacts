@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import campus.tech.kakao.contacts.Model.Contact
 import campus.tech.kakao.contacts.Model.Gender
 import campus.tech.kakao.contacts.R
-import campus.tech.kakao.contacts.Repository.contactRepository
+import campus.tech.kakao.contacts.Repository.ContactRepository
 
 class ContactDetailActivity : AppCompatActivity() {
 
@@ -81,7 +81,7 @@ class ContactDetailActivity : AppCompatActivity() {
         when(val position = intent.extras?.getInt("position")){
             null -> showError()
             else -> {
-                val contact = contactRepository.contactList[position]
+                val contact = ContactRepository.contactList[position]
                 loadContact(contact)
             }
         }

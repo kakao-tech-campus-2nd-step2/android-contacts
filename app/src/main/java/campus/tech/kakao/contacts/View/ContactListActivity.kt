@@ -13,11 +13,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import campus.tech.kakao.contacts.R
 import campus.tech.kakao.contacts.View.Adapter.RecyclerAdapter
-import campus.tech.kakao.contacts.Repository.contactRepository
+import campus.tech.kakao.contacts.Repository.ContactRepository
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ContactListActivity : AppCompatActivity() {
-    val contactList = contactRepository.contactList
+    val contactList = ContactRepository.contactList
     lateinit var contactListEmptyText : TextView
     lateinit var contactRecyclerView : RecyclerView
 

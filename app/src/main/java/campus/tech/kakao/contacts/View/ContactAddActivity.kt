@@ -19,7 +19,7 @@ import androidx.appcompat.app.AppCompatActivity
 import campus.tech.kakao.contacts.Model.Contact
 import campus.tech.kakao.contacts.Model.Gender
 import campus.tech.kakao.contacts.R
-import campus.tech.kakao.contacts.Repository.contactRepository
+import campus.tech.kakao.contacts.Repository.ContactRepository
 import com.google.android.material.button.MaterialButton
 
 class ContactAddActivity : AppCompatActivity() {
@@ -114,7 +114,7 @@ class ContactAddActivity : AppCompatActivity() {
             getGender(),
             memo.text.toString()
         )
-        contactRepository.addContact(newContact)
+        ContactRepository.addContact(newContact)
         showToast("저장이 완료 되었습니다.")
     }
 
