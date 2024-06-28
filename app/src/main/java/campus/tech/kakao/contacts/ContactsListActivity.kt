@@ -15,7 +15,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import campus.tech.kakao.contacts.model.Contact
+import campus.tech.kakao.contacts.utils.PermissionUtils
 import java.time.LocalDate
+
 
 class ContactsListActivity : AppCompatActivity() {
     private val contactList: MutableList<Contact> = mutableListOf()
@@ -39,6 +41,7 @@ class ContactsListActivity : AppCompatActivity() {
         helpMessageText = findViewById(R.id.text_help)
         initiateRecyclerView()
         initiateAddContactButton()
+        permissionCheck()
         // testAddContacts()
     }
 
@@ -132,5 +135,30 @@ class ContactsListActivity : AppCompatActivity() {
 
     private fun setHelpMessageActive(active: Boolean) {
         helpMessageText.visibility = if (active) View.VISIBLE else View.GONE
+    }
+    private fun permissionCheck() {
+        val permissionGranted = PermissionUtils.checkPermission(android.Manifest.permission.READ_CONTACTS, this)
+        if(!permissionGranted){
+            PermissionUtils.requestPermission(android.Manifest.permission.READ_CONTACTS, this)
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        if(requestCode != PermissionUtils.PERMISSION_REQ_CODE)
+            return
+        if(grantResults.isEmpty())
+            return
+        if(grantResults[0] == 0){
+            Log.d("KSC", "Permission Granted")
+        }
+        else{
+            Log.d("KSC", "Permission Denied")
+        }
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 }
