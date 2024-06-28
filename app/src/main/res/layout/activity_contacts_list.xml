@@ -30,6 +30,23 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/button_sync_contact"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="30dp"
+        android:autoSizeMaxTextSize="42dp"
+        android:autoSizeTextType="uniform"
+        android:background="@drawable/drawable_add_contact_button"
+        android:visibility="gone"
+
+        android:gravity="center"
+        android:src="@drawable/contact_icon"
+        android:translationZ="15dp"
+        app:layout_constraintBottom_toTopOf="@id/button_add_contact"
+        app:layout_constraintRight_toRightOf="@id/button_add_contact" />
+
     <TextView
         android:id="@+id/text_help"
         android:layout_width="wrap_content"

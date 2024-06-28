@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -23,6 +24,7 @@ class ContactsListActivity : AppCompatActivity() {
     private val contactList: MutableList<Contact> = mutableListOf()
     private lateinit var recyclerView: RecyclerView
     private lateinit var helpMessageText: TextView
+    private lateinit var syncButton: ImageButton
 
     private val activityLauncher: ActivityResultLauncher<Intent> =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -39,9 +41,11 @@ class ContactsListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_contacts_list)
 
         helpMessageText = findViewById(R.id.text_help)
+        syncButton = findViewById(R.id.button_sync_contact)
         initiateRecyclerView()
         initiateAddContactButton()
         permissionCheck()
+        initiateSyncContactButton()
         // testAddContacts()
     }
 
@@ -72,6 +76,12 @@ class ContactsListActivity : AppCompatActivity() {
         val addContactButton = findViewById<Button>(R.id.button_add_contact)
         addContactButton.setOnClickListener {
             startAddContactActivity()
+        }
+    }
+
+    private fun initiateSyncContactButton(){
+        syncButton.setOnClickListener {
+            syncContactsWithPhone()
         }
     }
 
@@ -136,10 +146,33 @@ class ContactsListActivity : AppCompatActivity() {
     private fun setHelpMessageActive(active: Boolean) {
         helpMessageText.visibility = if (active) View.VISIBLE else View.GONE
     }
+
+    private fun setSyncButtonActive(active: Boolean){
+        syncButton.visibility = if (active) View.VISIBLE else View.GONE
+    }
+
     private fun permissionCheck() {
         val permissionGranted = PermissionUtils.checkPermission(android.Manifest.permission.READ_CONTACTS, this)
         if(!permissionGranted){
             PermissionUtils.requestPermission(android.Manifest.permission.READ_CONTACTS, this)
+        }
+        else{
+            setSyncButtonActive(true)
+        }
+    }
+
+    fun getContactsFromPhone(): List<Contact>?{
+        if(!PermissionUtils.checkPermission(android.Manifest.permission.READ_CONTACTS, this))
+            return null
+        val contactLoader:ContactLoader = ContactLoader(this)
+        return contactLoader.loadContact()
+    }
+
+    fun syncContactsWithPhone() {
+        val contacts = getContactsFromPhone() ?: return
+
+        for(contact in contacts){
+            addNewContact(contact)
         }
     }
 
@@ -153,9 +186,11 @@ class ContactsListActivity : AppCompatActivity() {
         if(grantResults.isEmpty())
             return
         if(grantResults[0] == 0){
+            setSyncButtonActive(true)
             Log.d("KSC", "Permission Granted")
         }
         else{
+            setSyncButtonActive(false)
             Log.d("KSC", "Permission Denied")
         }
 
