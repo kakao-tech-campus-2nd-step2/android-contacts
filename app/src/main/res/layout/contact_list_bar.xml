@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <ImageView
+        android:id = "@+id/ListSpace"
+        android:layout_width="350dp"
+        android:layout_height="170dp"
+        android:background="@drawable/list_bar"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        />
+
+    <ImageView
+        android:id ="@+id/CircleImage"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:background="@drawable/circle"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
+        />
+    <TextView
+        android:id="@+id/NameSpace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="30dp"
+        android:textColor="@color/black"
+        android:layout_marginStart="170dp"
+        android:layout_marginTop="60dp"
+        />
+    <TextView
+        android:id="@+id/TeleSpace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:layout_marginStart="170dp"
+        android:layout_marginTop="120dp"
+        />
+    <TextView
+        android:id="@+id/OneNameSpace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="40dp"
+        android:textColor="@color/black"
+        android:layout_marginStart="90dp"
+        android:layout_marginTop="65dp"
+        />
+
+</RelativeLayout>
