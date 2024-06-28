@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
 import campus.tech.kakao.contacts.Contact.Companion.MIGRATION_1_2
 import campus.tech.kakao.contacts.Contact.Companion.MIGRATION_2_3
+import java.time.Month
 import java.util.Calendar
 
 class AddContact : AppCompatActivity() {
@@ -125,8 +126,15 @@ class AddContact : AppCompatActivity() {
         val calendar = Calendar.getInstance()
         val datePicker = DatePickerDialog(
             this, {DatePicker, year:Int, month:Int, dayOfMonth:Int ->
-                  val selectedDate = "$year.${month+1}.$dayOfMonth"
-                birth.text = selectedDate
+                var Month = "${month + 1}"
+                if (month < 9) {
+                    Month = "0${Month}"
+                }
+                var Day = "${dayOfMonth}"
+                if (dayOfMonth < 10) {
+                    Day = "0${Day}"
+                }
+                birth.text = "${year}.${Month}.${Day}"
             }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH))
         datePicker.show()
     }
