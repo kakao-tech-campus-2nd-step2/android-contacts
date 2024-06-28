@@ -1,5 +1,6 @@
 package campus.tech.kakao.contacts
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -34,7 +35,7 @@ class ListActivity : AppCompatActivity() {
         }
         Log.d("contact2", contactList.toString())
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
-        val adapter = RecyclerViewAdapter(contactList, LayoutInflater.from(this))
+        val adapter = RecyclerViewAdapter(contactList, LayoutInflater.from(this), this)
         recyclerView.adapter = adapter
         // 리사이클러 뷰에 레이아웃 매니저 장착
         recyclerView.layoutManager= LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -71,7 +72,8 @@ class ListActivity : AppCompatActivity() {
 class RecyclerViewAdapter(
     //outer class
     var contactList : MutableList<Contact>,
-    var inflater : LayoutInflater
+    var inflater : LayoutInflater,
+    var context : Context
 ) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>(){ // 어떤 뷰홀더를 쓸건지 알려줘야함 ViewHolder는 클래스 안쪽에 만든다.(inner class)
 
     inner class ViewHolder(itemView: View ): RecyclerView.ViewHolder(itemView){
@@ -82,6 +84,18 @@ class RecyclerViewAdapter(
         init{
             userTitle = itemView.findViewById(R.id.user_title)
             userName = itemView.findViewById(R.id.user_name)
+            itemView.setOnClickListener{
+                val position : Int = adapterPosition
+                val intent = Intent(context, DetailActivity::class.java)
+                val sendContact = contactList.get(position)
+                intent.putExtra("name", sendContact.name)
+                intent.putExtra("phoneNumber", sendContact.phoneNumber)
+                intent.putExtra("mail", sendContact.mail)
+                intent.putExtra("birthday", sendContact.birthday)
+                intent.putExtra("gender", sendContact.gender)
+                intent.putExtra("memo", sendContact.memo)
+                context.startActivity(intent)
+            }
 
         }
     }
@@ -105,20 +119,4 @@ class RecyclerViewAdapter(
 }
 
 
-class Contact(var name : String, var phoneNumber : String, var mail : String, var birthday : String, var gender : String, var memo : String){
-    fun existsMail(): Boolean {
-        return mail != ""
-    }
-
-    fun existsBirthday(): Boolean {
-        return birthday != ""
-    }
-
-    fun existsGender(): Boolean {
-        return gender != ""
-    }
-
-    fun existsMemo(): Boolean {
-        return memo != ""
-    }
-}
+class Contact(var name : String, var phoneNumber : String, var mail : String, var birthday : String, var gender : String, var memo : String){}
