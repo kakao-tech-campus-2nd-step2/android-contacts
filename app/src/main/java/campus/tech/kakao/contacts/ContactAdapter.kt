@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class ContactAdapter(val contacts: MutableList<Contact>) :
-    RecyclerView.Adapter<ContactAdapter.ContactViewHolder>() {
+class ContactAdapter(
+    val contacts: MutableList<Contact>,
+    private val mainTextVisibilityUpdater: () -> Unit
+) : RecyclerView.Adapter<ContactAdapter.ContactViewHolder>() {
 
     class ContactViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val displayName: TextView = itemView.findViewById(R.id.display_name)
@@ -41,5 +43,6 @@ class ContactAdapter(val contacts: MutableList<Contact>) :
     fun addContact(contact: Contact) {
         contacts.add(contact)
         notifyItemInserted(contacts.size - 1)
+        mainTextVisibilityUpdater()
     }
 }

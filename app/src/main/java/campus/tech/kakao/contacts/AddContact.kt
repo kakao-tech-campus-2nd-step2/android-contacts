@@ -1,9 +1,12 @@
 package campus.tech.kakao.contacts
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import java.util.*
 
 class AddContact : AppCompatActivity() {
 
@@ -11,10 +14,25 @@ class AddContact : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.add_contact)
 
+        val toggleButton: ImageView = findViewById(R.id.toggle)
+        val additionalFieldsLayout: LinearLayout = findViewById(R.id.additionalFieldsLayout)
+        val birthdayEditText: TextView = findViewById(R.id.birthday)
         val nameEditText: EditText = findViewById(R.id.name)
         val phoneNumEditText: EditText = findViewById(R.id.phoneNum)
+        val maleRadioButton: RadioButton = findViewById(R.id.maleRadioButton)
+        val femaleRadioButton: RadioButton = findViewById(R.id.femaleRadioButton)
         val saveButton: TextView = findViewById(R.id.saveButton)
         val cancelButton: TextView = findViewById(R.id.cancelButton)
+        val toggleLayout: LinearLayout = findViewById(R.id.toggleLayout)
+
+        toggleButton.setOnClickListener {
+            toggleLayout.visibility = View.GONE
+            additionalFieldsLayout.visibility = View.VISIBLE
+        }
+
+        birthdayEditText.setOnClickListener {
+            showDatePickerDialog()
+        }
 
         saveButton.setOnClickListener {
             val name = nameEditText.text.toString()
@@ -30,10 +48,10 @@ class AddContact : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-
             val resultIntent = Intent().apply {
                 putExtra("name", name)
                 putExtra("phoneNum", phoneNumber)
+
             }
             setResult(RESULT_OK, resultIntent)
             finish()
@@ -43,5 +61,20 @@ class AddContact : AppCompatActivity() {
             setResult(RESULT_CANCELED)
             finish()
         }
+    }
+
+    private fun showDatePickerDialog() {
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+        val datePickerDialog = DatePickerDialog(this, { _, selectedYear, selectedMonth, selectedDay ->
+            val selectedDate = "$selectedYear-${selectedMonth + 1}-$selectedDay"
+            val birthday: TextView = findViewById(R.id.birthday)
+            birthday.text = selectedDate
+        }, year, month, day)
+
+        datePickerDialog.show()
     }
 }
