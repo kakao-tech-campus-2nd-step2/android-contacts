@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
+import android.widget.RadioButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -101,9 +102,16 @@ class MainActivity : AppCompatActivity() {
     private fun saveData() {
         val nameData = name.text.toString()
         val telData = tel.text.toString()
-        val mailData = mail.text.toString()
-        val birthData = birth.text.toString()
-        val genderData = genderRadio
+        val mailData = mail.text?.toString()
+        val birthData = birth.text?.toString()
+        var genderData: String?
+
+        var male = findViewById<RadioButton>(R.id.male)
+        var female = findViewById<RadioButton>(R.id.female)
+
+        if (male.isChecked) genderData = "male"
+        else genderData = "female"
+
         val memoData = memo.text.toString()
 
         val intent = Intent().apply {
@@ -112,6 +120,7 @@ class MainActivity : AppCompatActivity() {
             putExtra("tel", telData)
             putExtra("mail", mailData)
             putExtra("birth", birthData)
+            putExtra("gender", genderData)
             putExtra("memo", memoData)
         }
 

@@ -3,13 +3,13 @@ package campus.tech.kakao.contacts
 import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
 import android.widget.Button
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.RecyclerView
 
-class addInfo : AppCompatActivity() {
+class AddInfo : AppCompatActivity() {
     private lateinit var addBtn: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,6 +18,7 @@ class addInfo : AppCompatActivity() {
 
         initialize()
         setUpListeners()
+
 
     }
 
@@ -36,6 +37,7 @@ class addInfo : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
 
 
 }

@@ -16,7 +16,7 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".addInfo"
+            android:name=".AddInfo"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
