@@ -1,6 +1,9 @@
 package campus.tech.kakao.contacts
 
+import android.opengl.Visibility
 import android.os.Bundle
+import android.service.voice.VoiceInteractionSession.VisibleActivityCallback
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
@@ -18,7 +21,7 @@ class DetailActivity : AppCompatActivity() {
         val phone = intent.getStringExtra("phone")
         val email = intent.getStringExtra("email")
         val birthday = intent.getStringExtra("birthday")
-        val gender = intent.getStringExtra("gender")
+        var gender = intent.getStringExtra("gender")
         val memo = intent.getStringExtra("memo")
 
         val namePrint = findViewById<LinearLayout>(R.id.namePrint)
@@ -41,5 +44,18 @@ class DetailActivity : AppCompatActivity() {
         birthdayTextView.text = birthday
         genderTextView.text = gender
         memoTextView.text = memo
+
+        if (emailTextView.text == "") {
+            emailPrint.setVisibility(View.GONE)
+        }
+        if (birthdayTextView.text == "") {
+            birthdayPrint.setVisibility(View.GONE)
+        }
+        if (genderTextView.text == "-1") {
+            genderPrint.setVisibility(View.GONE)
+        }
+        if (memoTextView.text == "") {
+            memoPrint.setVisibility(View.GONE)
+        }
     }
 }
