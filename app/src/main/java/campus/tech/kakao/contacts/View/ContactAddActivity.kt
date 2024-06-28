@@ -92,7 +92,7 @@ class ContactAddActivity : AppCompatActivity() {
             when (it) {
                 is EditText -> if (it.text.isNotEmpty()) return true
                 is TextView -> if (it.text.isNotEmpty()) return true
-                is RadioGroup -> if (getGender() == null) return true
+                is RadioGroup -> if (getGender() != null) return true
             }
         }
         return false
