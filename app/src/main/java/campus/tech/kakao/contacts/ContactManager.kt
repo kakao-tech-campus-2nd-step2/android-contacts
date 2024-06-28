@@ -4,9 +4,13 @@ import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import android.widget.Toast
+import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.content.ContextCompat.startActivity
+import org.w3c.dom.Text
 
 
 class ContactManager() {
@@ -26,5 +30,15 @@ class ContactManager() {
         })
         builder.create()
         builder.show()
+    }
+    
+    fun setTextViewText(textView: TextView, text: String, layout: LinearLayoutCompat? = null) {
+        if(text.isBlank()) {
+            if (layout != null) {
+                layout.visibility = View.GONE
+            }
+        } else {
+           textView.text = text
+        }
     }
 }
