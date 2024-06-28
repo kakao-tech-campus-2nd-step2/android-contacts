@@ -10,7 +10,8 @@ import android.widget.LinearLayout
 import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-
+const val GENDER_WOMAN_ID = "2131231241"
+const val GENDER_MAN_ID = "2131230978"
 class DetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +38,13 @@ class DetailActivity : AppCompatActivity() {
         val birthdayTextView = findViewById<TextView>(R.id.birthdayTextView)
         val genderTextView = findViewById<TextView>(R.id.genderTextView)
         val memoTextView = findViewById<TextView>(R.id.memoTextView)
+
+        if (gender == GENDER_WOMAN_ID) {
+            gender = "여성"
+        }
+        else if (gender == GENDER_MAN_ID) {
+            gender = "남성"
+        }
 
         nameTextView.text = name
         phoneTextView.text = phone
