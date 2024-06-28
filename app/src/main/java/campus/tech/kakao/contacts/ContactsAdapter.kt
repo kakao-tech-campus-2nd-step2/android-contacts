@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class ContactsAdapter(private var contList: List<Contact>, private val listener: OnItemClickListener): RecyclerView.Adapter<ContactsAdapter.ViewHolder>() {
+class ContactsAdapter(private var contList: List<Contact>, private val listener: OnItemClickListener, private val longListener: OnItemLongClickListener): RecyclerView.Adapter<ContactsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -22,12 +22,13 @@ class ContactsAdapter(private var contList: List<Contact>, private val listener:
         holder.bind(contList[position])
     }
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener, View.OnLongClickListener {
         private val firstName: TextView = itemView.findViewById(R.id.firstName)
         private val lastName: TextView = itemView.findViewById(R.id.lastName)
 
         init {
             itemView.setOnClickListener(this)
+            itemView.setOnLongClickListener(this)
         }
 
         fun bind(contact: Contact) {
@@ -41,10 +42,23 @@ class ContactsAdapter(private var contList: List<Contact>, private val listener:
                 listener.onItemClick(position)
             }
         }
+
+        override fun onLongClick(v: View?): Boolean {
+            val position = adapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                longListener.onItemLongClick(position)
+                return true
+            }
+            return false
+        }
     }
 
     interface OnItemClickListener {
         fun onItemClick(position: Int)
+    }
+
+    interface OnItemLongClickListener {
+        fun onItemLongClick(position: Int)
     }
 
     fun updateItems(newItems: List<Contact>) {

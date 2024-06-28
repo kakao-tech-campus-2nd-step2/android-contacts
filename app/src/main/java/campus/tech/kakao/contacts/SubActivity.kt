@@ -1,6 +1,7 @@
 package campus.tech.kakao.contacts
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -16,12 +17,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import campus.tech.kakao.contacts.databinding.ActivitySubBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.flow.MutableStateFlow
 import java.util.concurrent.Flow
 
-class SubActivity : AppCompatActivity(), ContactsAdapter.OnItemClickListener {
+class SubActivity : AppCompatActivity(), ContactsAdapter.OnItemClickListener, ContactsAdapter.OnItemLongClickListener {
     private lateinit var addFab: FloatingActionButton
     private lateinit var recyclerView: RecyclerView
     private lateinit var contactsAdapter: ContactsAdapter
@@ -41,12 +41,12 @@ class SubActivity : AppCompatActivity(), ContactsAdapter.OnItemClickListener {
             startActivity(intent)
         }
 
-//        var ar = arrayOf("zz", "44", "","","","")
-//        Contacts.addContact(ar)
-//        var arr = arrayOf("하하", "74", "","","","")
-//        Contacts.addContact(arr)
+        var ar = arrayOf("zz", "44", "","","","")
+        Contacts.addContact(ar)
+        var arr = arrayOf("하하", "74", "","","","")
+        Contacts.addContact(arr)
 
-        contactsAdapter = ContactsAdapter(Contacts.getList(), this)
+        contactsAdapter = ContactsAdapter(Contacts.getList(), this, this)
         contactsAdapter.notifyDataSetChanged()
 
         recyclerView.adapter = contactsAdapter
@@ -64,16 +64,36 @@ class SubActivity : AppCompatActivity(), ContactsAdapter.OnItemClickListener {
         super.onResume()
         contactsAdapter.notifyDataSetChanged()
 
+        checkContactsSize()
+    }
+
+    private fun checkContactsSize() {
         if (Contacts.getSize() < 1)
             textView.visibility = View.VISIBLE
         else
             textView.visibility = View.GONE
-
     }
 
     override fun onItemClick(position: Int) {
         val intent = Intent(this, MainActivity2::class.java)
         intent.putExtra("contIdx", position)
         startActivity(intent)
+    }
+
+    override fun onItemLongClick(position: Int) {
+        val builder = AlertDialog.Builder(this)
+        builder.setMessage("선택하신 연락처를 삭제하시겠습니까?")
+
+        builder.setNegativeButton("삭제") { dialog, which ->
+            Contacts.delContact(position)
+            contactsAdapter.notifyDataSetChanged()
+            checkContactsSize()
+        }
+
+        builder.setPositiveButton("아니오") { dialog, which ->
+        }
+
+        val dialog = builder.create()
+        dialog.show()
     }
 }

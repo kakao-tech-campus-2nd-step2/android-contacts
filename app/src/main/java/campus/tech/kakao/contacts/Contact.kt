@@ -13,4 +13,16 @@ data class Contact(
         return false
     }
 
+    operator fun get(s: String): String {
+        return when (s) {
+            "name" -> name
+            "phoneNumber" -> phoneNumber
+            "mail" -> mail
+            "birth" -> birth
+            "gender" -> gender
+            "memo" -> memo
+            else -> throw IllegalArgumentException("Unknown field: $s")
+        }
+    }
+
 }

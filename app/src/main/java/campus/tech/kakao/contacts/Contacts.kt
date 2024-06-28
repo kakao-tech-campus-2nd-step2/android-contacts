@@ -38,10 +38,8 @@ object Contacts {
         return false
     }
 
-    fun delContact(name: String, phoneNumber: String) {
-        var idx = findContact(name, phoneNumber)
-        if (idx != -1)
-            contacts.removeAt(idx)
+    fun delContact(idx: Int) {
+        contacts.removeAt(idx)
     }
 
 }
