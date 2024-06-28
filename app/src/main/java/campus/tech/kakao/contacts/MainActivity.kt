@@ -1,80 +1,72 @@
 package campus.tech.kakao.contacts
 
-import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.*
-
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import java.util.*
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var addContact: ImageView
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var contactAdapter: ContactAdapter
+    private lateinit var mainText: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-
-        val toggleButton: ImageView = findViewById(R.id.toggle)
-        val additionalFieldsLayout: LinearLayout = findViewById(R.id.additionalFieldsLayout)
-        val birthdayEditText: EditText = findViewById(R.id.birthdayEditText)
-        val nameEditText: EditText = findViewById(R.id.name)
-        val phoneNumEditText: EditText = findViewById(R.id.phoneNum)
-        val maleRadioButton: RadioButton = findViewById(R.id.maleRadioButton)
-        val femaleRadioButton: RadioButton = findViewById(R.id.femaleRadioButton)
-        val saveButton: TextView = findViewById(R.id.saveButton)
-        val cancelButton: TextView = findViewById(R.id.cancelButton)
-        val toggleLayout: LinearLayout = findViewById(R.id.toggleLayout)
-
-        toggleButton.setOnClickListener {
-            toggleLayout.visibility = View.GONE
-            additionalFieldsLayout.visibility = View.VISIBLE
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
         }
 
-        birthdayEditText.setOnClickListener {
-            showDatePickerDialog()
+        mainText = findViewById(R.id.mainText)
+        addContact = findViewById(R.id.add_contact)
+        recyclerView = findViewById(R.id.recyclerView)
+        contactAdapter = ContactAdapter(mutableListOf(), this::updateMainTextVisibility)
+
+        recyclerView.adapter = contactAdapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
+
+        addContact.setOnClickListener {
+            val intent = Intent(this@MainActivity, AddContact::class.java)
+            startActivityForResult(intent, ADD_CONTACT_REQUEST_CODE)
         }
 
-        saveButton.setOnClickListener {
-            val name = nameEditText.text.toString()
-            val phoneNumber = phoneNumEditText.text.toString()
+        updateMainTextVisibility()
+    }
 
-            if (name.isEmpty() || phoneNumber.isEmpty()) {
-                Toast.makeText(this, "이름과 전화번호는 필수 값입니다.", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == ADD_CONTACT_REQUEST_CODE && resultCode == RESULT_OK) {
+            val name = data?.getStringExtra("name")
+            val phoneNum = data?.getStringExtra("phoneNum")
+
+            if (name != null && phoneNum != null) {
+                val contact = Contact(name, phoneNum)
+                contactAdapter.addContact(contact)
             }
-
-            if (!phoneNumber.matches("\\d+".toRegex())) {
-                Toast.makeText(this, "전화번호는 숫자만 입력 가능합니다.", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
-//            if (!maleRadioButton.isChecked && !femaleRadioButton.isChecked) {
-//                Toast.makeText(this, "성별을 선택해 주세요.", Toast.LENGTH_SHORT).show()
-//                return@setOnClickListener
-//            }
-
-            Toast.makeText(this, "저장이 완료되었습니다.", Toast.LENGTH_SHORT).show()
-        }
-
-        cancelButton.setOnClickListener {
-            Toast.makeText(this, "취소 되었습니다.", Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun showDatePickerDialog() {
-        val calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
+    private fun updateMainTextVisibility() {
+        if (contactAdapter.itemCount >= 4) {
+            mainText.visibility = View.GONE
+        } else {
+            mainText.visibility = View.VISIBLE
+        }
+    }
 
-        val datePickerDialog = DatePickerDialog(this, { _, selectedYear, selectedMonth, selectedDay ->
-            val selectedDate = "$selectedYear-${selectedMonth + 1}-$selectedDay"
-            val birthdayEditText: EditText = findViewById(R.id.birthdayEditText)
-            birthdayEditText.setText(selectedDate)
-        }, year, month, day)
-
-        datePickerDialog.show()
+    companion object {
+        const val ADD_CONTACT_REQUEST_CODE = 1
     }
 }
-
-
