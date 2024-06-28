@@ -69,7 +69,7 @@ class AddContactActivity : AppCompatActivity() {
             }
             val memoText = memo.text.toString()
 
-            if (nameText.isNotEmpty() && phoneNumberText.isNotEmpty()) {
+            if (nameText.isNotBlank() && phoneNumberText.isNotBlank()) {
                 intent.putExtra("nameText", nameText)
                 intent.putExtra("emailText", emailText)
                 intent.putExtra("phoneNumberText", phoneNumberText)
