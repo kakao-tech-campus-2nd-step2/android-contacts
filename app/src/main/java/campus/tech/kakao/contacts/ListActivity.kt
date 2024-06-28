@@ -1,12 +1,15 @@
 package campus.tech.kakao.contacts
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class ListActivity : AppCompatActivity() {
+    lateinit var plusButton : TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
@@ -20,6 +23,16 @@ class ListActivity : AppCompatActivity() {
             intent.getStringExtra("gender").toString(),
             intent.getStringExtra("memo").toString())
         contactList.add(contact)
+
+        val plusButton = findViewById<TextView>(R.id.plus_item_button)
+        plusButton.setOnClickListener{
+            moveToAddContact()
+        }
+    }
+
+    fun moveToAddContact(){
+        val intent = Intent(this@ListActivity, MainActivity::class.java)
+        startActivity(intent)
     }
 }
 
