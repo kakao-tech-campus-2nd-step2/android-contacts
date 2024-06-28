@@ -38,12 +38,12 @@ class contactsInfo : AppCompatActivity() {
 
 
         with(sharedPreferences){
-            personName.text = getString("name1", "미정")
-            personNumber.text = getString("number1", "미정")
-            personMail.text = getString("mail1", "미정")
-            personBirthday.text = getString("birthday1", "미정")
-            personGender.text = getString("gender1", "미정")
-            personMemo.text = getString("memo1", "미정")
+            personName.text = getString("name1", "")
+            personNumber.text = getString("number1", "")
+            personMail.text = getString("mail1", "")
+            personBirthday.text = getString("birthday1", "")
+            personGender.text = getString("gender1", "")
+            personMemo.text = getString("memo1", "")
         }
     }
 }

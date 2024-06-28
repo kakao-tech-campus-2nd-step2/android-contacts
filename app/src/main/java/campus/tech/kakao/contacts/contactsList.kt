@@ -97,12 +97,12 @@ class contactsList : AppCompatActivity() {
 
     private fun getData() {
         with(getSharedPreferences("userInformation", Context.MODE_PRIVATE)){
-            contactsButton1.text = getString("name1", "미정")
-            contactsButton2.text = getString("name2", "미정")
-            contactsButton3.text = getString("name3", "미정")
-            contactsButton4.text = getString("name4", "미정")
-            contactsButton5.text = getString("name5", "미정")
-            contactsButton6.text = getString("name6", "미정")
+            contactsButton1.text = getString("name1", "")
+            contactsButton2.text = getString("name2", "")
+            contactsButton3.text = getString("name3", "")
+            contactsButton4.text = getString("name4", "")
+            contactsButton5.text = getString("name5", "")
+            contactsButton6.text = getString("name6", "")
 
         }
     }
