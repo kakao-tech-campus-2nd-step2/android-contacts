@@ -13,6 +13,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import java.util.Calendar
 import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.app.AlertDialog
+import androidx.activity.OnBackPressedCallback
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -70,8 +73,12 @@ class MainActivity : AppCompatActivity() {
 
         //취소 버튼
         cancel.setOnClickListener {
-            Toast.makeText(this, "취소 되었습니다.", Toast.LENGTH_SHORT).show()
-            //finish()
+            if (isFormEmpty()) {
+                Toast.makeText(this, "취소 되었습니다.", Toast.LENGTH_SHORT).show()
+                finish()
+            } else {
+                showExitConfirmationDialog()
+            }
         }
 
         //생일 입력 설정(달력 사용)
@@ -88,5 +95,32 @@ class MainActivity : AppCompatActivity() {
             datePickerDialog.show()
         }
 
+        //뒤로 가기 버튼: 입력 폼 작성 X -> 바로 나가기 / 입력 폼 작성 O -> 팝업 띄우기
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (isFormEmpty()) {
+                    finish()
+                } else {
+                    showExitConfirmationDialog()
+                }
+            }
+        })
+
     }
+
+    //입력 폼 작성 여부 검사
+    private fun isFormEmpty(): Boolean {
+        return name.text.isEmpty() && phone.text.isEmpty() && email.text.isEmpty() &&
+                birthday.text.isEmpty() && genderGroup.checkedRadioButtonId == -1 && memo.text.isEmpty()
+    }
+
+    //팝업
+    private fun showExitConfirmationDialog() {
+        AlertDialog.Builder(this)
+            .setMessage("작성 중인 내용이 있습니다. 정말 나가시겠습니까?")
+            .setPositiveButton("나가기") { _, _ -> finish() }
+            .setNegativeButton("작성하기", null)
+            .show()
+    }
+
 }
