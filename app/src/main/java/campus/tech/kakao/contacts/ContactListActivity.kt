@@ -50,8 +50,6 @@ class ContactListActivity : AppCompatActivity() {
         helpMessage.visibility = if (userList.isEmpty()) View.VISIBLE else View.GONE
     }
 
-    private fun setOnApplyWindowInsetsListener(){
-    }
 
     private fun initUserList(){
         Log.d("ContactListActivity", "inituserlist")
