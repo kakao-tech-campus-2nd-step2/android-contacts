@@ -16,18 +16,16 @@
         android:clipToPadding="false"
         android:scrollbars="vertical" />
 
-    <!-- 빈 상태일 때 표시할 텍스트 -->
     <TextView
         android:id="@+id/empty_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="오른쪽 + 버튼을 클릭하여\n연락처를 등록해보세요."
+        android:text="@string/prompt_add_contact"
         android:layout_centerInParent="true"
         android:textColor="@android:color/black"
         android:textSize="18sp"
         android:textAlignment="center" />
 
-    <!-- Floating Action Button (FAB) -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add_contact"
         android:layout_width="wrap_content"

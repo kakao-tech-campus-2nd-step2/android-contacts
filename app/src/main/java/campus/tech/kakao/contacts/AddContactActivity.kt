@@ -76,11 +76,11 @@ class AddContactActivity : AppCompatActivity() {
 
     private fun showExitConfirmationDialog() {
         AlertDialog.Builder(this)
-            .setMessage("작성 중인 내용이 있습니다. 정말 나가시겠습니까?")
-            .setPositiveButton("확인") { _, _ ->
+            .setMessage(getString(R.string.dialog_confirm_exit))
+            .setPositiveButton(getString(R.string.confirm_label)) { _, _ ->
                 finish()
             }
-            .setNegativeButton("취소") { dialog, _ ->
+            .setNegativeButton(getString(R.string.cancel_label)) { dialog, _ ->
                 dialog.dismiss()
             }
             .create()

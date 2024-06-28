@@ -14,4 +14,8 @@
     <string name="toast_phone_number_is_essential">전화번호는 필수로 입력해야 합니다.</string>
     <string name="toast_saved">저장이 완료 되었습니다.</string>
     <string name="toast_canceled">취소 되었습니다.</string>
+    <string name="dialog_confirm_exit">작성 중인 내용이 있습니다. 정말 나가시겠습니까?</string>
+    <string name="confirm_label">확인</string>
+    <string name="register_birthday">생일</string>
+    <string name="prompt_add_contact">오른쪽 + 버튼을 클릭하여\n연락처를 등록해보세요.</string>
 </resources>

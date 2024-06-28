@@ -86,7 +86,7 @@
             android:background="#E0F7FA"
             android:clickable="true"
             android:focusable="false"
-            android:hint="생일"
+            android:hint="@string/register_birthday"
             android:padding="10dp" />
 
         <LinearLayout

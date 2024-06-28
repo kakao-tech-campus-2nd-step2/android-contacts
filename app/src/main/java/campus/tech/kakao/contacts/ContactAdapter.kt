@@ -28,13 +28,8 @@ class ContactAdapter(private val context: Context, private val contactList: List
 
     override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
         val contact = contactList[position]
-
-        // Set contact name
         holder.nameTextView.text = contact.name
-
-        // Set initial letter in profile initial TextView
         holder.profileInitialTextView.text = contact.name.substring(0, 1).toUpperCase()
-
         holder.itemView.setOnClickListener {
             itemClickListener?.onItemClick(contact)
         }

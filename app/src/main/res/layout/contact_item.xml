@@ -18,7 +18,6 @@
         android:padding="10dp"
         android:gravity="center_vertical">
 
-        <!-- Circular profile image container -->
         <LinearLayout
             android:id="@+id/profile_image_container"
             android:layout_width="64dp"
@@ -27,7 +26,6 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <!-- Text view for first letter of contact name -->
             <TextView
                 android:id="@+id/profile_initial"
                 android:layout_width="wrap_content"
@@ -38,7 +36,6 @@
 
         </LinearLayout>
 
-        <!-- Name of the contact -->
         <TextView
             android:id="@+id/contact_name"
             android:layout_width="0dp"

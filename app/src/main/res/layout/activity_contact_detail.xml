@@ -28,15 +28,13 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:padding="8dp"
-            android:text="이름" />
+            android:text="@string/register_name" />
 
-        <!-- Empty box -->
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-        <!-- Name Content -->
         <TextView
             android:id="@+id/contact_name_content"
             android:layout_width="wrap_content"
@@ -64,15 +62,13 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:padding="8dp"
-            android:text="전화번호" />
+            android:text="@string/register_phone_number" />
 
-        <!-- Empty box -->
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-        <!-- Phone Content -->
         <TextView
             android:id="@+id/contact_phone_content"
             android:layout_width="wrap_content"
@@ -100,15 +96,13 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:padding="8dp"
-            android:text="메일" />
+            android:text="@string/register_email" />
 
-        <!-- Empty box -->
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-        <!-- Email Content -->
         <TextView
             android:id="@+id/contact_mail_content"
             android:layout_width="wrap_content"
@@ -136,15 +130,13 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:padding="8dp"
-            android:text="생일" />
+            android:text="@string/register_birthday" />
 
-        <!-- Empty box -->
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-        <!-- Birthday Content -->
         <TextView
             android:id="@+id/contact_birthday_content"
             android:layout_width="wrap_content"
@@ -172,15 +164,13 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:padding="8dp"
-            android:text="성별" />
+            android:text="@string/register_gender" />
 
-        <!-- Empty box -->
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-        <!-- Gender Content -->
         <TextView
             android:id="@+id/contact_gender_content"
             android:layout_width="wrap_content"
@@ -208,15 +198,13 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:padding="8dp"
-            android:text="메모" />
+            android:text="@string/register_memo" />
 
-        <!-- Empty box -->
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-        <!-- Memo Content -->
         <TextView
             android:id="@+id/contact_memo_content"
             android:layout_width="wrap_content"

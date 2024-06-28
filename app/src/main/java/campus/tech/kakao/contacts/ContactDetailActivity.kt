@@ -1,7 +1,6 @@
 package campus.tech.kakao.contacts
 
 import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
@@ -56,7 +55,7 @@ class ContactDetailActivity : Activity() {
 
         if (genderId != -1) {
             genderSection.visibility = View.VISIBLE
-            val genderText = if (genderId == R.id.gender_male) "Male" else "Female"
+            val genderText = if (genderId == R.id.gender_male) getString(R.string.gender_male) else getString(R.string.gender_female)
             genderTextView.text = genderText
         }
 
