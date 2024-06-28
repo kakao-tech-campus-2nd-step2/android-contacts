@@ -160,7 +160,7 @@
         app:layout_constraintTop_toBottomOf="@+id/dgenderLayout"
         android:layout_marginTop="16dp"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="150dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp">
         <TextView
@@ -169,7 +169,6 @@
             android:text="메모"
             android:textStyle="bold"
             android:textSize="25dp"
-            android:gravity="center_vertical"
             android:layout_height="match_parent"/>
         <TextView
             android:id="@+id/detailmemo"
@@ -178,6 +177,6 @@
             android:layout_height="match_parent"
             android:textSize="25dp"
             android:text="메모"
-            android:gravity="right|center_vertical" />
+            android:gravity="right" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.constraintlayout.widget.ConstraintLayout>

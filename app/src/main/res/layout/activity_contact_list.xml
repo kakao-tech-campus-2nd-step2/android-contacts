@@ -6,6 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Contact_List">
+    <TextView
+        android:id="@+id/notice"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:text="오른쪽 +버튼을 클릭하여 \n 연락처를 등록해보세요."/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -16,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </ScrollView>
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/add"
         android:layout_width="80dp"
         android:layout_height="80dp"

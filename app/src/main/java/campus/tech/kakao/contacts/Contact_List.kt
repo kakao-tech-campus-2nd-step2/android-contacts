@@ -3,15 +3,13 @@ package campus.tech.kakao.contacts
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.LinearLayoutCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 
 class Contact_List : AppCompatActivity() {
     lateinit var contactListLayout: LinearLayoutCompat
@@ -43,6 +41,8 @@ class Contact_List : AppCompatActivity() {
         add.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             addContact.launch(intent)
+            val notice = findViewById<TextView>(R.id.notice)
+            notice.visibility = View.GONE
         }
     }
 
