@@ -112,7 +112,7 @@ class ContactAdapter(private val context: Context, private val contacts: List<An
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val contact = contacts[position]
-        holder.nameTextView.text = contact?.name
+        holder.nameTextView.text = contact.name
 
         holder.itemView.setOnClickListener {
             val intent = Intent(context, whoamI::class.java)
@@ -123,6 +123,8 @@ class ContactAdapter(private val context: Context, private val contacts: List<An
 
     override fun getItemCount() = contacts.size
 }
+
+
 
 
 
