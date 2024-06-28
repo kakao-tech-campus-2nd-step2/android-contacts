@@ -25,7 +25,6 @@ class SubActivity : AppCompatActivity(), ContactsAdapter.OnItemClickListener, Co
     private lateinit var addFab: FloatingActionButton
     private lateinit var recyclerView: RecyclerView
     private lateinit var contactsAdapter: ContactsAdapter
-    private lateinit var viewModel: SubViewModel
     private lateinit var textView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
