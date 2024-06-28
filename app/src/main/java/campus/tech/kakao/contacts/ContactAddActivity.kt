@@ -1,6 +1,7 @@
 package campus.tech.kakao.contacts
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -76,11 +77,18 @@ class ContactAddActivity : AppCompatActivity() {
             }
             else{
                 Toast.makeText(this, "저장이 완료되었습니다.", Toast.LENGTH_SHORT).show()
-                Toast.makeText(
-                    this,
-                    "" + name_input.text + " "+ phone_number_input.text + " "+ email_input.text + " "+ birth_date_input.text + " "+ gender_input.text + " "+ memo_input.text,
-                    Toast.LENGTH_SHORT
-                ).show()
+                val contact: Contact = Contact(
+                    name_input.text.toString(),
+                    phone_number_input.text.toString(),
+                    email_input.text.toString(),
+                    birth_date_input.text.toString(),
+                    gender_input.text.toString(),
+                    memo_input.text.toString()
+                )
+                val intent: Intent = Intent()
+                intent.putExtra("contactInfo", contact)
+                setResult(RESULT_OK, intent)
+                finish()
             }
         }
         cancel_button.setOnClickListener {
