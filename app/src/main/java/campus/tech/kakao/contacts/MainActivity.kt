@@ -1,15 +1,17 @@
 package campus.tech.kakao.contacts
 
+import android.app.Activity
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.text.InputFilter
 import android.text.InputType
 import android.view.View
 import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import java.util.*
-
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,28 +31,32 @@ class MainActivity : AppCompatActivity() {
         val saveBtn = findViewById<Button>(R.id.saveBtn)
 
         phoneET.inputType = InputType.TYPE_CLASS_NUMBER
-
         nameET.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_CAP_WORDS
-        nameET.filters = arrayOf(InputFilter { source, _, _, _, _, _ ->
-            source.filter { it.isLetter() || it.isWhitespace() }
-        })
+        nameET.filters = arrayOf(InputFilter { source, _, _, _, _, _ -> source.filter { it.isLetter() || it.isWhitespace() } })
 
-        detailBtn.setOnClickListener {
-            showMoreFields(moreBtnLayout, moreETLayout)
-        }
+        detailBtn.setOnClickListener { showMoreFields(moreBtnLayout, moreETLayout) }
+        birthDayET.setOnClickListener { showDatePickerDialog(birthDayET) }
+        saveBtn.setOnClickListener { saveCheck(nameET, phoneET) }
+        cancelBtn.setOnClickListener { showToast("취소되었습니다") }
+    }
 
-        birthDayET.setOnClickListener {
-            showDatePickerDialog(birthDayET)
-        }
-
-        saveBtn.setOnClickListener {
-            saveCheck(nameET, phoneET)
-        }
-
-        cancelBtn.setOnClickListener {
-            showToast("취소되었습니다")
-        }
-
+    @Deprecated("Deprecated in Java")
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val builder = AlertDialog.Builder(this)
+        builder.setMessage("작성 중인 내용이 있습니다. 정말 나가시겠습니까?")
+            .setCancelable(false)
+            .setPositiveButton("나가기") { dialog, id ->
+                val intent = Intent(this, ContactListActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+                finish()
+            }
+            .setNegativeButton("작성하기") { dialog, id ->
+                dialog.dismiss()
+            }
+        val alert = builder.create()
+        alert.show()
     }
 
     private fun showMoreFields(moreBtnLayout: LinearLayout, moreETLayout: LinearLayout) {
@@ -86,6 +92,12 @@ class MainActivity : AppCompatActivity() {
             }
             else -> {
                 showToast("저장이 완료되었습니다")
+                val resultIntent = Intent().apply {
+                    putExtra("name", name)
+                    putExtra("phone", phone)
+                }
+                setResult(Activity.RESULT_OK, resultIntent)
+                finish()
             }
         }
     }
@@ -93,5 +105,4 @@ class MainActivity : AppCompatActivity() {
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
-
 }
