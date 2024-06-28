@@ -1,6 +1,7 @@
 package campus.tech.kakao.contacts
 
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -45,6 +46,42 @@ class DetailActivity : AppCompatActivity() {
         birthdayInputField.setText(intent.getStringExtra("birthday"))
         genderInputField.setText(intent.getStringExtra("gender"))
         memoInputField.setText(intent.getStringExtra("memo"))
+        setVisibleCompletedFields()
+    }
 
+    fun setVisibleCompletedFields() {
+        if(ExistMail()){
+            mail.visibility = View.VISIBLE
+            mailInputField.visibility = View.VISIBLE
+        }
+        if(ExistBirthday()){
+            birthday.visibility = View.VISIBLE
+            birthdayInputField.visibility = View.VISIBLE
+        }
+        if(ExistGender()){
+            gender.visibility = View.VISIBLE
+            genderInputField.visibility = View.VISIBLE
+        }
+        if(ExistMemo()){
+            memo.visibility = View.VISIBLE
+            memoInputField.visibility = View.VISIBLE
+        }
+
+    }
+
+    fun ExistMail(): Boolean {
+        return mailInputField.text.toString() != ""
+    }
+
+    fun ExistBirthday(): Boolean {
+        return birthdayInputField.text.toString() != ""
+    }
+
+    fun ExistGender(): Boolean {
+        return genderInputField.text.toString() != ""
+    }
+
+    fun ExistMemo(): Boolean {
+        return memoInputField.text.toString() != ""
     }
 }
