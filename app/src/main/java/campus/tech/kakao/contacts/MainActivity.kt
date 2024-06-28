@@ -33,7 +33,6 @@ class MainActivity : AppCompatActivity() {
         val see_more_button: LinearLayoutCompat = findViewById(R.id.see_more_button)
         val see_more_input_form: LinearLayoutCompat = findViewById(R.id.see_more_input_form)
 
-        // 초기화
         see_more_input_form.visibility = View.GONE
         birth_date_input.setClickable(false)
         birth_date_input.setFocusable(false)
@@ -45,7 +44,7 @@ class MainActivity : AppCompatActivity() {
             see_more_input_form.visibility = View.VISIBLE
         }
 
-        birth_date_input.setOnClickListener{
+        birth_date_input.      setOnClickListener{
             var calendar = Calendar.getInstance()
             var year = calendar.get(Calendar.YEAR)
             var month = calendar.get(Calendar.MONTH)
@@ -89,7 +88,5 @@ class MainActivity : AppCompatActivity() {
         cancel_button.setOnClickListener {
             Toast.makeText(this, "취소되었습니다.", Toast.LENGTH_SHORT).show()
         }
-
-
     }
 }
