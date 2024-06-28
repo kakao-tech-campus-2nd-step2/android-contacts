@@ -57,8 +57,8 @@ class ContactAddActivity : AppCompatActivity() {
         }
     }
 
-    fun cancelContact() {
-        // TODO: implement cancel workflow
+    fun cancelAddContact() {
+        finish()
         showToast("취소 되었습니다.")
     }
 
@@ -147,7 +147,7 @@ class ContactAddActivity : AppCompatActivity() {
         }
 
         cancelBtn.setOnClickListener {
-            cancelContact()
+            cancelAddContact()
         }
 
         submitBtn.setOnClickListener {
