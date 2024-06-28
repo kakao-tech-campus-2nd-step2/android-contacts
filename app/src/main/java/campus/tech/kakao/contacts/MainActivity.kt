@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
 		}
 
 	}
-
+	//연락처 추가 후 연락처 목록 갱신
 	override fun onResume() {
 		super.onResume()
 		val contactList = database.contactDao().getAll()
@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
 			contactList, LayoutInflater.from(this), this)
 		recyclerView.layoutManager = LinearLayoutManager(this)
 	}
-
+	//뒤로 가기 버튼 클릭 시 연락처 초기화
 	override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			database.contactDao().deleteAll()

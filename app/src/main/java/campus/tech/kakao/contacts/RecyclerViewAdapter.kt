@@ -29,6 +29,7 @@ class RecyclerViewAdapter(
 				val contact = contact_list.get(position)
 //				Toast.makeText(context, ""+contact.name+" "+contact.phone, Toast.LENGTH_SHORT).show()
 				val intent = Intent(context, ContactDetail::class.java)
+				//인텐트에 id 넘겨줌
 				intent.putExtra("contact-id", contact.id)
 				startActivity(context, intent, null)
 			}

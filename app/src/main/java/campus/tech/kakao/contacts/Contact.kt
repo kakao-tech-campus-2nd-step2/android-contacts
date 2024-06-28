@@ -20,6 +20,7 @@ class Contact (
 			this(0, name, phone, email, birth, sex, memo)
 
 	companion object {
+		// 테이블 변경 사항
 		val MIGRATION_1_2 = object : Migration(1, 2) {
 			override fun migrate(database: SupportSQLiteDatabase) {
 				database.execSQL(

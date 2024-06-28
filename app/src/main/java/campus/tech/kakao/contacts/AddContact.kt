@@ -53,6 +53,7 @@ class AddContact : AppCompatActivity() {
         birth.setOnClickListener {
             showDatePickerDialog()
         }
+        // 더보기 버튼 클릭 시
         moreText.setOnClickListener {
             if (moreText.visibility == View.VISIBLE) {
                 moreText.visibility = View.GONE
@@ -68,7 +69,7 @@ class AddContact : AppCompatActivity() {
             ContactDatabase::class.java, "database-name"
         ).addMigrations(MIGRATION_1_2, MIGRATION_2_3).allowMainThreadQueries().build()
 
-        // Set click listener for save button
+        // 저장 버튼 클릭 시
         save.setOnClickListener {
             if (name.text.isEmpty()) {
                 Toast.makeText(this, "이름은 필수 값입니다", Toast.LENGTH_SHORT).show()
@@ -98,7 +99,7 @@ class AddContact : AppCompatActivity() {
             }
 
         }
-        // Set click listener for cancel button
+        // 연락처 데이터 로그에 표시
         fun loadAllData(){
             if (database.contactDao() == null){
                 Log.d("contacttest", "null")
@@ -110,6 +111,7 @@ class AddContact : AppCompatActivity() {
                 }
             }
         }
+        //취소 버튼 클릭 시
         cancel.setOnClickListener {
             Toast.makeText(this, "취소 되었습니다", Toast.LENGTH_SHORT).show()
             loadAllData()
@@ -121,11 +123,12 @@ class AddContact : AppCompatActivity() {
 
     }
 
-    // Show date picker dialog
+    // 생일 선택 팝업창
     fun showDatePickerDialog() {
         val calendar = Calendar.getInstance()
         val datePicker = DatePickerDialog(
             this, {DatePicker, year:Int, month:Int, dayOfMonth:Int ->
+                //월과 일 포맷을 00으로 설정
                 var Month = "${month + 1}"
                 if (month < 9) {
                     Month = "0${Month}"
@@ -138,7 +141,7 @@ class AddContact : AppCompatActivity() {
             }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH))
         datePicker.show()
     }
-
+    //팝업창 설정
     fun popupMessage(){
         //팝업 UI 설정
         val popupView = layoutInflater.inflate(R.layout.popup_message, null)
@@ -147,10 +150,11 @@ class AddContact : AppCompatActivity() {
 
         val popupBuilder = AlertDialog.Builder(this).setView(popupView)
         val popupWindow = popupBuilder.show()
-
+        //작성하기 버튼 클릭 시 팝업창 닫기
         write.setOnClickListener {
             popupWindow.dismiss()
         }
+        //나가기 버튼 클릭 시 연락처 목록으로 이동
         exit.setOnClickListener {
             finish()
         }
@@ -158,6 +162,7 @@ class AddContact : AppCompatActivity() {
 
     //뒤로 가기 버튼 클릭 시
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        //뒤로 가기 버튼 클릭하고 나머지 텍스트가 있을 경우
         if (keyCode == KeyEvent.KEYCODE_BACK
             && (name.text.isNotEmpty() || phone.text.isNotEmpty()
                     || mail.text.isNotEmpty() || birth.text.isNotEmpty()
