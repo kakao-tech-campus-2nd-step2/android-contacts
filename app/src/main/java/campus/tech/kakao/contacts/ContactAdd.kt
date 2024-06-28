@@ -1,6 +1,8 @@
 package campus.tech.kakao.contacts
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -9,6 +11,7 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.RadioGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -46,12 +49,16 @@ class ContactAdd : AppCompatActivity() {
         cancel.setOnClickListener {
             name.text = null
             phoneNumber.text = null
+            mail.text = null
+            birth.text = null
+            genderRadio.clearCheck()
+            memo.text = null
             Toast.makeText(this, "취소 되었습니다", Toast.LENGTH_LONG).show()
         }
 
         save.apply {
             this.setOnClickListener {
-                if(checkContact()) {
+                if (checkContact()) {
                     val intent: Intent = Intent()
                     intent.putExtra("name", name.text.toString())
                     setResult(RESULT_OK, intent)
@@ -60,6 +67,7 @@ class ContactAdd : AppCompatActivity() {
             }
         }
 
+        onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
     }
 
     private fun findViews() {
@@ -95,14 +103,35 @@ class ContactAdd : AppCompatActivity() {
         if (name.getText().isEmpty()) {
             Toast.makeText(this, "이름을 반드시 적어야 합니다", Toast.LENGTH_LONG).show()
             return false
-        }
-        else if (phoneNumber.getText().isEmpty()) {
+        } else if (phoneNumber.getText().isEmpty()) {
             Toast.makeText(this, "전화번호를 반드시 적어야 합니다", Toast.LENGTH_LONG).show()
             return false
-        }
-        else {
+        } else {
             Toast.makeText(this, "저장이 완료 되었습니다", Toast.LENGTH_LONG).show()
             return true
+        }
+    }
+
+    private val onBackPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            if(name.getText().isNotEmpty()) {
+                val builder = AlertDialog.Builder(this@ContactAdd)
+                builder.setMessage("작성 중인 내용이 있습니다. 정말 나가시겠습니까?")
+                    .setPositiveButton("나가기",
+                        DialogInterface.OnClickListener { dialog, _ ->
+                            dialog.dismiss()
+                            val intent = Intent(this@ContactAdd, MainActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        })
+                    .setNegativeButton("작성하기",
+                        DialogInterface.OnClickListener { dialog, _ ->
+                            dialog.dismiss()
+                        })
+                builder.show()
+            }
+            else {
+                onBackPressedDispatcher.onBackPressed()            }
         }
     }
 
