@@ -61,10 +61,18 @@ class ContactWritingActivity : AppCompatActivity() {
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 intent.putExtra("name", name.text.toString())
                 intent.putExtra("phone", phone.text.toString())
-                //intent.putExtra("mail", mail.text)
-                //intent.putExtra("birthday", birthday.text)
-                //intent.putExtra("gender", name.text) //gender 선택한 값으로
-                //intent.putExtra("memo", memo.text)
+                intent.putExtra("mail", mail.text.toString())
+                intent.putExtra("birthday", birthday.text)
+
+                if(gender.checkedRadioButtonId == R.id.radioBtn_man) {
+                    intent.putExtra("gender", "남성")
+                } else if(gender.checkedRadioButtonId == R.id.radioBtn_woman) {
+                    intent.putExtra("gender", "여성")
+                } else {
+                    intent.putExtra("gender", "")
+                }
+
+                intent.putExtra("memo", memo.text.toString())
                 startActivity(intent)
             }
         }
