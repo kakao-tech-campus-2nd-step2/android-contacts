@@ -1,7 +1,7 @@
 package campus.tech.kakao.contacts
 
+import android.app.DatePickerDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -9,7 +9,9 @@ import android.widget.LinearLayout
 import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.ButtonBarLayout
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
     private lateinit var name: EditText
@@ -21,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var memo: EditText
     private lateinit var cancel: Button
     private lateinit var save: Button
+    private lateinit var datePickerDialog: DatePickerDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,9 +38,13 @@ class MainActivity : AppCompatActivity() {
             extraBtn.visibility = View.GONE
         }
 
+        birth.setOnClickListener {
+            showDatePickerDialog()
+        }
+
         cancel.setOnClickListener {
-            name.text = null;
-            phoneNumber.text = null;
+            name.text = null
+            phoneNumber.text = null
             Toast.makeText(this, "취소 되었습니다", Toast.LENGTH_LONG).show()
         }
 
@@ -55,7 +62,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun findViews() {
+    private fun findViews() {
         name = findViewById(R.id.name)
         phoneNumber = findViewById(R.id.phoneNumber)
         mail = findViewById(R.id.mail)
@@ -65,5 +72,22 @@ class MainActivity : AppCompatActivity() {
         memo = findViewById(R.id.memo)
         cancel = findViewById(R.id.cancel)
         save = findViewById(R.id.save)
+    }
+
+    private fun showDatePickerDialog() {
+        val calendar = Calendar.getInstance()
+        datePickerDialog = DatePickerDialog(
+            this,
+            { _, year, month, dayOfMonth ->
+                val selectedDate = Calendar.getInstance()
+                selectedDate.set(year, month, dayOfMonth)
+                val sdf = SimpleDateFormat("yyyy.MM.dd", Locale.getDefault())
+                birth.setText(sdf.format(selectedDate.time))
+            },
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
+        datePickerDialog.show()
     }
 }
