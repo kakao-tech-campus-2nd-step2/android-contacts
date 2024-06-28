@@ -2,24 +2,29 @@
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="#FFFFFF"
     android:layout_marginHorizontal="20dp"
+    android:layout_marginVertical="10dp"
+    android:elevation="5dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/phoneNumberLayout"
         android:layout_width="match_parent"
+        android:layout_marginHorizontal="20dp"
         android:layout_height="wrap_content"
         android:layout_marginVertical="20dp"
         android:gravity="center"
         android:orientation="horizontal">
 
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+        <TextView
+            android:id="@+id/nameFirstLetter"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_marginRight="20dp"
-            android:src="@drawable/face_smiling" />
+            android:background="@drawable/name_background"/>
 
         <TextView
             android:id="@+id/name"
