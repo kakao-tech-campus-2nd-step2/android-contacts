@@ -1,4 +1,4 @@
-package campus.tech.kakao.contacts
+package campus.tech.kakao.contacts.Model
 
 data class Contact(
     var name: String,

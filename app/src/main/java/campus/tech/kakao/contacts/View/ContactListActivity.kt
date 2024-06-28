@@ -1,19 +1,19 @@
-package campus.tech.kakao.contacts
+package campus.tech.kakao.contacts.View
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import android.view.ViewGroup
 import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import campus.tech.kakao.contacts.R
+import campus.tech.kakao.contacts.View.Adapter.RecyclerAdapter
+import campus.tech.kakao.contacts.Repository.contactRepository
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ContactListActivity : AppCompatActivity() {
@@ -47,7 +47,7 @@ class ContactListActivity : AppCompatActivity() {
         contactListEmptyText = findViewById<TextView>(R.id.contactListEmptyText)
 
         addContactBtn.setOnClickListener {
-            val intent = Intent(this,ContactAddActivity::class.java)
+            val intent = Intent(this, ContactAddActivity::class.java)
             addContactLauncher.launch(intent)
         }
 
@@ -57,42 +57,4 @@ class ContactListActivity : AppCompatActivity() {
 
     }
 
-}
-
-class RecyclerAdapter(
-    val context : Context,
-    var contactList : List<Contact>,
-    var inflater : LayoutInflater,
-
-    ) : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>(){
-
-    class ViewHolder(context: Context,itemView : View) : RecyclerView.ViewHolder(itemView){
-        val contactName : TextView
-        val contactImage : TextView
-        init{
-            contactImage = itemView.findViewById<TextView>(R.id.contactImage)
-            contactName = itemView.findViewById<TextView>(R.id.contactName)
-
-            itemView.setOnClickListener {
-                val intent = Intent(context,ContactDetailActivity::class.java)
-                intent.putExtra("position",adapterPosition)
-                context.startActivity(intent)
-            }
-        }
-    }
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = inflater.inflate(R.layout.contact_element,parent,false)
-
-        return RecyclerAdapter.ViewHolder(context,view)
-    }
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val contact = contactList[position]
-        holder.contactName.text = contact.name
-        holder.contactImage.text = contact.name[0].toString()
-    }
-
-    override fun getItemCount(): Int {
-        return contactList.size
-    }
 }

@@ -1,4 +1,4 @@
-package campus.tech.kakao.contacts
+package campus.tech.kakao.contacts.View
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
@@ -16,6 +16,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
+import campus.tech.kakao.contacts.Model.Contact
+import campus.tech.kakao.contacts.Model.Gender
+import campus.tech.kakao.contacts.R
+import campus.tech.kakao.contacts.Repository.contactRepository
 import com.google.android.material.button.MaterialButton
 
 class ContactAddActivity : AppCompatActivity() {

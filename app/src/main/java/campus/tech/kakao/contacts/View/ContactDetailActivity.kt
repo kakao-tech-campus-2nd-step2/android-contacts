@@ -1,10 +1,14 @@
-package campus.tech.kakao.contacts
+package campus.tech.kakao.contacts.View
 
 import android.os.Bundle
 import android.view.View.VISIBLE
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import campus.tech.kakao.contacts.Model.Contact
+import campus.tech.kakao.contacts.Model.Gender
+import campus.tech.kakao.contacts.R
+import campus.tech.kakao.contacts.Repository.contactRepository
 
 class ContactDetailActivity : AppCompatActivity() {
 

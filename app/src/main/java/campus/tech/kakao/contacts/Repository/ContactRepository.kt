@@ -1,4 +1,6 @@
-package campus.tech.kakao.contacts
+package campus.tech.kakao.contacts.Repository
+
+import campus.tech.kakao.contacts.Model.Contact
 
 object contactRepository {
     private var _contactList : MutableList<Contact> = mutableListOf<Contact>()
