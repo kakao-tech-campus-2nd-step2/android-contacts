@@ -148,11 +148,16 @@ class AddContact : AppCompatActivity() {
         }
     }
 
+    //뒤로 가기 버튼 클릭 시
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
+        if (keyCode == KeyEvent.KEYCODE_BACK
+            && (name.text.isNotEmpty() || phone.text.isNotEmpty()
+                    || mail.text.isNotEmpty() || birth.text.isNotEmpty()
+                    || (female.isChecked || male.isChecked) || memo.text.isNotEmpty())) {
             popupMessage()
             return true
         }
+        finish()
         return false
     }
 }
