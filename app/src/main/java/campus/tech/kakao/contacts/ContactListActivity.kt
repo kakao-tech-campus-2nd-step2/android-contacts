@@ -23,6 +23,13 @@ class ContactListActivity : AppCompatActivity() {
     private lateinit var contactViewModel: ContactViewModel
     private lateinit var adapter: ContactAdapter
 
+    private val addContactLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        if (it.resultCode == RESULT_OK) {
+            // 명시적으로 ViewModel의 데이터를 가져와서 업데이트
+            contactViewModel.getContacts()
+        }
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,12 +49,11 @@ class ContactListActivity : AppCompatActivity() {
         addButton.setOnClickListener {
             Log.d("ContactListActivity", "Launching ContactAddActivity")
             val intent: Intent = Intent(this, ContactAddActivity::class.java)
-            startActivity(intent)
+            addContactLauncher.launch(intent)
         }
 
         // LiveData 관찰
         contactViewModel.contacts.observe(this) { contacts ->
-            Log.d("testt", contacts.toString())
             Log.d("ContactListActivity", "Contacts observed: $contacts")
             adapter.updateContacts(contacts)
         }

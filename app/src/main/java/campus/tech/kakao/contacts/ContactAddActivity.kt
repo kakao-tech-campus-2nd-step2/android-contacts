@@ -75,6 +75,7 @@ class ContactAddActivity : AppCompatActivity() {
         cancelButton.setOnClickListener {
             clearFields()
             showCancelToast()
+            setResult(RESULT_CANCELED)
             finish()
         }
 
@@ -109,6 +110,7 @@ class ContactAddActivity : AppCompatActivity() {
     private fun saveContact(contact: Contact) {
         Log.d("ContactAddActivity", "Saving contact: $contact")
         contactViewModel.addContact(contact)
+        setResult(RESULT_OK)
         showSaveToast()
         finish()
     }

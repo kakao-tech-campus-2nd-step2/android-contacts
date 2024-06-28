@@ -16,8 +16,8 @@ class ContactViewModel: ViewModel() {
         _contacts.value = repository.getContacts()
     }
 
-    fun getContacts(): List<Contact> {
-        return repository.getContacts()
+    fun getContacts(){
+        _contacts.value = repository.getContacts()
     }
 
     fun getContact(name: String): Contact? {
