@@ -1,12 +1,15 @@
 package campus.tech.kakao.contacts
 
 import android.os.Bundle
+import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class ContactListActivity : AppCompatActivity() {
+    
+    lateinit var plusbtn: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -16,5 +19,10 @@ class ContactListActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        setUI()
+    }
+
+    private fun setUI(){
+        plusbtn = findViewById(R.id.btn_plus)
     }
 }
