@@ -37,8 +37,8 @@ class ContactRegisterActivity : AppCompatActivity() {
 		memoInputView = findViewById(R.id.contactMemo)
 
 		findViewById<Button>(R.id.cancelButton).setOnClickListener {
-			clearInputFields()
 			Toast.makeText(this@ContactRegisterActivity, "취소되었습니다.", Toast.LENGTH_SHORT).show()
+			finish()
 		}
 
 		findViewById<Button>(R.id.saveButton).setOnClickListener {
