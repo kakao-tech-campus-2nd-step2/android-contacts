@@ -47,5 +47,21 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, AddContactActivity::class.java)
             launcher.launch(intent)
         }
+
+        contactAdapter.itemClickListener = object : ContactAdapter.OnItemClickListener {
+            override fun onItemClick(position: Int) {
+                val item = contactList[position]
+                val intent = Intent(this@MainActivity, DetailActivity::class.java)
+
+                intent.putExtra("nameText", item.name)
+                intent.putExtra("emailText", item.email)
+                intent.putExtra("phoneNumberText", item.phoneNumber)
+                intent.putExtra("birthDayText", item.birthDay)
+                intent.putExtra("genderText", item.gender)
+                intent.putExtra("memoText", item.memo)
+
+                startActivity(intent)
+            }
+        }
     }
 }
