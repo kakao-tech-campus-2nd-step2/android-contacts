@@ -41,10 +41,10 @@ class SubActivity : AppCompatActivity(), ContactsAdapter.OnItemClickListener {
             startActivity(intent)
         }
 
-        var ar = arrayOf("zz", "44", "","","","")
-        Contacts.addContact(ar)
-        var arr = arrayOf("하하", "74", "","","","")
-        Contacts.addContact(arr)
+//        var ar = arrayOf("zz", "44", "","","","")
+//        Contacts.addContact(ar)
+//        var arr = arrayOf("하하", "74", "","","","")
+//        Contacts.addContact(arr)
 
         contactsAdapter = ContactsAdapter(Contacts.getList(), this)
         contactsAdapter.notifyDataSetChanged()

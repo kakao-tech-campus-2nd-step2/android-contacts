@@ -1,7 +1,10 @@
 package campus.tech.kakao.contacts
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.Button
@@ -25,6 +28,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var buttons: Array<Button>
     private lateinit var checkButtons: LinearLayout
     private lateinit var viewModel: SubViewModel
+    private var save: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,6 +64,22 @@ class MainActivity : AppCompatActivity() {
         buttons[1].setOnClickListener(clickListener)
 
         viewModel = ViewModelProvider(this).get(SubViewModel::class.java)
+
+//        editText.addTextChangedListener(object : TextWatcher {
+//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+//                // 텍스트 변경 전에 호출됩니다.
+//            }
+//
+//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+//                // 텍스트가 변경될 때 호출됩니다.
+//                val text = s.toString()
+//                // 여기서 변경된 텍스트에 대한 추가 처리를 수행할 수 있습니다.
+//            }
+//
+//            override fun afterTextChanged(s: Editable?) {
+//                // 텍스트 변경 후에 호출됩니다.
+//            }
+//        })
 
     }
 
@@ -137,5 +157,34 @@ class MainActivity : AppCompatActivity() {
             else
                 Toast.makeText(this, "이미 저장된 연락처 입니다.", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun onBackCheck() {
+        val builder = AlertDialog.Builder(this)
+        builder.setMessage("작성 중인 내용이 있습니다.\n정말 나가시겠습니까?")
+
+        builder.setNegativeButton("작성하기") { dialog, which ->
+        }
+
+        builder.setPositiveButton("나가기") { dialog, which ->
+            super.onBackPressed()
+        }
+
+        val dialog = builder.create()
+        dialog.show()
+    }
+
+    override fun onBackPressed() {
+        val infos: Array<String> = inputsTrim()
+        var hasContent = false
+
+        for (i in 0..5)
+            if (infos[i] != "") {
+                hasContent = true
+                break
+            }
+
+        if (hasContent) onBackCheck()
+        else super.onBackPressed()
     }
 }
