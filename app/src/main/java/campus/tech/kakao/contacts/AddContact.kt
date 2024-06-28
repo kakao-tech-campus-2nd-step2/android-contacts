@@ -170,7 +170,9 @@ class AddContact : AppCompatActivity() {
             popupMessage()
             return true
         }
-        finish()
+        else if (keyCode == KeyEvent.KEYCODE_BACK){
+            finish()
+        }
         return false
     }
 }
