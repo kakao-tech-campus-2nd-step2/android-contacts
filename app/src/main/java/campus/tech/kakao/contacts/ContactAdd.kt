@@ -114,7 +114,7 @@ class ContactAdd : AppCompatActivity() {
 
     private val onBackPressedCallback = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
-            if(name.getText().isNotEmpty()) {
+            if (checkData()) {
                 val builder = AlertDialog.Builder(this@ContactAdd)
                 builder.setMessage("작성 중인 내용이 있습니다. 정말 나가시겠습니까?")
                     .setPositiveButton("나가기",
@@ -129,10 +129,19 @@ class ContactAdd : AppCompatActivity() {
                             dialog.dismiss()
                         })
                 builder.show()
+            } else {
+                onBackPressedDispatcher.onBackPressed()
             }
-            else {
-                onBackPressedDispatcher.onBackPressed()            }
         }
+    }
+
+    private fun checkData(): Boolean {
+        return name.text.isNotEmpty() ||
+                phoneNumber.text.isNotEmpty() ||
+                mail.text.isNotEmpty() ||
+                birth.text.isNotEmpty() ||
+                genderRadio.checkedRadioButtonId != -1 ||
+                memo.text.isNotEmpty()
     }
 
 }
