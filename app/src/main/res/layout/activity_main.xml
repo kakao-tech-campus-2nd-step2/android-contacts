@@ -5,9 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     tools:context=".MainActivity">
-
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,12 +14,10 @@
         app:layout_constraintBottom_toTopOf="@id/cancleButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="24dp">
-
             <ImageView
                 android:id="@+id/personIcon"
                 android:layout_width="100dp"
@@ -31,7 +27,6 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/nameText"
                 android:layout_width="0dp"
@@ -42,7 +37,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/personIcon">
-
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/nameEdit"
                     android:layout_width="match_parent"
@@ -50,7 +44,6 @@
                     android:background="@drawable/color_shape"
                     android:hint="이름" />
             </com.google.android.material.textfield.TextInputLayout>
-
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/numberText"
                 android:layout_width="0dp"
@@ -60,7 +53,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/nameText">
-
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/numberEdit"
                     android:layout_width="match_parent"
@@ -68,7 +60,6 @@
                     android:background="@drawable/color_shape"
                     android:hint="전화번호" />
             </com.google.android.material.textfield.TextInputLayout>
-
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/mailText"
                 android:layout_width="0dp"
@@ -86,7 +77,6 @@
                     android:background="@drawable/color_shape"
                     android:hint="메일" />
             </com.google.android.material.textfield.TextInputLayout>
-
             <Button
                 android:id="@+id/seeMoreButton"
                 android:layout_width="wrap_content"
@@ -99,7 +89,6 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/mailText" />
-
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/birthdayText"
                 android:layout_width="0dp"
@@ -109,7 +98,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/mailText">
-
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/birthdayButton"
                     android:layout_width="match_parent"
@@ -124,8 +112,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/mailText" />
             </com.google.android.material.textfield.TextInputLayout>
-
-
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/genderText"
                 android:layout_width="0dp"
@@ -135,7 +121,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/birthdayText">
-
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/genderEdit"
                     android:layout_width="match_parent"
@@ -145,7 +130,6 @@
                     android:hint="성별"
                     android:visibility="gone" />
             </com.google.android.material.textfield.TextInputLayout>
-
             <RadioGroup
                 android:id="@+id/genderRadio"
                 android:layout_width="wrap_content"
@@ -170,7 +154,6 @@
                     android:layout_height="wrap_content"
                     android:text="남성" />
             </RadioGroup>
-
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/memoText"
                 android:layout_width="0dp"
@@ -180,7 +163,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/genderText">
-
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/memoEdit"
                     android:layout_width="match_parent"
@@ -188,14 +170,9 @@
                     android:background="@drawable/color_shape"
                     android:hint="메모"
                     android:visibility="gone" />
-
             </com.google.android.material.textfield.TextInputLayout>
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </androidx.core.widget.NestedScrollView>
-
-
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/cancleButton"
         android:layout_width="0dp"
@@ -209,7 +186,6 @@
         app:layout_constraintEnd_toStartOf="@id/saveButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintVertical_weight="1" />
-
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/saveButton"
         android:layout_width="0dp"
@@ -224,8 +200,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/cancleButton"
         app:layout_constraintVertical_weight="1" />
-
-
     <FrameLayout
         android:id="@+id/frm"
         android:layout_width="match_parent"
@@ -233,17 +207,13 @@
         android:layout_margin="20dp"
         android:background="@color/white"
         android:visibility="gone">
-
         <CalendarView
             android:id="@+id/birthdayCalendar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/birthdayText" />
     </FrameLayout>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

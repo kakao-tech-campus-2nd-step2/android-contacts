@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var saveButton: Button
     private lateinit var maleButton: RadioButton
     private lateinit var femaleButton: RadioButton
+    private var count : Int = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +57,7 @@ class MainActivity : AppCompatActivity() {
         seeMore(seeMoreButton)
         showToast()
         clickDate()
+
         saveButton.setOnClickListener {
             saveData()
             finish()
@@ -65,6 +67,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun seeMore(seeMoreButton: Button) {
         seeMoreButton.setOnClickListener {
+            val genderEdit = findViewById<EditText>(R.id.genderEdit)
+            val memoEdit = findViewById<EditText>(R.id.memoEdit)
+            val genderRadio = findViewById<RadioGroup>(R.id.genderRadio)
+            val birthdayText = findViewById<TextInputLayout>(R.id.birthdayText)
+            val birthdayButton = findViewById<Button>(R.id.birthdayButton)
             genderEdit.visibility = EditText.VISIBLE
             memoEdit.visibility = EditText.VISIBLE
             genderRadio.visibility = RadioGroup.VISIBLE
@@ -75,11 +82,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showToast() {
+        val cancleButton = findViewById<Button>(R.id.cancleButton)
+        val saveButton = findViewById<Button>(R.id.saveButton)
+        val nameEdit = findViewById<EditText>(R.id.nameEdit)
+        val numberEdit = findViewById<EditText>(R.id.numberEdit)
 
         cancleButton.setOnClickListener {
             Toast.makeText(this, "취소 되었습니다", Toast.LENGTH_SHORT).show()
         }
-
         saveButton.setOnClickListener {
             if (nameEdit.text.isEmpty()) {
                 Toast.makeText(this, "이름은 필수 값 입니다.", Toast.LENGTH_SHORT).show()
@@ -92,6 +102,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun clickDate() {
+        val birthdayCalendar = findViewById<CalendarView>(R.id.birthdayCalendar)
+        val birthdayButton = findViewById<Button>(R.id.birthdayButton)
+        val frm = findViewById<FrameLayout>(R.id.frm)
 
         birthdayButton.setOnClickListener {
             Log.d("testt", "birthdayEdit clicked")
@@ -107,24 +120,29 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun saveData() {
-        var gender: String? = null;
+        var gender: String? = null
         if (maleButton.isChecked()) {
-            gender = maleButton.getText().toString();
+            gender = maleButton.text.toString()
         } else if (femaleButton.isChecked()) {
-            gender = femaleButton.getText().toString();
+            gender = femaleButton.text.toString()
         }
-        with(getSharedPreferences("userInformation", Context.MODE_PRIVATE).edit()) {
-            putString("name", nameEdit.text.toString())
-            putString("number", numberEdit.text.toString())
-            putString("mail", mailEdit.text.toString())
-            putString("birthday", birthdayButton.text.toString())
-            putString("gender", gender)
-            putString("memo", memoEdit.text.toString())
+
+        val sharedPreferences = getSharedPreferences("userInformation", Context.MODE_PRIVATE)
+
+
+        with(sharedPreferences.edit()) {
+            putString("name1", nameEdit.text.toString())
+            putString("number1", numberEdit.text.toString())
+            putString("mail1", mailEdit.text.toString())
+            putString("birthday1", birthdayButton.text.toString())
+            putString("gender1", gender)
+            putString("memo1", memoEdit.text.toString())
+            putInt("count", count)
             apply()
         }
-        Toast.makeText(this, "저장이 완료 되었습니다", Toast.LENGTH_SHORT).show()
 
+        Toast.makeText(this, "저장이 완료되었습니다", Toast.LENGTH_SHORT).show()
+
+        count++
     }
 }
-
-

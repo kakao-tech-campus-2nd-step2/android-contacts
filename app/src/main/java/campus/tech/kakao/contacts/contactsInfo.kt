@@ -31,14 +31,19 @@ class contactsInfo : AppCompatActivity() {
     }
 
     private fun getData() {
-        with(getSharedPreferences("userInformation", Context.MODE_PRIVATE)){
-            personName.text = getString("name", "미정")
-            personNumber.text = getString("number", "미정")
-            personMail.text = getString("mail", "미정")
-            personBirthday.text = getString("birthday", "미정")
-            personGender.text = getString("gender", "미정")
-            personMemo.text = getString("memo", "미정")
 
+        val sharedPreferences = getSharedPreferences("userInformation", Context.MODE_PRIVATE)
+
+        val count = sharedPreferences.getInt("count", 0) + 1
+
+
+        with(sharedPreferences){
+            personName.text = getString("name1", "미정")
+            personNumber.text = getString("number1", "미정")
+            personMail.text = getString("mail1", "미정")
+            personBirthday.text = getString("birthday1", "미정")
+            personGender.text = getString("gender1", "미정")
+            personMemo.text = getString("memo1", "미정")
         }
     }
 }
