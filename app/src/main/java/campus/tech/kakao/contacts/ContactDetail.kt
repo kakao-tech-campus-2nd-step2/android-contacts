@@ -23,9 +23,9 @@ class ContactDetail : AppCompatActivity() {
         profileImageView.setImageResource(contact.profile)
         nameTextView.text = contact.name
         phoneTextView.text = contact.phoneNumber
-        mailTextView.text = contact.email?.ifEmpty { "없음" } ?: "없음"
-        birthdayTextView.text = contact.birthday?.ifEmpty { "없음" } ?: "없음"
-        genderTextView.text = contact.gender?.ifEmpty { "없음" } ?: "없음"
-        memoTextView.text = contact.memo?.ifEmpty { "없음" } ?: "없음"
+        mailTextView.text = contact.email?.ifEmpty { "" } ?: ""
+        birthdayTextView.text = contact.birthday?.ifEmpty { "" } ?: ""
+        genderTextView.text = contact.gender?.ifEmpty { "" } ?: ""
+        memoTextView.text = contact.memo?.ifEmpty { "" } ?: ""
     }
 }
