@@ -3,11 +3,8 @@ package campus.tech.kakao.contacts
 import android.app.DatePickerDialog
 import android.content.Context
 import android.content.DialogInterface
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.DatePicker
 import android.widget.EditText
 import android.widget.RadioGroup
 import android.widget.TextView
@@ -15,8 +12,10 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import java.util.Calendar
-import kotlin.math.log
+
+const val EXIST_NAME_AND_PHONE_NUMBER = 1
+const val NOT_EXIST_NAME = 2
+const val NOT_EXIST_PHONE_NUMBER = 3
 
 class MainActivity : AppCompatActivity() {
     lateinit var name : EditText
@@ -27,6 +26,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var memo : EditText
     lateinit var birthday : EditText
     lateinit var moreInfoButton : TextView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +40,14 @@ class MainActivity : AppCompatActivity() {
         override fun handleOnBackPressed() {
             finishContactAdding(this@MainActivity)
         }
+    }
+
+    fun initListener(){
+        saveButtonSetOnClickListener(this)
+        cancelButtonSetOnClickListener(this)
+        moreButtonSetOnClickListener()
+        birthdayFieldSetOnclickListener()
+        genderFieldSetOnChangeListener()
     }
 
     fun finishContactAdding(context: Context){
@@ -69,14 +77,6 @@ class MainActivity : AppCompatActivity() {
         else false
     }
 
-    fun initListener(){
-        saveButtonSetOnClickListener(this)
-        cancelButtonSetOnClickListener(this)
-        moreButtonSetOnClickListener()
-        birthdayFieldSetOnclickListener()
-        genderFieldSetOnChangeListener()
-    }
-
     fun cancelButtonSetOnClickListener(context : Context){
         findViewById<TextView>(R.id.button_cancel).setOnClickListener(){
             finishContactAdding(context)
@@ -96,7 +96,7 @@ class MainActivity : AppCompatActivity() {
 
     fun existNameAndPhoneNum() : Boolean{
         val checkNum = checkNameAndPhoneNum()
-        return if(checkNum == 2 || checkNum == 3) false
+        return if(checkNum == NOT_EXIST_NAME || checkNum == NOT_EXIST_PHONE_NUMBER) false
         else true
     }
 
@@ -128,21 +128,21 @@ class MainActivity : AppCompatActivity() {
     fun checkNameAndPhoneNum() : Int{
         return if (name.text.toString() == ""){
             name.requestFocus()
-            2
+            NOT_EXIST_NAME
         } else if(phoneNumber.text.toString() == ""){
             phoneNumber.requestFocus()
-            3
+            NOT_EXIST_PHONE_NUMBER
         } else{
-            1
+            EXIST_NAME_AND_PHONE_NUMBER
         }
     }
 
     fun getToastMessageToNameAndPhoneNum() : String{
         val checkNum = checkNameAndPhoneNum()
         return when(checkNum){
-            1 -> "저장이 완료되었습니다"
-            2 -> "이름을 입력해 주세요"
-            3 -> "전화번호를 입력해 주세요"
+            EXIST_NAME_AND_PHONE_NUMBER -> "저장이 완료되었습니다"
+            NOT_EXIST_NAME -> "이름을 입력해 주세요"
+            NOT_EXIST_PHONE_NUMBER -> "전화번호를 입력해 주세요"
             else -> "오류"
         }
     }

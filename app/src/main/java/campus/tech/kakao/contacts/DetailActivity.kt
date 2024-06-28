@@ -26,6 +26,12 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
+        initVar()
+        bindField()
+        setVisibleCompletedFields()
+    }
+
+    fun initVar(){
         name = findViewById(R.id.name)
         phoneNumber = findViewById(R.id.phone_number)
         mail = findViewById(R.id.mail)
@@ -38,7 +44,9 @@ class DetailActivity : AppCompatActivity() {
         birthdayInputField = findViewById(R.id.input_birthday_field)
         genderInputField = findViewById(R.id.input_gender_field)
         memoInputField = findViewById(R.id.input_memo_field)
+    }
 
+    fun bindField(){
         val intent = intent
         nameInputField.setText(intent.getStringExtra("name"))
         phoneNumberInputField.setText(intent.getStringExtra("phoneNumber"))
@@ -46,7 +54,6 @@ class DetailActivity : AppCompatActivity() {
         birthdayInputField.setText(intent.getStringExtra("birthday"))
         genderInputField.setText(intent.getStringExtra("gender"))
         memoInputField.setText(intent.getStringExtra("memo"))
-        setVisibleCompletedFields()
     }
 
     fun setVisibleCompletedFields() {
@@ -68,6 +75,8 @@ class DetailActivity : AppCompatActivity() {
         }
 
     }
+
+
 
     fun ExistMail(): Boolean {
         return mailInputField.text.toString() != ""

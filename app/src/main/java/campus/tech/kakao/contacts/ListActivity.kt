@@ -18,74 +18,86 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class ListActivity : AppCompatActivity() {
-    lateinit var resultLauncher : ActivityResultLauncher<Intent>
-    lateinit var descriptionText : TextView
-    lateinit var plusButton : TextView
+    lateinit var resultLauncher: ActivityResultLauncher<Intent>
+    lateinit var descriptionText: TextView
+    lateinit var plusButton: TextView
+    lateinit var recyclerView: RecyclerView
+    lateinit var contactList: MutableList<Contact>
+    lateinit var adapter: RecyclerViewAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
 
+        initVar()
+        initListener()
 
-        val contactList = mutableListOf<Contact>()
-
-        plusButton = findViewById<TextView>(R.id.plus_item_button)
-        descriptionText = findViewById<TextView>(R.id.description_text)
-        plusButton.setOnClickListener{
-            moveToAddContact()
-        }
-        Log.d("contact2", contactList.toString())
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
-        val adapter = RecyclerViewAdapter(contactList, LayoutInflater.from(this), this)
-        recyclerView.adapter = adapter
-        // 리사이클러 뷰에 레이아웃 매니저 장착
-        recyclerView.layoutManager= LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        // 리사이클러 뷰에 어답터 장착
-        resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == RESULT_OK) {
-                // 전달 받은 String 데이터를 출력
-                val contact = Contact(
-                    result.data?.getStringExtra("name") ?: "",
-                    result.data?.getStringExtra("phoneNumber") ?: "",
-                    result.data?.getStringExtra("mail") ?: "",
-                    result.data?.getStringExtra("birthday") ?: "",
-                    result.data?.getStringExtra("gender") ?: "",
-                    result.data?.getStringExtra("memo") ?: "",
-                )
-                Log.d("contact2", contact.name)
-                contactList.add(contact)
-                setDescriptionTextVisibilityGone()
-                adapter.notifyItemInserted(contactList.size)
-            }
-        }
     }
 
-    fun moveToAddContact(){
+    fun initVar(){
+        contactList = mutableListOf<Contact>()
+        adapter = RecyclerViewAdapter(contactList, LayoutInflater.from(this), this)
+        plusButton = findViewById<TextView>(R.id.plus_item_button)
+        descriptionText = findViewById<TextView>(R.id.description_text)
+        initRecyclerView()
+        initResultLauncher()
+    }
+
+    fun initRecyclerView() {
+        recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+    }
+
+    fun initResultLauncher() {
+        resultLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == RESULT_OK) {
+                    val contact = Contact(
+                        result.data?.getStringExtra("name") ?: "",
+                        result.data?.getStringExtra("phoneNumber") ?: "",
+                        result.data?.getStringExtra("mail") ?: "",
+                        result.data?.getStringExtra("birthday") ?: "",
+                        result.data?.getStringExtra("gender") ?: "",
+                        result.data?.getStringExtra("memo") ?: "",
+                    )
+                    Log.d("contact2", contact.name)
+                    contactList.add(contact)
+                    setDescriptionTextVisibilityGone()
+                    adapter.notifyItemInserted(contactList.size)
+                }
+            }
+    }
+    fun initListener(){
+        plusButton.setOnClickListener {
+            moveToAddContact()
+        }
+    }
+    fun moveToAddContact() {
         val intent = Intent(this@ListActivity, MainActivity::class.java)
         resultLauncher.launch(intent)
     }
 
-    fun setDescriptionTextVisibilityGone(){
+    fun setDescriptionTextVisibilityGone() {
         descriptionText.visibility = View.GONE
     }
+
 }
 
 class RecyclerViewAdapter(
-    //outer class
-    var contactList : MutableList<Contact>,
-    var inflater : LayoutInflater,
-    var context : Context
-) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>(){ // 어떤 뷰홀더를 쓸건지 알려줘야함 ViewHolder는 클래스 안쪽에 만든다.(inner class)
+    var contactList: MutableList<Contact>,
+    var inflater: LayoutInflater,
+    var context: Context
+) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
 
-    inner class ViewHolder(itemView: View ): RecyclerView.ViewHolder(itemView){
-        //RecyclerView의 뷰 홀더를 상속받아야만 개선된 ViewHolder를 사용할 수 있다.
-        // 아이템뷰 컴포넌트를 구체적으로 찾는(홀드하는) 역할
-        val userTitle : TextView
-        val userName : TextView
-        init{
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val userTitle: TextView
+        val userName: TextView
+
+        init {
             userTitle = itemView.findViewById(R.id.user_title)
             userName = itemView.findViewById(R.id.user_name)
-            itemView.setOnClickListener{
-                val position : Int = adapterPosition
+            itemView.setOnClickListener {
+                val position: Int = adapterPosition
                 val intent = Intent(context, DetailActivity::class.java)
                 val sendContact = contactList.get(position)
                 intent.putExtra("name", sendContact.name)
@@ -96,27 +108,29 @@ class RecyclerViewAdapter(
                 intent.putExtra("memo", sendContact.memo)
                 context.startActivity(intent)
             }
-
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        // 인플레이트 시켜서 뷰 홀더에게 넘겨준다.
         val view = inflater.inflate(R.layout.contact_item, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        //데이터를 아이템뷰의 뷰컴포넌트와 묶는다.(뷰를 채운다)
         holder.userTitle.text = contactList.get(position).name[0].toString()
         holder.userName.text = contactList.get(position).name
     }
 
     override fun getItemCount(): Int {
-        // 전체 데이터의 크기 리턴
         return contactList.size
     }
 }
 
-
-class Contact(var name : String, var phoneNumber : String, var mail : String, var birthday : String, var gender : String, var memo : String){}
+class Contact(
+    var name: String,
+    var phoneNumber: String,
+    var mail: String,
+    var birthday: String,
+    var gender: String,
+    var memo: String
+) {}
