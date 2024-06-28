@@ -36,4 +36,6 @@ class addInfo : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
+
 }
