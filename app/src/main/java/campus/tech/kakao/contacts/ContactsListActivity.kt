@@ -1,10 +1,14 @@
 package campus.tech.kakao.contacts
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -31,9 +35,27 @@ class ContactsListActivity : AppCompatActivity() {
 		contactsList.adapter = ContactsListAdapter(contactsDataList, LayoutInflater.from(this))
 		contactsList.layoutManager = LinearLayoutManager(this)
 
+		val startActivityLauncher: ActivityResultLauncher<Intent> =
+			registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+				when (result.resultCode) {
+					RESULT_OK -> {
+						val contactData = when (Build.VERSION.SDK_INT) {
+							in 33..Int.MAX_VALUE ->
+								result.data?.getSerializableExtra("contactData", ContactData::class.java)
+							else ->
+								result.data?.getSerializableExtra("contactData") as ContactData?
+						}?.let { data ->
+							contactsDataList.add(data)
+							contactsList.adapter?.notifyItemInserted(contactsDataList.size - 1)
+							emptyInfoView.visibility = View.GONE
+						}
+					}
+				}
+			}
+
 		addButton.setOnClickListener {
 			val intent = Intent(this, ContactRegisterActivity::class.java)
-			startActivity(intent)
+			startActivityLauncher.launch(intent)
 		}
 	}
 }

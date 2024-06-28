@@ -1,5 +1,6 @@
 package campus.tech.kakao.contacts
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -45,9 +46,11 @@ class ContactRegisterActivity : AppCompatActivity() {
 
 		findViewById<Button>(R.id.saveButton).setOnClickListener {
 			if (checkRequiredFields()) {
+				val intent = Intent()
+				intent.putExtra("contactData", saveContact())
+				setResult(RESULT_OK, intent)
 				Toast.makeText(this@ContactRegisterActivity, "저장되었습니다.", Toast.LENGTH_SHORT).show()
-				Log.d("savedContact", saveContact().toString())
-				clearInputFields()
+				finish()
 			}
 		}
 
@@ -72,16 +75,6 @@ class ContactRegisterActivity : AppCompatActivity() {
 			findViewById<LinearLayout>(R.id.moreInfoLayout).visibility = View.VISIBLE
 			moreInfoButton.visibility = View.GONE
 		}
-	}
-
-	private fun clearInputFields() {
-		nameInputView.text.clear()
-		phoneInputView.text.clear()
-		emailInputView.text.clear()
-		birthdayInputView.text.clear()
-		femaleRadioButton.isChecked = false
-		maleRadioButton.isChecked = false
-		memoInputView.text.clear()
 	}
 
 	private fun checkRequiredFields(): Boolean {
