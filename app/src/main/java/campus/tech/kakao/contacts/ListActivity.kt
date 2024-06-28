@@ -21,7 +21,6 @@ class ListActivity : AppCompatActivity() {
         contactLinearView = findViewById<LinearLayout>(R.id.contactLinearView)
         val contactAddButton = findViewById<Button>(R.id.contactAddButton)
 
-
         contactAddButton.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivityForResult(intent, REQUEST_CODE_ADD_CONTACT)
@@ -53,8 +52,34 @@ class ListActivity : AppCompatActivity() {
         tvInitial.text = contact.name.first().toString()
         tvName.text = contact.name
 
+        contactView.setOnClickListener {
+            val intent = Intent(this, DetailActivity::class.java).apply {
+                putExtra("name", contact.name)
+                putExtra("phone", contact.phone)
+                putExtra("email", contact.email)
+                putExtra("birthday", contact.birthday)
+                putExtra("gender", contact.gender)
+                putExtra("memo", contact.memo)
+            }
+            startActivity(intent)
+        }
+
+        contactView.setOnClickListener {
+            val intent = Intent(this, DetailActivity::class.java).apply {
+                putExtra("name", contact.name)
+                putExtra("phone", contact.phone)
+                putExtra("email", contact.email)
+                putExtra("birthday", contact.birthday)
+                putExtra("gender", contact.gender)
+                putExtra("memo", contact.memo)
+            }
+            startActivity(intent)
+        }
+
         contactLinearView.addView(contactView)
     }
+
+
 
     companion object {
         const val REQUEST_CODE_ADD_CONTACT = 1
