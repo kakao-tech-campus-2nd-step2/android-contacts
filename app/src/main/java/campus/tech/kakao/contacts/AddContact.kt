@@ -108,6 +108,7 @@ class AddContact : AppCompatActivity() {
         cancel.setOnClickListener {
             Toast.makeText(this, "취소 되었습니다", Toast.LENGTH_SHORT).show()
             loadAllData()
+            finish()
         }
 
 
