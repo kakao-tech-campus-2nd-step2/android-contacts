@@ -12,4 +12,5 @@
     <string name="gender_m">남성</string>
     <string name="edittext_note">메모</string>
     <string name="button_more">더보기</string>
+    <string name="addbutton_info">오른쪽 + 버튼을 클릭하여\n연락처를 등록해보세요.</string>
 </resources>
