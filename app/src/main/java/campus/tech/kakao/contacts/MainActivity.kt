@@ -38,7 +38,8 @@ class MainActivity : AppCompatActivity() {
 
                 val contact = Contact(name, phoneNumber, email, birthDay, gender, memo)
                 contactList.add(contact)
-                contactAdapter.notifyItemInserted(contactList.size - 1) // Notify only the new item
+                Log.d("넘어왔?", contactList.toString())
+                contactAdapter.notifyDataSetChanged()
             }
         }
 
