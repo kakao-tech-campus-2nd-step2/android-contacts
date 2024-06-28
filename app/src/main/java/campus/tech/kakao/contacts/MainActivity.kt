@@ -28,7 +28,6 @@ class MainActivity : AppCompatActivity() {
 
         launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == RESULT_OK) {
-                Log.d("result", "넘어왔어요옹")
                 val name = result.data?.getStringExtra("nameText") ?: ""
                 val phoneNumber = result.data?.getStringExtra("phoneNumberText") ?: ""
                 val email = result.data?.getStringExtra("emailText") ?: ""
@@ -38,7 +37,6 @@ class MainActivity : AppCompatActivity() {
 
                 val contact = Contact(name, phoneNumber, email, birthDay, gender, memo)
                 contactList.add(contact)
-                Log.d("넘어왔?", contactList.toString())
                 contactAdapter.notifyDataSetChanged()
             }
         }

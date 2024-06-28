@@ -21,12 +21,11 @@ class ContactManager() {
     fun showCancelAlert(activity: Activity, msg: String) {
         val builder = AlertDialog.Builder(activity)
         builder.setMessage(msg)
-        builder.setPositiveButton("작성하기", DialogInterface.OnClickListener { dialog, which ->
-            // 계속 작성
+        builder.setPositiveButton("나가기", DialogInterface.OnClickListener { dialog, which ->
+            activity.finish()
         })
-        builder.setNegativeButton("나가기", DialogInterface.OnClickListener { dialog, which ->
-            val intent = Intent(activity, MainActivity::class.java)
-            activity.startActivity(intent)
+        builder.setNegativeButton("작성하기", DialogInterface.OnClickListener { dialog, which ->
+            // 계속 작성
         })
         builder.create()
         builder.show()

@@ -49,9 +49,9 @@ class AddContactActivity : AppCompatActivity() {
                 else -> ""
             }
             val memoText = memo.text.toString()
-            if(nameText.isNotEmpty() && phoneNumberText.isNotEmpty()
-                && emailText.isNotEmpty() && birthDayText.isNotEmpty()
-                && genderText.isNotEmpty() && memoText.isNotEmpty()
+            if(nameText.isNotEmpty() || phoneNumberText.isNotEmpty()
+                || emailText.isNotEmpty() || birthDayText.isNotEmpty()
+                || genderText.isNotEmpty() || memoText.isNotEmpty()
             )
             {contactManager.showCancelAlert(this@AddContactActivity, "작성 중인 내용이 있습니다. 정말 나가시겠습니까?")}
             else contactManager.showCancelAlert(this@AddContactActivity, "나가시겠습니까?")
@@ -77,7 +77,6 @@ class AddContactActivity : AppCompatActivity() {
                 intent.putExtra("genderText", genderText)
                 intent.putExtra("memoText", memoText)
                 setResult(RESULT_OK, intent)
-                Log.d("result", "넘어갑니다아아" + nameText)
                 contactManager.showToast(this@AddContactActivity, "저장되었습니다.")
                 finish()
             } else {
