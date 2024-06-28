@@ -6,6 +6,8 @@ import android.content.Context
 import android.content.Intent
 import android.icu.util.Calendar
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
@@ -20,6 +22,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isEmpty
+import androidx.core.widget.addTextChangedListener
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class ContactActivity : AppCompatActivity() {
@@ -30,6 +33,7 @@ class ContactActivity : AppCompatActivity() {
         val cancelButton: Button = findViewById(R.id.cancel)
         val saveButton: Button = findViewById(R.id.save)
 
+        val profile: TextView = findViewById(R.id.profile)
         val name: EditText = findViewById(R.id.name)
         val phoneNumber: EditText = findViewById(R.id.phone_number)
         val mail: EditText = findViewById(R.id.mail)
@@ -49,6 +53,8 @@ class ContactActivity : AppCompatActivity() {
         saveButton.setOnClickListener {
             saveProcess(name, phoneNumber, mail, birth, sex, memo)
         }
+
+        name.addTextChangedListener(nameTextWatcher(profile))
 
         viewMore.setOnClickListener {
             extendInput(viewMore, moreInfos)
@@ -147,6 +153,29 @@ class ContactActivity : AppCompatActivity() {
 
         val contact: Contact = Contact(nameInfo, phoneNumberInfo,mailInfo, birthInfo, sexInfo, memoInfo)
         return contact
+    }
+
+    fun nameTextWatcher(profile: TextView): TextWatcher {
+        return object: TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                s?.let {
+                    updateProfile(profile, s.toString())
+                }
+            }
+        }
+    }
+
+    private fun updateProfile(profile: TextView, name: String) {
+        if (name.isEmpty())
+            profile.text = ""
+        else
+            profile.text = name[0].toString()
     }
 
     fun extendInput(viewMore: ConstraintLayout, moreInfos: ConstraintLayout) {
