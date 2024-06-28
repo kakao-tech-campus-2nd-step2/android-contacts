@@ -8,7 +8,9 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.RadioButton
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -47,6 +49,21 @@ class ContactRegisterActivity : AppCompatActivity() {
 				Log.d("savedContact", saveContact().toString())
 				clearInputFields()
 			}
+		}
+
+		onBackPressedDispatcher.addCallback(backPressedCallback)
+	}
+
+	private val backPressedCallback = object : OnBackPressedCallback(true) {
+		override fun handleOnBackPressed() {
+			val dialogBuilder = AlertDialog.Builder(this@ContactRegisterActivity)
+			dialogBuilder.setMessage("작성중인 내용이 있습니다. 정말 나가시겠습니까?")
+			dialogBuilder.setNegativeButton("작성하기", null)
+			dialogBuilder.setPositiveButton("나가기") { dialog, which ->
+				Toast.makeText(this@ContactRegisterActivity, "취소되었습니다.", Toast.LENGTH_SHORT).show()
+				finish()
+			}
+			dialogBuilder.show()
 		}
 	}
 
