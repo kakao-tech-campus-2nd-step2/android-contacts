@@ -30,5 +30,10 @@ class ContactsListActivity : AppCompatActivity() {
 
 		contactsList.adapter = ContactsListAdapter(contactsDataList, LayoutInflater.from(this))
 		contactsList.layoutManager = LinearLayoutManager(this)
+
+		addButton.setOnClickListener {
+			val intent = Intent(this, ContactRegisterActivity::class.java)
+			startActivity(intent)
+		}
 	}
 }
