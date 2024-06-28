@@ -4,8 +4,8 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:gravity="center" >
-    <!--tools:context=".ContactListActivity"-->
+    android:gravity="center"
+    tools:context=".ContactListActivity">
 
     <TextView
         android:id="@+id/emptyText"
@@ -25,6 +25,7 @@
         android:visibility="gone"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
