@@ -1,5 +1,6 @@
 package campus.tech.kakao.contacts
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
@@ -73,14 +74,24 @@ class ContactAddActivity : AppCompatActivity() {
         }
 
         cancelButton.setOnClickListener {
-            clearFields()
-            showCancelToast()
-            setResult(RESULT_CANCELED)
-            finish()
+            showConfirmExitDialog()
         }
 
 
         }
+
+    private fun showConfirmExitDialog() {
+        AlertDialog.Builder(this)
+            .setMessage("저장하지 않고 나가시겠습니까?")
+            .setPositiveButton("예") { dialog, which ->
+                clearFields()
+                showCancelToast()
+                setResult(RESULT_CANCELED)
+                finish()
+            }
+            .setNegativeButton("아니오", null)
+            .show()
+    }
     private fun showDatePickerDialog(){
         val datePickerDialog = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
             birthEditText.setText("$year-${month + 1}-$dayOfMonth")
