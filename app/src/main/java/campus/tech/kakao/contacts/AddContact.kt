@@ -1,5 +1,6 @@
 package campus.tech.kakao.contacts
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
@@ -77,4 +78,19 @@ class AddContact : AppCompatActivity() {
 
         datePickerDialog.show()
     }
+
+    override fun onBackPressed() {
+        // 확인 팝업을 띄움
+        AlertDialog.Builder(this)
+            .setMessage("작성중인 내용이 있습니다. 정말 나가시겠습니까?")
+            .setPositiveButton("작성하기") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .setNegativeButton("나가기") { dialog, _ ->
+                super.onBackPressed()
+            }
+            .create()
+            .show()
+    }
+
 }
