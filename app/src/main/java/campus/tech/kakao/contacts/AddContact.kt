@@ -3,11 +3,15 @@ package campus.tech.kakao.contacts
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
 import android.view.View
+import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.PopupWindow
 import android.widget.RadioButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
 import campus.tech.kakao.contacts.Contact.Companion.MIGRATION_1_2
@@ -112,6 +116,8 @@ class AddContact : AppCompatActivity() {
         }
 
 
+
+
     }
 
     // Show date picker dialog
@@ -125,7 +131,28 @@ class AddContact : AppCompatActivity() {
         datePicker.show()
     }
 
+    fun popupMessage(){
+        //팝업 UI 설정
+        val popupView = layoutInflater.inflate(R.layout.popup_message, null)
+        val write = popupView.findViewById<TextView>(R.id.write)
+        val exit = popupView.findViewById<TextView>(R.id.exit)
 
+        val popupBuilder = AlertDialog.Builder(this).setView(popupView)
+        val popupWindow = popupBuilder.show()
 
+        write.setOnClickListener {
+            popupWindow.dismiss()
+        }
+        exit.setOnClickListener {
+            finish()
+        }
+    }
 
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            popupMessage()
+            return true
+        }
+        return false
+    }
 }
