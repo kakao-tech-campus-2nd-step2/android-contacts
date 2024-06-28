@@ -64,9 +64,9 @@ class ContactWritingActivity : AppCompatActivity() {
                 intent.putExtra("mail", mail.text.toString())
                 intent.putExtra("birthday", birthday.text)
 
-                if(gender.checkedRadioButtonId == R.id.radioBtn_man) {
+                if (gender.checkedRadioButtonId == R.id.radioBtn_man) {
                     intent.putExtra("gender", "남성")
-                } else if(gender.checkedRadioButtonId == R.id.radioBtn_woman) {
+                } else if (gender.checkedRadioButtonId == R.id.radioBtn_woman) {
                     intent.putExtra("gender", "여성")
                 } else {
                     intent.putExtra("gender", "")
@@ -104,7 +104,7 @@ class ContactWritingActivity : AppCompatActivity() {
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        if(keyCode == KeyEvent.KEYCODE_BACK) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
             val name = findViewById<EditText>(R.id.name)
             val phone = findViewById<EditText>(R.id.phone)
             val mail = findViewById<EditText>(R.id.mail)
@@ -112,11 +112,11 @@ class ContactWritingActivity : AppCompatActivity() {
             val gender = findViewById<RadioGroup>(R.id.gender)
             val memo = findViewById<EditText>(R.id.memo)
 
-            if(checkWriting(name, phone, mail, birthday, gender, memo)) {
+            if (checkWriting(name, phone, mail, birthday, gender, memo)) {
                 val dialogListener = DialogInterface.OnClickListener { dialog, which ->
-                    if(which == DialogInterface.BUTTON_POSITIVE) {
+                    if (which == DialogInterface.BUTTON_POSITIVE) {
                         Log.d("uin", "작성하기 버튼")
-                    } else if(which == DialogInterface.BUTTON_NEGATIVE) {
+                    } else if (which == DialogInterface.BUTTON_NEGATIVE) {
                         Log.d("uin", "나가기 버튼")
                         val intent = Intent(this, ContactMainActivity::class.java)
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
@@ -136,14 +136,17 @@ class ContactWritingActivity : AppCompatActivity() {
     }
 }
 
-fun checkWriting(name : EditText, phone : EditText, mail : EditText, birthday : TextView,
-    gender : RadioGroup, memo : EditText) : Boolean {
-    if(name.text.isNotEmpty()|| phone.text.isNotEmpty() || mail.text.isNotEmpty()
-        || birthday.text.isNotEmpty() || memo.text.isNotEmpty()) {
+fun checkWriting(
+    name: EditText, phone: EditText, mail: EditText, birthday: TextView,
+    gender: RadioGroup, memo: EditText
+): Boolean {
+    if (name.text.isNotEmpty() || phone.text.isNotEmpty() || mail.text.isNotEmpty()
+        || birthday.text.isNotEmpty() || memo.text.isNotEmpty()
+    ) {
 
         return true
     }
-    if(gender.checkedRadioButtonId != -1) {
+    if (gender.checkedRadioButtonId != -1) {
         return true
     }
     return false

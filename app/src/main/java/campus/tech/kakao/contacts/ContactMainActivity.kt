@@ -53,7 +53,7 @@ class ContactMainActivity : AppCompatActivity() {
 
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        adapter.setListener(object: RecyclerViewAdapter.ItemClickListener{
+        adapter.setListener(object : RecyclerViewAdapter.ItemClickListener {
             override fun onClick(v: View, position: Int) {
                 val intent = Intent(this@ContactMainActivity, ContactDetailActivity::class.java)
                 intent.putExtra("name", contactList.get(position).name)
@@ -94,6 +94,7 @@ class RecyclerViewAdapter(
             recyclerListener.onClick(it, position)
         }
     }
+
     interface ItemClickListener {
         fun onClick(v: View, position: Int)
     }
@@ -102,11 +103,18 @@ class RecyclerViewAdapter(
         this.recyclerListener = itemClickListener
     }
 
-    lateinit var recyclerListener : ItemClickListener
+    lateinit var recyclerListener: ItemClickListener
 
     override fun getItemCount(): Int {
         return contactList.size
     }
 }
 
-class Contact(val name: String, val phone: String, val mail: String, val birthday: String, val gender: String, val memo: String)
+class Contact(
+    val name: String,
+    val phone: String,
+    val mail: String,
+    val birthday: String,
+    val gender: String,
+    val memo: String
+)

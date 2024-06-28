@@ -5,8 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ContactMainActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".ContactMainActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -17,9 +17,9 @@
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:text="오른쪽 +버튼을 클릭하여\n연락처를 등록해보세요."
-        android:textSize="20sp"
-        android:layout_centerInParent="true"/>
+        android:textSize="20sp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingBtn"

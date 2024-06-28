@@ -25,21 +25,21 @@
 
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="0.3"
             android:layout_height="match_parent"
+            android:layout_weight="0.3"
             android:gravity="center_vertical"
-            android:text="이름"
             android:paddingStart="15dp"
+            android:text="이름"
             android:textSize="15sp" />
 
         <TextView
             android:id="@+id/name"
             android:layout_width="0dp"
-            android:layout_weight="0.7"
             android:layout_height="match_parent"
+            android:layout_weight="0.7"
             android:gravity="end|center_vertical"
-            android:text="이름"
             android:paddingEnd="15dp"
+            android:text="이름"
             android:textSize="15sp" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -53,21 +53,21 @@
 
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="0.3"
             android:layout_height="match_parent"
+            android:layout_weight="0.3"
             android:gravity="center_vertical"
-            android:text="전화번호"
             android:paddingStart="15dp"
+            android:text="전화번호"
             android:textSize="15sp" />
 
         <TextView
             android:id="@+id/phone"
             android:layout_width="0dp"
-            android:layout_weight="0.7"
             android:layout_height="match_parent"
+            android:layout_weight="0.7"
             android:gravity="end|center_vertical"
-            android:text="010-1234-5678"
             android:paddingEnd="15dp"
+            android:text="010-1234-5678"
             android:textSize="15sp" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -81,21 +81,21 @@
 
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="0.3"
             android:layout_height="match_parent"
+            android:layout_weight="0.3"
             android:gravity="center_vertical"
-            android:text="메일"
             android:paddingStart="15dp"
+            android:text="메일"
             android:textSize="15sp" />
 
         <TextView
             android:id="@+id/mail"
             android:layout_width="0dp"
-            android:layout_weight="0.7"
             android:layout_height="match_parent"
+            android:layout_weight="0.7"
             android:gravity="end|center_vertical"
-            android:text="kakao.com"
             android:paddingEnd="15dp"
+            android:text="kakao.com"
             android:textSize="15sp" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -109,21 +109,21 @@
 
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="0.3"
             android:layout_height="match_parent"
+            android:layout_weight="0.3"
             android:gravity="center_vertical"
-            android:text="생일"
             android:paddingStart="15dp"
+            android:text="생일"
             android:textSize="15sp" />
 
         <TextView
             android:id="@+id/birthday"
             android:layout_width="0dp"
-            android:layout_weight="0.7"
             android:layout_height="match_parent"
+            android:layout_weight="0.7"
             android:gravity="end|center_vertical"
-            android:text="2001.01.01"
             android:paddingEnd="15dp"
+            android:text="2001.01.01"
             android:textSize="15sp" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -137,21 +137,21 @@
 
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="0.3"
             android:layout_height="match_parent"
+            android:layout_weight="0.3"
             android:gravity="center_vertical"
-            android:text="성별"
             android:paddingStart="15dp"
+            android:text="성별"
             android:textSize="15sp" />
 
         <TextView
             android:id="@+id/gender"
             android:layout_width="0dp"
-            android:layout_weight="0.7"
             android:layout_height="match_parent"
+            android:layout_weight="0.7"
             android:gravity="end|center_vertical"
-            android:text="여성"
             android:paddingEnd="15dp"
+            android:text="여성"
             android:textSize="15sp" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -165,21 +165,21 @@
 
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="0.3"
             android:layout_height="match_parent"
+            android:layout_weight="0.3"
             android:gravity="center_vertical"
-            android:text="메모"
             android:paddingStart="15dp"
+            android:text="메모"
             android:textSize="15sp" />
 
         <TextView
             android:id="@+id/memo"
             android:layout_width="0dp"
-            android:layout_weight="0.7"
             android:layout_height="match_parent"
+            android:layout_weight="0.7"
             android:gravity="end|center_vertical"
-            android:text="메모"
             android:paddingEnd="15dp"
+            android:text="메모"
             android:textSize="15sp" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>

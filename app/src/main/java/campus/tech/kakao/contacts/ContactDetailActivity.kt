@@ -23,7 +23,7 @@ class ContactDetailActivity : AppCompatActivity() {
         phoneTextView.text = intent.getStringExtra("phone")
         mailTextView.text = intent.getStringExtra("mail")
         birthdayTextView.text = intent.getStringExtra("birthday")
-        genderTextView.text =intent.getStringExtra("gender")
+        genderTextView.text = intent.getStringExtra("gender")
         memoTextView.text = intent.getStringExtra("memo")
     }
 }
