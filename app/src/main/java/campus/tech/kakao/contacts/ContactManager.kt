@@ -40,4 +40,12 @@ class ContactManager() {
            textView.text = text
         }
     }
+
+    fun viewText(textView: View, size:Int) {
+        if(size==0) {
+            textView.visibility = View.VISIBLE
+        } else {
+            textView.visibility = View.GONE
+        }
+    }
 }

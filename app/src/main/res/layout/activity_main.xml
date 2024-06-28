@@ -6,7 +6,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-    
+
+    <TextView
+        android:id="@+id/emptyMainView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="25dp"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:visibility="gone"
+        android:layout_marginHorizontal="20dp"
+        android:text="우측 아래 버튼을 눌러\n연락처를 추가해보세요."
+        />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingAddButton"
         app:layout_constraintEnd_toEndOf="parent"

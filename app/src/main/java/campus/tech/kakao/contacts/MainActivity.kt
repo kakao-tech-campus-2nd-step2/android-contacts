@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -16,15 +17,20 @@ class MainActivity : AppCompatActivity() {
     private lateinit var launcher: ActivityResultLauncher<Intent>
     private lateinit var contactAdapter: ContactAdapter
     private val contactList = ArrayList<Contact>()
+    private val contactManager = ContactManager()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
+
         contactAdapter = ContactAdapter(contactList, LayoutInflater.from(this))
         val contactView = findViewById<RecyclerView>(R.id.contactRecyclerView)
         contactView.adapter = contactAdapter
         contactView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        val emptyView = findViewById<TextView>(R.id.emptyMainView)
+        contactManager.viewText(emptyView, contactAdapter.itemCount)
 
         launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == RESULT_OK) {
@@ -38,6 +44,9 @@ class MainActivity : AppCompatActivity() {
                 val contact = Contact(name, phoneNumber, email, birthDay, gender, memo)
                 contactList.add(contact)
                 contactAdapter.notifyDataSetChanged()
+
+                Log.d("음..", ""+ contactAdapter.itemCount)
+                contactManager.viewText(emptyView, contactAdapter.itemCount)
             }
         }
 
