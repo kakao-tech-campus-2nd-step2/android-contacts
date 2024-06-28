@@ -1,6 +1,7 @@
 package campus.tech.kakao.contacts
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,7 +26,9 @@ class RecyclerViewAdapter(
 				val position = adapterPosition
 				//adapterPosition을 통해 포지션을 받음.
 				val contact = contact_list.get(position)
-				Toast.makeText(context, ""+contact.name+" "+contact.phone, Toast.LENGTH_SHORT).show()
+//				Toast.makeText(context, ""+contact.name+" "+contact.phone, Toast.LENGTH_SHORT).show()
+				val intent = Intent(context, ContactDetail::class.java)
+				intent.putExtra("contact-id", contact.id)
 			}
 		}
 	}
@@ -46,3 +49,5 @@ class RecyclerViewAdapter(
 		return contact_list.size
 	}
 }
+
+
