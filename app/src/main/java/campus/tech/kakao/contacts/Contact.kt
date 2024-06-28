@@ -10,5 +10,5 @@ data class Contact(
     val emailAddress: String,
     val birthday: String?,
     val gender: String?,
-    val note: String?
+    val memo: String?
 ) : Parcelable
