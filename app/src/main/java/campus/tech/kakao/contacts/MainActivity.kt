@@ -113,6 +113,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     abstract class AppDatabase : RoomDatabase() {
+        abstract val phone: CharSequence?
+        abstract val email: CharSequence?
+        abstract val name: CharSequence?
+
         abstract fun contactDao(): ContactDao
         abstract fun userDao(): UserDao
     }

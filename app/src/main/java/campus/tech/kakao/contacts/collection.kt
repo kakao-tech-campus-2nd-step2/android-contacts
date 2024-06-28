@@ -76,6 +76,16 @@ class CollectionActivity : AppCompatActivity() {
         }
 
     }
+    override fun onBindViewHolder(holder:ContactAdapter.ViewHolder,position: Int){
+        val contact = contacts[position]
+        holder.nameTextView = contact.name
+
+        holder.itemViewView.setOnClickListener {
+            val intent = Intent(context, whoamI::class.java)
+            intent.putExtra("contact", contact)
+            context.startActivity(intent)
+        }
+    }
 
     private fun showMessage() {
         GlobalScope.launch {

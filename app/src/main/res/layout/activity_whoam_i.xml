@@ -7,4 +7,25 @@
     android:layout_height="match_parent"
     tools:context=".whoamI">
 
+    <TextView
+        android:id="@+id/nameTextView"
+        android:text="감자"
+        android:textSize="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="고구마"
+        android:textSize="20dp"
+        android:id="@+id/emailTextView"/>
+
+    <TextView
+        android:text="가지"
+        android:textSize="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/phoneTextView"/>
+
 </FrameLayout>
