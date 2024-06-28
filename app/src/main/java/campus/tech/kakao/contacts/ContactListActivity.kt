@@ -1,29 +1,68 @@
 package campus.tech.kakao.contacts
 
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ContactListActivity : AppCompatActivity() {
+    private val contactViewModel = ViewModelProvider(this)[ContactViewModel::class.java]
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contact_list)
 
-        // TODO : findViewById
+        val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
+        val addButton: ExtendedFloatingActionButton = findViewById(R.id.fab)
 
-        // TODO : AddButton setOnClickListener
+        // 리사이클러뷰 설정
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        val contacts = contactViewModel.getContacts()
+        val adapter = ContactAdapter(contacts)
+        recyclerView.adapter = adapter
 
-        // TODO : RecyclerView Adapter 설정
+        // 플로팅 액션 버튼 클릭 리스너 설정
+        addButton.setOnClickListener {
+            // TODO : AddButton setOnClickListener - 새로운 연락처 추가화면으로 이동하기
+        }
 
         }
     }
 
-// TODO : RecyclerView Adapter 제작하기
-class ContactAdapter {
 
-// TODO : Item setOnClickListener
+class ContactAdapter(private val contacts: List<Contact>): RecyclerView.Adapter<ContactAdapter.ContactViewHolder>() {
+
+    inner class ContactViewHolder(view: View): RecyclerView.ViewHolder(view) {
+        val contactName : TextView = view.findViewById(R.id.contactName)
+
+        init {
+            view.setOnClickListener {
+                // TODO : 클릭 시 연락처 세부 정보 창 이동하기
+            }
+        }
+    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.contact_item, parent, false)
+        return ContactViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
+        val contact = contacts[position]
+        holder.contactName.text = contact.name
+    }
+
+    override fun getItemCount(): Int {
+        return contacts.size
+    }
 
 }
