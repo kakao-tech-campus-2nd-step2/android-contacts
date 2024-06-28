@@ -15,9 +15,17 @@ class ContactDetail : AppCompatActivity() {
         val profileImageView: ImageView = findViewById(R.id.profile_image_view)
         val nameTextView: TextView = findViewById(R.id.name_text_view)
         val phoneTextView: TextView = findViewById(R.id.phone_text_view)
+        val mailTextView: TextView = findViewById(R.id.mail)
+        val birthdayTextView: TextView = findViewById(R.id.birthday)
+        val genderTextView: TextView = findViewById(R.id.gender)
+        val memoTextView: TextView = findViewById(R.id.memo)
 
         profileImageView.setImageResource(contact.profile)
         nameTextView.text = contact.name
         phoneTextView.text = contact.phoneNumber
+        mailTextView.text = contact.email?.ifEmpty { "없음" } ?: "없음"
+        birthdayTextView.text = contact.birthday?.ifEmpty { "없음" } ?: "없음"
+        genderTextView.text = contact.gender?.ifEmpty { "없음" } ?: "없음"
+        memoTextView.text = contact.memo?.ifEmpty { "없음" } ?: "없음"
     }
 }
