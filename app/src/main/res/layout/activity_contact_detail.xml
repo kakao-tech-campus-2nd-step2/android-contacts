@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ContactAddActivity">
+
+
+    <ImageView
+        android:id="@+id/contactImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_double"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:src="@drawable/contact_main_image"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/error"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="오류가 발생했습니다."
+        android:textSize="50dp"
+        android:visibility="gone"
+        android:gravity="center"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/contactImage"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        >
+
+        <RelativeLayout
+            android:id="@+id/nameLayout"
+            style="@style/contactDetailElementStyle"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="이름"
+                android:layout_alignParentLeft="true"
+                android:textSize="22dp"/>
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="이름"
+                android:textSize="22dp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/telLayout"
+            style="@style/contactDetailElementStyle"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="연착처"
+                android:layout_alignParentLeft="true"
+                android:textSize="22dp"/>
+
+            <TextView
+                android:id="@+id/tel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="연락처"
+                android:textSize="22dp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/mailLayout"
+            style="@style/contactDetailElementStyle"
+            android:visibility="gone"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="메일"
+                android:layout_alignParentLeft="true"
+                android:textSize="22dp"/>
+
+            <TextView
+                android:id="@+id/mail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="메일"
+                android:textSize="22dp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/birthdayLayout"
+            style="@style/contactDetailElementStyle"
+            android:visibility="gone"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="생일"
+                android:layout_alignParentLeft="true"
+                android:textSize="22dp"/>
+
+            <TextView
+                android:id="@+id/birthday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="생일"
+                android:textSize="22dp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/genderLayout"
+            style="@style/contactDetailElementStyle"
+            android:visibility="gone"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="성별"
+                android:layout_alignParentLeft="true"
+                android:textSize="22dp"/>
+
+            <TextView
+                android:id="@+id/gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="성별"
+                android:textSize="22dp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/memoLayout"
+            style="@style/contactDetailElementStyle"
+            android:visibility="gone"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="메모"
+                android:layout_alignParentLeft="true"
+                android:textSize="22dp"/>
+
+            <TextView
+                android:id="@+id/memo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="메모"
+                android:textSize="22dp"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+

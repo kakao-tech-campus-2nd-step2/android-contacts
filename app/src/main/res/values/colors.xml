@@ -5,4 +5,5 @@
     <color name="editTextBackground">#FFE0F4F7</color>
     <color name="backgroundColor">#FFFEF7FF</color>
     <color name="rippleColor">#FFEAE3EB</color>
+    <color name="btnColorOrange">#FFFFC108</color>
 </resources>

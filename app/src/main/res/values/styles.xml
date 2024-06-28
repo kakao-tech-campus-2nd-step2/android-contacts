@@ -9,4 +9,12 @@
         <item name="android:padding">@dimen/edittext_padding</item>
         <item name="android:textSize">@dimen/text_size</item>
     </style>
+
+    <style name="contactDetailElementStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_marginHorizontal">@dimen/margin_double</item>
+        <item name="android:layout_marginVertical">@dimen/margin</item>
+    </style>
 </resources>
