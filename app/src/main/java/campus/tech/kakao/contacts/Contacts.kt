@@ -16,6 +16,10 @@ object Contacts {
         return contacts.size
     }
 
+    fun getContact(idx: Int): Contact {
+        return contacts.get(idx)
+    }
+
     fun getList(): ArrayList<Contact> {
         return contacts
     }

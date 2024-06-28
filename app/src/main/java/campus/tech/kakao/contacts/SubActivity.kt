@@ -72,6 +72,8 @@ class SubActivity : AppCompatActivity(), ContactsAdapter.OnItemClickListener {
     }
 
     override fun onItemClick(position: Int) {
-        Toast.makeText(this, "Clicked item at position $position", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, MainActivity2::class.java)
+        intent.putExtra("contIdx", position)
+        startActivity(intent)
     }
 }
