@@ -99,6 +99,7 @@ class PersonAdapter(
         val text_name: TextView = itemView.findViewById(R.id.name)
         val text_initial: TextView = itemView.findViewById(R.id.nameinitial)
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view = inflater.inflate(R.layout.person_item, parent, false)
         return ViewHolder(view)
@@ -109,6 +110,19 @@ class PersonAdapter(
         val viewHolder = holder as ViewHolder
         viewHolder.text_name.text = person.name
         viewHolder.text_initial.text = person.name[0].toString()
+
+        holder.itemView.setOnClickListener {
+            val context = it.context
+            val intent = Intent(context, ContactDetailActivity::class.java).apply {
+                putExtra(NAME, person.name)
+                putExtra(PHONE, person.phone)
+                putExtra(EMAIL, person.email)
+                putExtra(BIRTH, person.birth)
+                putExtra(GENDER_TYPE, person.gender)
+                putExtra(NOTE, person.note)
+            }
+            context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int {
