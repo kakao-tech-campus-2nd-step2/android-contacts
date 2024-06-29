@@ -13,4 +13,7 @@
     <string name="edittext_note">메모</string>
     <string name="button_more">더보기</string>
     <string name="addbutton_info">오른쪽 + 버튼을 클릭하여\n연락처를 등록해보세요.</string>
+    <string name="notice_choice">작성 중인 내용이 있습니다. 정말 나가시겠습니까?</string>
+    <string name="button_write">작성하기</string>
+    <string name="button_exit">나가기</string>
 </resources>
