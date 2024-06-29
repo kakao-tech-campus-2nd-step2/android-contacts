@@ -1,12 +1,16 @@
 package campus.tech.kakao.contacts
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Context
 import android.icu.util.Calendar
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.Button
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import campus.tech.kakao.contacts.databinding.ActivitySaveContactBinding
 
@@ -22,6 +26,7 @@ class SaveContactActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
 
         showMoreEditTexts()
         showDatePicker()
@@ -37,6 +42,12 @@ class SaveContactActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         clearData()
+    }
+
+    private val onBackPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            exitPopup()
+        }
     }
 
     fun showMoreEditTexts(){
@@ -130,5 +141,25 @@ class SaveContactActivity : AppCompatActivity() {
             remove(NOTE)
             apply()
         }
+    }
+
+    private fun exitPopup(){
+        val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val view = inflater.inflate(R.layout.exitpopup, null)
+        val alertDialog = AlertDialog.Builder(this)
+            .create()
+
+        val btnWrite = view.findViewById<Button>(R.id.btn_write)
+        btnWrite.setOnClickListener {
+            alertDialog.dismiss()
+        }
+
+        val btnExit = view.findViewById<Button>(R.id.btn_exit)
+        btnExit.setOnClickListener {
+            finish()
+        }
+
+        alertDialog.setView(view)
+        alertDialog.show()
     }
 }
