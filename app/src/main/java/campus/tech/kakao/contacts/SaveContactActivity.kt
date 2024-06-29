@@ -2,70 +2,56 @@ package campus.tech.kakao.contacts
 
 import android.app.DatePickerDialog
 import android.content.Context
-import android.content.Intent
 import android.icu.util.Calendar
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.Button
-import android.widget.EditText
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import campus.tech.kakao.contacts.databinding.ActivitySaveContactBinding
 
 class SaveContactActivity : AppCompatActivity() {
 
-    lateinit var cancel: Button
-    lateinit var save: Button
-    lateinit var more: Button
-    lateinit var more_layout: LinearLayout
-
-    lateinit var date_birth : EditText
-    lateinit var dateString : String
     lateinit var imm : InputMethodManager
-
-    lateinit var name : EditText
-    lateinit var phone : EditText
+    lateinit var binding: ActivitySaveContactBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-        setUI()
+        binding = ActivitySaveContactBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+
         showMoreEditTexts()
         showDatePicker()
         onCancelClicked()
         onSaveClicked()
     }
 
-    fun setUI(){
-        more = findViewById(R.id.btn_more)
-        more_layout = findViewById(R.id.addfield)
+    override fun onResume() {
+        super.onResume()
+        clearData()
+    }
 
-        date_birth = findViewById(R.id.edit_birth)
-        imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-
-        cancel = findViewById(R.id.btn_cancel)
-        save = findViewById(R.id.btn_save)
-
-        name = findViewById(R.id.edit_name)
-        phone = findViewById(R.id.edit_phone)
+    override fun onDestroy() {
+        super.onDestroy()
+        clearData()
     }
 
     fun showMoreEditTexts(){
-        more.setOnClickListener {
-            more.visibility = if(more.visibility == View.VISIBLE){
+        binding.btnMore.setOnClickListener {
+            binding.btnMore.visibility = if(binding.btnMore.visibility == View.VISIBLE){
                 View.GONE
             } else {View.VISIBLE}
-            more_layout.visibility = if(more_layout.visibility == View.GONE){
+            binding.addfield.visibility = if(binding.addfield.visibility == View.GONE){
                 View.VISIBLE
             } else {View.GONE}
         }
     }
 
     fun showDatePicker(){
-        date_birth.setOnClickListener {
+        binding.editBirth.setOnClickListener {
             val cal = Calendar.getInstance()
             cal.set(2000, Calendar.JANUARY, 1)
 
@@ -75,8 +61,8 @@ class SaveContactActivity : AppCompatActivity() {
             )
 
             val dateSetListener = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-                dateString= "${year}.${month+1}.${dayOfMonth}"
-                date_birth.setText(dateString)
+                val dateString= "${year}.${month+1}.${dayOfMonth}"
+                binding.editBirth.setText(dateString)
             }
             DatePickerDialog(this, dateSetListener, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)).show()
         }
@@ -87,29 +73,62 @@ class SaveContactActivity : AppCompatActivity() {
     }
 
     fun onCancelClicked(){
-        cancel.setOnClickListener {
+        binding.btnCancel.setOnClickListener {
             showToast("취소 되었습니다")
         }
     }
 
     fun onSaveClicked(){
-        save.setOnClickListener {
-            if (name.text.isEmpty()){
+        binding.btnSave.setOnClickListener {
+            val name = binding.editName.text.toString()
+            val phone = binding.editPhone.text.toString()
+
+            if (name.isEmpty()){
                 showToast("이름은 필수 입력 항목입니다")
-                name.requestFocus()
+                binding.editName.requestFocus()
             }
-            else if (phone.text.isEmpty()){
+            else if (phone.isEmpty()){
                 showToast("전화번호는 필수 입력 항목입니다")
-                phone.requestFocus()
+                binding.editPhone.requestFocus()
             }
             else {
-                showToast("저장이 완료 되었습니다")
-                val intent = Intent(this@SaveContactActivity, ContactListActivity::class.java).apply {
-                    putExtra("name", name.text.toString())
-                    putExtra("phone", phone.text.toString())
-                }
-                startActivity(intent)
+                saveData(name,phone)
+                finish()
             }
+        }
+    }
+
+    private fun saveData(name: String, phone: String){
+        with(getSharedPreferences(CONTACT_INFORMATION, Context.MODE_PRIVATE).edit()) {
+            putString(NAME, name)
+            putString(PHONE, phone)
+            putString(EMAIL, binding.editEmail.text.toString().takeIf { it.isNotEmpty() })
+            putString(BIRTH, binding.editBirth.text.toString().takeIf { it.isNotEmpty() })
+
+            val genderType = getGenderType()
+            putString(GENDER_TYPE, genderType)
+
+            putString(NOTE, binding.editNote.text.toString().takeIf { it.isNotEmpty() })
+            apply()
+        }
+        showToast("저장이 완료 되었습니다")
+    }
+
+    private fun getGenderType(): String? {
+        return if (binding.female.isChecked) "여성"
+        else if (binding.male.isChecked) "남성"
+        else null
+    }
+
+    private fun clearData() {
+        with(getSharedPreferences(CONTACT_INFORMATION, Context.MODE_PRIVATE).edit()) {
+            remove(NAME)
+            remove(PHONE)
+            remove(EMAIL)
+            remove(BIRTH)
+            remove(GENDER_TYPE)
+            remove(NOTE)
+            apply()
         }
     }
 }
