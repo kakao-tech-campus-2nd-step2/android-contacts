@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
 
         detailBtn.setOnClickListener { showMoreFields(moreBtnLayout, moreETLayout) }
         birthDayET.setOnClickListener { showDatePickerDialog(birthDayET) }
-        saveBtn.setOnClickListener { saveCheck(nameET, phoneET) }
+        saveBtn.setOnClickListener { saveCheck(nameET, phoneET, mailET, birthDayET, genderRG, memoET) }
         cancelBtn.setOnClickListener { showToast("취소되었습니다") }
     }
 
@@ -76,9 +76,12 @@ class MainActivity : AppCompatActivity() {
         datePickerDialog.show()
     }
 
-    private fun saveCheck(nameET: EditText, phoneET: EditText) {
+    private fun saveCheck(nameET: EditText, phoneET: EditText, mailET: EditText, birthDayET: EditText, genderRG: RadioGroup, memoET: EditText) {
         val name = nameET.text.toString()
         val phone = phoneET.text.toString()
+        val mail = mailET.text.toString()
+        val birthday = birthDayET.text.toString()
+        val memo = memoET.text.toString()
 
         when {
             name.isEmpty() && phone.isEmpty() -> {
@@ -95,6 +98,9 @@ class MainActivity : AppCompatActivity() {
                 val resultIntent = Intent().apply {
                     putExtra("name", name)
                     putExtra("phone", phone)
+                    putExtra("email", mail)
+                    putExtra("birthday", birthday)
+                    putExtra("memo", memo)
                 }
                 setResult(Activity.RESULT_OK, resultIntent)
                 finish()
