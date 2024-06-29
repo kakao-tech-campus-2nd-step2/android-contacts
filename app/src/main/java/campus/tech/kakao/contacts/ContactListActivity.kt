@@ -100,7 +100,7 @@ class PersonAdapter(
         val text_initial: TextView = itemView.findViewById(R.id.nameinitial)
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val view = inflater.inflate(R.layout.activity_person_item, parent, false)
+        val view = inflater.inflate(R.layout.person_item, parent, false)
         return ViewHolder(view)
     }
 
