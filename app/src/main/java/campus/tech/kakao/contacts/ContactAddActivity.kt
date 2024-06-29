@@ -70,6 +70,9 @@ class ContactAddActivity : AppCompatActivity() {
 
             if (checkTerms(name, phoneNum)) {
                 saveContact(contact)
+                clearFields()
+            } else {
+                showValidationMessage()
             }
         }
 
@@ -78,34 +81,29 @@ class ContactAddActivity : AppCompatActivity() {
         }
 
 
-        }
+    }
 
     private fun showConfirmExitDialog() {
-        AlertDialog.Builder(this)
-            .setMessage("저장하지 않고 나가시겠습니까?")
+        AlertDialog.Builder(this).setMessage("저장하지 않고 나가시겠습니까?")
             .setPositiveButton("예") { dialog, which ->
                 clearFields()
                 showCancelToast()
                 setResult(RESULT_CANCELED)
                 finish()
-            }
-            .setNegativeButton("아니오", null)
-            .show()
+            }.setNegativeButton("아니오", null).show()
     }
-    private fun showDatePickerDialog(){
-        val datePickerDialog = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-            birthEditText.setText("$year-${month + 1}-$dayOfMonth")
-        }, 2021, 0, 1)
+
+    private fun showDatePickerDialog() {
+        val datePickerDialog = DatePickerDialog(
+            this, DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+                birthEditText.setText("$year-${month + 1}-$dayOfMonth")
+            }, 2021, 0, 1
+        )
         datePickerDialog.show()
     }
 
     private fun checkTerms(name: String, phoneNum: String): Boolean {
-        if(name.isEmpty() || phoneNum.isEmpty()){
-            Toast.makeText(this, "이름과 전화번호는 필수 입력사항입니다.", Toast.LENGTH_SHORT).show()
-            return false
-        } else {
-            return true
-        }
+        return !(name.isEmpty() || phoneNum.isEmpty())
     }
 
     private fun getSelectedGender(): String {
@@ -126,7 +124,7 @@ class ContactAddActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun clearFields(){
+    private fun clearFields() {
         nameEditText.text.clear()
         phoneNumEditText.text.clear()
         emailEditText.text.clear()
@@ -139,13 +137,17 @@ class ContactAddActivity : AppCompatActivity() {
         moreButton.visibility = TextView.VISIBLE
     }
 
-    private fun showCancelToast(){
+    private fun showValidationMessage() {
+        Toast.makeText(this, "이름과 전화번호는 필수 입력사항입니다.", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun showCancelToast() {
         val toast = Toast.makeText(this, "취소 되었습니다", Toast.LENGTH_SHORT)
         toast.setGravity(Gravity.TOP, 0, 100)
         toast.show()
     }
 
-    private fun showSaveToast(){
+    private fun showSaveToast() {
         val toast = Toast.makeText(this, "저장이 완료 되었습니다", Toast.LENGTH_SHORT)
         toast.setGravity(Gravity.TOP, 0, 100)
         toast.show()

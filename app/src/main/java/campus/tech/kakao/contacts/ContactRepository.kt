@@ -1,6 +1,6 @@
 package campus.tech.kakao.contacts
 
-class ContactRepository private constructor(){
+class ContactRepository private constructor() {
     private val contacts = mutableListOf<Contact>()
 
     fun addContact(contact: Contact) {
@@ -18,8 +18,10 @@ class ContactRepository private constructor(){
     fun removeContact(name: String) {
         contacts.removeIf { it.name == name }
     }
+
     companion object {
-        @Volatile private var instance: ContactRepository? = null
+        @Volatile
+        private var instance: ContactRepository? = null
 
         fun getInstance() =
             instance ?: synchronized(this) {

@@ -23,12 +23,13 @@ class ContactListActivity : AppCompatActivity() {
     private lateinit var contactViewModel: ContactViewModel
     private lateinit var adapter: ContactAdapter
 
-    private val addContactLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-        if (it.resultCode == RESULT_OK) {
-            // 명시적으로 ViewModel의 데이터를 가져와서 업데이트
-            contactViewModel.getContacts()
+    private val addContactLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == RESULT_OK) {
+                // 명시적으로 ViewModel의 데이터를 가져와서 업데이트
+                contactViewModel.getContacts()
+            }
         }
-    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,15 +59,15 @@ class ContactListActivity : AppCompatActivity() {
             adapter.updateContacts(contacts)
         }
 
-
-        }
     }
+}
 
 
-class ContactAdapter(private var contacts: List<Contact>): RecyclerView.Adapter<ContactAdapter.ContactViewHolder>() {
+class ContactAdapter(private var contacts: List<Contact>) :
+    RecyclerView.Adapter<ContactAdapter.ContactViewHolder>() {
 
-    inner class ContactViewHolder(view: View): RecyclerView.ViewHolder(view) {
-        val contactName : TextView = view.findViewById(R.id.contactName)
+    inner class ContactViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val contactName: TextView = view.findViewById(R.id.contactName)
 
         init {
             view.setOnClickListener {
@@ -86,6 +87,7 @@ class ContactAdapter(private var contacts: List<Contact>): RecyclerView.Adapter<
             }
         }
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.contact_item, parent, false)
         return ContactViewHolder(view)
@@ -99,6 +101,7 @@ class ContactAdapter(private var contacts: List<Contact>): RecyclerView.Adapter<
     override fun getItemCount(): Int {
         return contacts.size
     }
+
     fun updateContacts(newContacts: List<Contact>) {
         contacts = newContacts
         notifyDataSetChanged()
