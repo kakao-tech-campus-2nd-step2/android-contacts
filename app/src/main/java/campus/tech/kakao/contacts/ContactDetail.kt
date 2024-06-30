@@ -25,6 +25,7 @@ class ContactDetail : AppCompatActivity() {
         setContentView(R.layout.activity_contact_detail)
 
         initialize()
+        setContactDetail()
     }
     private fun initialize() {
         detailName = findViewById(R.id.detailName)
@@ -38,6 +39,27 @@ class ContactDetail : AppCompatActivity() {
         detailBirthLayout = findViewById(R.id.detailBirth_layout)
         detailGenderLayout = findViewById(R.id.detailGender_layout)
         detailMemoLayout = findViewById(R.id.detailMemo_layout)
+    }
+
+    private fun setContactDetail() {
+        val contact: Contact? =
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                intent.getParcelableExtra("CONTACT", Contact::class.java)
+            } else {
+                intent.getParcelableExtra("CONTACT")
+            }
+
+        contact?.let {
+            setDetail(it)
+        }
+    }
+    private fun setDetail(contact: Contact) {
+        detailName.text = contact.name
+        detailTel.text = contact.tel
+        detailMail.text = contact.mail ?: ""
+        detailBirth.text = contact.birth ?: ""
+        detailGender.text = contact.gender
+        detailMemo.text = contact.memo ?: ""
     }
 
 }
