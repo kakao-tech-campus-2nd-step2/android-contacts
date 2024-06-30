@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
             expandView()
         }
         cancel.setOnClickListener {
-            
+            showCancelMsg()
         }
         save.setOnClickListener {
             if (checkValide()) {
@@ -132,4 +132,19 @@ class MainActivity : AppCompatActivity() {
 
         return contact
     }
+
+    private fun showCancelMsg() {
+        AlertDialog.Builder(this).apply {
+            setMessage("작성 중인 내용이 있습니다. 정말 나가시겠습니까?")
+            setPositiveButton("나가기") { _, _ ->
+                finish()
+            }
+            setNegativeButton("작성하기", null)
+            create()
+            show()
+        }
+    }
+
+
+
 }
