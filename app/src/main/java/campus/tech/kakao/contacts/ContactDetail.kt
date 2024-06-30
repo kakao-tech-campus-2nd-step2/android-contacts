@@ -1,6 +1,8 @@
 package campus.tech.kakao.contacts
 
+import android.os.Build
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -37,6 +39,5 @@ class ContactDetail : AppCompatActivity() {
         detailGenderLayout = findViewById(R.id.detailGender_layout)
         detailMemoLayout = findViewById(R.id.detailMemo_layout)
     }
-
 
 }

@@ -11,11 +11,13 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlin.collections.ArrayList
 
 class AddInfo : AppCompatActivity() {
     private lateinit var addBtn: Button
@@ -32,6 +34,7 @@ class AddInfo : AppCompatActivity() {
         initialize()
         setUpListeners()
         setRecyclerView()
+        setupResultLauncher()
 
     }
 
@@ -53,6 +56,21 @@ class AddInfo : AppCompatActivity() {
     private fun setRecyclerView() {
         recyclerView.adapter = RecyclerViewAdapter(contactList, LayoutInflater.from(this),this)
         recyclerView.layoutManager = LinearLayoutManager(this)
+    }
+
+    private fun setupResultLauncher() {
+        resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val data: Intent? = result.data
+                val contact = data?.getParcelableExtra<Contact>("CONTACT_RESULT")
+                contact?.let {
+                    contactList.add(it)
+                    recyclerView.adapter?.notifyItemInserted(contactList.size - 1)
+                    Log.d("AddInfo", "New contact added: ${it.name}")
+
+                }
+            }
+        }
     }
 
     class RecyclerViewAdapter(
@@ -80,6 +98,12 @@ class AddInfo : AppCompatActivity() {
             val contact = contactList[position]
             holder.name_text_view.text = contact.name
 
+            holder.itemView.setOnClickListener {
+                val intent = Intent(context, ContactDetail::class.java).apply {
+                    putExtra("CONTACT", contact)
+                }
+                context.startActivity(intent)
+            }
         }
 
         override fun getItemCount(): Int {
