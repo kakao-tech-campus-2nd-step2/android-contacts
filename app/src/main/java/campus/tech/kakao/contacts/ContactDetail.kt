@@ -51,6 +51,7 @@ class ContactDetail : AppCompatActivity() {
 
         contact?.let {
             setDetail(it)
+            setDetailLayoutVisibility(it)
         }
     }
     private fun setDetail(contact: Contact) {
@@ -62,4 +63,10 @@ class ContactDetail : AppCompatActivity() {
         detailMemo.text = contact.memo ?: ""
     }
 
+    private fun setDetailLayoutVisibility(contact: Contact) {
+        detailMailLayout.visibility = if (contact.mail.isEmpty()) View.GONE else View.VISIBLE
+        detailBirthLayout.visibility = if (contact.birth.isEmpty()) View.GONE else View.VISIBLE
+        detailGenderLayout.visibility = if (contact.gender == "null") View.GONE else View.VISIBLE
+        detailMemoLayout.visibility = if (contact.memo.isEmpty()) View.GONE else View.VISIBLE
+    }
 }
