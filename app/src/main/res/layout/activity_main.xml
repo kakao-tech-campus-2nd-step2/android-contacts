@@ -34,6 +34,7 @@
                 android:layout_height="wrap_content"
                 android:hint="이름"
                 style="@style/inputBox"
+                android:background="@drawable/rectangled_mint"
                 app:layout_constraintTop_toBottomOf="@id/face"/>
 
             <EditText
@@ -42,6 +43,7 @@
                 android:layout_height="wrap_content"
                 android:hint="전화번호"
                 style="@style/inputBox"
+                android:background="@drawable/rectangled_mint"
                 app:layout_constraintTop_toBottomOf="@id/name"
                 android:inputType="number"
                 android:digits="0123456789"/>
@@ -52,6 +54,7 @@
                 android:layout_height="wrap_content"
                 android:hint="메일"
                 style="@style/inputBox"
+                android:background="@drawable/rectangled_mint"
                 app:layout_constraintTop_toBottomOf="@id/tel"/>
 
             <TextView
@@ -62,6 +65,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:text="더보기"
+                android:drawableEnd="@drawable/arrow_down"
                 />
 
 
@@ -74,6 +78,7 @@
                 android:layout_height="wrap_content"
                 android:hint="생일"
                 style="@style/inputBox"
+                android:background="@drawable/rectangled_mint"
                 app:layout_constraintTop_toBottomOf="@id/mail"
 
                 android:visibility="invisible"/>
@@ -86,6 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="28dp"
                 android:hint="성별"
+                android:background="@drawable/rectangled_mint"
                 app:layout_constraintTop_toBottomOf="@id/birth"
                 android:visibility="invisible"
                 android:focusable="false"/>
@@ -131,6 +137,7 @@
                 android:layout_height="wrap_content"
                 android:hint="메모"
                 style="@style/inputBox"
+                android:background="@drawable/rectangled_mint"
                 app:layout_constraintTop_toBottomOf="@id/gender"
                 android:visibility="invisible"/>
 
