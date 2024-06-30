@@ -54,4 +54,36 @@
         android:layout_height="wrap_content"
         android:id="@+id/emailTextView"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="220dp"
+        android:layout_marginLeft="30dp"
+        android:text="생일"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/BirTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="220dp"
+        android:layout_marginLeft="130dp"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="270dp"
+        android:layout_marginLeft="30dp"
+        android:text="메모"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/memoTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="270dp"
+        android:layout_marginLeft="130dp"
+        android:textSize="20dp"/>
+
 </FrameLayout>
