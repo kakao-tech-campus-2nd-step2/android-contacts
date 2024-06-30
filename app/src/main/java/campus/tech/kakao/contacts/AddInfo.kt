@@ -67,11 +67,21 @@ class AddInfo : AppCompatActivity() {
                     contactList.add(it)
                     recyclerView.adapter?.notifyItemInserted(contactList.size - 1)
                     Log.d("AddInfo", "New contact added: ${it.name}")
-
+                    isShowText()
                 }
             }
         }
     }
+
+    private fun isShowText() {
+        if (contactList.isEmpty()) {
+            infoText.visibility = View.VISIBLE
+        }
+        else {
+            infoText.visibility = View.GONE
+        }
+    }
+
 
     class RecyclerViewAdapter(
         var contactList: ArrayList<Contact>,
