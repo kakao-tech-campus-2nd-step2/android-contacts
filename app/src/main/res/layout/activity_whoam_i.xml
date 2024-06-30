@@ -16,7 +16,6 @@
 
     <TextView
         android:id="@+id/nameTextView"
-        android:text="감자"
         android:textSize="20dp"
         android:layout_marginTop="70dp"
         android:layout_marginLeft="130dp"
@@ -34,11 +33,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="고구마"
         android:layout_marginLeft="130dp"
         android:layout_marginTop="120dp"
         android:textSize="20dp"
-        android:id="@+id/emailTextView"/>
+        android:id="@+id/phoneTextView"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -49,12 +47,11 @@
         android:textSize="20dp"/>
 
     <TextView
-        android:text="가지"
         android:textSize="20dp"
         android:layout_marginLeft="130dp"
         android:layout_marginTop="170dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/phoneTextView"/>
+        android:id="@+id/emailTextView"/>
 
 </FrameLayout>
