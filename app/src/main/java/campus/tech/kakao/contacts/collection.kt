@@ -19,10 +19,37 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-class ContactAdapter(private val contacts: List<MainActivity.Contact>) : RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+@Entity(tableName = "contacts")
+data class Contact(
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    val contactData: ContactData
+) {
+    data class ContactData(
+        @PrimaryKey(autoGenerate = true) val id: Int = 0,
+        val name: String,
+        val phone: String,
+        val gender: String,
+        val email: String,
+        val message: String,
+        val birthday: String
+    )
+}
+
+class ContactAdapter(private val contacts: List<Contact>) : RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
+
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nameTextView: TextView = itemView.findViewById(R.id.name)
         val phoneTextView: TextView = itemView.findViewById(R.id.phone)
+
+        init {
+            itemView.setOnClickListener {
+                val intent = Intent(itemView.context, WhoamiActivity::class.java).also {
+                    it.putExtra("contact", contacts[adapterPosition].contactData)
+                }
+                itemView.context.startActivity(intent)
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -32,12 +59,19 @@ class ContactAdapter(private val contacts: List<MainActivity.Contact>) : Recycle
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val contact = contacts[position]
-        holder.nameTextView.text = contact.name
-        holder.phoneTextView.text = contact.phone
+        holder.nameTextView.text = contact.contactData.name
+        holder.phoneTextView.text = contact.contactData.phone
     }
 
-    override fun getItemCount(): Int {
-        return contacts.size
+    override fun getItemCount() = contacts.size
+}
+
+class WhoamiActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_whoam_i)
+        val contactData = intent.getParcelableExtra<Contact.ContactData>("contact")
+        // Use contactData here
     }
 }
 
@@ -92,16 +126,8 @@ class CollectionActivity : AppCompatActivity() {
     }
 }
 
-@Entity(tableName = "contacts")
-data class Contact(
-    @PrimaryKey(autoGenerate = true) val id: Int = 0,
-    val name: String,
-    val phone: String,
-    val gender: String,
-    val email: String,
-    val message: String,
-    val birthday: String
-)
+
+
 
 
 
