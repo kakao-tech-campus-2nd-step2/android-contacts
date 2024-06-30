@@ -1,16 +1,11 @@
 package campus.tech.kakao.contacts
 
-import android.app.Application
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.provider.ContactsContract.CommonDataKinds.Phone
-import android.provider.Settings.Global
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -18,34 +13,34 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.room.Dao
-import androidx.room.Database
 import androidx.room.Entity
-import androidx.room.Insert
 import androidx.room.PrimaryKey
-import androidx.room.Query
-import androidx.room.Room
-import androidx.room.RoomDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-class ContactAdapter<Contact>(private val contacts: List<Contact>) : RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
+class ContactAdapter(private val contacts: List<MainActivity.Contact>) : RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val nameTextView: TextView = itemView.findViewById(R.id.namelist)
+        val nameTextView: TextView = itemView.findViewById(R.id.name)
+        val phoneTextView: TextView = itemView.findViewById(R.id.phone)
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.activity_person, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.activity_whoam_i, parent, false)
         return ViewHolder(view)
     }
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val contact = contacts[position]
-        holder.nameTextView.text = contact.toString()
+        holder.nameTextView.text = contact.name
+        holder.phoneTextView.text = contact.phone
     }
+
     override fun getItemCount(): Int {
         return contacts.size
     }
 }
+
 class CollectionActivity : AppCompatActivity() {
     private lateinit var db: MainActivity.AppDatabase
     private lateinit var tvmessage: TextView
@@ -64,9 +59,9 @@ class CollectionActivity : AppCompatActivity() {
         }
         tvmessage = findViewById(R.id.message)
 
-        // MainActivity에서 생성한 AppDatabase 인스턴스 가져오기
         db = (application as MainActivity).db
 
+        recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
         loadContacts()
         showMessage()
@@ -90,50 +85,11 @@ class CollectionActivity : AppCompatActivity() {
         GlobalScope.launch {
             val contacts = db.contactDao().getAllContacts()
             withContext(Dispatchers.Main) {
-                contactAdapter = ContactAdapter(this@CollectionActivity, contacts)
+                contactAdapter = ContactAdapter(contacts)
                 recyclerView.adapter = contactAdapter
             }
         }
     }
-}
-
-class ContactAdapter(private val context: Context, private val contacts: List<Any?>) :
-    RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
-
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var nameTextView: TextView = itemView.findViewById(R.id.nameTextView)
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.activity_whoam_i, parent, false)
-        return ViewHolder(view)
-    }
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val contact = contacts[position]
-        holder.nameTextView.text = contact.toString()
-
-        holder.itemView.setOnClickListener {
-            val intent = Intent(context, whoamI::class.java)
-            intent.putExtra("contact", contact)
-            context.startActivity(intent)
-        }
-    }
-
-    override fun getItemCount() = contacts.size
-}
-
-class whoamI : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_whoam_i)
-        val contact = intent.getSerializableExtra("contact") as? Any
-
-    }
-}
-
-private fun Intent.putExtra(s: String, contact: Any?) {
-
 }
 
 @Entity(tableName = "contacts")
@@ -146,6 +102,7 @@ data class Contact(
     val message: String,
     val birthday: String
 )
+
 
 
 
