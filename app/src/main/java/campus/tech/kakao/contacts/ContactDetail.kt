@@ -1,20 +1,42 @@
 package campus.tech.kakao.contacts
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.constraintlayout.widget.ConstraintLayout
 
 class ContactDetail : AppCompatActivity() {
+    lateinit var detailName: TextView
+    lateinit var detailTel: TextView
+    lateinit var detailMail: TextView
+    lateinit var detailBirth: TextView
+    lateinit var detailGender: TextView
+    lateinit var detailMemo: TextView
+
+    lateinit var detailMailLayout: ConstraintLayout
+    lateinit var detailBirthLayout: ConstraintLayout
+    lateinit var detailGenderLayout: ConstraintLayout
+    lateinit var detailMemoLayout: ConstraintLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_contact_detail)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+
+        initialize()
     }
+    private fun initialize() {
+        detailName = findViewById(R.id.detailName)
+        detailTel = findViewById(R.id.detailTel)
+        detailMail = findViewById(R.id.detailMail)
+        detailBirth = findViewById(R.id.detailBirth)
+        detailGender = findViewById(R.id.detailGender)
+        detailMemo = findViewById(R.id.detailMemo)
+
+        detailMailLayout = findViewById(R.id.detailMail_layout)
+        detailBirthLayout = findViewById(R.id.detailBirth_layout)
+        detailGenderLayout = findViewById(R.id.detailGender_layout)
+        detailMemoLayout = findViewById(R.id.detailMemo_layout)
+    }
+
+
 }
