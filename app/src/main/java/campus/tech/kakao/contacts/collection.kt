@@ -36,7 +36,7 @@ data class Contact(
     )
 }
 
-class ContactAdapter(private val contacts: List<Contact>) : RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
+class ContactAdapter(private val contacts: List<MainActivity.Contact>) : RecyclerView.Adapter<ContactAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nameTextView: TextView = itemView.findViewById(R.id.name)
@@ -45,7 +45,7 @@ class ContactAdapter(private val contacts: List<Contact>) : RecyclerView.Adapter
         init {
             itemView.setOnClickListener {
                 val intent = Intent(itemView.context, WhoamiActivity::class.java).also {
-                    it.putExtra("contact", contacts[adapterPosition].contactData)
+                    it.putExtra("contact", contacts[adapterPosition].name)
                 }
                 itemView.context.startActivity(intent)
             }
@@ -59,19 +59,21 @@ class ContactAdapter(private val contacts: List<Contact>) : RecyclerView.Adapter
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val contact = contacts[position]
-        holder.nameTextView.text = contact.contactData.name
-        holder.phoneTextView.text = contact.contactData.phone
+        holder.nameTextView.text = contact.name
+        holder.phoneTextView.text = contact.phone
     }
 
     override fun getItemCount() = contacts.size
+}
+
+private fun Intent.putExtra(s: String, contactData: Contact.ContactData) {
+
 }
 
 class WhoamiActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_whoam_i)
-        val contactData = intent.getParcelableExtra<Contact.ContactData>("contact")
-        // Use contactData here
     }
 }
 
