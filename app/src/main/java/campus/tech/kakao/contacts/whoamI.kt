@@ -16,7 +16,7 @@ class whoamI : AppCompatActivity() {
             findViewById<TextView>(R.id.emailTextView).text = contact.email
             findViewById<TextView>(R.id.BirTextView).text = contact.birthday
             findViewById<TextView>(R.id.memoTextView).text = contact.message
-
+            findViewById<TextView>(R.id.genderTextView).text = contact.gender
         }
     }
 }
