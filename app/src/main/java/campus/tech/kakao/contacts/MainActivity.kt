@@ -1,8 +1,10 @@
 package campus.tech.kakao.contacts
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -53,7 +55,7 @@ class MainActivity : AppCompatActivity() {
             expandView()
         }
         cancel.setOnClickListener {
-            Toast.makeText(this, "취소되었습니다.", Toast.LENGTH_SHORT).show()
+            
         }
         save.setOnClickListener {
             if (checkValide()) {
@@ -100,34 +102,34 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun saveData() {
-        val nameData = name.text.toString()
-        val telData = tel.text.toString()
-        val mailData = mail.text?.toString()
-        val birthData = birth.text?.toString()
-        var genderData: String?
+        val contact = createContact()
+        val resultIntent = Intent().apply {
+            putExtra("CONTACT_RESULT", contact)
+            Log.d("Gender", "${gender}")
+        }
+        setResult(RESULT_OK, resultIntent)
+        finish()
+    }
 
+    private fun createContact(): Contact {
+        var genderData: String?
         var male = findViewById<RadioButton>(R.id.male)
         var female = findViewById<RadioButton>(R.id.female)
 
         if (male.isChecked) genderData = "male"
-        else genderData = "female"
+        else if (female.isChecked) genderData = "female"
+        else genderData = "null"
 
-        val memoData = memo.text.toString()
+        val contact: Contact
+        contact = Contact(
+            name.text.toString(),
+            tel.text.toString(),
+            mail.text.toString(),
+            birth.text.toString(),
+            genderData,
+            memo.text.toString()
+        )
 
-        val intent = Intent().apply {
-            putExtra("newData", true)
-            putExtra("name", nameData)
-            putExtra("tel", telData)
-            putExtra("mail", mailData)
-            putExtra("birth", birthData)
-            putExtra("gender", genderData)
-            putExtra("memo", memoData)
-        }
-
-        setResult(RESULT_OK, intent)
-        finish()
+        return contact
     }
-
-
-
 }

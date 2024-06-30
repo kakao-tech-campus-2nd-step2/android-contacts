@@ -1,10 +1,14 @@
 package campus.tech.kakao.contacts
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Contact(
-    var name: String,
-    var tel: String,
-    var mail: String?,
-    var birth: String?,
-    var gender: String?,
-    var memo: String?
-)
+    val name: String,
+    val tel: String,
+    val mail: String,
+    val birth: String,
+    val gender: String,
+    val memo: String
+): Parcelable
