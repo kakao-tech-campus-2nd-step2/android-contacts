@@ -23,7 +23,7 @@
                 android:id="@+id/face"
                 android:layout_width="match_parent"
                 android:layout_height="130dp"
-                android:src="@drawable/baseline_face_24"
+                android:src="@drawable/face"
                 app:layout_constraintTop_toTopOf="parent"
 
                 />
@@ -62,7 +62,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:text="더보기"
-                android:drawableEnd="@drawable/arrow_down"
                 />
 
 
@@ -76,6 +75,7 @@
                 android:hint="생일"
                 style="@style/inputBox"
                 app:layout_constraintTop_toBottomOf="@id/mail"
+
                 android:visibility="invisible"/>
 
 
@@ -164,4 +164,3 @@
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
