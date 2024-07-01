@@ -16,4 +16,8 @@
     <string name="notice_choice">작성 중인 내용이 있습니다. 정말 나가시겠습니까?</string>
     <string name="button_write">작성하기</string>
     <string name="button_exit">나가기</string>
+    <string name="notice_cancel">취소 되었습니다</string>
+    <string name="notice_save">저장이 완료 되었습니다</string>
+    <string name="notice_name_required">이름은 필수 입력 항목입니다</string>
+    <string name="notice_phone_required">전화번호는 필수 입력 항목입니다</string>
 </resources>

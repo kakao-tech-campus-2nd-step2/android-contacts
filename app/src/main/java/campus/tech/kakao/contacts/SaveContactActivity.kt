@@ -85,7 +85,7 @@ class SaveContactActivity : AppCompatActivity() {
 
     fun onCancelClicked(){
         binding.btnCancel.setOnClickListener {
-            showToast("취소 되었습니다")
+            showToast(getString(R.string.notice_cancel))
         }
     }
 
@@ -95,11 +95,11 @@ class SaveContactActivity : AppCompatActivity() {
             val phone = binding.editPhone.text.toString()
 
             if (name.isEmpty()){
-                showToast("이름은 필수 입력 항목입니다")
+                showToast(getString(R.string.notice_name_required))
                 binding.editName.requestFocus()
             }
             else if (phone.isEmpty()){
-                showToast("전화번호는 필수 입력 항목입니다")
+                showToast(getString(R.string.notice_phone_required))
                 binding.editPhone.requestFocus()
             }
             else {
@@ -122,12 +122,12 @@ class SaveContactActivity : AppCompatActivity() {
             putString(NOTE, binding.editNote.text.toString().takeIf { it.isNotEmpty() })
             apply()
         }
-        showToast("저장이 완료 되었습니다")
+        showToast(getString(R.string.notice_save))
     }
 
     private fun getGenderType(): String? {
-        return if (binding.female.isChecked) "여성"
-        else if (binding.male.isChecked) "남성"
+        return if (binding.female.isChecked) getString(R.string.gender_w)
+        else if (binding.male.isChecked) getString(R.string.gender_m)
         else null
     }
 
