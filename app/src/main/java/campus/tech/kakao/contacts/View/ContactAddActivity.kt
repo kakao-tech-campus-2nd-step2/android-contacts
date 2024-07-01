@@ -65,7 +65,8 @@ class ContactAddActivity : AppCompatActivity() {
         submitBtn.setOnClickListener {
             if (isValidContact(essentialInputViews)) {
                 submitContact()
-                setIntent()
+                val intent = Intent()
+                setResult(RESULT_OK, intent)
                 finish()
             }
         }
@@ -169,8 +170,4 @@ class ContactAddActivity : AppCompatActivity() {
         showToast("저장이 완료 되었습니다.")
     }
 
-    fun setIntent() {
-        val intent = Intent()
-        setResult(RESULT_OK, intent)
-    }
 }
