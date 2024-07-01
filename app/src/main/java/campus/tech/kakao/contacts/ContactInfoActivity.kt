@@ -17,9 +17,9 @@ class ContactInfoActivity : AppCompatActivity() {
 
 		val contactDate =
 			if (Build.VERSION.SDK_INT >= 33) {
-				intent.getSerializableExtra("contactData", ContactData::class.java)
+				intent.getSerializableExtra(ContactData.CONTACT_DATA_KEY, ContactData::class.java)
 			} else {
-				intent.getSerializableExtra("contactData") as ContactData?
+				intent.getSerializableExtra(ContactData.CONTACT_DATA_KEY) as ContactData?
 			}
 
 		contactDate?.let {

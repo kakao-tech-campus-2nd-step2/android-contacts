@@ -43,11 +43,11 @@ class ContactsListActivity : AppCompatActivity() {
 						val contactDate =
 							if (Build.VERSION.SDK_INT >= 33) {
 								result.data?.getSerializableExtra(
-									"contactData",
+									ContactData.CONTACT_DATA_KEY,
 									ContactData::class.java
 								)
 							} else {
-								result.data?.getSerializableExtra("contactData") as ContactData?
+								result.data?.getSerializableExtra(ContactData.CONTACT_DATA_KEY) as ContactData?
 							}
 
 						contactDate?.let { data ->

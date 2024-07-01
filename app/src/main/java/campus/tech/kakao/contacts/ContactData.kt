@@ -9,4 +9,8 @@ data class ContactData(
 	var birthday: String? = null,
 	var isFemale: Boolean? = null,
 	var memo: String? = null
-) : Serializable
+) : Serializable {
+	companion object {
+		const val CONTACT_DATA_KEY: String = "contactData"
+	}
+}
