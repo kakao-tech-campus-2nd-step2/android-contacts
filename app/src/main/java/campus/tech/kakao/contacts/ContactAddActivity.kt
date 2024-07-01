@@ -17,7 +17,7 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
-class ContactAdd : AppCompatActivity() {
+class ContactAddActivity : AppCompatActivity() {
     private lateinit var name: EditText
     private lateinit var phoneNumber: EditText
     private lateinit var mail: EditText
@@ -125,12 +125,12 @@ class ContactAdd : AppCompatActivity() {
     private val onBackPressedCallback = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
             if (checkData()) {
-                val builder = AlertDialog.Builder(this@ContactAdd)
+                val builder = AlertDialog.Builder(this@ContactAddActivity)
                 builder.setMessage("작성 중인 내용이 있습니다. 정말 나가시겠습니까?")
                     .setPositiveButton("나가기",
                         DialogInterface.OnClickListener { dialog, _ ->
                             dialog.dismiss()
-                            val intent = Intent(this@ContactAdd, MainActivity::class.java)
+                            val intent = Intent(this@ContactAddActivity, MainActivity::class.java)
                             startActivity(intent)
                             finish()
                         })

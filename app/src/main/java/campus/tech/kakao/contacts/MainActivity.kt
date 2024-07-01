@@ -48,13 +48,13 @@ class MainActivity : AppCompatActivity() {
             }
 
         contactAddBtn.setOnClickListener {
-            val intent = Intent(this@MainActivity, ContactAdd::class.java)
+            val intent = Intent(this@MainActivity, ContactAddActivity::class.java)
             startActivityLauncher.launch(intent)
         }
 
         contactListView.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
             val contact = contacts[position]
-            val intent = Intent(this@MainActivity, ContactDetail::class.java).apply {
+            val intent = Intent(this@MainActivity, ContactDetailActivity::class.java).apply {
                 putExtra("name", contact.name)
                 putExtra("phoneNumber", contact.phoneNumber)
                 putExtra("mail", contact.mail)
