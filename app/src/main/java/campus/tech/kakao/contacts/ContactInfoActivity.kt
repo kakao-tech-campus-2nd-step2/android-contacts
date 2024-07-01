@@ -7,10 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.get
 import campus.tech.kakao.contacts.model.Contact
 
 class ContactInfoActivity : AppCompatActivity() {
+    private lateinit var nameText: TextView
+    private lateinit var phoneText: TextView
+    private lateinit var emailText: TextView
+    private lateinit var birthdayText: TextView
+    private lateinit var genderText: TextView
+    private lateinit var memoText: TextView
+
     private lateinit var birthdayLayout: ViewGroup
     private lateinit var nameLayout: ViewGroup
     private lateinit var phoneLayout: ViewGroup
@@ -37,7 +43,7 @@ class ContactInfoActivity : AppCompatActivity() {
                 Contact::class.java
             ) as Contact
         } else {
-            intent.getSerializableExtra(AddContactActivity.KEY_CONTACT) as Contact?
+            intent.getSerializableExtra(AddContactActivity.KEY_CONTACT) as? Contact
         }
     }
 
@@ -48,13 +54,20 @@ class ContactInfoActivity : AppCompatActivity() {
         birthdayLayout = findViewById(R.id.birthday_layout)
         genderLayout = findViewById(R.id.gender_layout)
         memoLayout = findViewById(R.id.memo_layout)
+
+        nameText = findViewById(R.id.text_name)
+        phoneText = findViewById(R.id.text_phone)
+        emailText = findViewById(R.id.text_email)
+        birthdayText = findViewById(R.id.text_birthday)
+        genderText = findViewById(R.id.text_gender)
+        memoText = findViewById(R.id.text_memo)
     }
 
-    private fun updateLayout(layout: ViewGroup, value: String?) {
+    private fun updateLayoutVisibility(layout: ViewGroup, value: String?) {
         if (value == null) {
             layout.visibility = View.GONE
         } else {
-            (layout[CONTACT_LAYOUT_VALUE_INDEX] as TextView?)?.text = value
+            layout.visibility = View.VISIBLE
         }
     }
 
@@ -68,16 +81,16 @@ class ContactInfoActivity : AppCompatActivity() {
     }
 
     private fun updateValuesWithContact(contact: Contact) {
-        (nameLayout[CONTACT_LAYOUT_VALUE_INDEX] as TextView?)?.text = contact.name
-        (phoneLayout[CONTACT_LAYOUT_VALUE_INDEX] as TextView?)?.text = contact.phoneNumber
+        nameText.text = contact.name
+        phoneText.text = contact.phoneNumber
+        emailText.text = contact.email
+        birthdayText.text = contact.birthday?.toString()
+        genderText.text = parseGender(contact.gender)
+        memoText.text = contact.memo
 
-        updateLayout(emailLayout, contact.email)
-        updateLayout(birthdayLayout, contact.birthday?.toString())
-        updateLayout(genderLayout, parseGender(contact.gender))
-        updateLayout(memoLayout, contact.memo)
-    }
-
-    companion object {
-        private const val CONTACT_LAYOUT_VALUE_INDEX = 1
+        updateLayoutVisibility(emailLayout, contact.email)
+        updateLayoutVisibility(birthdayLayout, contact.birthday?.toString())
+        updateLayoutVisibility(genderLayout, parseGender(contact.gender))
+        updateLayoutVisibility(memoLayout, contact.memo)
     }
 }
