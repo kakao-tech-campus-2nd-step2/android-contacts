@@ -13,6 +13,7 @@ import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import campus.tech.kakao.contacts.model.Contact
@@ -46,21 +47,6 @@ class ContactsListActivity : AppCompatActivity() {
         initiateAddContactButton()
         permissionCheck()
         initiateSyncContactButton()
-        // testAddContacts()
-    }
-
-    private fun testAddContacts() {
-        addNewContact(
-            Contact(
-                "권성찬",
-                "010123123",
-                "kscksc@ksc.com",
-                Contact.GENDER_MALE,
-                LocalDate.now(),
-                "Hello!!"
-            )
-        )
-        addNewContact(Contact("장진욱", "4442358", null, null, null, null))
     }
 
     private fun initiateRecyclerView() {
@@ -144,7 +130,7 @@ class ContactsListActivity : AppCompatActivity() {
     }
 
     private fun setHelpMessageActive(active: Boolean) {
-        helpMessageText.visibility = if (active) View.VISIBLE else View.GONE
+        helpMessageText.isVisible = active
     }
 
     private fun setSyncButtonActive(active: Boolean){
