@@ -21,7 +21,7 @@ class ContactsListAdapter(
 		init {
 			itemView.setOnClickListener {
 				val intent = Intent(context, ContactInfoActivity::class.java)
-				intent.putExtra("contactData", contactsList[adapterPosition])
+				intent.putExtra(ContactData.CONTACT_DATA_KEY, contactsList[adapterPosition])
 				context.startActivity(intent)
 			}
 		}
