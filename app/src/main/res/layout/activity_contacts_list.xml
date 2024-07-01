@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context=".contactsList">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:id="@+id/frm1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="28dp"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/contactsImage1"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/contacts_image" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/contactsButton1"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+
+                    android:background="@drawable/contactslist_button" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/frm2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="28dp"
+                app:layout_constraintTop_toBottomOf="@id/frm1">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/contactsImage2"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/contacts_image" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/contactsButton2"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+
+                    android:background="@drawable/contactslist_button" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/frm3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="28dp"
+                app:layout_constraintTop_toBottomOf="@id/frm2">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/contactsImage3"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/contacts_image" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/contactsButton3"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+
+                    android:background="@drawable/contactslist_button" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/frm4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="28dp"
+                app:layout_constraintTop_toBottomOf="@id/frm3">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/contactsImage4"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/contacts_image" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/contactsButton4"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+
+                    android:background="@drawable/contactslist_button" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/frm5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="28dp"
+                app:layout_constraintTop_toBottomOf="@id/frm4">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/contactsImage5"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/contacts_image" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/contactsButton5"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+
+                    android:background="@drawable/contactslist_button" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/frm6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="28dp"
+                app:layout_constraintTop_toBottomOf="@id/frm5">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/contactsImage6"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/contacts_image" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/contactsButton6"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+
+                    android:background="@drawable/contactslist_button" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/frm7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="28dp"
+                app:layout_constraintTop_toBottomOf="@id/frm6">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/contactsImage7"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/contacts_image" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/contactsButton7"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+
+                    android:background="@drawable/contactslist_button" />
+
+            </FrameLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="오른쪽 + 버튼을 클릭하여\n 연락처를 등록해보세요."
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/addButton"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/contacts_button"
+        android:text="+"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

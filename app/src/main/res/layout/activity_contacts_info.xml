@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/personIcon"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/face_24px"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/infoName"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="15dp"
+        android:text="이름"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/personName"
+        app:layout_constraintTop_toBottomOf="@id/personIcon"
+        app:layout_constraintVertical_weight="1" />
+
+    <TextView
+        android:id="@+id/personName"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:textSize="25sp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toEndOf="@id/infoName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/personIcon"
+        app:layout_constraintVertical_weight="1" />
+
+    <TextView
+        android:id="@+id/infoNumber"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="15dp"
+        android:text="전화번호"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/personNumber"
+        app:layout_constraintTop_toBottomOf="@id/personName"
+        app:layout_constraintVertical_weight="1" />
+
+    <TextView
+        android:id="@+id/personNumber"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:textSize="25sp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toEndOf="@id/infoNumber"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/personName"
+        app:layout_constraintVertical_weight="1" />
+
+    <TextView
+        android:id="@+id/infoMail"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="15dp"
+        android:text="메일"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/personMail"
+        app:layout_constraintTop_toBottomOf="@id/personNumber"
+        app:layout_constraintVertical_weight="1" />
+
+    <TextView
+        android:id="@+id/personMail"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:textSize="25sp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toEndOf="@id/infoMail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/personNumber"
+        app:layout_constraintVertical_weight="1" />
+
+    <TextView
+        android:id="@+id/infoBirthday"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="15dp"
+        android:text="생일"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/personBirthday"
+        app:layout_constraintTop_toBottomOf="@id/personMail"
+        app:layout_constraintVertical_weight="1" />
+
+    <TextView
+        android:id="@+id/personBirthday"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:textSize="25sp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toEndOf="@id/infoBirthday"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/personMail"
+        app:layout_constraintVertical_weight="1" />
+
+    <TextView
+        android:id="@+id/infoGender"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="15dp"
+        android:text="성별"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/personGender"
+        app:layout_constraintTop_toBottomOf="@id/personBirthday"
+        app:layout_constraintVertical_weight="1" />
+
+    <TextView
+        android:id="@+id/personGender"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:textSize="25sp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toEndOf="@id/infoGender"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/personBirthday"
+        app:layout_constraintVertical_weight="1" />
+
+    <TextView
+        android:id="@+id/infoMemo"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="15dp"
+        android:text="메모"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/personMemo"
+        app:layout_constraintTop_toBottomOf="@id/personGender"
+        app:layout_constraintVertical_weight="1" />
+
+    <TextView
+        android:id="@+id/personMemo"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:textSize="25sp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toEndOf="@id/infoMemo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/personGender"
+        app:layout_constraintVertical_weight="1" />
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
