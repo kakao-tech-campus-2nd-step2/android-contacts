@@ -7,8 +7,8 @@ import android.net.Uri
 import android.provider.ContactsContract
 import campus.tech.kakao.contacts.model.Contact
 
-class ContactLoader (private val context: Context) {
-    fun loadContact():List<Contact>{
+class ContactLoader(private val context: Context) {
+    fun loadContact(): List<Contact> {
         val resolver: ContentResolver = context.contentResolver
         val phoneUri: Uri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI
         val projection = arrayOf(
@@ -18,9 +18,9 @@ class ContactLoader (private val context: Context) {
         )
         val result = mutableListOf<Contact>()
 
-        val cursor:Cursor? = resolver.query(phoneUri, projection, null, null, null)
+        val cursor: Cursor? = resolver.query(phoneUri, projection, null, null, null)
 
-        while(cursor?.moveToNext() == true){
+        while (cursor?.moveToNext() == true) {
             val nameIndex = cursor.getColumnIndex(projection[1])
             val numberIndex = cursor.getColumnIndex(projection[2])
 

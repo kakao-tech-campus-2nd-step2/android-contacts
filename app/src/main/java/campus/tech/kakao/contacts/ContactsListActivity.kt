@@ -65,7 +65,7 @@ class ContactsListActivity : AppCompatActivity() {
         }
     }
 
-    private fun initiateSyncContactButton(){
+    private fun initiateSyncContactButton() {
         syncButton.setOnClickListener {
             syncContactsWithPhone()
         }
@@ -133,31 +133,31 @@ class ContactsListActivity : AppCompatActivity() {
         helpMessageText.isVisible = active
     }
 
-    private fun setSyncButtonActive(active: Boolean){
+    private fun setSyncButtonActive(active: Boolean) {
         syncButton.visibility = if (active) View.VISIBLE else View.GONE
     }
 
     private fun permissionCheck() {
-        val permissionGranted = PermissionUtils.checkPermission(android.Manifest.permission.READ_CONTACTS, this)
-        if(!permissionGranted){
+        val permissionGranted =
+            PermissionUtils.checkPermission(android.Manifest.permission.READ_CONTACTS, this)
+        if (!permissionGranted) {
             PermissionUtils.requestPermission(android.Manifest.permission.READ_CONTACTS, this)
-        }
-        else{
+        } else {
             setSyncButtonActive(true)
         }
     }
 
-    fun getContactsFromPhone(): List<Contact>?{
-        if(!PermissionUtils.checkPermission(android.Manifest.permission.READ_CONTACTS, this))
+    fun getContactsFromPhone(): List<Contact>? {
+        if (!PermissionUtils.checkPermission(android.Manifest.permission.READ_CONTACTS, this))
             return null
-        val contactLoader:ContactLoader = ContactLoader(this)
+        val contactLoader: ContactLoader = ContactLoader(this)
         return contactLoader.loadContact()
     }
 
     fun syncContactsWithPhone() {
         val contacts = getContactsFromPhone() ?: return
 
-        for(contact in contacts){
+        for (contact in contacts) {
             addNewContact(contact)
         }
     }
@@ -167,15 +167,14 @@ class ContactsListActivity : AppCompatActivity() {
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
-        if(requestCode != PermissionUtils.PERMISSION_REQ_CODE)
+        if (requestCode != PermissionUtils.PERMISSION_REQ_CODE)
             return
-        if(grantResults.isEmpty())
+        if (grantResults.isEmpty())
             return
-        if(grantResults[0] == 0){
+        if (grantResults[0] == 0) {
             setSyncButtonActive(true)
             Log.d("KSC", "Permission Granted")
-        }
-        else{
+        } else {
             setSyncButtonActive(false)
             Log.d("KSC", "Permission Denied")
         }

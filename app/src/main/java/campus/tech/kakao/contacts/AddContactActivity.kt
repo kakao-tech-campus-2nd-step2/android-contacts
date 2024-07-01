@@ -204,6 +204,7 @@ class AddContactActivity : AppCompatActivity() {
         }
         builder.create().show()
     }
+
     companion object {
         const val KEY_CONTACT = "contact"
     }
