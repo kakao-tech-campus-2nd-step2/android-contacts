@@ -43,7 +43,7 @@ class ContactRegisterActivity : AppCompatActivity() {
 		findViewById<Button>(R.id.saveButton).setOnClickListener {
 			if (checkRequiredFields()) {
 				val intent = Intent()
-				intent.putExtra(ContactData.CONTACT_DATA_KEY, saveContact())
+				intent.putExtra(ContactData.CONTACT_DATA_KEY, getContactInfoFromView())
 				setResult(RESULT_OK, intent)
 				Toast.makeText(this@ContactRegisterActivity, "저장되었습니다.", Toast.LENGTH_SHORT).show()
 				finish()
@@ -85,7 +85,7 @@ class ContactRegisterActivity : AppCompatActivity() {
 		} else true
 	}
 
-	private fun saveContact(): ContactData = ContactData(
+	private fun getContactInfoFromView(): ContactData = ContactData(
 		name = nameInputView.text.toString(),
 		phone = phoneInputView.text.toString(),
 		email = when {
