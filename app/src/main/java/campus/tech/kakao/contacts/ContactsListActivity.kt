@@ -32,7 +32,8 @@ class ContactsListActivity : AppCompatActivity() {
 		emptyInfoView = findViewById(R.id.contact_list_empty_textview)
 		addButton = findViewById(R.id.contact_add_button)
 
-		contactsList.adapter = ContactsListAdapter(contactsDataList, LayoutInflater.from(this), this)
+		contactsList.adapter =
+			ContactsListAdapter(contactsDataList, LayoutInflater.from(this), this)
 		contactsList.layoutManager = LinearLayoutManager(this)
 
 		val startActivityLauncher: ActivityResultLauncher<Intent> =
@@ -41,7 +42,11 @@ class ContactsListActivity : AppCompatActivity() {
 					RESULT_OK -> {
 						val contactData = when (Build.VERSION.SDK_INT) {
 							in 33..Int.MAX_VALUE ->
-								result.data?.getSerializableExtra("contactData", ContactData::class.java)
+								result.data?.getSerializableExtra(
+									"contactData",
+									ContactData::class.java
+								)
+
 							else ->
 								result.data?.getSerializableExtra("contactData") as ContactData?
 						}?.let { data ->

@@ -18,8 +18,8 @@
         android:id="@+id/contact_name_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="30dp" >
+        android:layout_marginBottom="30dp"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
@@ -45,8 +45,8 @@
         android:id="@+id/contact_phone_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="30dp" >
+        android:layout_marginBottom="30dp"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
@@ -72,9 +72,9 @@
         android:id="@+id/contact_mail_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:layout_marginBottom="30dp"
         android:orientation="horizontal"
-        android:layout_marginBottom="30dp" >
+        android:visibility="gone">
 
         <TextView
             android:layout_width="wrap_content"
@@ -100,9 +100,9 @@
         android:id="@+id/contact_birthday_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:layout_marginBottom="30dp"
         android:orientation="horizontal"
-        android:layout_marginBottom="30dp" >
+        android:visibility="gone">
 
         <TextView
             android:layout_width="wrap_content"
@@ -128,9 +128,9 @@
         android:id="@+id/contact_Sex_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:layout_marginBottom="30dp"
         android:orientation="horizontal"
-        android:layout_marginBottom="30dp" >
+        android:visibility="gone">
 
         <TextView
             android:layout_width="wrap_content"
@@ -156,9 +156,9 @@
         android:id="@+id/contact_memo_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:layout_marginBottom="30dp"
         android:orientation="vertical"
-        android:layout_marginBottom="30dp" >
+        android:visibility="gone">
 
         <TextView
             android:layout_width="wrap_content"
@@ -171,8 +171,8 @@
             android:id="@+id/contactMemo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
             android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
             android:textSize="20dp" />
 
     </LinearLayout>

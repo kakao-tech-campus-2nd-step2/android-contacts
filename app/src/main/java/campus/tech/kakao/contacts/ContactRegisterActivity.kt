@@ -78,11 +78,13 @@ class ContactRegisterActivity : AppCompatActivity() {
 	}
 
 	private fun checkRequiredFields(): Boolean {
-		return if (nameInputView.text.isEmpty())  {
-			Toast.makeText(this@ContactRegisterActivity, "이름은 필수 입력사항입니다.", Toast.LENGTH_SHORT).show()
+		return if (nameInputView.text.isEmpty()) {
+			Toast.makeText(this@ContactRegisterActivity, "이름은 필수 입력사항입니다.", Toast.LENGTH_SHORT)
+				.show()
 			false
 		} else if (phoneInputView.text.isEmpty()) {
-			Toast.makeText(this@ContactRegisterActivity, "전화번호는 필수 입력사항입니다.", Toast.LENGTH_SHORT).show()
+			Toast.makeText(this@ContactRegisterActivity, "전화번호는 필수 입력사항입니다.", Toast.LENGTH_SHORT)
+				.show()
 			false
 		} else true
 	}

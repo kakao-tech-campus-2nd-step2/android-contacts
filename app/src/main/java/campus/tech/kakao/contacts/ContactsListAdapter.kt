@@ -12,9 +12,9 @@ class ContactsListAdapter(
 	val contactsList: MutableList<ContactData>,
 	val inflater: LayoutInflater,
 	val context: Context
-): RecyclerView.Adapter<ContactsListAdapter.MyViewHolder>() {
+) : RecyclerView.Adapter<ContactsListAdapter.MyViewHolder>() {
 
-	inner class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+	inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 		val thumbnail: TextView = itemView.findViewById(R.id.contact_item_thumbnail)
 		val name: TextView = itemView.findViewById(R.id.contact_item_name)
 

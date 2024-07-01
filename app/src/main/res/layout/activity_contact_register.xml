@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:padding="10dp"
     tools:context=".ContactRegisterActivity">
 
@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <ImageView
             android:layout_width="140dp"
@@ -25,46 +25,46 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginBottom="10dp"
-            android:hint="이름"
-            android:textColorHint="@color/hintColor"
             android:background="@drawable/backgound_input_form"
-            android:inputType="text" />
+            android:hint="이름"
+            android:inputType="text"
+            android:textColorHint="@color/hintColor" />
 
         <EditText
             android:id="@+id/contactPhone"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginBottom="10dp"
-            android:hint="전화번호"
-            android:textColorHint="@color/hintColor"
             android:background="@drawable/backgound_input_form"
-            android:inputType="phone" />
+            android:hint="전화번호"
+            android:inputType="phone"
+            android:textColorHint="@color/hintColor" />
 
         <EditText
             android:id="@+id/contactMail"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginBottom="10dp"
-            android:hint="메일"
-            android:textColorHint="@color/hintColor"
             android:background="@drawable/backgound_input_form"
-            android:inputType="textEmailAddress" />
+            android:hint="메일"
+            android:inputType="textEmailAddress"
+            android:textColorHint="@color/hintColor" />
 
         <LinearLayout
             android:id="@+id/moreInfoButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="10dp"
             android:orientation="horizontal"
+            android:padding="10dp"
             android:visibility="visible">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
                 android:text="더보기"
-                android:textSize="20dp"
-                android:layout_marginEnd="5dp" />
+                android:textSize="20dp" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -78,24 +78,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="gone" >
+            android:visibility="gone">
 
             <EditText
                 android:id="@+id/contactBirthday"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginBottom="10dp"
-                android:hint="생일"
-                android:textColorHint="@color/hintColor"
                 android:background="@drawable/backgound_input_form"
-                android:inputType="text" />
+                android:hint="생일"
+                android:inputType="text"
+                android:textColorHint="@color/hintColor" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
-                android:orientation="horizontal"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/backgound_input_form"
-                android:layout_marginBottom="10dp" >
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -114,7 +114,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="right|center"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal">
 
                     <RadioButton
                         android:id="@+id/femaleRadioButton"
@@ -126,8 +126,8 @@
                         android:id="@+id/maleRadioButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="남성"
-                        android:layout_marginStart="15dp" />
+                        android:layout_marginStart="15dp"
+                        android:text="남성" />
 
                 </RadioGroup>
 
@@ -137,10 +137,10 @@
                 android:id="@+id/contactMemo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="메모"
-                android:textColorHint="@color/hintColor"
                 android:background="@drawable/backgound_input_form"
-                android:inputType="textMultiLine" />
+                android:hint="메모"
+                android:inputType="textMultiLine"
+                android:textColorHint="@color/hintColor" />
 
         </LinearLayout>
 
@@ -149,27 +149,27 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/cancelButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="24dp"
+            android:background="@drawable/background_none"
             android:text="취소"
             android:textColor="@color/black"
-            android:background="@drawable/background_none" />
+            android:textSize="24dp" />
 
         <Button
             android:id="@+id/saveButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="24dp"
+            android:background="@drawable/background_none"
             android:text="저장"
             android:textColor="@color/black"
-            android:background="@drawable/background_none" />
+            android:textSize="24dp" />
 
     </LinearLayout>
 

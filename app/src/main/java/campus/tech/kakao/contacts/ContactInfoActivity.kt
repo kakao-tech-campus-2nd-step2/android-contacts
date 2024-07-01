@@ -18,6 +18,7 @@ class ContactInfoActivity : AppCompatActivity() {
 		when (Build.VERSION.SDK_INT) {
 			in 33..Int.MAX_VALUE ->
 				intent.getSerializableExtra("contactData", ContactData::class.java)
+
 			else ->
 				intent.getSerializableExtra("contactData") as ContactData?
 		}?.let {
