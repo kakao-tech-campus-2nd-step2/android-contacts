@@ -51,7 +51,7 @@ class ContactListActivity : AppCompatActivity() {
             addContactLauncher.launch(intent)
         }
 
-        contactRecyclerView.adapter = RecyclerAdapter(this,contactList,LayoutInflater.from(this))
+        contactRecyclerView.adapter = RecyclerAdapter(contactList,LayoutInflater.from(this))
         contactRecyclerView.layoutManager = LinearLayoutManager(this)
 
 

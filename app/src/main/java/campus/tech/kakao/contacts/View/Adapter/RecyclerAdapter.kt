@@ -13,9 +13,8 @@ import campus.tech.kakao.contacts.View.ContactDetailActivity
 
 
 class RecyclerAdapter(
-    val context : Context,
-    var contactList : List<Contact>,
-    var inflater : LayoutInflater,
+    private var contactList : List<Contact>,
+    private var inflater : LayoutInflater,
 
     ) : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>(){
 
@@ -37,7 +36,7 @@ class RecyclerAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = inflater.inflate(R.layout.contact_element,parent,false)
 
-        return ViewHolder(context,view)
+        return ViewHolder(parent.context,view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
