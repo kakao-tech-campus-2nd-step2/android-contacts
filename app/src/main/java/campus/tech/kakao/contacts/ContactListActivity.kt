@@ -59,7 +59,7 @@ class ContactListActivity : AppCompatActivity() {
 
     fun displayContact(){
         Log.d("ContactListActivity","${personList.size}")
-        if (personList.size != 0) {
+        if (personList.isEmpty()) {
             binding.textInfo.visibility = View.GONE
 
             with(binding.contactRecyclerView) {
