@@ -9,6 +9,8 @@ import campus.tech.kakao.contacts.Model.Contact
 import campus.tech.kakao.contacts.Model.Gender
 import campus.tech.kakao.contacts.R
 import campus.tech.kakao.contacts.Repository.ContactRepository
+import campus.tech.kakao.contacts.Util.DateFormatter
+import java.util.Date
 
 class ContactDetailActivity : AppCompatActivity() {
 
@@ -22,12 +24,12 @@ class ContactDetailActivity : AppCompatActivity() {
         }
     }
 
-    fun handleBirthday(birthday : String?){
+    fun handleBirthday(birthday : Date?){
         val birthdayLayout = findViewById<RelativeLayout>(R.id.birthdayLayout)
-        if(!birthday.isNullOrEmpty()){
+        if(birthday != null){
             birthdayLayout.visibility = VISIBLE
             val birthdayView = findViewById<TextView>(R.id.birthday)
-            birthdayView.text = birthday
+            birthdayView.text = DateFormatter.dateToString(birthday)
 
         }
     }

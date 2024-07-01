@@ -20,7 +20,12 @@ import campus.tech.kakao.contacts.Model.Contact
 import campus.tech.kakao.contacts.Model.Gender
 import campus.tech.kakao.contacts.R
 import campus.tech.kakao.contacts.Repository.ContactRepository
+import campus.tech.kakao.contacts.Util.DateFormatter
 import com.google.android.material.button.MaterialButton
+import java.lang.Exception
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class ContactAddActivity : AppCompatActivity() {
     lateinit var name: EditText
@@ -110,7 +115,7 @@ class ContactAddActivity : AppCompatActivity() {
             name.text.toString(),
             tel.text.toString(),
             mail.text.toString(),
-            bday.text.toString(),
+            DateFormatter.stringToDate(bday.text.toString()),
             getGender(),
             memo.text.toString()
         )
