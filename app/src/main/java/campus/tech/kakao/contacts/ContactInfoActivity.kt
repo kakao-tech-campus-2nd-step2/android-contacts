@@ -15,13 +15,14 @@ class ContactInfoActivity : AppCompatActivity() {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_contact_info)
 
-		when (Build.VERSION.SDK_INT) {
-			in 33..Int.MAX_VALUE ->
+		val contactDate =
+			if (Build.VERSION.SDK_INT >= 33) {
 				intent.getSerializableExtra("contactData", ContactData::class.java)
-
-			else ->
+			} else {
 				intent.getSerializableExtra("contactData") as ContactData?
-		}?.let {
+			}
+
+		contactDate?.let {
 			findViewById<TextView>(R.id.contactName).text = it.name
 			findViewById<TextView>(R.id.contactPhone).text = it.phone
 

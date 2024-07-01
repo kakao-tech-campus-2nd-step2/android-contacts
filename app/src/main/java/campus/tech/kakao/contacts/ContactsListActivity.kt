@@ -40,16 +40,17 @@ class ContactsListActivity : AppCompatActivity() {
 			registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
 				when (result.resultCode) {
 					RESULT_OK -> {
-						val contactData = when (Build.VERSION.SDK_INT) {
-							in 33..Int.MAX_VALUE ->
+						val contactDate =
+							if (Build.VERSION.SDK_INT >= 33) {
 								result.data?.getSerializableExtra(
 									"contactData",
 									ContactData::class.java
 								)
-
-							else ->
+							} else {
 								result.data?.getSerializableExtra("contactData") as ContactData?
-						}?.let { data ->
+							}
+
+						contactDate?.let { data ->
 							contactsDataList.add(data)
 							contactsList.adapter?.notifyItemInserted(contactsDataList.size - 1)
 							emptyInfoView.visibility = View.GONE
