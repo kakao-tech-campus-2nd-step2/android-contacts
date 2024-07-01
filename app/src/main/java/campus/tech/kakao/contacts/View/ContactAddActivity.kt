@@ -22,18 +22,64 @@ import campus.tech.kakao.contacts.R
 import campus.tech.kakao.contacts.Repository.ContactRepository
 import campus.tech.kakao.contacts.Util.DateFormatter
 import com.google.android.material.button.MaterialButton
-import java.lang.Exception
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 
 class ContactAddActivity : AppCompatActivity() {
-    lateinit var name: EditText
-    lateinit var tel: EditText
-    lateinit var mail: EditText
-    lateinit var bday: TextView
-    lateinit var genderRadioGroup: RadioGroup
-    lateinit var memo: EditText
+    private lateinit var name: EditText
+    private lateinit var tel: EditText
+    private lateinit var mail: EditText
+    private lateinit var bday: TextView
+    private lateinit var genderRadioGroup: RadioGroup
+    private lateinit var memo: EditText
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_contact_add)
+
+        name = findViewById<EditText>(R.id.contactName)
+        tel = findViewById<EditText>(R.id.contactTel)
+        mail = findViewById<EditText>(R.id.contactMail)
+        bday = findViewById<TextView>(R.id.contactBirthDay)
+        genderRadioGroup = findViewById<RadioGroup>(R.id.genderRadioGroup)
+        memo = findViewById<EditText>(R.id.contactMemo)
+        val editTextList = findViewById<LinearLayout>(R.id.editTextList)
+        val showDetail = findViewById<TextView>(R.id.more)
+        val cancelBtn = findViewById<MaterialButton>(R.id.cancelBtn)
+        val submitBtn = findViewById<MaterialButton>(R.id.submitBtn)
+
+        val essentialInputViews = listOf(name, tel)
+        val views = listOf(name, tel, mail, bday, genderRadioGroup, memo)
+
+        showDetail.setOnClickListener {
+            extendEditTextList(editTextList, R.dimen.contact_list_height_detail)
+            toggleViewVisibility(showDetail)
+        }
+
+        bday.setOnClickListener {
+            startCalenderDialog(it as TextView)
+        }
+
+        cancelBtn.setOnClickListener {
+            cancelAddContact()
+        }
+
+        submitBtn.setOnClickListener {
+            if (isValidContact(essentialInputViews)) {
+                submitContact()
+                setIntent()
+                finish()
+            }
+        }
+
+        this.onBackPressedDispatcher.addCallback(this) {
+            if (isWriting(views)) {
+                showExitConfirmDialog()
+            } else {
+                finish()
+            }
+        }
+
+    }
+
     fun showExitConfirmDialog() {
         AlertDialog.Builder(this).setTitle("").setMessage(R.string.back_check_message)
             .setPositiveButton("나가기") { _, _ ->
@@ -126,54 +172,5 @@ class ContactAddActivity : AppCompatActivity() {
     fun setIntent() {
         val intent = Intent()
         setResult(RESULT_OK, intent)
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_contact_add)
-
-        name = findViewById<EditText>(R.id.contactName)
-        tel = findViewById<EditText>(R.id.contactTel)
-        mail = findViewById<EditText>(R.id.contactMail)
-        bday = findViewById<TextView>(R.id.contactBirthDay)
-        genderRadioGroup = findViewById<RadioGroup>(R.id.genderRadioGroup)
-        memo = findViewById<EditText>(R.id.contactMemo)
-        val editTextList = findViewById<LinearLayout>(R.id.editTextList)
-        val showDetail = findViewById<TextView>(R.id.more)
-        val cancelBtn = findViewById<MaterialButton>(R.id.cancelBtn)
-        val submitBtn = findViewById<MaterialButton>(R.id.submitBtn)
-
-        val essentialInputViews = listOf(name, tel)
-        val views = listOf(name, tel, mail, bday, genderRadioGroup, memo)
-
-        showDetail.setOnClickListener {
-            extendEditTextList(editTextList, R.dimen.contact_list_height_detail)
-            toggleViewVisibility(showDetail)
-        }
-
-        bday.setOnClickListener {
-            startCalenderDialog(it as TextView)
-        }
-
-        cancelBtn.setOnClickListener {
-            cancelAddContact()
-        }
-
-        submitBtn.setOnClickListener {
-            if (isValidContact(essentialInputViews)) {
-                submitContact()
-                setIntent()
-                finish()
-            }
-        }
-
-        this.onBackPressedDispatcher.addCallback(this) {
-            if (isWriting(views)) {
-                showExitConfirmDialog()
-            } else {
-                finish()
-            }
-        }
-
     }
 }
