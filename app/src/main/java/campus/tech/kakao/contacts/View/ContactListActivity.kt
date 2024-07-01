@@ -17,9 +17,25 @@ import campus.tech.kakao.contacts.Repository.ContactRepository
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ContactListActivity : AppCompatActivity() {
-    val contactList = ContactRepository.contactList
-    lateinit var contactListEmptyText : TextView
-    lateinit var contactRecyclerView : RecyclerView
+    private val contactList = ContactRepository.contactList
+    private lateinit var contactListEmptyText : TextView
+    private lateinit var contactRecyclerView : RecyclerView
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_contact_list)
+        val addContactBtn = findViewById<FloatingActionButton>(R.id.addContactBtn)
+        contactRecyclerView = findViewById<RecyclerView>(R.id.contactList)
+        contactListEmptyText = findViewById<TextView>(R.id.contactListEmptyText)
+
+        addContactBtn.setOnClickListener {
+            val intent = Intent(this, ContactAddActivity::class.java)
+            addContactLauncher.launch(intent)
+        }
+
+        contactRecyclerView.adapter = RecyclerAdapter(contactList,LayoutInflater.from(this))
+        contactRecyclerView.layoutManager = LinearLayoutManager(this)
+    }
 
     val addContactLauncher : ActivityResultLauncher<Intent> = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
         when(it.resultCode){
@@ -37,24 +53,4 @@ class ContactListActivity : AppCompatActivity() {
     fun updateRecyclerView(){
         contactRecyclerView.adapter?.notifyItemInserted(contactList.size-1)
     }
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_contact_list)
-        val addContactBtn = findViewById<FloatingActionButton>(R.id.addContactBtn)
-        contactRecyclerView = findViewById<RecyclerView>(R.id.contactList)
-        contactListEmptyText = findViewById<TextView>(R.id.contactListEmptyText)
-
-        addContactBtn.setOnClickListener {
-            val intent = Intent(this, ContactAddActivity::class.java)
-            addContactLauncher.launch(intent)
-        }
-
-        contactRecyclerView.adapter = RecyclerAdapter(contactList,LayoutInflater.from(this))
-        contactRecyclerView.layoutManager = LinearLayoutManager(this)
-
-
-    }
-
 }
