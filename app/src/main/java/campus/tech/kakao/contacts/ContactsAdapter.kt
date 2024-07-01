@@ -6,7 +6,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class ContactsAdapter(private var contList: List<Contact>, private val listener: OnItemClickListener, private val longListener: OnItemLongClickListener): RecyclerView.Adapter<ContactsAdapter.ViewHolder>() {
+class ContactsAdapter(
+    private var contList: List<Contact>, 
+    private val onClick: (Int) -> Unit, 
+    private val onLongClick: (Int) -> Unit
+): RecyclerView.Adapter<ContactsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
