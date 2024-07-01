@@ -10,4 +10,5 @@
     <dimen name="margin_double">30dp</dimen>
     <dimen name="horizontal_margin">20dp</dimen>
     <dimen name="edittext_padding">15dp</dimen>
+    <dimen name="contact_detail_element_width">350dp</dimen>
 </resources>

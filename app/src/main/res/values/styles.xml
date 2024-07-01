@@ -11,10 +11,10 @@
     </style>
 
     <style name="contactDetailElementStyle">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">@dimen/contact_detail_element_width</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:orientation">horizontal</item>
-        <item name="android:layout_marginHorizontal">@dimen/margin_double</item>
-        <item name="android:layout_marginVertical">@dimen/margin</item>
+        <item name="android:layout_marginTop">@dimen/margin_double</item>
     </style>
+
 </resources>
