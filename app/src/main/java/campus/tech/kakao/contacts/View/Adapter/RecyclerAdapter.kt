@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import campus.tech.kakao.contacts.Model.Contact
 import campus.tech.kakao.contacts.R
+import campus.tech.kakao.contacts.Util.Constant
 import campus.tech.kakao.contacts.View.ContactDetailActivity
 
 
@@ -27,7 +28,7 @@ class RecyclerAdapter(
 
             itemView.setOnClickListener {
                 val intent = Intent(context, ContactDetailActivity::class.java)
-                intent.putExtra("position",adapterPosition)
+                intent.putExtra(Constant.NAV_KEY_POSITION,adapterPosition)
                 context.startActivity(intent)
             }
         }

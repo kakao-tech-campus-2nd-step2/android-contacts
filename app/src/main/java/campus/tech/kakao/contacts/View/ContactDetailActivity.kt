@@ -9,6 +9,7 @@ import campus.tech.kakao.contacts.Model.Contact
 import campus.tech.kakao.contacts.Model.Gender
 import campus.tech.kakao.contacts.R
 import campus.tech.kakao.contacts.Repository.ContactRepository
+import campus.tech.kakao.contacts.Util.Constant
 import campus.tech.kakao.contacts.Util.DateFormatter
 import java.util.Date
 
@@ -80,7 +81,7 @@ class ContactDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contact_detail)
 
-        when(val position = intent.extras?.getInt("position")){
+        when(val position = intent.extras?.getInt(Constant.NAV_KEY_POSITION)){
             null -> showError()
             else -> {
                 val contact = ContactRepository.contactList[position]
