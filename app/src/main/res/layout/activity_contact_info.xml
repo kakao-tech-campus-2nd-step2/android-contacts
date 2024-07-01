@@ -41,6 +41,7 @@
                 android:textSize="22dp" />
 
             <TextView
+                android:id="@+id/text_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -63,6 +64,7 @@
                 android:textSize="22dp" />
 
             <TextView
+                android:id="@+id/text_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -85,6 +87,7 @@
                 android:textSize="22dp" />
 
             <TextView
+                android:id="@+id/text_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -107,6 +110,7 @@
                 android:textSize="22dp" />
 
             <TextView
+                android:id="@+id/text_birthday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -129,6 +133,7 @@
                 android:textSize="22dp" />
 
             <TextView
+                android:id="@+id/text_gender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -151,6 +156,7 @@
                 android:textSize="22dp" />
 
             <TextView
+                android:id="@+id/text_memo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
