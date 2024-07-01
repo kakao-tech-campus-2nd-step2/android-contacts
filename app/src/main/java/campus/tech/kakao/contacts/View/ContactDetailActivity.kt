@@ -14,9 +14,35 @@ import campus.tech.kakao.contacts.Util.DateFormatter
 import java.util.Date
 
 class ContactDetailActivity : AppCompatActivity() {
+    private lateinit var error : TextView
+    private lateinit var memoLayout : RelativeLayout
+    private lateinit var birthdayLayout : RelativeLayout
+    private lateinit var genderLayout : RelativeLayout
+    private lateinit var mailLayout : RelativeLayout
+    private lateinit var name : TextView
+    private lateinit var tel : TextView
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_contact_detail)
+        error = findViewById<TextView>(R.id.error)
+        memoLayout = findViewById<RelativeLayout>(R.id.memoLayout)
+        birthdayLayout = findViewById<RelativeLayout>(R.id.birthdayLayout)
+        genderLayout = findViewById<RelativeLayout>(R.id.genderLayout)
+        mailLayout = findViewById<RelativeLayout>(R.id.mailLayout)
+        name = findViewById<TextView>(R.id.name)
+        tel = findViewById<TextView>(R.id.tel)
+
+        when(val position = intent.extras?.getInt(Constant.NAV_KEY_POSITION)){
+            null -> showError()
+            else -> {
+                loadContact(position)
+            }
+        }
+
+    }
 
     fun handleMail(mail : String?){
-        val mailLayout = findViewById<RelativeLayout>(R.id.mailLayout)
         if(!mail.isNullOrEmpty()){
             mailLayout.visibility = VISIBLE
             val mailView = findViewById<TextView>(R.id.mail)
@@ -26,7 +52,6 @@ class ContactDetailActivity : AppCompatActivity() {
     }
 
     fun handleBirthday(birthday : Date?){
-        val birthdayLayout = findViewById<RelativeLayout>(R.id.birthdayLayout)
         if(birthday != null){
             birthdayLayout.visibility = VISIBLE
             val birthdayView = findViewById<TextView>(R.id.birthday)
@@ -36,7 +61,6 @@ class ContactDetailActivity : AppCompatActivity() {
     }
 
     fun handleGender(gender: Gender?){
-        val genderLayout = findViewById<RelativeLayout>(R.id.genderLayout)
         if(gender != null){
             genderLayout.visibility = VISIBLE
             val genderView = findViewById<TextView>(R.id.gender)
@@ -49,7 +73,6 @@ class ContactDetailActivity : AppCompatActivity() {
     }
 
     fun handleMemo(memo : String?){
-        val memoLayout = findViewById<RelativeLayout>(R.id.memoLayout)
         if(!memo.isNullOrEmpty()){
             memoLayout.visibility = VISIBLE
             val memoView = findViewById<TextView>(R.id.memo)
@@ -59,12 +82,10 @@ class ContactDetailActivity : AppCompatActivity() {
     }
 
 
-    fun loadContact(contact: Contact){
-        val name = findViewById<TextView>(R.id.name)
-        val tel = findViewById<TextView>(R.id.tel)
+    fun loadContact(position : Int){
+        val contact = ContactRepository.contactList[position]
         name.text = contact.name
         tel.text = contact.tel
-
 
         handleMail(contact.mail)
         handleBirthday(contact.bDay)
@@ -72,22 +93,7 @@ class ContactDetailActivity : AppCompatActivity() {
         handleMemo(contact.memo)
     }
 
-    fun showError(){
-        val error = findViewById<TextView>(R.id.error)
+    fun showError() {
         error.visibility = VISIBLE
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_contact_detail)
-
-        when(val position = intent.extras?.getInt(Constant.NAV_KEY_POSITION)){
-            null -> showError()
-            else -> {
-                val contact = ContactRepository.contactList[position]
-                loadContact(contact)
-            }
-        }
-
     }
 }
