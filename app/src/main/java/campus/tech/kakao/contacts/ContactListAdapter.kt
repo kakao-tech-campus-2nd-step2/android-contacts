@@ -10,22 +10,17 @@ import campus.tech.kakao.contacts.model.Contact
 
 class ContactListAdapter(
     private val inflater: LayoutInflater,
-    val context: Context,
-    private val contactList: MutableList<Contact>,
+    private val contactList: List<Contact>,
     private val listener: (view: View, index: Int) -> Unit = { _, _ -> }
 ) :
     RecyclerView.Adapter<ContactListAdapter.ContactViewHolder>() {
     class ContactViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val textInsideImage: TextView
-        private val contactName: TextView
+        private val textInsideImage: TextView = itemView.findViewById(R.id.text_inside_icon)
+        private val contactName: TextView = itemView.findViewById(R.id.contact_name)
+
         fun bind(contact: Contact) {
             contactName.text = contact.name
-            textInsideImage.text = (contact.name).getOrNull(0).toString()
-        }
-
-        init {
-            contactName = itemView.findViewById(R.id.contact_name)
-            textInsideImage = itemView.findViewById(R.id.text_inside_icon)
+            textInsideImage.text = (contact.name).firstOrNull().toString()
         }
 
         fun setOnViewClickListener(listener: ((view: View, index: Int) -> Unit)?) {

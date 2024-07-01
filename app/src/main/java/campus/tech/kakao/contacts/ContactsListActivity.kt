@@ -52,7 +52,7 @@ class ContactsListActivity : AppCompatActivity() {
     private fun initiateRecyclerView() {
         recyclerView = findViewById(R.id.contact_list_recyclerView)
         recyclerView.adapter =
-            ContactListAdapter(LayoutInflater.from(this), this, contactList) { _, index ->
+            ContactListAdapter(LayoutInflater.from(this), contactList) { _, index ->
                 clickContactItem(contactList[index])
             }
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
