@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/display_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="@drawable/circle_background"
+        android:text="성"
+        android:textColor="@color/black"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/full_name"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="성이름"
+        android:textSize="24dp"
+        android:layout_marginLeft="20dp"/>
+
+
+</LinearLayout>
