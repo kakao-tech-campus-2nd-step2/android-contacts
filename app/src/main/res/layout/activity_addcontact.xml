@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/header_icon"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/account_profile"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/input_name"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="15dp"
+        android:autofillHints="name"
+        android:background="@drawable/round_rect_bright"
+        android:hint="@string/hint_name"
+        android:inputType="textPersonName"
+        android:paddingHorizontal="15dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@id/header_icon" />
+
+    <EditText
+        android:id="@+id/input_tel"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="15dp"
+        android:autofillHints="phone"
+        android:background="@drawable/round_rect_bright"
+        android:hint="@string/hint_phonenumber"
+        android:inputType="phone"
+        android:paddingHorizontal="15dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/input_name" />
+
+    <EditText
+        android:id="@+id/input_mail"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="15dp"
+        android:autofillHints="emailAddress"
+        android:background="@drawable/round_rect_bright"
+        android:hint="@string/hint_email"
+        android:inputType="text|textNoSuggestions"
+        android:paddingHorizontal="15dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/input_tel" />
+
+    <TextView
+        android:id="@+id/more_options"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_marginTop="25dp"
+        android:drawableRight="@drawable/arrow_down"
+        android:drawablePadding="10dp"
+        android:gravity="center"
+        android:text="@string/text_more_options"
+        android:textSize="24dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/input_mail" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/additional_inputs"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:orientation="vertical"
+        android:visibility="visible"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/input_mail">
+
+        <EditText
+            android:id="@+id/input_birthday"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/round_rect_bright"
+            android:hint="@string/hint_birthday"
+            android:inputType="text|date"
+            android:paddingHorizontal="15dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/round_rect_bright"
+            android:gravity="left|center_vertical"
+            android:paddingHorizontal="15dp"
+            android:text="@string/hint_gender"
+            android:textColor="@color/material_dynamic_neutral_variant60"
+            android:textSize="18sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/input_birthday"/>
+
+        <RadioGroup
+            android:id="@+id/radiogroup_gender"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingHorizontal="15dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/input_birthday">
+
+            <RadioButton
+                android:id="@+id/radiobutton_female"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:text="@string/text_radiobutton_female" />
+
+            <RadioButton
+                android:id="@+id/radiobutton_male"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_radiobutton_male" />
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/input_memo"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/round_rect_bright"
+            android:hint="@string/hint_memo"
+            android:inputType="text"
+            android:paddingHorizontal="15dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/radiogroup_gender" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/button_cancel"
+        style="@style/Widget.Material3.Button.TextButton.Dialog"
+        android:layout_width="0dp"
+        android:layout_height="75dp"
+        android:layout_margin="5dp"
+        android:layout_weight="1"
+        android:text="@string/text_button_cancel"
+        android:textSize="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/button_submit" />
+
+    <Button
+        android:id="@+id/button_submit"
+        style="@style/Widget.Material3.Button.TextButton.Dialog"
+        android:layout_width="0dp"
+        android:layout_height="75dp"
+        android:layout_margin="5dp"
+        android:layout_weight="1"
+        android:text="@string/text_button_submit"
+        android:textSize="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/button_cancel"
+        app:layout_constraintRight_toRightOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
