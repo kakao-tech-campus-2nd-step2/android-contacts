@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.activity.addCallback
@@ -20,7 +21,9 @@ class AddContactActivity : AppCompatActivity() {
     private lateinit var nameInput: EditText
     private lateinit var phoneInput: EditText
     private lateinit var birthdayInput: EditText
-    private lateinit var genderInput: RadioGroup
+    private lateinit var genderRadioGroup: RadioGroup
+    private lateinit var femaleRadioButton: RadioButton
+    private lateinit var maleRadioButton: RadioButton
     private lateinit var memoInput: EditText
     private var birthday: LocalDate? = null
 
@@ -42,7 +45,9 @@ class AddContactActivity : AppCompatActivity() {
         phoneInput = findViewById(R.id.input_tel)
         birthdayInput = findViewById(R.id.input_birthday)
         memoInput = findViewById(R.id.input_memo)
-        genderInput = findViewById(R.id.input_gender)
+        genderRadioGroup = findViewById(R.id.radiogroup_gender)
+        femaleRadioButton = findViewById(R.id.radiobutton_female)
+        maleRadioButton = findViewById(R.id.radiobutton_male)
 
         birthdayInput.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
@@ -71,11 +76,10 @@ class AddContactActivity : AppCompatActivity() {
     }
 
     private fun getGender(): Int? {
-        return when (genderInput.checkedRadioButtonId) {
-            -1 -> null
-            genderInput[GENDER_FEMALE].id -> GENDER_FEMALE
-            genderInput[GENDER_MALE].id -> GENDER_MALE
-            else -> -1
+        return when (genderRadioGroup.checkedRadioButtonId) {
+            femaleRadioButton.id -> Contact.GENDER_FEMALE
+            maleRadioButton.id -> Contact.GENDER_MALE
+            else -> null
         }
     }
 
@@ -165,13 +169,6 @@ class AddContactActivity : AppCompatActivity() {
         birthdayInput.setText(birthday?.toString() ?: "")
     }
 
-    companion object {
-        const val GENDER_NONE = -1
-        const val GENDER_FEMALE = 0
-        const val GENDER_MALE = 1
-
-        const val KEY_CONTACT = "contact"
-    }
 
     private fun getTextOrNull(editText: EditText): String? {
         val str = editText.text.toString()
@@ -206,5 +203,8 @@ class AddContactActivity : AppCompatActivity() {
         builder.setNegativeButton("작성하기") { _, _ ->
         }
         builder.create().show()
+    }
+    companion object {
+        const val KEY_CONTACT = "contact"
     }
 }

@@ -114,7 +114,7 @@
                 app:layout_constraintLeft_toLeftOf="parent" />
 
             <RadioGroup
-                android:id="@+id/input_gender"
+                android:id="@+id/radiogroup_gender"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -122,12 +122,14 @@
                 app:layout_constraintRight_toRightOf="parent">
 
                 <RadioButton
+                    android:id="@+id/radiobutton_female"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
                     android:text="여성" />
 
                 <RadioButton
+                    android:id="@+id/radiobutton_male"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="남성" />
@@ -145,7 +147,7 @@
             android:inputType="text"
             android:paddingHorizontal="15dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/input_gender" />
+            app:layout_constraintTop_toBottomOf="@id/radiogroup_gender" />
 
     </LinearLayout>
 

@@ -61,8 +61,8 @@ class ContactInfoActivity : AppCompatActivity() {
     private fun parseGender(gender: Int?): String? {
         return when (gender) {
             null -> null
-            AddContactActivity.GENDER_FEMALE -> "여성"
-            AddContactActivity.GENDER_MALE -> "남성"
+            Contact.GENDER_FEMALE -> "여성"
+            Contact.GENDER_MALE -> "남성"
             else -> "?"
         }
     }

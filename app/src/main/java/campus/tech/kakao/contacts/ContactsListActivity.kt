@@ -55,7 +55,7 @@ class ContactsListActivity : AppCompatActivity() {
                 "권성찬",
                 "010123123",
                 "kscksc@ksc.com",
-                AddContactActivity.GENDER_MALE,
+                Contact.GENDER_MALE,
                 LocalDate.now(),
                 "Hello!!"
             )
