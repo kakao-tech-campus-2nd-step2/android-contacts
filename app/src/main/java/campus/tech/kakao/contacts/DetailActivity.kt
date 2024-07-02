@@ -2,22 +2,22 @@ package campus.tech.kakao.contacts
 
 import android.os.Build
 import android.os.Bundle
-import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isVisible
 
 class DetailActivity : AppCompatActivity() {
-    lateinit var detailNameTextView: TextView
-    lateinit var detailPhoneNumTextView: TextView
-    lateinit var detailEmailTextView: TextView
-    lateinit var detailBirthdayTextView: TextView
-    lateinit var detailGenderTextView: TextView
-    lateinit var detailMemoTextView: TextView
-    lateinit var detailEmailLayout: ConstraintLayout
-    lateinit var detailBirthdayLayout: ConstraintLayout
-    lateinit var detailGenderLayout: ConstraintLayout
-    lateinit var detailMemoLayout: ConstraintLayout
+    private lateinit var detailNameTextView: TextView
+    private lateinit var detailPhoneNumTextView: TextView
+    private lateinit var detailEmailTextView: TextView
+    private lateinit var detailBirthdayTextView: TextView
+    private lateinit var detailGenderTextView: TextView
+    private lateinit var detailMemoTextView: TextView
+    private lateinit var detailEmailLayout: ConstraintLayout
+    private lateinit var detailBirthdayLayout: ConstraintLayout
+    private lateinit var detailGenderLayout: ConstraintLayout
+    private lateinit var detailMemoLayout: ConstraintLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,8 +84,8 @@ class DetailActivity : AppCompatActivity() {
         detailBirthdayTextView.text = contact.birthday ?: ""
         detailGenderTextView.text =
             when (contact.gender) {
-                1 -> "여성"
-                2 -> "남성"
+                Gender.FEMALE -> "여성"
+                Gender.MALE -> "남성"
                 else -> ""
             }
         detailMemoTextView.text = contact.memo ?: ""
@@ -99,9 +99,9 @@ class DetailActivity : AppCompatActivity() {
      * @param contact RegisterActivity로 부터 받은 Contact 객체.
      */
     private fun setDetailLayoutVisibility(contact: Contact) {
-        detailEmailLayout.isVisible = !contact.email.isEmpty()
-        detailBirthdayLayout.isVisible = !contact.birthday.isEmpty()
-        detailGenderLayout.isVisible = contact.gender != 0
-        detailMemoLayout.isVisible = !contact.memo.isEmpty()
+        detailEmailLayout.isVisible = contact.email.isNotEmpty()
+        detailBirthdayLayout.isVisible = contact.birthday.isNotEmpty()
+        detailGenderLayout.isVisible = contact.gender != null
+        detailMemoLayout.isVisible = contact.memo.isNotEmpty()
     }
 }

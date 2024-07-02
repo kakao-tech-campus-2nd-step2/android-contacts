@@ -3,30 +3,30 @@ package campus.tech.kakao.contacts
 import android.app.DatePickerDialog
 import android.icu.util.Calendar
 import android.os.Bundle
-import android.view.KeyEvent
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.constraintlayout.widget.ConstraintLayout
 
 class MainActivity : AppCompatActivity() {
-    lateinit var nameEditText: EditText
-    lateinit var phoneNumEditText: EditText
-    lateinit var emailEditText: EditText
-    lateinit var birthdayTextView: TextView
-    lateinit var genderLayout: ConstraintLayout
-    lateinit var memoEditText: EditText
-    lateinit var cancelBtn: Button
-    lateinit var saveBtn: Button
-    lateinit var seeMoreLayout: LinearLayoutCompat
-    lateinit var genderRadioGroup: RadioGroup
-    private var gender = 0 // 0 : 무응답, 1 : 여성, 2 : 남성
+    private lateinit var nameEditText: EditText
+    private lateinit var phoneNumEditText: EditText
+    private lateinit var emailEditText: EditText
+    private lateinit var birthdayTextView: TextView
+    private lateinit var genderLayout: ConstraintLayout
+    private lateinit var memoEditText: EditText
+    private lateinit var cancelBtn: Button
+    private lateinit var saveBtn: Button
+    private lateinit var seeMoreLayout: LinearLayoutCompat
+    private lateinit var genderRadioGroup: RadioGroup
+    private var gender: Gender? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity() {
 
         initViews()
         setOnClickListeners()
+        registerOnBackPressedCallback()
     }
 
     /**
@@ -91,18 +92,30 @@ class MainActivity : AppCompatActivity() {
      * 아닌 경우 입력한 정보를 contact 객체로 담아 결과를 보내고 finish.
      *
      * - `contact` : 입력한 연락처 정보를 담고 있는 Contact 객체
+     * - `name` : 작성한 이름 String
+     * - `phoneNum` : 작성한 전화 번호 String
      */
     private fun setOnClickListenerOfSaveBtn() {
         saveBtn.setOnClickListener {
-            if (nameEditText.text.isEmpty()) {
-                Toast.makeText(this, "이름은 필수 값 입니다.", Toast.LENGTH_LONG).show()
-            } else if (phoneNumEditText.text.isEmpty()) {
-                Toast.makeText(this, "전화 번호는 필수 값 입니다.", Toast.LENGTH_LONG).show()
-            } else {
-                val contact = createContact()
-                intent.putExtra("CONTACT_RESULT", contact)
-                setResult(RESULT_OK, intent)
-                finish()
+            val name = nameEditText.text.toString().trim()
+            val phoneNum = phoneNumEditText.text.toString().trim()
+
+            when {
+                name.isEmpty() -> {
+                    Toast.makeText(this, "이름은 필수 값 입니다.", Toast.LENGTH_LONG).show()
+                }
+                phoneNum.isEmpty() -> {
+                    Toast.makeText(this, "전화 번호는 필수 값 입니다.", Toast.LENGTH_LONG).show()
+                }
+                !phoneNum.matches(Regex("^\\d{10,11}\$")) -> {
+                    Toast.makeText(this, "전화 번호는 10자리 또는 11자리의 숫자만 입력 가능합니다.", Toast.LENGTH_LONG).show()
+                }
+                else -> {
+                    val contact = createContact()
+                    intent.putExtra("CONTACT_RESULT", contact)
+                    setResult(RESULT_OK, intent)
+                    finish()
+                }
             }
         }
     }
@@ -146,9 +159,9 @@ class MainActivity : AppCompatActivity() {
         genderRadioGroup.setOnCheckedChangeListener { group, checkId ->
             gender =
                 when (checkId) {
-                    R.id.woman_radio_btn -> 1
-                    R.id.man_radio_btn -> 2
-                    else -> 0
+                    R.id.woman_radio_btn -> Gender.FEMALE
+                    R.id.man_radio_btn -> Gender.MALE
+                    else -> null
                 }
         }
     }
@@ -176,19 +189,16 @@ class MainActivity : AppCompatActivity() {
     /**
      * 뒤로 가기 버튼을 누르면 확인 팝업을 보여주도록 설정하는 함수
      *
-     * @param keyCode 누른 키의 코드 값
-     * @param event 키 이벤트 객체
      */
-    @Override
-    override fun onKeyDown(
-        keyCode: Int,
-        event: KeyEvent?,
-    ): Boolean {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            showAlertDialog()
-            return true
-        }
-        return false
+    private fun registerOnBackPressedCallback() {
+        onBackPressedDispatcher.addCallback(
+            this,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    showAlertDialog()
+                }
+            },
+        )
     }
 
     /**

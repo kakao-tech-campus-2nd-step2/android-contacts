@@ -1,6 +1,6 @@
 package campus.tech.kakao.contacts
 
-import android.content.Context
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -68,10 +68,23 @@ class RegisterActivity : AppCompatActivity() {
     /**
      * 연락처 리사이클러뷰를 설정하는 함수
      *
+     * - `contactClickListener` : RecyclerView의 아이템이 클릭될 때 실행될 코드를 포함하는 OnContactClickListener 구현 객체
+     *
      */
     private fun setContactRecyclerView() {
+        val contactClickListener =
+            object : OnContactClickListener {
+                override fun onContactClicked(position: Int) {
+                    val contact = contactList[position]
+                    val intent =
+                        Intent(this@RegisterActivity, DetailActivity::class.java).apply {
+                            putExtra("contact", contact)
+                        }
+                    startActivity(intent)
+                }
+            }
         contactRecyclerView.adapter =
-            ContactRecyclerViewAdapter(contactList, LayoutInflater.from(this), this)
+            ContactRecyclerViewAdapter(contactList, contactClickListener)
         contactRecyclerView.layoutManager = LinearLayoutManager(this)
     }
 
@@ -81,6 +94,7 @@ class RegisterActivity : AppCompatActivity() {
      * result로 contact 객체를 받아와 list에 추가.
      * 하나 이상의 contact 객체가 들어오면 등록 안내 textview의 visibility를 gone으로 설정.
      */
+    @SuppressLint("NotifyDataSetChanged")
     private fun setStartActivityLauncher() {
         startActivityLauncher =
             registerForActivityResult(StartActivityForResult()) { result ->
@@ -102,36 +116,35 @@ class RegisterActivity : AppCompatActivity() {
             }
     }
 
-    class ContactRecyclerViewAdapter(
-        var contactList: ArrayList<Contact>,
-        var inflater: LayoutInflater,
-        val context: Context,
-    ) : RecyclerView.Adapter<ContactRecyclerViewAdapter.ViewHolder>() {
-        inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-            val lastNameTextView: TextView
-            val nameTextView: TextView
+    interface OnContactClickListener {
+        fun onContactClicked(position: Int)
+    }
 
-            init {
-                lastNameTextView = itemView.findViewById(R.id.last_name_text_view)
-                nameTextView = itemView.findViewById(R.id.name_text_view)
-                setOnClickListenerOfContactItemView(itemView)
+    class ContactRecyclerViewAdapter(
+        private val contactList: ArrayList<Contact>,
+        private val contactClickListener: OnContactClickListener,
+    ) : RecyclerView.Adapter<ContactRecyclerViewAdapter.ViewHolder>() {
+        class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+            private val lastNameTextView: TextView = itemView.findViewById(R.id.last_name_text_view)
+            private val nameTextView: TextView = itemView.findViewById(R.id.name_text_view)
+
+            fun bind(
+                contact: Contact,
+                clickListener: OnContactClickListener,
+            ) {
+                setLastNameText(contact.name[0].toString())
+                setNameText(contact.name)
+                itemView.setOnClickListener {
+                    clickListener.onContactClicked(adapterPosition)
+                }
             }
 
-            /**
-             * 아이템 뷰에 대한 클릭 리스너를 설정하는 함수
-             *
-             * 연락처를 intent에 담아 DetailActivity로 전달
-             * @param itemView 리사이클러뷰의 각 아이템에 대한 뷰
-             */
-            private fun setOnClickListenerOfContactItemView(itemView: View) {
-                itemView.setOnClickListener {
-                    val contact = contactList[adapterPosition]
-                    val intent =
-                        Intent(context, DetailActivity::class.java).apply {
-                            putExtra("contact", contact)
-                        }
-                    context.startActivity(intent)
-                }
+            private fun setLastNameText(lastName: String) {
+                lastNameTextView.text = lastName
+            }
+
+            private fun setNameText(name: String) {
+                nameTextView.text = name
             }
         }
 
@@ -140,13 +153,10 @@ class RegisterActivity : AppCompatActivity() {
             parent: ViewGroup,
             viewType: Int,
         ): ViewHolder {
-            val view = inflater.inflate(R.layout.contact_item, parent, false)
-            return ViewHolder(view)
-        }
-
-        @Override
-        override fun getItemCount(): Int {
-            return contactList.size
+            val itemView =
+                LayoutInflater.from(parent.context)
+                    .inflate(R.layout.contact_item, parent, false)
+            return ViewHolder(itemView)
         }
 
         @Override
@@ -154,8 +164,13 @@ class RegisterActivity : AppCompatActivity() {
             holder: ViewHolder,
             position: Int,
         ) {
-            holder.lastNameTextView.text = contactList.get(position).name.get(0).toString()
-            holder.nameTextView.text = contactList.get(position).name
+            val contact = contactList[position]
+            holder.bind(contact, contactClickListener)
+        }
+
+        @Override
+        override fun getItemCount(): Int {
+            return contactList.size
         }
     }
 
@@ -181,6 +196,10 @@ class RegisterActivity : AppCompatActivity() {
         contactList = savedInstanceState.getParcelableArrayList("contact_list")!!
     }
 
+    companion object {
+        const val KEY_CONTACT_LIST = "contact_list"
+    }
+
     /**
      * 화면 방향 전환 등으로 인해 Activity의 정보가 사라지지 않도록 복원하는 함수
      *
@@ -189,7 +208,7 @@ class RegisterActivity : AppCompatActivity() {
     @Override
     private fun restoreInstanceState(savedInstanceState: Bundle?) {
         if (savedInstanceState != null) {
-            contactList = savedInstanceState.getParcelableArrayList("contact_list") ?: ArrayList()
+            contactList = savedInstanceState.getParcelableArrayList(KEY_CONTACT_LIST) ?: ArrayList()
             setContactRecyclerView()
             if (contactList.isNotEmpty()) {
                 howToRegisterTextView.visibility = View.GONE
