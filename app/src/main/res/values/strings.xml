@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Contacts</string>
+    <string name="EMPTY_VIEW_TEXT">우측 아래 버튼을 눌러\n연락처를 추가해보세요.</string>
+    <string name="EXIT_BUTTON_TEXT">나가기</string>
+    <string name="EXIT_INFO_ALERT_TEXT">작성 중인 내용이 있습니다. 정말 나가시겠습니까?</string>
+    <string name="EXIT_ALERT_TEXT">나가시겠습니까?</string>
+    <string name="CONTACT_SAVED_TEXT">저장되었습니다.</string>
+    <string name="CONTINUE_BUTTON_TEXT">계속 작성</string>
+    <string name="CONDITION_NOT_MET_MESSAGE">이름과 번호 입력은 필수입니다.</string>
 </resources>
