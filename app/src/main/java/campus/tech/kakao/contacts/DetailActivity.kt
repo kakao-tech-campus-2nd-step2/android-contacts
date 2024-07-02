@@ -99,9 +99,9 @@ class DetailActivity : AppCompatActivity() {
      * @param contact RegisterActivity로 부터 받은 Contact 객체.
      */
     private fun setDetailLayoutVisibility(contact: Contact) {
-        detailEmailLayout.visibility = if (contact.email.isEmpty()) View.GONE else View.VISIBLE
-        detailBirthdayLayout.visibility = if (contact.birthday.isEmpty()) View.GONE else View.VISIBLE
-        detailGenderLayout.visibility = if (contact.gender == 0) View.GONE else View.VISIBLE
-        detailMemoLayout.visibility = if (contact.memo.isEmpty()) View.GONE else View.VISIBLE
+        detailEmailLayout.isVisible = !contact.email.isEmpty()
+        detailBirthdayLayout.isVisible = !contact.birthday.isEmpty()
+        detailGenderLayout.isVisible = contact.gender != 0
+        detailMemoLayout.isVisible = !contact.memo.isEmpty()
     }
 }
