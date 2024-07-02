@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="button_cancel">취소</string>
+    <string name="button_save">저장</string>
+    <string name="edittext_name">이름</string>
+    <string name="edittext_phone">전화번호</string>
+    <string name="edittext_email">메일</string>
+    <string name="edittext_birth">생일</string>
+    <string name="edittext_gender">성별</string>
+    <string name="gender_w">여성</string>
+    <string name="gender_m">남성</string>
+    <string name="edittext_note">메모</string>
+    <string name="button_more">더보기</string>
+    <string name="addbutton_info">오른쪽 + 버튼을 클릭하여\n연락처를 등록해보세요.</string>
+    <string name="notice_choice">작성 중인 내용이 있습니다. 정말 나가시겠습니까?</string>
+    <string name="button_write">작성하기</string>
+    <string name="button_exit">나가기</string>
+    <string name="notice_cancel">취소 되었습니다</string>
+    <string name="notice_save">저장이 완료 되었습니다</string>
+    <string name="notice_name_required">이름은 필수 입력 항목입니다</string>
+    <string name="notice_phone_required">전화번호는 필수 입력 항목입니다</string>
+</resources>
