@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Contacts</string>
+    <string name="userName">이름</string>
+    <string name="userPhoneNumber">전화번호</string>
+    <string name="userEmail">메일</string>
+    <string name="userBirthDay">생일</string>
+    <string name="userGender">성별</string>
+    <string name="female">여성</string>
+    <string name="male">남성</string>
+    <string name="userMemo">메모</string>
+    <string name="moreBtn">더보기</string>
+    <string name="cancleBtn">취소</string>
+    <string name="saveBtn">저장</string>
+    <string name="Description_of_contact_usage">오른쪽 + 버튼을 클릭하여\n연락처를 등록해보세요.</string>
+    <string name="add_contact">Add Contact</string>
 </resources>
