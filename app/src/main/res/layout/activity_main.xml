@@ -5,15 +5,204 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+    <ScrollView
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/checkbuttons"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:fillViewport="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    app:srcCompat="@drawable/baseline_face_24" />
+
+                <EditText
+                    android:id="@+id/inputName"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/rounded_edittext"
+                    android:focusable="true"
+                    android:hint="이름"
+                    android:padding="11dp" />
+
+                <EditText
+                    android:id="@+id/inputPhoneNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/rounded_edittext"
+                    android:focusable="true"
+                    android:hint="전화번호"
+                    android:inputType="number"
+                    android:padding="11dp" />
+
+                <EditText
+                    android:id="@+id/inputMail"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/rounded_edittext"
+                    android:hint="메일"
+                    android:padding="11dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/moreButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:visibility="visible">
+
+                        <TextView
+                            android:id="@+id/textView4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:text="더보기"
+                            android:textSize="17sp" />
+
+                        <ImageView
+                            android:id="@+id/imageView2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            app:srcCompat="@drawable/keyboard_arrow_down_24px" />
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/inputBirth"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/rounded_edittext"
+                        android:clickable="true"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:hint="생일"
+                        android:padding="11dp"
+                        android:visibility="gone" />
+
+                    <LinearLayout
+                        android:id="@+id/inputGender"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/rounded_edittext"
+                        android:visibility="gone">
+
+                        <EditText
+                            android:id="@+id/textGender"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:layout_weight="4"
+                            android:background="@drawable/rounded_edittext"
+                            android:enabled="false"
+                            android:hint="성별"
+                            android:padding="11dp" />
+
+                        <RadioGroup
+                            android:id="@+id/radioGroup"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/radioFemale"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="여성" />
+
+                            <RadioButton
+                                android:id="@+id/radioMale"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="남성" />
+                        </RadioGroup>
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/inputMemo"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/rounded_edittext"
+                        android:hint="메모"
+                        android:padding="11dp"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/checkbuttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <android.widget.Button
+            android:id="@+id/cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="취소"
+            android:background="#FDF6FE"
+            android:textColor="#000000"
+            android:textSize="20dp" />
+
+        <android.widget.Button
+            android:id="@+id/save"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#FDF6FE"
+            android:text="저장"
+            android:textColor="#000000"
+            android:textSize="20dp" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
